@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.graphics.Animation;
 
 /**
  * COSC3550 Spring 2014 Homework 2

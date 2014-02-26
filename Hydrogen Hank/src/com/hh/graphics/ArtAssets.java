@@ -1,4 +1,4 @@
-package com.hh.framework;
+package com.hh.graphics;
 
 import java.awt.AlphaComposite;
 import java.awt.Color;
@@ -29,11 +29,11 @@ public class ArtAssets
    */
   public ArtAssets()
   {
-    dustbunnyright_sheet = loadImage("/dustbunnywalkright.png");
-    dirt = loadImage("/dirtblock.png");
-    button = loadImage("/button.png");
-    buttonpress = loadImage("/buttonpress.png");
-    cloud = loadImage("/cloud.png");
+    dustbunnyright_sheet = loadImage("/oldgraphics/dustbunnywalkright.png");
+    dirt = loadImage("/oldgraphics/dirtblock.png");
+    button = loadImage("/oldgraphics/button.png");
+    buttonpress = loadImage("/oldgraphics/buttonpress.png");
+    cloud = loadImage("/oldgraphics/cloud.png");
     
     dustright = new SpriteSheet(dustbunnyright_sheet);
 

@@ -7,6 +7,8 @@ import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import com.hh.framework.*;
+import com.hh.graphics.ArtAssets;
+import com.hh.keyboard.KeyInput;
 import com.hh.objects.*;
 
 /**
@@ -54,7 +56,7 @@ public class Game extends Canvas implements Runnable
     bs = this.getBufferStrategy();
     artassets = new ArtAssets();
     cam = new Camera(0, 0);
-
+    
     restart();
     this.addKeyListener(new KeyInput());
   }
@@ -66,6 +68,7 @@ public class Game extends Canvas implements Runnable
   {
     if (!running)
     {
+    
       running = true;
       thread = new Thread(this);
       thread.start();
@@ -83,9 +86,11 @@ public class Game extends Canvas implements Runnable
     GameTime.start();
     while (running)
     {
+    	
       GameTime.update();
       if (state == GameState.Running)
       {
+    	 
         tick();
       }
       render();

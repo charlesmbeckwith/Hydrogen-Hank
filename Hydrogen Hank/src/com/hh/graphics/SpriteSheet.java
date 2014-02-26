@@ -1,4 +1,4 @@
-package com.hh.framework;
+package com.hh.graphics;
 
 import java.awt.image.BufferedImage;
 

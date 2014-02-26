@@ -6,6 +6,9 @@ import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.graphics.Animation;
+import com.hh.keyboard.KeyBinding;
+import com.hh.keyboard.KeyInput;
 
 /**
  * COSC3550 Spring 2014 Homework 3
