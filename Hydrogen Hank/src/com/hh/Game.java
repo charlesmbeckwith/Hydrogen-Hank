@@ -143,7 +143,11 @@ public class Game extends Canvas implements Runnable
       g2d.translate(-cam.getX(), -cam.getY()); //end cam
     } else if (state == GameState.Paused)
     {
-      g2d.drawImage(artassets.mainmenu, 0, 0, WIDTH, HEIGHT, null);
+    	g2d.drawImage(artassets.mainBg, 0, 0, WIDTH, HEIGHT, null);
+    	g2d.drawImage(artassets.mainTitle, (WIDTH/2 - artassets.mainTitle.getWidth()/2), 20, null);
+    	g2d.drawImage(artassets.newButton, (WIDTH/2 - artassets.newButton.getWidth()/2), HEIGHT - 275, null);
+    	g2d.drawImage(artassets.scoresButton, (WIDTH/2 - artassets.scoresButton.getWidth()/2), HEIGHT - 200, null);
+    	g2d.drawImage(artassets.creditsButton, (WIDTH/2 - artassets.creditsButton.getWidth()/2), HEIGHT - 125, null);
     }
 
     g.dispose();
