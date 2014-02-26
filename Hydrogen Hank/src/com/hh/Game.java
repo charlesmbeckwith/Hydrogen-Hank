@@ -8,6 +8,7 @@ import java.awt.image.BufferStrategy;
 
 import com.hh.framework.*;
 import com.hh.graphics.ArtAssets;
+import com.hh.keyboard.KeyBinding;
 import com.hh.keyboard.KeyInput;
 import com.hh.objects.*;
 
@@ -56,6 +57,8 @@ public class Game extends Canvas implements Runnable
     bs = this.getBufferStrategy();
     artassets = new ArtAssets();
     cam = new Camera(0, 0);
+    
+    KeyBinding.LOAD_BINDINGS();
     
     restart();
     this.addKeyListener(new KeyInput());
