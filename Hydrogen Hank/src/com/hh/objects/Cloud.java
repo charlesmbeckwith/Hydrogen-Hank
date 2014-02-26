@@ -17,7 +17,7 @@ public class Cloud extends GameObject {
 	private BufferedImage IMG;
 	
 	public Cloud(float x, float y, int width, int height) {
-		super(x, y, width, height, ObjectID.Background);
+		super(x, y, width, height, ObjectID.Background, ObjectLayer.background);
 		
 		IMG = Game.artassets.cloud;
 		ALIVE = true;

@@ -29,7 +29,7 @@ public class Player extends GameObject
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
-    super(x, y, width, height, v, ObjectID.Player);
+    super(x, y, width, height, v, ObjectID.Player, ObjectLayer.foreground);
 
     ALIVE = true;
     Random rand = new Random();

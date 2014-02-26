@@ -20,7 +20,7 @@ public class Button extends GameObject {
 	private Animation ANIM;
 	
 	public Button(float x, float y, int width, int height) {
-		super(x, y, width, height, ObjectID.Button);
+		super(x, y, width, height, ObjectID.Button, ObjectLayer.hud);
 		ANIM = new Animation(3, Game.artassets.button, Game.artassets.button, Game.artassets.button,Game.artassets.buttonpress);
 	}
 

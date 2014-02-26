@@ -18,7 +18,7 @@ public class Tile extends GameObject {
 	private BufferedImage IMG;
 	
 	public Tile(float x, float y, int width, int height) {
-		super(x, y, width, height, ObjectID.Tile);
+		super(x, y, width, height, ObjectID.Tile, ObjectLayer.middleground);
 		IMG = Game.artassets.dirt;
 		ALIVE = true;
 	}
