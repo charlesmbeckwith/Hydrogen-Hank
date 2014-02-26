@@ -2,6 +2,7 @@ package com.hh.framework;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import com.hh.framework.ObjectLayer;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -26,6 +27,7 @@ public abstract class GameObject
   protected Vector2D V;
   protected ObjectID ID;
   protected boolean ALIVE;
+  protected ObjectLayer LAYER;
 
   /**
    * Creates a stationary gameobject
@@ -39,6 +41,20 @@ public abstract class GameObject
     Y = y;
     V = new Vector2D();
     ID = id;
+  }
+  
+  /**
+   * Creates a stationary gameobject with an object layer
+   * @param x - x position of the gameobject
+   * @param y - y position of the gameobject
+   * @param id - ObjectID of the gameobject
+   * @param layer - ObjectLayer of the gameobject
+   */
+  public GameObject(float x, float y, ObjectID id, ObjectLayer layer){
+	  X = x;
+	  Y = y;
+	  V = new Vector2D();
+	  ID = id;
   }
   
   /**
@@ -200,4 +216,9 @@ public abstract class GameObject
   {
     return ID;
   }
+  /**
+   * Getter for gameobject layer
+   * @return returns layer of the gameobject
+   */
+  public ObjectLayer getLayer(){return LAYER;}
 }

@@ -30,13 +30,13 @@ public class ArtAssets
   public ArtAssets()
   {
     dustbunnyright_sheet = loadImage("/oldgraphics/dustbunnywalkright.png");
+    dustright = new SpriteSheet(dustbunnyright_sheet);
+    
     dirt = loadImage("/oldgraphics/dirtblock.png");
     button = loadImage("/oldgraphics/button.png");
     buttonpress = loadImage("/oldgraphics/buttonpress.png");
     cloud = loadImage("/oldgraphics/cloud.png");
-    
-    dustright = new SpriteSheet(dustbunnyright_sheet);
-
+ 
     getFrames();
   }
 
