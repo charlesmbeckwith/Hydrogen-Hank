@@ -16,12 +16,12 @@ public class Handler
 {
   private static LinkedGameObjects objects = new LinkedGameObjects();
 
-  private static GameObject tempObj;
+  private GameObject tempObj;
 
   /**
    * Advances all of the gameobjects in the list
    */
-  public static void tick()
+  public void tick()
   {
     for (int i = 0; i < objects.size(); i++)
     {
@@ -34,7 +34,7 @@ public class Handler
    * Renders and Draws all of the gameobjects in the list
    * then removes dead gameobjects from the list
    */
-  public static void render(Graphics g)
+  public void render(Graphics g)
   {
     for (int i = 0; i < objects.size(); i++)
     {
@@ -59,7 +59,7 @@ public class Handler
   /**
    * Removes all of the gameobjects from the list
    */
-  public static void clearObjects()
+  public void clearObjects()
   {
     objects.clear();
   }
@@ -69,7 +69,7 @@ public class Handler
    * @param object - gameobject to insert
    * @param index - position to insert it at
    */
-  public static void insertObject(GameObject object, int index)
+  public void insertObject(GameObject object, int index)
   {
     objects.add(index, object);
     //sort linked list after adding object
@@ -80,7 +80,7 @@ public class Handler
    * Adds a gameobject to the end of the list
    * @param object - gameobject to add
    */
-  public static void addObject(GameObject object)
+  public void addObject(GameObject object)
   {
     objects.add(object);
     //sort linked list after adding object
@@ -91,7 +91,7 @@ public class Handler
    * Removes a gameobject from the list
    * @param object - gameobject to remove
    */
-  public static void removeObject(GameObject object)
+  public void removeObject(GameObject object)
   {
     objects.remove(object);
   }
@@ -100,7 +100,7 @@ public class Handler
    * Gets the gameobject list
    * Used for collision detection primarily
    */
-  public static LinkedList<GameObject> getObjects()
+  public LinkedList<GameObject> getObjects()
   {
     return objects;
   }

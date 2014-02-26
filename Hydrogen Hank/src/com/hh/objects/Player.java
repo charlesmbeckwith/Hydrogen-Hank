@@ -9,6 +9,7 @@ import com.hh.framework.*;
 import com.hh.graphics.Animation;
 import com.hh.keyboard.KeyBinding;
 import com.hh.keyboard.KeyInput;
+import com.hh.states.PlayState;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -106,7 +107,7 @@ public class Player extends GameObject
   {
     boolean col = false;
 
-    for (GameObject go : Handler.getObjects())
+    for (GameObject go : Game.playState.handler.getObjects())
     {
       if (go != this && go.getID() != ObjectID.Background && (Y + (HEIGHT / 2) - 14) >= go.getY() && X > go.getX()
           && X < go.getX() + go.getWidth())
@@ -132,11 +133,6 @@ public class Player extends GameObject
 
       BufferedImage image = Game.artassets.hueImg(CURRENT.getAnimationFrame(), WIDTH, HEIGHT, HUE);
       g2d.drawImage(image, (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)), WIDTH, HEIGHT, null);
-
-      if (Game.showColliders)
-      {
-        g2d.drawOval((int) ((X - (WIDTH / 2))), (int) ((Y - (HEIGHT / 2))), WIDTH, HEIGHT);
-      }
     }
   }
 }

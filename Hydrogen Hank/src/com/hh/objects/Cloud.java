@@ -28,7 +28,7 @@ public class Cloud extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-	  if(X + WIDTH < -Game.cam.getX()){
+	  if(X + WIDTH < -Game.playState.cam.getX()){
       ALIVE = false;
     }
 	  

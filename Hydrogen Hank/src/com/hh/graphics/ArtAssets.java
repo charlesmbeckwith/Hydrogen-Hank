@@ -22,7 +22,7 @@ public class ArtAssets
   private BufferedImage dustbunnyright_sheet = null;
 
   public BufferedImage[] dustbunnyright = new BufferedImage[9];
-  public BufferedImage dirt, button, buttonpress, cloud;
+  public BufferedImage dirt, button, buttonpress, cloud, pauseScreen;
   public BufferedImage mainBg, mainTitle, newButton, newButton2, scoresButton, scoresButton2, creditsButton, creditsButton2;
 
   /**
@@ -46,6 +46,7 @@ public class ArtAssets
     button = loadImage("/oldgraphics/button.png");
     buttonpress = loadImage("/oldgraphics/buttonpress.png");
     cloud = loadImage("/oldgraphics/cloud.png");
+    pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
  
     getFrames();
   }

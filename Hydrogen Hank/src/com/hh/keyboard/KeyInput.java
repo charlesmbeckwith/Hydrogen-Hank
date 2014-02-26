@@ -57,10 +57,5 @@ public class KeyInput extends KeyAdapter
     {
       Game.togglePause();
     }
-    
-    if (e.getKeyCode() == KeyBinding.COLLIDERS.VALUE())
-    {
-      Game.toggleColliders();
-    }
   }
 }
