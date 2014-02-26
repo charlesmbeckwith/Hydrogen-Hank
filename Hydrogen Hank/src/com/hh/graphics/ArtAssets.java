@@ -22,7 +22,7 @@ public class ArtAssets
   private BufferedImage dustbunnyright_sheet = null;
 
   public BufferedImage[] dustbunnyright = new BufferedImage[9];
-  public BufferedImage dirt, button, buttonpress, cloud;
+  public BufferedImage mainmenu, dirt, button, buttonpress, cloud;
 
   /**
    * Initializes the art assets and loads them
@@ -32,6 +32,7 @@ public class ArtAssets
     dustbunnyright_sheet = loadImage("/oldgraphics/dustbunnywalkright.png");
     dustright = new SpriteSheet(dustbunnyright_sheet);
     
+    mainmenu = loadImage("/graphics/mainmenu.png");
     dirt = loadImage("/oldgraphics/dirtblock.png");
     button = loadImage("/oldgraphics/button.png");
     buttonpress = loadImage("/oldgraphics/buttonpress.png");

@@ -140,6 +140,7 @@ public class Game extends Canvas implements Runnable
       g2d.translate(-cam.getX(), -cam.getY()); //end cam
     } else if (state == GameState.Paused)
     {
+      g2d.drawImage(artassets.mainmenu, 0, 0, WIDTH, HEIGHT, null);
     }
 
     g.dispose();
