@@ -11,7 +11,7 @@ import com.hh.framework.ObjectLayer;
  * Last Updated : Feb. 11, 2014
  * Purpose: Defines the generic GameObject super class
  * 
- * @author Mark Schlottke
+ * @author Mark Schlottke, Charlie Beckwith
  */
 public abstract class GameObject
 {
@@ -65,7 +65,7 @@ public abstract class GameObject
    * @param height - height of the gameobject
    * @param id - ObjectID of the gameobject
    */
-  public GameObject(float x, float y, int width, int height, ObjectID id)
+  public GameObject(float x, float y, int width, int height, ObjectID id,  ObjectLayer layer)
   {
     X = x;
     Y = y;
@@ -73,6 +73,7 @@ public abstract class GameObject
     HEIGHT = height;
     V = new Vector2D();
     ID = id;
+    LAYER = layer;
   }
 
   /**
@@ -82,12 +83,13 @@ public abstract class GameObject
    * @param v - velocity vector of the gameobject
    * @param id - ObjectID of the gameobject
    */
-  public GameObject(float x, float y, Vector2D v, ObjectID id)
+  public GameObject(float x, float y, Vector2D v, ObjectID id, ObjectLayer layer)
   {
     X = x;
     Y = y;
     V = v;
     ID = id;
+    LAYER = layer;
   }
   
   /**
@@ -99,7 +101,7 @@ public abstract class GameObject
    * @param v - velocity vector of the gameobject
    * @param id - ObjectID of the gameobject
    */
-  public GameObject(float x, float y, int width, int height, Vector2D v, ObjectID id)
+  public GameObject(float x, float y, int width, int height, Vector2D v, ObjectID id, ObjectLayer layer)
   {
     X = x;
     Y = y;
@@ -107,6 +109,7 @@ public abstract class GameObject
     HEIGHT = height;
     V = v;
     ID = id;
+    LAYER = layer;
   }
 
   /**

@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class Handler
 {
-  private static LinkedList<GameObject> objects = new LinkedList<GameObject>();
+  private static LinkedGameObjects objects = new LinkedGameObjects();
 
   private static GameObject tempObj;
 
@@ -72,6 +72,8 @@ public class Handler
   public static void insertObject(GameObject object, int index)
   {
     objects.add(index, object);
+    //sort linked list after adding object
+    objects.sort();
   }
 
   /**
@@ -81,6 +83,8 @@ public class Handler
   public static void addObject(GameObject object)
   {
     objects.add(object);
+    //sort linked list after adding object
+    objects.sort();
   }
 
   /**
