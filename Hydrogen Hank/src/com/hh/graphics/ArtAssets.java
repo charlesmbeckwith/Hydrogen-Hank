@@ -31,7 +31,7 @@ public class ArtAssets
    */
   public ArtAssets()
   {
-    dustbunnyright_sheet = loadImage("/oldgraphics/dustbunnywalkright.png");
+    dustbunnyright_sheet = loadImage("/hydrogenhank/balloonmanspritesheet.png");
     dustright = new SpriteSheet(dustbunnyright_sheet);
 
     mainBg = loadImage("/graphics/mainmenu/mainmenubackground.png");
@@ -46,7 +46,7 @@ public class ArtAssets
     dirt = loadImage("/oldgraphics/dirtblock.png");
     button = loadImage("/oldgraphics/button.png");
     buttonpress = loadImage("/oldgraphics/buttonpress.png");
-    cloud = loadImage("/oldgraphics/cloud.png");
+    cloud = loadImage("/graphics/bgelements/cloud.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
 
     getFrames();
@@ -76,8 +76,8 @@ public class ArtAssets
    */
   private void getFrames()
   {
-    int width = 104;
-    int height = 59;
+    int width = 562;
+    int height = 562;
     dustbunnyright[0] = dustright.grabImage(1, 1, width, height);
     dustbunnyright[1] = dustright.grabImage(2, 1, width, height);
     dustbunnyright[2] = dustright.grabImage(3, 1, width, height);
