@@ -23,7 +23,8 @@ public class ArtAssets
 
   public BufferedImage[] dustbunnyright = new BufferedImage[9];
   public BufferedImage dirt, button, buttonpress, cloud, pauseScreen;
-  public BufferedImage mainBg, mainTitle, newButton, newButton2, scoresButton, scoresButton2, creditsButton, creditsButton2;
+  public BufferedImage mainBg, mainTitle, newButton, newButton2, scoresButton, scoresButton2,
+      creditsButton, creditsButton2;
 
   /**
    * Initializes the art assets and loads them
@@ -32,7 +33,7 @@ public class ArtAssets
   {
     dustbunnyright_sheet = loadImage("/oldgraphics/dustbunnywalkright.png");
     dustright = new SpriteSheet(dustbunnyright_sheet);
-    
+
     mainBg = loadImage("/graphics/mainmenu/mainmenubackground.png");
     mainTitle = loadImage("/graphics/mainmenu/HydrogenHankTitle.png");
     newButton = loadImage("/graphics/mainmenu/newGameButton.png");
@@ -41,13 +42,13 @@ public class ArtAssets
     newButton2 = loadImage("/graphics/mainmenu/newGameButton2.png");
     scoresButton2 = loadImage("/graphics/mainmenu/highScoresButton2.png");
     creditsButton2 = loadImage("/graphics/mainmenu/creditsButton2.png");
-    
+
     dirt = loadImage("/oldgraphics/dirtblock.png");
     button = loadImage("/oldgraphics/button.png");
     buttonpress = loadImage("/oldgraphics/buttonpress.png");
     cloud = loadImage("/oldgraphics/cloud.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
- 
+
     getFrames();
   }
 

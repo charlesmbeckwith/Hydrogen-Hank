@@ -14,13 +14,11 @@ import com.hh.framework.ObjectLayer;
  */
 public abstract class GameObject
 {
-  public enum ObjectID {
-    Background,
-    Tile,
-    Button,
-    Player
+  public enum ObjectID
+  {
+    Background, Tile, Button, Player
   }
-  
+
   protected float X, Y;
   protected int WIDTH, HEIGHT;
   protected Vector2D V;
@@ -41,7 +39,7 @@ public abstract class GameObject
     V = new Vector2D();
     ID = id;
   }
-  
+
   /**
    * Creates a stationary gameobject with an object layer
    * @param x - x position of the gameobject
@@ -49,13 +47,14 @@ public abstract class GameObject
    * @param id - ObjectID of the gameobject
    * @param layer - ObjectLayer of the gameobject
    */
-  public GameObject(float x, float y, ObjectID id, ObjectLayer layer){
-	  X = x;
-	  Y = y;
-	  V = new Vector2D();
-	  ID = id;
+  public GameObject(float x, float y, ObjectID id, ObjectLayer layer)
+  {
+    X = x;
+    Y = y;
+    V = new Vector2D();
+    ID = id;
   }
-  
+
   /**
    * Creates a stationary gameobject
    * @param x - x position of the gameobject
@@ -64,7 +63,7 @@ public abstract class GameObject
    * @param height - height of the gameobject
    * @param id - ObjectID of the gameobject
    */
-  public GameObject(float x, float y, int width, int height, ObjectID id,  ObjectLayer layer)
+  public GameObject(float x, float y, int width, int height, ObjectID id, ObjectLayer layer)
   {
     X = x;
     Y = y;
@@ -90,7 +89,7 @@ public abstract class GameObject
     ID = id;
     LAYER = layer;
   }
-  
+
   /**
    * Creates a stationary gameobject
    * @param x - x position of the gameobject
@@ -100,7 +99,8 @@ public abstract class GameObject
    * @param v - velocity vector of the gameobject
    * @param id - ObjectID of the gameobject
    */
-  public GameObject(float x, float y, int width, int height, Vector2D v, ObjectID id, ObjectLayer layer)
+  public GameObject(float x, float y, int width, int height, Vector2D v, ObjectID id,
+      ObjectLayer layer)
   {
     X = x;
     Y = y;
@@ -139,7 +139,7 @@ public abstract class GameObject
   {
     X = x;
   }
-  
+
   /**
    * Gets the current Y position of the gameobject
    * @return - current y position
@@ -157,20 +157,22 @@ public abstract class GameObject
   {
     Y = y;
   }
-  
+
   /**
    * Gets the width of the gameobject
    * @return
    */
-  public int getWidth(){
+  public int getWidth()
+  {
     return WIDTH;
   }
-  
+
   /**
    * Gets the height of the gameobject
    * @return
    */
-  public int getHeight(){
+  public int getHeight()
+  {
     return HEIGHT;
   }
 
@@ -191,15 +193,16 @@ public abstract class GameObject
   {
     V = v;
   }
-  
+
   /**
    * Kills the gameobject
    * Used to tag it for removal
    */
-  public void Kill(){
+  public void Kill()
+  {
     ALIVE = false;
   }
-  
+
   /**
    * Determines if the gameobject is active
    * @return
@@ -218,9 +221,13 @@ public abstract class GameObject
   {
     return ID;
   }
+
   /**
    * Getter for gameobject layer
    * @return returns layer of the gameobject
    */
-  public ObjectLayer getLayer(){return LAYER;}
+  public ObjectLayer getLayer()
+  {
+    return LAYER;
+  }
 }

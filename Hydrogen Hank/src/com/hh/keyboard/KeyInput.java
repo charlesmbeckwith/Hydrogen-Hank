@@ -36,7 +36,7 @@ public class KeyInput extends KeyAdapter
     {
       KEYSDOWN.add(e.getKeyCode());
     }
-    
+
     if (e.getKeyCode() == KeyBinding.RESTART.VALUE())
     {
       Game.doRestart();
@@ -52,7 +52,7 @@ public class KeyInput extends KeyAdapter
     {
       KEYSDOWN.remove((Integer) e.getKeyCode());
     }
-    
+
     if (e.getKeyCode() == KeyBinding.PAUSE.VALUE())
     {
       Game.togglePause();

@@ -10,23 +10,26 @@ package com.hh.framework;
  * 
  * @author Mark Schlottke
  */
-public class Vector2D{
+public class Vector2D
+{
   public float DX, DY;
 
   /**
    * Initializes an zero vector
    */
-  public Vector2D() {
+  public Vector2D()
+  {
     DX = 0;
     DY = 0;
   }
-  
+
   /**
    * Initilizes a general 2D vector
    * @param dx
    * @param dy
    */
-  public Vector2D(float dx, float dy) {
+  public Vector2D(float dx, float dy)
+  {
     DX = dx;
     DY = dy;
   }
@@ -35,15 +38,17 @@ public class Vector2D{
    * Gets the magnitude of the vector
    * @return
    */
-  public float magnitude() {
-    return (float)(Math.sqrt(DX * DX + DY * DY));
+  public float magnitude()
+  {
+    return (float) (Math.sqrt(DX * DX + DY * DY));
   }
 
   /**
    * Adds the given vector to the class' vector
    * @param v
    */
-  public void add(Vector2D v) {
+  public void add(Vector2D v)
+  {
     DX += v.DX;
     DY += v.DY;
   }
@@ -52,7 +57,8 @@ public class Vector2D{
    * Subtracts the given vector to the class' vector
    * @param v
    */
-  public void subtract(Vector2D v) {
+  public void subtract(Vector2D v)
+  {
     DX -= v.DX;
     DY -= v.DY;
   }
@@ -60,7 +66,8 @@ public class Vector2D{
   /**
    * Sets the vector to its unit vector
    */
-  public void unitVector() {
+  public void unitVector()
+  {
     float mag = magnitude();
     DX = DX / mag;
     DY = DY / mag;
@@ -70,7 +77,8 @@ public class Vector2D{
    * Scales to vector by the given amount
    * @param scale
    */
-  public void scale(float scale) {
+  public void scale(float scale)
+  {
     DX = DX * scale;
     DY = DY * scale;
   }
