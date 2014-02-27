@@ -123,7 +123,7 @@ public class Game extends Canvas implements Runnable
   public static void togglePause()
   {
     if (manager.getFirstClass() == TitleMenuState.class || manager.getFirstClass() == PauseState.class
-        || manager.getFirstClass() == TitleMenuAnimState.class)
+        || manager.getFirstClass() == TitleMenuAnimState.class || manager.getFirstClass() == IntroAnimation.class)
     {
       manager.pop();
     } else if (manager.getFirstClass() == PlayState.class)
