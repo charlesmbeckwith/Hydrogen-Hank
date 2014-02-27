@@ -37,15 +37,15 @@ public class Player extends GameObject
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
 
-    RIGHT = new Animation(1, Game.artassets.dustbunnyright[0]);
+    RIGHT = new Animation(1, Game.artassets.hydrogenhank[0]);
     	/*
-    		, Game.artassets.dustbunnyright[1],
-        Game.artassets.dustbunnyright[2], Game.artassets.dustbunnyright[3],
-        Game.artassets.dustbunnyright[4], Game.artassets.dustbunnyright[5],
-        Game.artassets.dustbunnyright[6], Game.artassets.dustbunnyright[7]);
+    		, Game.artassets.hydrogenhank[1],
+        Game.artassets.hydrogenhank[2], Game.artassets.hydrogenhank[3],
+        Game.artassets.hydrogenhank[4], Game.artassets.hydrogenhank[5],
+        Game.artassets.hydrogenhank[6], Game.artassets.hydrogenhank[7]);
         */
 
-    CURRENT = new Animation(3, Game.artassets.dustbunnyright[8]);
+    CURRENT = new Animation(3, Game.artassets.hydrogenhank[8]);
   }
 
   public void tick()

@@ -18,11 +18,11 @@ import javax.imageio.ImageIO;
  */
 public class ArtAssets
 {
-  private SpriteSheet dustright;
-  private BufferedImage dustbunnyright_sheet = null;
+  private SpriteSheet hydrogenhank_sheet;
+  private BufferedImage hydrogenhank_sheetimg = null;
 
-  public BufferedImage[] dustbunnyright = new BufferedImage[9];
-  public BufferedImage dirt, button, buttonpress, cloud, pauseScreen;
+  public BufferedImage[] hydrogenhank = new BufferedImage[9];
+  public BufferedImage dirt, cloud, pauseScreen;
   public BufferedImage mainBg, mainTitle, newButton, newButton2, scoresButton, scoresButton2,
       creditsButton, creditsButton2;
 
@@ -31,8 +31,8 @@ public class ArtAssets
    */
   public ArtAssets()
   {
-    dustbunnyright_sheet = loadImage("/hydrogenhank/balloonmanspritesheet.png");
-    dustright = new SpriteSheet(dustbunnyright_sheet);
+    hydrogenhank_sheetimg = loadImage("/hydrogenhank/balloonmanspritesheet.png");
+    hydrogenhank_sheet = new SpriteSheet(hydrogenhank_sheetimg);
 
     mainBg = loadImage("/graphics/mainmenu/mainmenubackground.png");
     mainTitle = loadImage("/graphics/mainmenu/HydrogenHankTitle.png");
@@ -44,8 +44,6 @@ public class ArtAssets
     creditsButton2 = loadImage("/graphics/mainmenu/creditsButton2.png");
 
     dirt = loadImage("/oldgraphics/dirtblock.png");
-    button = loadImage("/oldgraphics/button.png");
-    buttonpress = loadImage("/oldgraphics/buttonpress.png");
     cloud = loadImage("/graphics/bgelements/cloud.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
 
@@ -78,15 +76,15 @@ public class ArtAssets
   {
     int width = 562;
     int height = 562;
-    dustbunnyright[0] = dustright.grabImage(1, 1, width, height);
-    dustbunnyright[1] = dustright.grabImage(2, 1, width, height);
-    dustbunnyright[2] = dustright.grabImage(3, 1, width, height);
-    dustbunnyright[3] = dustright.grabImage(4, 1, width, height);
-    dustbunnyright[4] = dustright.grabImage(5, 1, width, height);
-    dustbunnyright[5] = dustright.grabImage(6, 1, width, height);
-    dustbunnyright[6] = dustright.grabImage(7, 1, width, height);
-    dustbunnyright[7] = dustright.grabImage(8, 1, width, height);
-    dustbunnyright[8] = dustright.grabImage(9, 1, width, height);
+    hydrogenhank[0] = hydrogenhank_sheet.grabImage(1, 1, width, height);
+    hydrogenhank[1] = hydrogenhank_sheet.grabImage(2, 1, width, height);
+    hydrogenhank[2] = hydrogenhank_sheet.grabImage(3, 1, width, height);
+    hydrogenhank[3] = hydrogenhank_sheet.grabImage(4, 1, width, height);
+    hydrogenhank[4] = hydrogenhank_sheet.grabImage(5, 1, width, height);
+    hydrogenhank[5] = hydrogenhank_sheet.grabImage(6, 1, width, height);
+    hydrogenhank[6] = hydrogenhank_sheet.grabImage(7, 1, width, height);
+    hydrogenhank[7] = hydrogenhank_sheet.grabImage(8, 1, width, height);
+    hydrogenhank[8] = hydrogenhank_sheet.grabImage(9, 1, width, height);
   }
 
   /**
