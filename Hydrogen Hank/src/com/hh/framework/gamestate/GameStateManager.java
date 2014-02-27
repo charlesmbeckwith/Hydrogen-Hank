@@ -6,7 +6,7 @@ import java.util.ListIterator;
 
 public class GameStateManager
 {
-  public LinkedList<GameState> STATES = new LinkedList<GameState>();
+  private LinkedList<GameState> STATES = new LinkedList<GameState>();
 
   public void tick()
   {
@@ -46,5 +46,26 @@ public class GameStateManager
     {
       render(iter, iter.next(), g);
     }
+  }
+  
+  public void pop()
+  {
+	  STATES.pop();
+  }
+  
+  public void push(GameState state)
+  {
+	  STATES.push(state);
+  }
+  
+  public GameState getFirstState()
+  {
+	  return STATES.getFirst();
+  }
+  
+  @SuppressWarnings("rawtypes")
+  public Class getFirstClass()
+  {
+	  return STATES.getFirst().getClass();
   }
 }

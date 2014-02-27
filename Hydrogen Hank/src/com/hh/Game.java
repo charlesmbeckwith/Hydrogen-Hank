@@ -6,8 +6,7 @@ import java.awt.Point;
 import java.awt.image.BufferStrategy;
 
 import com.hh.framework.*;
-import com.hh.framework.gamestate.GameState;
-import com.hh.framework.gamestate.GameStateManager;
+import com.hh.framework.gamestate.*;
 import com.hh.framework.gamestate.states.*;
 import com.hh.graphics.ArtAssets;
 import com.hh.input.KeyBinding;
@@ -53,9 +52,9 @@ public class Game extends Canvas implements Runnable
 
     KeyBinding.LOAD_BINDINGS();
     playState.restart();
-    manager.STATES.push(playState);
-    manager.STATES.push(new TitleMenuState());
-    manager.STATES.push(new TitleMenuAnimState());
+    manager.push(playState);
+    manager.push(new TitleMenuState());
+    manager.push(new TitleMenuAnimState());
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
   }
@@ -123,15 +122,13 @@ public class Game extends Canvas implements Runnable
    */
   public static void togglePause()
   {
-    GameState first = manager.STATES.getFirst();
-
-    if (first.getClass() == TitleMenuState.class || first.getClass() == PauseState.class
-        || first.getClass() == TitleMenuAnimState.class)
+    if (manager.getFirstClass() == TitleMenuState.class || manager.getFirstClass() == PauseState.class
+        || manager.getFirstClass() == TitleMenuAnimState.class)
     {
-      manager.STATES.pop();
-    } else if (manager.STATES.getFirst().getClass() == PlayState.class)
+      manager.pop();
+    } else if (manager.getFirstClass() == PlayState.class)
     {
-      manager.STATES.push(new PauseState());
+      manager.push(new PauseState());
     }
   }
 
@@ -141,12 +138,12 @@ public class Game extends Canvas implements Runnable
    */
   public static void doRestart()
   {
-    if (manager.STATES.getFirst().getClass() == PauseState.class)
+    if (manager.getFirstClass() == PauseState.class)
     {
       playState.restart();
-      manager.STATES.pop();
-      manager.STATES.push(new TitleMenuState());
-      manager.STATES.push(new TitleMenuAnimState());
+      manager.pop();
+      manager.push(new TitleMenuState());
+      manager.push(new TitleMenuAnimState());
     }
   }
   /**

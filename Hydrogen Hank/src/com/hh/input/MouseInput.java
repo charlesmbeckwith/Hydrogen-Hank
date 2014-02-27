@@ -15,10 +15,10 @@ public class MouseInput extends MouseAdapter {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (Game.manager.STATES.getFirst().getClass() == TitleMenuAnimState.class) {
-			Game.manager.STATES.pop();
+		if (Game.manager.getFirstClass() == TitleMenuAnimState.class) {
+			Game.manager.pop();
 		}
-		else if(Game.manager.STATES.getFirst().getClass() == TitleMenuState.class) {
+		else if(Game.manager.getFirstClass() == TitleMenuState.class) {
 			for (GameObject go : TitleMenuState.handler.getObjects()) {
 				if (go.getClass() == MenuButton.class) {
 					MenuButton button = (MenuButton) go;
@@ -37,7 +37,7 @@ public class MouseInput extends MouseAdapter {
 	public void switchMenuButton(MenuButton button) {
 		switch (button.getButtonID()) {
 		case NEWGAME:
-			Game.manager.STATES.pop();
+			Game.manager.pop();
 			break;
 		case HIGHSCORE:
 			System.out.println("Highscore");
