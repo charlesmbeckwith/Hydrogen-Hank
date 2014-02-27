@@ -110,7 +110,7 @@ public class Player extends GameObject {
 
 			// BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
 			// WIDTH, HEIGHT, HUE);
-			if(Game.isDebug())
+			if (Game.isDebug())
 				debugOptions(g2d);
 			g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)),
 					(int) (Y - (HEIGHT / 2)), WIDTH + HEIGHT / 3, HEIGHT, null);
@@ -122,7 +122,7 @@ public class Player extends GameObject {
 		g2d.setColor(Color.BLACK);
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
-		
+
 		float relativeZeroX = (X - Game.WIDTH / 3);
 		float relativeZeroY = (Y - (Game.HEIGHT * 2 / 3));
 		int row = 1;
@@ -132,6 +132,7 @@ public class Player extends GameObject {
 		}
 
 	}
+
 	private void initDebug() {
 		debugOptions = new LinkedList<String>();
 		String BouyancyDebug = new String().concat("Bouyancy = "
@@ -139,9 +140,13 @@ public class Player extends GameObject {
 		String PositionDebug = new String().concat("XPosition: " + (int) X
 				+ " || YPosition: " + (int) Y);
 		String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);
+		String XYOffset = new String().concat("XOffset = "
+				+ PlayState.cam.getX() + " || YOffset = "
+				+ PlayState.cam.getY());
 		debugOptions.add(BouyancyDebug);
 		debugOptions.add(PositionDebug);
 		debugOptions.add(VelocityDebug);
+		debugOptions.add(XYOffset);
 	}
 
 	/**

@@ -4,7 +4,6 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
-
 import com.hh.framework.*;
 import com.hh.framework.gamestate.*;
 import com.hh.framework.gamestate.states.*;
@@ -45,8 +44,8 @@ public class Game extends Canvas implements Runnable
     WIDTH = getWidth();
     HEIGHT = getHeight();
     HEIGHTOFFSET = 50;
-    this.createBufferStrategy(3);
-    bs = this.getBufferStrategy();
+    createBufferStrategy(3);
+    bs = getBufferStrategy();
     artassets = new ArtAssets();
     playState = new PlayState();
 
@@ -90,7 +89,7 @@ public class Game extends Canvas implements Runnable
 
       try
       {
-        Thread.sleep(10);
+        Thread.sleep(25);
       } catch (InterruptedException e)
       {
         e.printStackTrace();
@@ -174,5 +173,7 @@ public class Game extends Canvas implements Runnable
   {
     window = new Window(800, 600, "Hydrogen Hank", new Game());
   }
+  
+  
   
 }
