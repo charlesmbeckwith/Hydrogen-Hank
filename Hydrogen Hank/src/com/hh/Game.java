@@ -52,9 +52,9 @@ public class Game extends Canvas implements Runnable
     KeyBinding.LOAD_BINDINGS();
     playState.restart();
     manager.push(playState);
-    manager.push(new IntroAnimation());
     manager.push(new TitleMenuState());
     manager.push(new TitleMenuAnimState());
+    manager.push(new IntroAnimation());
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
   }
