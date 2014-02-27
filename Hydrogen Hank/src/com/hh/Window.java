@@ -15,6 +15,8 @@ import java.awt.*;
  */
 public class Window
 {
+  JFrame frame;
+
   /**
    * Set up the display of the game and start it
    * @param w - width of the game window
@@ -28,7 +30,7 @@ public class Window
     game.setMaximumSize(new Dimension(w, h));
     game.setMinimumSize(new Dimension(w, h));
 
-    JFrame frame = new JFrame(title);
+    frame = new JFrame(title);
     frame.add(game);
     frame.pack();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,5 +39,10 @@ public class Window
     frame.setVisible(true);
 
     game.start();
+  }
+
+  public Point getPosition()
+  {
+    return frame.getLocationOnScreen();
   }
 }

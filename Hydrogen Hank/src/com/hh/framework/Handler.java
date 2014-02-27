@@ -14,7 +14,7 @@ import java.util.LinkedList;
  */
 public class Handler
 {
-  private static LinkedGameObjects objects = new LinkedGameObjects();
+  private LinkedGameObjects objects = new LinkedGameObjects();
 
   private GameObject tempObj;
 

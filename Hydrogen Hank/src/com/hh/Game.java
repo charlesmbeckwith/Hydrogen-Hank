@@ -2,12 +2,14 @@ package com.hh;
 
 import java.awt.Canvas;
 import java.awt.Graphics;
+import java.awt.Point;
 import java.awt.image.BufferStrategy;
 
 import com.hh.framework.*;
 import com.hh.graphics.ArtAssets;
 import com.hh.keyboard.KeyBinding;
 import com.hh.keyboard.KeyInput;
+import com.hh.mouse.MouseInput;
 import com.hh.states.*;
 
 /**
@@ -26,6 +28,7 @@ public class Game extends Canvas implements Runnable
   public static PlayState playState;
   public static int WIDTH, HEIGHT, HEIGHTOFFSET;
   public static ArtAssets artassets;
+  public static Window window;
 
   public boolean running = false;
   public Thread thread;
@@ -52,6 +55,7 @@ public class Game extends Canvas implements Runnable
     manager.STATES.push(new TitleMenuState());
     manager.STATES.push(new TitleMenuAnimState());
     this.addKeyListener(new KeyInput());
+    this.addMouseListener(new MouseInput());
   }
 
   /**
@@ -144,6 +148,11 @@ public class Game extends Canvas implements Runnable
     }
   }
 
+  public static Point getPosition()
+  {
+    return window.getPosition();
+  }
+
   /**
    * Main entry point for the program
    * 
@@ -151,6 +160,6 @@ public class Game extends Canvas implements Runnable
    */
   public static void main(String args[])
   {
-    new Window(800, 600, "Hydrogen Hank", new Game());
+    window = new Window(800, 600, "Hydrogen Hank", new Game());
   }
 }
