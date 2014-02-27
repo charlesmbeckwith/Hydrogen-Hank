@@ -31,23 +31,23 @@ public class LinkedGameObjects extends LinkedList<GameObject>
       GameObject go = ll.next();
       if (go.getLayer() == ObjectLayer.background)
       {
-        background.add(go);
+        background.push(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.middleground)
       {
-        middleground.add(go);
+        middleground.push(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.foreground)
       {
-        foreground.add(go);
+        foreground.push(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.hud)
       {
-        hud.add(go);
+        hud.push(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.toplevel)
       {
-        toplevel.add(go);
+        toplevel.push(go);
         ll.remove();
       }
     }
@@ -83,11 +83,12 @@ public class LinkedGameObjects extends LinkedList<GameObject>
       tl.remove();
     }
 
-    background = null;
-    middleground = null;
-    foreground = null;
-    hud = null;
-    toplevel = null;
+    background.clear();
+    background.clear();
+    middleground.clear();
+    foreground.clear();
+    hud.clear();
+    toplevel.clear();
 
   }
 
