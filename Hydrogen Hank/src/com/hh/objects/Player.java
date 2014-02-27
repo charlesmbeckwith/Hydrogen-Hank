@@ -110,8 +110,8 @@ public class Player extends GameObject {
 
 			// BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
 			// WIDTH, HEIGHT, HUE);
-			debugOptions(g2d);
-
+			if(Game.isDebug())
+				debugOptions(g2d);
 			g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)),
 					(int) (Y - (HEIGHT / 2)), WIDTH + HEIGHT / 3, HEIGHT, null);
 		}
@@ -138,8 +138,10 @@ public class Player extends GameObject {
 				+ (int) BUOYANCY);
 		String PositionDebug = new String().concat("XPosition: " + (int) X
 				+ " || YPosition: " + (int) Y);
+		String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);
 		debugOptions.add(BouyancyDebug);
 		debugOptions.add(PositionDebug);
+		debugOptions.add(VelocityDebug);
 	}
 
 	/**

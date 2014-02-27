@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable
   public static int WIDTH, HEIGHT, HEIGHTOFFSET;
   private static ArtAssets artassets;
   public static Window window;
-
+  public static boolean debugOn = true;
   public boolean running = false;
   public Thread thread;
 
@@ -158,6 +158,12 @@ public class Game extends Canvas implements Runnable
   {
     return window.getPosition();
   }
+  
+  /**
+   * Debug toggle
+   * @return if debug is toggled on or off
+   */
+  public static boolean isDebug(){return debugOn;};
 
   /**
    * Main entry point for the program
@@ -168,4 +174,5 @@ public class Game extends Canvas implements Runnable
   {
     window = new Window(800, 600, "Hydrogen Hank", new Game());
   }
+  
 }
