@@ -94,19 +94,19 @@ public enum KeyBinding
     if (keyStr.length() == 1)
     {
       return keyStr.charAt(0);
-    } else if (keyStr.equals("spacebar"))
+    } else if (keyStr.equalsIgnoreCase("spacebar"))
     {
       return KeyEvent.VK_SPACE;
-    } else if (keyStr.equals("up"))
+    } else if (keyStr.equalsIgnoreCase("up"))
     {
       return KeyEvent.VK_UP;
-    } else if (keyStr.equals("down"))
+    } else if (keyStr.equalsIgnoreCase("down"))
     {
       return KeyEvent.VK_DOWN;
-    } else if (keyStr.equals("left"))
+    } else if (keyStr.equalsIgnoreCase("left"))
     {
       return KeyEvent.VK_LEFT;
-    } else if (keyStr.equals("right"))
+    } else if (keyStr.equalsIgnoreCase("right"))
     {
       return KeyEvent.VK_RIGHT;
     } else if (keyStr.equalsIgnoreCase("enter"))
