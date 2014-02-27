@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.states.PlayState;
 
 /**
  * COSC3550 Spring 2014 Homework 2
@@ -28,7 +29,7 @@ public class Cloud extends GameObject {
 	}
 	
 	public void render(Graphics g) {
-	  if(X + WIDTH < -Game.playState.cam.getX()){
+	  if(X + WIDTH < -PlayState.cam.getX()){
       ALIVE = false;
     }
 	  

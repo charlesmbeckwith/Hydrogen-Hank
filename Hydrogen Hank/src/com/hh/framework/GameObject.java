@@ -1,7 +1,6 @@
 package com.hh.framework;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
 import com.hh.framework.ObjectLayer;
 
 /**

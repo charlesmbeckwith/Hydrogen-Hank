@@ -1,16 +1,13 @@
 package com.hh;
 
 import java.awt.Canvas;
-import java.awt.Color;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.image.BufferStrategy;
 
 import com.hh.framework.*;
 import com.hh.graphics.ArtAssets;
 import com.hh.keyboard.KeyBinding;
 import com.hh.keyboard.KeyInput;
-import com.hh.objects.*;
 import com.hh.states.*;
 
 /**
