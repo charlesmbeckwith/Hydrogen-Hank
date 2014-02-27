@@ -72,8 +72,7 @@ public class Handler
   public void insertObject(GameObject object, int index)
   {
     objects.add(index, object);
-    //sort linked list after adding object
-    objects.sort();
+    
   }
 
   /**
@@ -83,8 +82,8 @@ public class Handler
   public void addObject(GameObject object)
   {
     objects.add(object);
-    //sort linked list after adding object
-    objects.sort();
+    
+    
   }
 
   /**

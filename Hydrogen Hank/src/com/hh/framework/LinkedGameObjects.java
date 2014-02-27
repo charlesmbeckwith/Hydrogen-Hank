@@ -18,7 +18,7 @@ public class LinkedGameObjects extends LinkedList<GameObject>
    * sort LinkedGameObjects LinkedList. Organizes a hierarchy for painting purposes. 
    * 
    */
-  public void sort()
+  private void sort()
   {
     LinkedList<GameObject> background = new LinkedList<GameObject>();
     LinkedList<GameObject> middleground = new LinkedList<GameObject>();
@@ -31,23 +31,23 @@ public class LinkedGameObjects extends LinkedList<GameObject>
       GameObject go = ll.next();
       if (go.getLayer() == ObjectLayer.background)
       {
-        background.push(go);
+        background.add(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.middleground)
       {
-        middleground.push(go);
+        middleground.add(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.foreground)
       {
-        foreground.push(go);
+        foreground.add(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.hud)
       {
-        hud.push(go);
+        hud.add(go);
         ll.remove();
       } else if (go.getLayer() == ObjectLayer.toplevel)
       {
-        toplevel.push(go);
+        toplevel.add(go);
         ll.remove();
       }
     }
@@ -55,31 +55,31 @@ public class LinkedGameObjects extends LinkedList<GameObject>
     for (Iterator<GameObject> bg = background.iterator(); bg.hasNext();)
     {
       GameObject go = bg.next();
-      this.add(go);
+      super.add(go);
       bg.remove();
     }
     for (Iterator<GameObject> mg = middleground.iterator(); mg.hasNext();)
     {
       GameObject go = mg.next();
-      this.add(go);
+      super.add(go);
       mg.remove();
     }
     for (Iterator<GameObject> fg = foreground.iterator(); fg.hasNext();)
     {
       GameObject go = fg.next();
-      this.add(go);
+      super.add(go);
       fg.remove();
     }
     for (Iterator<GameObject> hd = hud.iterator(); hd.hasNext();)
     {
       GameObject go = hd.next();
-      this.add(go);
+      super.add(go);
       hd.remove();
     }
     for (Iterator<GameObject> tl = toplevel.iterator(); tl.hasNext();)
     {
       GameObject go = tl.next();
-      this.add(go);
+      super.add(go);
       tl.remove();
     }
 
@@ -90,6 +90,30 @@ public class LinkedGameObjects extends LinkedList<GameObject>
     hud.clear();
     toplevel.clear();
 
+  }
+  /**
+   * Override add function.
+   * Automatically calls sort.
+   * @param gameobject - takes in a game object and adds to LinkedGameObject list
+   */
+  @Override
+  public boolean add(GameObject gameobject){
+	  super.add(gameobject);
+	  this.sort();
+	  return true;
+  }
+  
+  /**
+   * Override add function.
+   * Automatically calls sort.
+   * @param gameobject - takes in a game object and adds to LinkedGameObject list
+   * @param index - index where the object should be added 
+   */
+  @Override
+  public void add(int index,GameObject gameobject){
+	  super.add(index, gameobject);
+	  this.sort();
+	  
   }
 
 }
