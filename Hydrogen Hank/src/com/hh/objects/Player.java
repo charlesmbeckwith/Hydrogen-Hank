@@ -7,6 +7,8 @@ import java.util.Random;
 import com.hh.Game;
 import com.hh.framework.*;
 import com.hh.graphics.Animation;
+import com.hh.graphics.ArtAssets;
+import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.keyboard.KeyBinding;
 import com.hh.keyboard.KeyInput;
 import com.hh.states.PlayState;
@@ -25,28 +27,22 @@ public class Player extends GameObject
   private final float GRAVITY = 200f;
 
   private Animation RIGHT, CURRENT;
+  private ArtAssets art;
   private float BUOYANCY;
   private Color HUE;
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
-    super(x, y, width, height, v, ObjectID.Player, ObjectLayer.foreground);
+    super(x, y, width-30, height, v, ObjectID.Player, ObjectLayer.foreground);
 
     ALIVE = true;
     Random rand = new Random();
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
-
-    RIGHT = new Animation(1, Game.artassets.hydrogenhank[0]);
-    	/*
-    		, Game.artassets.hydrogenhank[1],
-        Game.artassets.hydrogenhank[2], Game.artassets.hydrogenhank[3],
-        Game.artassets.hydrogenhank[4], Game.artassets.hydrogenhank[5],
-        Game.artassets.hydrogenhank[6], Game.artassets.hydrogenhank[7]);
-        */
-
-    CURRENT = new Animation(3, Game.artassets.hydrogenhank[8]);
+    art = Game.getArtAssets();
+    initAnimations();
   }
+  
 
   public void tick()
   {
@@ -119,8 +115,16 @@ public class Player extends GameObject
     {
       Graphics2D g2d = (Graphics2D) g;
 
-      BufferedImage image = Game.artassets.hueImg(CURRENT.getAnimationFrame(), WIDTH, HEIGHT, HUE);
+      BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(), WIDTH, HEIGHT, HUE);
       g2d.drawImage(image, (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)), WIDTH, HEIGHT, null);
     }
   }
+  /**
+   * initialize Animations
+   */
+  private void initAnimations(){
+	  
+	    RIGHT = new Animation(3, art.getSpriteFrame(spriteID.HANK,0), art.getSpriteFrame(spriteID.HANK,1));
+	    CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK,0));
+}
 }

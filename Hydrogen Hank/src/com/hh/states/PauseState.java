@@ -4,10 +4,11 @@ import java.awt.Graphics;
 
 import com.hh.Game;
 import com.hh.framework.GameState;
+import com.hh.graphics.ArtAssets;
 
 public class PauseState extends GameState
 {
-
+  private ArtAssets art = Game.getArtAssets();
   public void tick()
   {
   }
@@ -15,8 +16,8 @@ public class PauseState extends GameState
   public void render(Graphics g)
   {
     Game.playState.render(g);
-    g.drawImage(Game.artassets.pauseScreen,
-        (Game.WIDTH / 2 - Game.artassets.pauseScreen.getWidth() / 2), (Game.HEIGHT / 2 - 150), null);
+    g.drawImage(art.pauseScreen,
+        (Game.WIDTH / 2 - art.pauseScreen.getWidth() / 2), (Game.HEIGHT / 2 - 150), null);
   }
 
 }

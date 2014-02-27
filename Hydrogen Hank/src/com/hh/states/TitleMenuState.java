@@ -5,25 +5,27 @@ import java.awt.Graphics;
 import com.hh.Game;
 import com.hh.framework.GameState;
 import com.hh.framework.Handler;
+import com.hh.graphics.ArtAssets;
 import com.hh.objects.MenuButton;
 import com.hh.objects.MenuButton.ButtonID;
 
 public class TitleMenuState extends GameState
 {
   public static Handler handler;
+  private ArtAssets art = Game.getArtAssets();
 
   public TitleMenuState()
   {
     handler = new Handler();
-    handler.addObject(new MenuButton(Game.artassets.newButton, Game.artassets.newButton2,
-        Game.WIDTH / 2, Game.HEIGHT - 275, Game.artassets.newButton.getWidth(),
-        Game.artassets.newButton.getHeight(),ButtonID.NEWGAME));
-    handler.addObject(new MenuButton(Game.artassets.scoresButton, Game.artassets.scoresButton2,
-        Game.WIDTH / 2, Game.HEIGHT - 200, Game.artassets.scoresButton.getWidth(),
-        Game.artassets.scoresButton.getHeight(),ButtonID.HIGHSCORE));
-    handler.addObject(new MenuButton(Game.artassets.creditsButton, Game.artassets.creditsButton2,
-        Game.WIDTH / 2, Game.HEIGHT - 125, Game.artassets.creditsButton.getWidth(),
-        Game.artassets.creditsButton.getHeight(),ButtonID.CREDITS));
+    handler.addObject(new MenuButton(art.newButton, art.newButton2,
+        Game.WIDTH / 2, Game.HEIGHT - 275, art.newButton.getWidth(),
+        art.newButton.getHeight(),ButtonID.NEWGAME));
+    handler.addObject(new MenuButton(art.scoresButton, art.scoresButton2,
+        Game.WIDTH / 2, Game.HEIGHT - 200, art.scoresButton.getWidth(),
+        art.scoresButton.getHeight(),ButtonID.HIGHSCORE));
+    handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2,
+        Game.WIDTH / 2, Game.HEIGHT - 125, art.creditsButton.getWidth(),
+        art.creditsButton.getHeight(),ButtonID.CREDITS));
   }
 
   public void tick()
@@ -33,9 +35,9 @@ public class TitleMenuState extends GameState
 
   public void render(Graphics g)
   {
-    g.drawImage(Game.artassets.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-    g.drawImage(Game.artassets.mainTitle,
-        (Game.WIDTH / 2 - Game.artassets.mainTitle.getWidth() / 2), 20, null);
+    g.drawImage(art.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+    g.drawImage(art.mainTitle,
+        (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), 20, null);
 
     handler.render(g);
   }

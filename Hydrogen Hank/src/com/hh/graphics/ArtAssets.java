@@ -7,6 +7,8 @@ import java.awt.image.BufferedImage;
 
 import javax.imageio.ImageIO;
 
+import com.hh.graphics.SpriteSheet.spriteID;
+
 /**
  * COSC3550 Spring 2014 Homework 3
  * 
@@ -18,8 +20,7 @@ import javax.imageio.ImageIO;
  */
 public class ArtAssets
 {
-  private SpriteSheet hydrogenhank_sheet;
-  private BufferedImage hydrogenhank_sheetimg = null;
+  public SpriteSheet hydrogenhank_sheet;
 
   public BufferedImage[] hydrogenhank = new BufferedImage[9];
   public BufferedImage dirt, cloud, pauseScreen;
@@ -31,8 +32,8 @@ public class ArtAssets
    */
   public ArtAssets()
   {
-    hydrogenhank_sheetimg = loadImage("/hydrogenhank/balloonmanspritesheet.png");
-    hydrogenhank_sheet = new SpriteSheet(hydrogenhank_sheetimg);
+   
+    hydrogenhank_sheet = new SpriteSheet(spriteID.HANK, "/hydrogenhank/HydrogenHankSpriteSheet.png");
 
     mainBg = loadImage("/graphics/mainmenu/mainmenubackground.png");
     mainTitle = loadImage("/graphics/mainmenu/HydrogenHankTitle.png");
@@ -47,7 +48,7 @@ public class ArtAssets
     cloud = loadImage("/graphics/bgelements/cloud.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
 
-    getFrames();
+   
   }
 
   /**
@@ -67,24 +68,6 @@ public class ArtAssets
     }
 
     return image;
-  }
-
-  /**
-   * Gets the frames of the animations
-   */
-  private void getFrames()
-  {
-    int width = 562;
-    int height = 562;
-    hydrogenhank[0] = hydrogenhank_sheet.grabImage(1, 1, width, height);
-    hydrogenhank[1] = hydrogenhank_sheet.grabImage(2, 1, width, height);
-    hydrogenhank[2] = hydrogenhank_sheet.grabImage(3, 1, width, height);
-    hydrogenhank[3] = hydrogenhank_sheet.grabImage(4, 1, width, height);
-    hydrogenhank[4] = hydrogenhank_sheet.grabImage(5, 1, width, height);
-    hydrogenhank[5] = hydrogenhank_sheet.grabImage(6, 1, width, height);
-    hydrogenhank[6] = hydrogenhank_sheet.grabImage(7, 1, width, height);
-    hydrogenhank[7] = hydrogenhank_sheet.grabImage(8, 1, width, height);
-    hydrogenhank[8] = hydrogenhank_sheet.grabImage(9, 1, width, height);
   }
 
   /**
@@ -108,5 +91,23 @@ public class ArtAssets
     g.drawImage(image, 0, 0, width, height, null);
     g.dispose();
     return newImage;
+  } 
+
+  /**
+   * 
+   * @param id - spriteID
+   * @param frame - frame number in sprite sheet to be grabbed
+   * @return BufferedImage - return BufferedImage of sprite sheet called for
+   */
+  public BufferedImage getSpriteFrame(spriteID id, int frame){
+	  switch(id){
+	  case HANK:
+		  
+		  return hydrogenhank_sheet.getFrame(frame);
+	  default:
+		  return null;
+			  
+	  }
   }
+
 }

@@ -27,7 +27,7 @@ public class Game extends Canvas implements Runnable
   public static GameStateManager manager;
   public static PlayState playState;
   public static int WIDTH, HEIGHT, HEIGHTOFFSET;
-  public static ArtAssets artassets;
+  private static ArtAssets artassets;
   public static Window window;
 
   public boolean running = false;
@@ -147,7 +147,14 @@ public class Game extends Canvas implements Runnable
       manager.STATES.push(new TitleMenuAnimState());
     }
   }
+  /**
+   * getArtAssets
+   * @return returns instance of ArtAssets
+   */
+  public static ArtAssets getArtAssets(){return artassets;}
 
+  
+  //TODO: What. 
   public static Point getPosition()
   {
     return window.getPosition();

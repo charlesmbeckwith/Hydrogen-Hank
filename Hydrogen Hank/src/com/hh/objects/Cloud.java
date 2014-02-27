@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.graphics.ArtAssets;
 import com.hh.states.PlayState;
 
 /**
@@ -17,12 +18,13 @@ import com.hh.states.PlayState;
 public class Cloud extends GameObject
 {
   private BufferedImage IMG;
+  private ArtAssets art;
 
   public Cloud(float x, float y, int width, int height)
   {
     super(x, y, width, height, ObjectID.Background, ObjectLayer.background);
-
-    IMG = Game.artassets.cloud;
+    art = Game.getArtAssets();
+    IMG = art.cloud;
     ALIVE = true;
   }
 

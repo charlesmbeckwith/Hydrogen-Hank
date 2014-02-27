@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.graphics.ArtAssets;
 import com.hh.states.PlayState;
 
 /**
@@ -17,11 +18,11 @@ import com.hh.states.PlayState;
 public class Tile extends GameObject
 {
   private BufferedImage IMG;
-
+  private ArtAssets art = Game.getArtAssets();
   public Tile(float x, float y, int width, int height)
   {
     super(x, y, width, height, ObjectID.Tile, ObjectLayer.middleground);
-    IMG = Game.artassets.dirt;
+    IMG = art.dirt;
     ALIVE = true;
   }
 
