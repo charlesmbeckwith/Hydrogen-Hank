@@ -1,9 +1,9 @@
-package com.hh.states;
+package com.hh.framework.gamestate.states;
 
 import java.awt.Graphics;
 
 import com.hh.Game;
-import com.hh.framework.GameState;
+import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 
 public class PauseState extends GameState

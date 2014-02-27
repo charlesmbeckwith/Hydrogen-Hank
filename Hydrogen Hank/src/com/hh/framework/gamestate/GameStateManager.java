@@ -1,4 +1,4 @@
-package com.hh.framework;
+package com.hh.framework.gamestate;
 
 import java.awt.Graphics;
 import java.util.LinkedList;

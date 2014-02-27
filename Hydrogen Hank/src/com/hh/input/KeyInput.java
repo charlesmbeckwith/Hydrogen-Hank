@@ -1,4 +1,4 @@
-package com.hh.keyboard;
+package com.hh.input;
 
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;

@@ -1,10 +1,10 @@
-package com.hh.states;
+package com.hh.framework.gamestate.states;
 
 import java.awt.Graphics;
 
 import com.hh.Game;
-import com.hh.framework.GameState;
 import com.hh.framework.Handler;
+import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.MenuButton;
 import com.hh.objects.MenuButton.ButtonID;

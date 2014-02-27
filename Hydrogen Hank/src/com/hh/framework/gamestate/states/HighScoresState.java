@@ -1,8 +1,8 @@
-package com.hh.states;
+package com.hh.framework.gamestate.states;
 
 import java.awt.Graphics;
 
-import com.hh.framework.GameState;
+import com.hh.framework.gamestate.GameState;
 
 public class HighScoresState extends GameState
 {

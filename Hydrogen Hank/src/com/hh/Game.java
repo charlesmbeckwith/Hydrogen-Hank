@@ -6,11 +6,13 @@ import java.awt.Point;
 import java.awt.image.BufferStrategy;
 
 import com.hh.framework.*;
+import com.hh.framework.gamestate.GameState;
+import com.hh.framework.gamestate.GameStateManager;
+import com.hh.framework.gamestate.states.*;
 import com.hh.graphics.ArtAssets;
-import com.hh.keyboard.KeyBinding;
-import com.hh.keyboard.KeyInput;
-import com.hh.mouse.MouseInput;
-import com.hh.states.*;
+import com.hh.input.KeyBinding;
+import com.hh.input.KeyInput;
+import com.hh.input.MouseInput;
 
 /**
  * COSC3550 Spring 2014 Homework 3

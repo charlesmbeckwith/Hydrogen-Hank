@@ -6,12 +6,12 @@ import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
-import com.hh.keyboard.KeyBinding;
-import com.hh.keyboard.KeyInput;
-import com.hh.states.PlayState;
+import com.hh.input.KeyBinding;
+import com.hh.input.KeyInput;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -38,6 +38,7 @@ public class Player extends GameObject
     ALIVE = true;
     Random rand = new Random();
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
+    
     BUOYANCY = 0.0f;
     art = Game.getArtAssets();
     initAnimations();
@@ -116,7 +117,8 @@ public class Player extends GameObject
       Graphics2D g2d = (Graphics2D) g;
 
       BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(), WIDTH, HEIGHT, HUE);
-      g2d.drawImage(image, (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)), WIDTH, HEIGHT, null);
+     
+      g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)), WIDTH, HEIGHT, null);
     }
   }
   /**

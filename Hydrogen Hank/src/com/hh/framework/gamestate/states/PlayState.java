@@ -1,4 +1,4 @@
-package com.hh.states;
+package com.hh.framework.gamestate.states;
 
 import java.awt.Color;
 import java.awt.Graphics;
@@ -6,9 +6,9 @@ import java.awt.Graphics2D;
 
 import com.hh.Game;
 import com.hh.framework.Camera;
-import com.hh.framework.GameState;
 import com.hh.framework.Handler;
 import com.hh.framework.Vector2D;
+import com.hh.framework.gamestate.GameState;
 import com.hh.objects.Cloud;
 import com.hh.objects.Player;
 import com.hh.objects.Tile;
