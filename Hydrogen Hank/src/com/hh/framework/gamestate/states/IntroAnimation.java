@@ -14,13 +14,7 @@ public class IntroAnimation extends GameState{
 	@Override
 	public void tick() {
 		  hankPosition-=1;
-	      try
-	      {
-	        Thread.sleep(25);
-	      } catch (InterruptedException e)
-	      {
-	        e.printStackTrace();
-	      }
+
 	}
 
 	@Override
