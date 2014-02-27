@@ -16,14 +16,7 @@ public class MouseInput extends MouseAdapter {
 
 	public void mouseReleased(MouseEvent e) {
 		if (Game.manager.STATES.getFirst().getClass() == TitleMenuAnimState.class) {
-			for (GameObject go : TitleMenuAnimState.handler.getObjects()) {
-				if (go.getClass() == MenuButton.class) {
-					MenuButton button = (MenuButton) go;
-					if (button.SELECTED) {
-						switchMenuButton(button);
-					}
-				}
-			}
+			Game.manager.STATES.pop();
 		}
 		else if(Game.manager.STATES.getFirst().getClass() == TitleMenuState.class) {
 			for (GameObject go : TitleMenuState.handler.getObjects()) {

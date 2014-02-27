@@ -128,7 +128,7 @@ public class Player extends GameObject
    */
   private void initAnimations(){
 	  
-	    RIGHT = new Animation(3, art.getSpriteFrame(spriteID.HANK,0), art.getSpriteFrame(spriteID.HANK,1));
+	    RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK,0), art.getSpriteFrame(spriteID.HANK,1));
 	    CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK,0));
 }
 }

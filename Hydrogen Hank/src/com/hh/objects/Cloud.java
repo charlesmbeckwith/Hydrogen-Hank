@@ -2,6 +2,7 @@ package com.hh.objects;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
@@ -19,10 +20,11 @@ public class Cloud extends GameObject
 {
   private BufferedImage IMG;
   private ArtAssets art;
+  private static Random rand = new Random();
 
   public Cloud(float x, float y, int width, int height)
   {
-    super(x, y, width, height, ObjectID.Background, ObjectLayer.background);
+    super(x, y, width, height, ObjectID.Background, (rand.nextBoolean() ? ObjectLayer.background : ObjectLayer.foreground));
     art = Game.getArtAssets();
     IMG = art.cloud;
     ALIVE = true;
