@@ -80,21 +80,6 @@ public class Player extends GameObject
       X += V.DX * GameTime.delta();
       Y += V.DY * GameTime.delta();
 
-      // Keeps the block in the game window
-      if (Y < Game.HEIGHTOFFSET - 150)
-      {
-        Y = Game.HEIGHTOFFSET - 150;
-      } else if (Y > Game.HEIGHT)
-      {
-        Y = Game.HEIGHT;
-      }
-
-      if (X < 0)
-      {
-      } else if (X > Game.WIDTH)
-      {
-      }
-
       CURRENT = RIGHT;
       CURRENT.runAnimation();
 

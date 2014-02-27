@@ -9,7 +9,7 @@ import java.io.IOException;
 
 public enum KeyBinding {
 	INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), FANON(KeyEvent.VK_SPACE), PAUSE(
-			KeyEvent.VK_P), COLLIDERS(KeyEvent.VK_C), RESTART(KeyEvent.VK_R);
+			KeyEvent.VK_P), RESTART(KeyEvent.VK_R);
 
 	private int value;
 	private static File controls = new File(System.getProperty("user.dir")
@@ -54,8 +54,6 @@ public enum KeyBinding {
 								FANON.SET(newVal);
 							} else if (line.contains("PAUSE_KEY")) {
 								PAUSE.SET(newVal);
-							} else if (line.contains("COLLIDER_KEY")) {
-								COLLIDERS.SET(newVal);
 							} else if (line.contains("RESTART_KEY")) {
 								RESTART.SET(newVal);
 							}
