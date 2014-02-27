@@ -51,6 +51,7 @@ public class Game extends Canvas implements Runnable {
 		playState.restart();
 		manager.STATES.push(playState);
 		manager.STATES.push(new TitleMenuState());
+		manager.STATES.push(new TitleMenuAnimState());
 		this.addKeyListener(new KeyInput());
 	}
 
@@ -91,6 +92,7 @@ public class Game extends Canvas implements Runnable {
 	 * Advances the gameobjects
 	 */
 	private void tick() {
+		System.out.println(manager.STATES.getFirst().getClass());
 		manager.tick();
 	}
 
@@ -124,6 +126,9 @@ public class Game extends Canvas implements Runnable {
 	public static void doRestart() {
 		if (manager.STATES.getFirst().getClass() == PauseState.class) {
 			playState.restart();
+			manager.STATES.pop();
+			manager.STATES.push(new TitleMenuState());
+			//manager.STATES.push(new TitleMenuAnimState());
 		}
 	}
 
