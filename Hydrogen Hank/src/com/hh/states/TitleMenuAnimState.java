@@ -23,14 +23,13 @@ public class TitleMenuAnimState extends GameState
     g.drawImage(Game.artassets.mainTitle,
         (Game.WIDTH / 2 - Game.artassets.mainTitle.getWidth() / 2), position + 20, null);
     g.drawImage(Game.artassets.newButton,
-        (Game.WIDTH / 2 - Game.artassets.newButton.getWidth() / 2), position + Game.HEIGHT - 275,
+        (Game.WIDTH / 2 - Game.artassets.newButton.getWidth() / 2), position + 300,
         null);
     g.drawImage(Game.artassets.scoresButton,
         (Game.WIDTH / 2 - Game.artassets.scoresButton.getWidth() / 2),
-        position + Game.HEIGHT - 200, null);
+        position + 375, null);
     g.drawImage(Game.artassets.creditsButton,
-        (Game.WIDTH / 2 - Game.artassets.creditsButton.getWidth() / 2), position + Game.HEIGHT
-            - 125, null);
+        (Game.WIDTH / 2 - Game.artassets.creditsButton.getWidth() / 2), position + 450, null);
 
     position -= 3;
 
