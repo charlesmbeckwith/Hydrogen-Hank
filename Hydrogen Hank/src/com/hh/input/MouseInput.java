@@ -37,13 +37,15 @@ public class MouseInput extends MouseAdapter {
 	public void switchMenuButton(MenuButton button) {
 		switch (button.getButtonID()) {
 		case NEWGAME:
-			Game.manager.STATES.push(Game.playState);
+			Game.manager.STATES.pop();
 			break;
 		case HIGHSCORE:
 			System.out.println("Highscore");
+			//Game.manager.STATES.push(new HighScoresState());
 			break;
 		case CREDITS:
 			System.out.println("Credits");
+			//Game.manager.STATES.push(new CreditsState());
 			break;
 
 		}

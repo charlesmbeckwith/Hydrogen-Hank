@@ -11,7 +11,7 @@
 # and finally number of rows of sprites
 
 
-WIDTH=1934
-HEIGHT=2508
+WIDTH=99
+HEIGHT=128
 COLUMNS=2
 ROWS=1
