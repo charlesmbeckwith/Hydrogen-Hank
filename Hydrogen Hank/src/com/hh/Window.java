@@ -25,10 +25,10 @@ public class Window
    */
   public Window(int w, int h, String title, Game game)
   {
-	this.game = (Game) game;
-    game.setPreferredSize(new Dimension(w, h));
-    game.setMaximumSize(new Dimension(w, h));
-    game.setMinimumSize(new Dimension(w, h));
+    this.game = (Game) game;
+    this.game.setPreferredSize(new Dimension(w, h));
+    this.game.setMaximumSize(new Dimension(w, h));
+    this.game.setMinimumSize(new Dimension(w, h));
 
     frame = new JFrame(title);
     frame.add(game);
@@ -38,7 +38,7 @@ public class Window
     frame.setLocationRelativeTo(null);
     frame.setVisible(true);
 
-    game.start();
+    this.game.start();
   }
 
   public Point getPosition()

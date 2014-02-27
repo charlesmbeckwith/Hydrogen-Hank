@@ -75,8 +75,8 @@ public class PlayState extends GameState
 
   private void addBackground(int x)
   {
-    handler.addObject(new Cloud((int) (x + (Math.random() * 20)), (int) (Math.random() * 350), 75,
-        25));
+    handler.addObject(new Cloud((int) (x + (Math.random() * 20)), (int) (Math.random() * 350), 128,
+        64));
     handler.addObject(new Tile(x, 400, 75, 300));
   }
 
