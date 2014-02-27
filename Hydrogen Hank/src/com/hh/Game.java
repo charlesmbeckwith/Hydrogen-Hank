@@ -92,7 +92,6 @@ public class Game extends Canvas implements Runnable {
 	 * Advances the gameobjects
 	 */
 	private void tick() {
-		System.out.println(manager.STATES.getFirst().getClass());
 		manager.tick();
 	}
 
@@ -110,12 +109,14 @@ public class Game extends Canvas implements Runnable {
 	 * Toggles the game between the 'Running' and 'Paused' states
 	 */
 	public static void togglePause() {
-		if (manager.STATES.getFirst().getClass() == TitleMenuState.class) {
+		GameState first = manager.STATES.getFirst();
+
+		if (first.getClass() == TitleMenuState.class
+				|| first.getClass() == PauseState.class
+				|| first.getClass() == TitleMenuAnimState.class) {
 			manager.STATES.pop();
 		} else if (manager.STATES.getFirst().getClass() == PlayState.class) {
 			manager.STATES.push(new PauseState());
-		} else if (manager.STATES.getFirst().getClass() == PauseState.class) {
-			manager.STATES.pop();
 		}
 	}
 
@@ -128,7 +129,7 @@ public class Game extends Canvas implements Runnable {
 			playState.restart();
 			manager.STATES.pop();
 			manager.STATES.push(new TitleMenuState());
-			//manager.STATES.push(new TitleMenuAnimState());
+			manager.STATES.push(new TitleMenuAnimState());
 		}
 	}
 
