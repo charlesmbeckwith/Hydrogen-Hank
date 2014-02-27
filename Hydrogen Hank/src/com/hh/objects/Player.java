@@ -22,6 +22,7 @@ import com.hh.input.KeyInput;
  * 
  * @author Mark Schlottke
  */
+@SuppressWarnings("unused")
 public class Player extends GameObject
 {
   private final float GRAVITY = 200f;
@@ -116,11 +117,12 @@ public class Player extends GameObject
     {
       Graphics2D g2d = (Graphics2D) g;
 
-      BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(), WIDTH, HEIGHT, HUE);
-     
-      g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)), WIDTH, HEIGHT, null);
+      //BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(), WIDTH, HEIGHT, HUE);
+ 
+      g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)), WIDTH + HEIGHT/3, HEIGHT, null);
     }
   }
+  
   /**
    * initialize Animations
    */

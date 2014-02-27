@@ -6,6 +6,7 @@ import com.hh.Game;
 import com.hh.framework.Handler;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
+import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.MenuButton;
 import com.hh.objects.MenuButton.ButtonID;
 
@@ -13,6 +14,7 @@ public class TitleMenuState extends GameState
 {
   public static Handler handler;
   private ArtAssets art = Game.getArtAssets();
+  private int hankFlyingPosition = 0;
 
   public TitleMenuState()
   {
@@ -36,6 +38,12 @@ public class TitleMenuState extends GameState
   public void render(Graphics g)
   {
     g.drawImage(art.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+    
+    //Draw Hank animation
+    g.drawImage(art.getSpriteFrame(spriteID.HANK, 0), hankFlyingPosition+=2, (int) ( Game.HEIGHT - hankFlyingPosition), 150, 150, null);
+    if(hankFlyingPosition > Game.WIDTH){
+    	hankFlyingPosition = 0;
+    }
     g.drawImage(art.mainTitle,
         (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), 20, null);
 
