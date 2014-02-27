@@ -12,9 +12,7 @@ import com.hh.objects.MenuButton.ButtonID;
 
 public class TitleMenuAnimState extends GameState
 {
-
   private int position = Game.HEIGHT;
-  private int hankFlyingPosition = 0;
   private ArtAssets art = Game.getArtAssets();
   public static Handler handler;
   public boolean scrollingTitlesRunning = true;
@@ -23,10 +21,9 @@ public class TitleMenuAnimState extends GameState
   public TitleMenuAnimState(){
   	handler = new Handler();
   }
+  
   public void tick()
   {
-	  if(!scrollingTitlesRunning)
-		  handler.tick();
   }
 
   public void render(Graphics g)
@@ -34,10 +31,10 @@ public class TitleMenuAnimState extends GameState
     g.drawImage(art.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 
     //Draw Hank animation
-    g.drawImage(art.getSpriteFrame(spriteID.HANK, 0), hankFlyingPosition+=2, (int) ( Game.HEIGHT - hankFlyingPosition), 150, 150, null);
-    if(hankFlyingPosition > Game.WIDTH){
-    	hankFlyingPosition = 0;
-    }    	
+    //g.drawImage(art.getSpriteFrame(spriteID.HANK, 0), hankFlyingPosition+=2, (int) ( Game.HEIGHT - hankFlyingPosition), 150, 150, null);
+    //if(hankFlyingPosition > Game.WIDTH){
+    //	hankFlyingPosition = 0;
+    //}    	
     
     if(scrollingTitlesRunning){
 	    g.drawImage(art.mainTitle,
