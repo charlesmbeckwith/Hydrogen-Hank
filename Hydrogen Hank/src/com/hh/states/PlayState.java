@@ -61,7 +61,7 @@ public class PlayState extends GameState
   {
     handler.clearObjects();
 
-    player = new Player(100, 100, 75, 50, new Vector2D(0, 100));
+    player = new Player(100, 100, 64, 64, new Vector2D(0, 100));
     handler.addObject(player);
 
     start = -175;

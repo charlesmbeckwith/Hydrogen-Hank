@@ -22,17 +22,21 @@ public class TitleMenuAnimState extends GameState
   {
     g.drawImage(art.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
 
+
     g.drawImage(art.mainTitle,
         (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), position + 20, null);
     g.drawImage(art.newButton,
         (Game.WIDTH / 2 - art.newButton.getWidth() / 2), position + Game.HEIGHT - 275,
+
         null);
+
     g.drawImage(art.scoresButton,
         (Game.WIDTH / 2 - art.scoresButton.getWidth() / 2),
         position + Game.HEIGHT - 200, null);
     g.drawImage(art.creditsButton,
         (Game.WIDTH / 2 - art.creditsButton.getWidth() / 2), position + Game.HEIGHT
             - 125, null);
+
 
     position -= 3;
 
