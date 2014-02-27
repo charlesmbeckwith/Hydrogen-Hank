@@ -77,7 +77,7 @@ public class Player extends GameObject
       {
         V.DX += 1;
       }
-      
+
       V.DY = BUOYANCY + GRAVITY;
 
       X += V.DX * GameTime.delta();
@@ -95,10 +95,10 @@ public class Player extends GameObject
   {
     boolean col = false;
 
-    for (GameObject go : Game.playState.handler.getObjects())
+    for (GameObject go : PlayState.handler.getObjects())
     {
-      if (go != this && go.getID() != ObjectID.Background && (Y + (HEIGHT / 2) - 14) >= go.getY() && X > go.getX()
-          && X < go.getX() + go.getWidth())
+      if (go != this && go.getID() != ObjectID.Background && (Y + (HEIGHT / 2) - 14) >= go.getY()
+          && X > go.getX() && X < go.getX() + go.getWidth())
       {
         col = true;
 

@@ -13,63 +13,71 @@ import com.hh.objects.Cloud;
 import com.hh.objects.Player;
 import com.hh.objects.Tile;
 
-public class PlayState extends GameState {
-	public static Handler handler;
-	public static Camera cam;
-	
-	public Player player;
-	private int start;
+public class PlayState extends GameState
+{
+  public static Handler handler;
+  public static Camera cam;
 
-	public PlayState() {
-		handler = new Handler();
-		cam = new Camera(0, 0);
-	}
+  public Player player;
+  private int start;
 
-	public void tick() {
-		if (handler.getObjects().size() < 50) {
-			addBackground(start);
-			start += 75;
-		}
+  public PlayState()
+  {
+    handler = new Handler();
+    cam = new Camera(0, 0);
+  }
 
-		handler.tick();
-		cam.tick(player);
-	}
+  public void tick()
+  {
+    if (handler.getObjects().size() < 50)
+    {
+      addBackground(start);
+      start += 75;
+    }
 
-	public void render(Graphics g) {
-		Graphics2D g2d = (Graphics2D) g;
+    handler.tick();
+    cam.tick(player);
+  }
 
-		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+  public void render(Graphics g)
+  {
+    Graphics2D g2d = (Graphics2D) g;
 
-		g2d.translate(cam.getX(), cam.getY()); // begin cam
-		// Begin Drawing
-		handler.render(g);
-		// End Drawing
-		g2d.translate(-cam.getX(), -cam.getY()); // end cam
-	}
+    g.setColor(new Color(109, 136, 253));
+    g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
 
-	/**
-	 * Clears the necessary objects and reinitializes them to enable a restart
-	 * of the game
-	 */
-	public void restart() {
-		handler.clearObjects();
+    g2d.translate(cam.getX(), cam.getY()); // begin cam
+    // Begin Drawing
+    handler.render(g);
+    // End Drawing
+    g2d.translate(-cam.getX(), -cam.getY()); // end cam
+  }
 
-		player = new Player(100, 100, 75, 50, new Vector2D(0, 100));
-		handler.addObject(player);
+  /**
+   * Clears the necessary objects and reinitializes them to enable a restart
+   * of the game
+   */
+  public void restart()
+  {
+    handler.clearObjects();
 
-		start = -175;
-		for (int i = start; i < start + Game.WIDTH * 2; i += 75) {
-			addBackground(i);
-		}
+    player = new Player(100, 100, 75, 50, new Vector2D(0, 100));
+    handler.addObject(player);
 
-		start = start + Game.WIDTH * 2;
-	}
+    start = -175;
+    for (int i = start; i < start + Game.WIDTH * 2; i += 75)
+    {
+      addBackground(i);
+    }
 
-	private void addBackground(int x) {
-		handler.addObject(new Cloud((int) (x + (Math.random() * 20)),
-				(int) (Math.random() * 350), 75, 25));
-		handler.addObject(new Tile(x, 400, 75, 300));
-	}
+    start = start + Game.WIDTH * 2;
+  }
+
+  private void addBackground(int x)
+  {
+    handler.addObject(new Cloud((int) (x + (Math.random() * 20)), (int) (Math.random() * 350), 75,
+        25));
+    handler.addObject(new Tile(x, 400, 75, 300));
+  }
 
 }

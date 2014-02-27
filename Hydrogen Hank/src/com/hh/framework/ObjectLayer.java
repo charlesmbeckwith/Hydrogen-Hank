@@ -1,4 +1,5 @@
 package com.hh.framework;
+
 /**
  * @author Charlie Beckwith
  *
@@ -10,7 +11,8 @@ package com.hh.framework;
  *  in a worst case scenario. In regular practice I don't anticipate 
  *  this needing to be used.
  */
-public enum ObjectLayer {
-	background, middleground, foreground, hud, toplevel
+public enum ObjectLayer
+{
+  background, middleground, foreground, hud, toplevel
 
 }
