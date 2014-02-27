@@ -39,8 +39,10 @@ public class Cloud extends GameObject
 
     if (ALIVE)
     {
-      Graphics2D g2d = (Graphics2D) g;
+      Graphics2D g2d = (Graphics2D) g.create();
+      g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.8f));
       g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
+      
     }
   }
 
