@@ -65,6 +65,8 @@ public class IntroAnimation extends GameState {
 			heightShift++;
 			hankYPosition = (Game.HEIGHT / heightShift);
 		}
+		if(scriptProgCounter % 600 == 0)
+			Game.manager.pop();
 
 	}
 
