@@ -5,16 +5,17 @@ import javax.swing.*;
 import java.awt.*;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 
- * Last Updated : Feb. 7, 2014 
- * Purpose: JFrame display for 'Dust Bunny Mayhem' game canvas
  * 
- * @author Mark
+ * 
+ * @author Mark Schlottke
  */
 public class Window
 {
+	
+	private Game game;
+	private JFrame frame;
   /**
    * Set up the display of the game and start it
    * @param w - width of the game window
@@ -24,11 +25,12 @@ public class Window
    */
   public Window(int w, int h, String title, Game game)
   {
+	this.game = (Game) game;
     game.setPreferredSize(new Dimension(w, h));
     game.setMaximumSize(new Dimension(w, h));
     game.setMinimumSize(new Dimension(w, h));
 
-    JFrame frame = new JFrame(title);
+    frame = new JFrame(title);
     frame.add(game);
     frame.pack();
     frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -37,5 +39,19 @@ public class Window
     frame.setVisible(true);
 
     game.start();
+  }
+  
+  public void swapWindow(Canvas canvas){
+	  frame.add(canvas);
+  }
+  
+  /**
+   * Main entry point for the program
+   * @param args
+   */
+  public static void main(String args[])
+  {
+  new Window(800, 600, "Hydrogen Hank", new Game());
+   
   }
 }

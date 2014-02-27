@@ -133,6 +133,7 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+
 	/**
 	 * Main entry point for the program
 	 * 
@@ -141,4 +142,5 @@ public class Game extends Canvas implements Runnable {
 	public static void main(String args[]) {
 		new Window(800, 600, "Hydrogen Hank", new Game());
 	}
+
 }
