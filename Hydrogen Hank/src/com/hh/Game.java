@@ -42,13 +42,13 @@ public class Game extends Canvas implements Runnable
   private void init()
   {
     manager = new GameStateManager();
-    playState = new PlayState();
     WIDTH = getWidth();
     HEIGHT = getHeight();
     HEIGHTOFFSET = 50;
     this.createBufferStrategy(3);
     bs = this.getBufferStrategy();
     artassets = new ArtAssets();
+    playState = new PlayState();
 
     KeyBinding.LOAD_BINDINGS();
     playState.restart();
