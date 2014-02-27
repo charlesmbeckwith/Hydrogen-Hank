@@ -16,47 +16,48 @@ import com.hh.graphics.ArtAssets;
  * 
  * @author Mark Schlottke
  */
-public class Cloud extends GameObject
-{
-  private BufferedImage IMG;
-  private ArtAssets art;
-  private static Random rand = new Random();
+public class Cloud extends GameObject {
+	private BufferedImage IMG;
+	private ArtAssets art;
+	private static Random rand = new Random();
 
-  public Cloud(float x, float y, int width, int height)
-  {
-    super(x, y, width, height, ObjectID.Background, (rand.nextBoolean() ? ObjectLayer.background : ObjectLayer.foreground));
-    art = Game.getArtAssets();
-    IMG = art.cloud;
-    ALIVE = true;
-  }
+	public Cloud(float x, float y, int width, int height) {
+		// TODO: If we want to have particles/clouds in the foreground we should
+		// make sure they're bigger and maybe more atmospheric?
+		// TODO: Make another semi transparent fog overlay that comes in like a
+		// cloud. For now I'm going to take it out, though. As I thought there
+		// was a problem with my sorting algorithm :p
 
-  public void tick()
-  {
-  }
+		super(x, y, width, height, ObjectID.Background, (rand.nextBoolean() ?
+		 ObjectLayer.background : ObjectLayer.foreground));
+		
+		art = Game.getArtAssets();
+		IMG = art.cloud;
+		ALIVE = true;
+	}
 
-  public void render(Graphics g)
-  {
-    if (X + WIDTH < -PlayState.cam.getX())
-    {
-      ALIVE = false;
-    }
+	public void tick() {
+	}
 
-    if (ALIVE)
-    {
-      Graphics2D g2d = (Graphics2D) g.create();
-      g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER,0.8f));
-      g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
-      
-    }
-  }
+	public void render(Graphics g) {
+		if (X + WIDTH < -PlayState.cam.getX()) {
+			ALIVE = false;
+		}
 
-  public int getWidth()
-  {
-    return WIDTH;
-  }
+		if (ALIVE) {
+			Graphics2D g2d = (Graphics2D) g.create();
+			g2d.setComposite(AlphaComposite.getInstance(
+					AlphaComposite.SRC_OVER, 0.8f));
+			g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
 
-  public int getHeight()
-  {
-    return HEIGHT;
-  }
+		}
+	}
+
+	public int getWidth() {
+		return WIDTH;
+	}
+
+	public int getHeight() {
+		return HEIGHT;
+	}
 }
