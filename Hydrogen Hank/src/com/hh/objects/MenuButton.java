@@ -18,15 +18,24 @@ public class MenuButton extends GameObject
 {
   private BufferedImage BASEIMG, SELECTIMG;
   public boolean SELECTED;
+  private ButtonID BUTTONID;
+  
+  public enum ButtonID{
+	  NEWGAME,
+	  HIGHSCORE,
+	  CREDITS
+  };
+  
 
   public MenuButton(BufferedImage base, BufferedImage selected, float x, float y, int width,
-      int height)
+      int height, ButtonID buttontype)
   {
-    super(x, y, width, height, ObjectID.Tile, ObjectLayer.foreground);
+    super(x, y, width, height, ObjectID.Tile, ObjectLayer.hud);
     ALIVE = true;
     BASEIMG = base;
     SELECTIMG = selected;
     SELECTED = false;
+    BUTTONID = buttontype;
   }
 
   public void tick()
@@ -69,5 +78,9 @@ public class MenuButton extends GameObject
   public int getHeight()
   {
     return HEIGHT;
+  }
+  
+  public ButtonID getButtonID(){
+	  return BUTTONID;
   }
 }

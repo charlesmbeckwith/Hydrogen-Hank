@@ -6,6 +6,7 @@ import com.hh.Game;
 import com.hh.framework.GameState;
 import com.hh.framework.Handler;
 import com.hh.objects.MenuButton;
+import com.hh.objects.MenuButton.ButtonID;
 
 public class TitleMenuState extends GameState
 {
@@ -16,13 +17,13 @@ public class TitleMenuState extends GameState
     handler = new Handler();
     handler.addObject(new MenuButton(Game.artassets.newButton, Game.artassets.newButton2,
         Game.WIDTH / 2, Game.HEIGHT - 275, Game.artassets.newButton.getWidth(),
-        Game.artassets.newButton.getHeight()));
+        Game.artassets.newButton.getHeight(),ButtonID.NEWGAME));
     handler.addObject(new MenuButton(Game.artassets.scoresButton, Game.artassets.scoresButton2,
         Game.WIDTH / 2, Game.HEIGHT - 200, Game.artassets.scoresButton.getWidth(),
-        Game.artassets.scoresButton.getHeight()));
+        Game.artassets.scoresButton.getHeight(),ButtonID.HIGHSCORE));
     handler.addObject(new MenuButton(Game.artassets.creditsButton, Game.artassets.creditsButton2,
         Game.WIDTH / 2, Game.HEIGHT - 125, Game.artassets.creditsButton.getWidth(),
-        Game.artassets.creditsButton.getHeight()));
+        Game.artassets.creditsButton.getHeight(),ButtonID.CREDITS));
   }
 
   public void tick()

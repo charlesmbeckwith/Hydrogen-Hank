@@ -26,8 +26,18 @@ public class MouseInput extends MouseAdapter
           MenuButton button = (MenuButton) go;
           if (button.SELECTED)
           {
-            // Do something
-            System.out.println("Did something");
+        	  switch(button.getButtonID()){
+        	  case NEWGAME:
+        		  System.out.println("Newgame");
+        		  break;
+        	  case HIGHSCORE:
+        		  System.out.println("Highscore");
+        		  break;
+        	  case CREDITS:
+        		  System.out.println("Credits");
+        		  break;
+        		  
+        	  }     
           }
         }
       }
