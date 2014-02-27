@@ -13,6 +13,7 @@ import java.awt.*;
  */
 public class Window
 {
+	
 	private Game game;
 	private JFrame frame;
   /**
@@ -47,14 +48,5 @@ public class Window
   
   public void swapWindow(Canvas canvas){
 	  frame.add(canvas);
-  }
-  
-  /**
-   * Main entry point for the program
-   * @param args
-   */
-  public static void main(String args[])
-  {
-    new Window(800, 600, "Hydrogen Hank", new Game());
   }
 }
