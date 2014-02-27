@@ -7,6 +7,7 @@ import java.util.ListIterator;
 public class GameStateManager
 {
   private LinkedList<GameState> STATES = new LinkedList<GameState>();
+  private int removeCount = 0;
 
   public void tick()
   {
@@ -46,11 +47,16 @@ public class GameStateManager
     {
       render(iter, iter.next(), g);
     }
+    
+    while(removeCount > 0){
+      STATES.pop();
+      removeCount--;
+    }
   }
   
   public void pop()
   {
-	  STATES.pop();
+    removeCount++;
   }
   
   public void push(GameState state)
