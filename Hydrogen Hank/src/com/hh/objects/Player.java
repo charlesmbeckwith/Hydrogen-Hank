@@ -104,7 +104,7 @@ public class Player extends GameObject
       if (go != this && go.getID() == ObjectID.Enemy && collided(go))
       {
         // TODO: finish collision logic
-        go.Kill();
+        //go.Kill();
       }
       if (go != this && go.getID() == ObjectID.Ground && (Y + (HEIGHT / 2) - 14) >= go.getY()
           && X > go.getX() && X < go.getX() + go.getWidth())
@@ -124,6 +124,7 @@ public class Player extends GameObject
 
   public boolean collided(GameObject go)
   {
+    // TODO: Implement a better collision detection algorithm instead of just rectangle-rectangle collision
     boolean collided = false;
     boolean leftin = false, rightin = false, topin = false, bottomin = false;
 
