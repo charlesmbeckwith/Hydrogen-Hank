@@ -77,7 +77,7 @@ public class Cloud extends BackgroundElement
 
     }
   }
-
+  
   public int getWidth()
   {
     return WIDTH;
