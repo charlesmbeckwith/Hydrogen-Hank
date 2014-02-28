@@ -15,7 +15,6 @@ public class PauseState extends GameState
 
   public void render(Graphics g)
   {
-    Game.playState.render(g);
     g.drawImage(art.pauseScreen,
         (Game.WIDTH / 2 - art.pauseScreen.getWidth() / 2), (Game.HEIGHT / 2 - 150), null);
   }

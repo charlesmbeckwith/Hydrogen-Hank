@@ -90,7 +90,7 @@ public class Game extends Canvas implements Runnable
 
       try
       {
-        Thread.sleep(25);
+        Thread.sleep(10);
       } catch (InterruptedException e)
       {
         e.printStackTrace();

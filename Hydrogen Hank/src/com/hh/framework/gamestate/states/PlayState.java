@@ -30,9 +30,10 @@ public class PlayState extends GameState {
 			addBackground(start);
 			start += 75;
 		}
+		
+		cam.tick(player);
 
 		handler.tick();
-		cam.tick(player);
 	}
 
 	public void render(Graphics g) {

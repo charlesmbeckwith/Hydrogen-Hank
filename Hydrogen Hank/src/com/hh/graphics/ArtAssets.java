@@ -45,7 +45,7 @@ public class ArtAssets
     creditsButton2 = loadImage("/graphics/mainmenu/creditsButton2.png");
 
     dirt = loadImage("/oldgraphics/dirtblock.png");
-    cloud = loadImage("/graphics/bgelements/cloud.png");
+    cloud = loadImage("/graphics/bgelements/cloud2.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
 
    
