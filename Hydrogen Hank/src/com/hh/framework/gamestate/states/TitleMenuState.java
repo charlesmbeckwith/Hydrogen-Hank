@@ -74,8 +74,7 @@ public class TitleMenuState extends GameState
     {
       handler.render(g);
       
-      g.drawImage(art.mainTitle, (100), 20, Game.HEIGHT, (int) ((Game.HEIGHT)*.8),
-              null);
+      g.drawImage(art.mainTitle, (100), 20, Game.HEIGHT, (int) ((Game.HEIGHT)*.8), null);
     }
   }
 }

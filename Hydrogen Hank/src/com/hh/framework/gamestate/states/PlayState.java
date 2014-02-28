@@ -56,6 +56,7 @@ public class PlayState extends GameState {
 
 		player = new Player(100, 100, 64, 64, new Vector2D(0, 100));
 		handler.addObject(player);
+		cam = new Camera(0,0);
 
 		start = -175;
 		for (int i = start; i < start + Game.WIDTH * 2; i += 75) {

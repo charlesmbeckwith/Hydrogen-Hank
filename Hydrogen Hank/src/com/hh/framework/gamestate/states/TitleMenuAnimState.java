@@ -9,6 +9,8 @@ import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.Cloud;
+import com.hh.objects.MenuButton;
+import com.hh.objects.MenuButton.ButtonID;
 
 public class TitleMenuAnimState extends GameState
 {
@@ -43,14 +45,13 @@ public class TitleMenuAnimState extends GameState
     if (scrollingTitlesRunning)
     {
       handler.render(g);
-      g.drawImage(art.mainTitle, (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), position + 20, Game.HEIGHT, (int) ((Game.HEIGHT/2)*.8),
-          null);
-      g.drawImage(art.newButton, (Game.WIDTH / 2 - art.newButton.getWidth() / 2), position + 300,
-          null);
-      g.drawImage(art.scoresButton, (Game.WIDTH / 2 - art.scoresButton.getWidth() / 2),
-          position + 375, null);
-      g.drawImage(art.creditsButton, (Game.WIDTH / 2 - art.creditsButton.getWidth() / 2),
-          position + 450, null);
+      int yOffset = art.newButton.getHeight();
+      
+      g.drawImage(art.newButton, 20, Game.HEIGHT - yOffset - 25, Game.WIDTH/3 - 15, yOffset, null);
+      g.drawImage(art.scoresButton, Game.WIDTH/2, Game.HEIGHT - 50, null);
+      g.drawImage(art.creditsButton, Game.WIDTH - art.creditsButton.getWidth()/2 + 20, Game.HEIGHT - 50, null);
+      
+      g.drawImage(art.mainTitle, (100), 20, Game.HEIGHT, position + (int) ((Game.HEIGHT)*.8), null);
        
     }
 
