@@ -9,8 +9,8 @@ import java.io.IOException;
 
 public enum KeyBinding
 {
-  INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), FANON(KeyEvent.VK_SPACE), PAUSE(KeyEvent.VK_P), RESTART(
-      KeyEvent.VK_R);
+  INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), PAN_RIGHT(KeyEvent.VK_A), PAN_LEFT(KeyEvent.VK_D), FANON(
+      KeyEvent.VK_SPACE), PAUSE(KeyEvent.VK_P), RESTART(KeyEvent.VK_R);
 
   private int value;
   private static File controls = new File(System.getProperty("user.dir")
@@ -63,6 +63,12 @@ public enum KeyBinding
               } else if (line.contains("DEFLATE_KEY"))
               {
                 DEFLATE.SET(newVal);
+              } else if (line.contains("PAN_RIGHT_KEY"))
+              {
+                PAN_RIGHT.SET(newVal);
+              } else if (line.contains("PAN_LEFT_KEY"))
+              {
+                PAN_LEFT.SET(newVal);
               } else if (line.contains("FANON_KEY"))
               {
                 FANON.SET(newVal);

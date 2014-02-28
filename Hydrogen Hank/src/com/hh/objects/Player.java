@@ -123,8 +123,8 @@ public class Player extends GameObject {
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
 				RenderingHints.VALUE_ANTIALIAS_ON);
 
-		float relativeZeroX = (X - Game.WIDTH / 3);
-		float relativeZeroY = (Y - (Game.HEIGHT * 2 / 3));
+		float relativeZeroX = -PlayState.cam.getX();
+		float relativeZeroY = -PlayState.cam.getY();
 		int row = 1;
 		for (String x : debugOptions) {
 			g2d.drawString(x, relativeZeroX, relativeZeroY + 11 * row);
