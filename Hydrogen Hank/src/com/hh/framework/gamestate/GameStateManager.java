@@ -1,6 +1,7 @@
 package com.hh.framework.gamestate;
 
 import java.awt.Graphics;
+import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
@@ -8,7 +9,7 @@ public class GameStateManager
 {
   private LinkedList<GameState> STATES = new LinkedList<GameState>();
   private int removeCount = 0;
-  private LinkedList<GameState> toAdd = new LinkedList<GameState>();
+  private ArrayList<GameState> toAdd = new ArrayList<GameState>();
 
   public GameStateManager(GameState state)
   {
@@ -76,7 +77,6 @@ public class GameStateManager
   public void push(GameState state)
   {
     toAdd.add(state);
-    //STATES.push(state);
   }
 
   public GameState getFirstState()
