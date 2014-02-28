@@ -31,13 +31,15 @@ public class TitleMenuState extends GameState
     handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(-100, 0), true));
     
     // Adding Buttons
-    handler.addObject(new MenuButton(art.newButton, art.newButton2, Game.WIDTH / 2,
-        Game.HEIGHT - 275, art.newButton.getWidth(), art.newButton.getHeight(), ButtonID.NEWGAME));
-    handler.addObject(new MenuButton(art.scoresButton, art.scoresButton2, Game.WIDTH / 2,
-        Game.HEIGHT - 200, art.scoresButton.getWidth(), art.scoresButton.getHeight(),
+    handler.addObject(new MenuButton(art.newButton, art.newButton2, art.newButton.getWidth()/2 - 20,
+    		Game.HEIGHT - 50, Game.WIDTH/3 - 15, art.newButton.getHeight(), ButtonID.NEWGAME));
+    
+    handler.addObject(new MenuButton(art.scoresButton, art.scoresButton2, Game.WIDTH/2,
+    		Game.HEIGHT - 50, Game.WIDTH/3 - 15, art.scoresButton.getHeight(),
         ButtonID.HIGHSCORE));
-    handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2, Game.WIDTH / 2,
-        Game.HEIGHT - 125, art.creditsButton.getWidth(), art.creditsButton.getHeight(),
+    
+    handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2, Game.WIDTH - art.creditsButton.getWidth()/2 + 20,
+    		Game.HEIGHT - 50, Game.WIDTH/3 - 15, art.creditsButton.getHeight(),
         ButtonID.CREDITS));   
   }
 
@@ -66,7 +68,9 @@ public class TitleMenuState extends GameState
     if (Game.manager.getFirstClass() == this.getClass())
     {
       handler.render(g);
-      g.drawImage(art.mainTitle, (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), 20, null);
+      
+      g.drawImage(art.mainTitle, (100), 20, Game.HEIGHT, (int) ((Game.HEIGHT)*.8),
+              null);
     }
   }
 }

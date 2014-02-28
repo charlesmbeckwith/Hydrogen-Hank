@@ -46,7 +46,7 @@ public class TitleMenuAnimState extends GameState
     if (scrollingTitlesRunning)
     {
       handler.render(g);
-      g.drawImage(art.mainTitle, (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), position + 20,
+      g.drawImage(art.mainTitle, (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), position + 20, Game.HEIGHT, (int) ((Game.HEIGHT/2)*.8),
           null);
       g.drawImage(art.newButton, (Game.WIDTH / 2 - art.newButton.getWidth() / 2), position + 300,
           null);
@@ -54,6 +54,8 @@ public class TitleMenuAnimState extends GameState
           position + 375, null);
       g.drawImage(art.creditsButton, (Game.WIDTH / 2 - art.creditsButton.getWidth() / 2),
           position + 450, null);
+      
+      
     }
 
     if (position <= 0)
