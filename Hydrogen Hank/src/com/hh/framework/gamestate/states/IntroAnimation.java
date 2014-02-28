@@ -105,7 +105,6 @@ public class IntroAnimation extends GameState {
 			TextLayout text = new TextLayout(lineToPrint, animFont,
 					fontRendContext);
 			Shape shape = text.getOutline(null);
-			Rectangle rect = shape.getBounds();
 			AffineTransform affineTransform = new AffineTransform();
 		    affineTransform = g2d.getTransform();
 		    affineTransform.translate(150, 150);
