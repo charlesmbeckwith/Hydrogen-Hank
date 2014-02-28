@@ -14,7 +14,7 @@ public class Camera
     this.x = x;
     this.y = y;
     this.xOffset = Game.WIDTH / 3;
-    this.yOffset = Game.HEIGHT * 2 / 3;
+    this.yOffset = Game.HEIGHT * 5 / 9;
   }
 
   public void tick(GameObject go)
