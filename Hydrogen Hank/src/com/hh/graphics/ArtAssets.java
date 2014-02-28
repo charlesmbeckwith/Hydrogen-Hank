@@ -21,8 +21,9 @@ import com.hh.graphics.SpriteSheet.spriteID;
 public class ArtAssets
 {
   public SpriteSheet hydrogenhank_sheet;
+  public SpriteSheet balloon_sheet;
 
-  public BufferedImage[] hydrogenhank = new BufferedImage[9];
+  
   public BufferedImage dirt, cloud, pauseScreen;
   public BufferedImage mainBg, mainTitle, newButton, newButton2, scoresButton, scoresButton2,
       creditsButton, creditsButton2;
@@ -34,7 +35,7 @@ public class ArtAssets
   {
    
     hydrogenhank_sheet = new SpriteSheet(spriteID.HANK, "/hydrogenhank/HydrogenHankSpriteSheet.png");
-
+    balloon_sheet = new SpriteSheet(spriteID.BALLOON, "/hydrogenhank/balloons/balloonvariations.png");
     mainBg = loadImage("/graphics/mainmenu/mainmenubackground.png");
     mainTitle = loadImage("/graphics/mainmenu/Logo2.png");
     newButton = loadImage("/graphics/mainmenu/newGameButton.png");
@@ -43,7 +44,7 @@ public class ArtAssets
     newButton2 = loadImage("/graphics/mainmenu/newGameButton2.png");
     scoresButton2 = loadImage("/graphics/mainmenu/highScoresButton2.png");
     creditsButton2 = loadImage("/graphics/mainmenu/creditsButton2.png");
-
+   
     dirt = loadImage("/oldgraphics/dirtblock.png");
     cloud = loadImage("/graphics/bgelements/cloud2.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
@@ -104,6 +105,8 @@ public class ArtAssets
 	  case HANK:
 		  
 		  return hydrogenhank_sheet.getFrame(frame);
+	  case BALLOON:
+		  return balloon_sheet.getFrame(frame);
 	  default:
 		  return null;
 			  
