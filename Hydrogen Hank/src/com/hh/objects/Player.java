@@ -44,9 +44,9 @@ public class Player extends GameObject
     Random rand = new Random();
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
-    
-    balloon = new Balloon(x,y,width,height);
-    
+
+    balloon = new Balloon(x, y, width, height);
+
     art = Game.getArtAssets();
     initAnimations();
   }
@@ -101,7 +101,12 @@ public class Player extends GameObject
 
     for (GameObject go : PlayState.handler.getObjects())
     {
-      if (go != this && go.getID() == ObjectID.Tile && (Y + (HEIGHT / 2) - 14) >= go.getY()
+      if (go != this && go.getID() == ObjectID.Enemy && collided(go))
+      {
+        // TODO: finish collision logic
+        go.Kill();
+      }
+      if (go != this && go.getID() == ObjectID.Ground && (Y + (HEIGHT / 2) - 14) >= go.getY()
           && X > go.getX() && X < go.getX() + go.getWidth())
       {
         col = true;
@@ -115,6 +120,47 @@ public class Player extends GameObject
     }
 
     return col;
+  }
+
+  public boolean collided(GameObject go)
+  {
+    boolean collided = false;
+    boolean leftin = false, rightin = false, topin = false, bottomin = false;
+
+    float goLeft = go.getX() - go.getWidth() / 2;
+    float goRight = go.getX() + go.getWidth() / 2;
+    float goTop = go.getY() - go.getHeight() / 2;
+    float goBottom = go.getY() + go.getHeight() / 2;
+    float left = X - WIDTH / 2;
+    float right = X + WIDTH / 2;
+    float top = Y - HEIGHT / 2;
+    float bottom = Y + HEIGHT / 2;
+
+    if (right > goLeft && right < goRight)
+    {
+      rightin = true;
+    }
+
+    if (left < goRight && left > goLeft)
+    {
+      leftin = true;
+    }
+
+    if (top < goBottom && top > goTop)
+    {
+      topin = true;
+    }
+
+    if (bottom > goTop && bottom < goBottom)
+    {
+      bottomin = true;
+    }
+    
+    if((rightin || leftin) && (topin || bottomin)){
+      collided = true;
+    }
+
+    return collided;
   }
 
   public void render(Graphics g)
@@ -175,38 +221,46 @@ public class Player extends GameObject
         spriteID.HANK, 1));
     CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
   }
-  
-  private class Balloon{
-	  private float X;
-	  private float Y;
-	  private int balloonColor;
-	  private boolean Alive = true;
-	  private int width,height;
-	  public Balloon(float x, float y, int width, int height){
-		  
-		  Random rand = new Random();
-		  balloonColor = rand.nextInt(3);
-		  this.width = (int) (width*.8);
-		  this.height = height;
-		  setOffset(x,y);
-		  
-	  }
-	  
-	  public void render(Graphics2D g){
-		  g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor), (int) X,(int) Y , width, height, null );
-	  }
-	  
-	  public void tick(float x, float y){
-		  setOffset(x,y);
-	  }
-	  /**
-	   * Sets X,Y position to be offset by player position by a certain amount.
-	   * @param x
-	   * @param y
-	   */
-	  public void setOffset(float x, float y){
-		  X = x - width/2;
-		  Y = (float) (y - height*1.5);
-	  }
+
+  private class Balloon
+  {
+    private float X;
+    private float Y;
+    private int balloonColor;
+    private boolean Alive = true;
+    private int width, height;
+
+    public Balloon(float x, float y, int width, int height)
+    {
+
+      Random rand = new Random();
+      balloonColor = rand.nextInt(3);
+      this.width = (int) (width * .8);
+      this.height = height;
+      setOffset(x, y);
+
+    }
+
+    public void render(Graphics2D g)
+    {
+      g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor), (int) X, (int) Y, width,
+          height, null);
+    }
+
+    public void tick(float x, float y)
+    {
+      setOffset(x, y);
+    }
+
+    /**
+     * Sets X,Y position to be offset by player position by a certain amount.
+     * @param x
+     * @param y
+     */
+    public void setOffset(float x, float y)
+    {
+      X = x - width / 2;
+      Y = (float) (y - height * 1.5);
+    }
   }
 }

@@ -15,13 +15,13 @@ import com.hh.graphics.ArtAssets;
  * 
  * @author Mark Schlottke
  */
-public class Tile extends GameObject
+public class Ground extends GameObject
 {
   private BufferedImage IMG;
   private ArtAssets art = Game.getArtAssets();
-  public Tile(float x, float y, int width, int height)
+  public Ground(float x, float y, int width, int height)
   {
-    super(x, y, width, height, ObjectID.Tile, ObjectLayer.middleground);
+    super(x, y, width, height, ObjectID.Ground, ObjectLayer.middleground);
     IMG = art.dirt;
     ALIVE = true;
   }
