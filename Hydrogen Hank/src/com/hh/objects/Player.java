@@ -33,6 +33,7 @@ public class Player extends GameObject
   private Color HUE;
   private float startx, starty;
   private LinkedList<String> debugOptions;
+  private Balloon balloon;
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
@@ -43,6 +44,9 @@ public class Player extends GameObject
     Random rand = new Random();
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
+    
+    balloon = new Balloon(x,y,width,height);
+    
     art = Game.getArtAssets();
     initAnimations();
   }
@@ -87,6 +91,7 @@ public class Player extends GameObject
 
       // Simulate a slow leak in the balloon
       BUOYANCY += 1;
+      balloon.tick(X, Y);
     }
   }
 
@@ -122,6 +127,7 @@ public class Player extends GameObject
       // WIDTH, HEIGHT, HUE);
       if (Game.isDebug())
         debugOptions(g2d);
+      balloon.render(g2d);
       g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
           WIDTH + HEIGHT / 3, HEIGHT, null);
     }
@@ -168,5 +174,39 @@ public class Player extends GameObject
     RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0), art.getSpriteFrame(
         spriteID.HANK, 1));
     CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
+  }
+  
+  private class Balloon{
+	  private float X;
+	  private float Y;
+	  private int balloonColor;
+	  private boolean Alive = true;
+	  private int width,height;
+	  public Balloon(float x, float y, int width, int height){
+		  
+		  Random rand = new Random();
+		  balloonColor = rand.nextInt(3);
+		  this.width = (int) (width*.8);
+		  this.height = height;
+		  setOffset(x,y);
+		  
+	  }
+	  
+	  public void render(Graphics2D g){
+		  g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor), (int) X,(int) Y , width, height, null );
+	  }
+	  
+	  public void tick(float x, float y){
+		  setOffset(x,y);
+	  }
+	  /**
+	   * Sets X,Y position to be offset by player position by a certain amount.
+	   * @param x
+	   * @param y
+	   */
+	  public void setOffset(float x, float y){
+		  X = x - width/2;
+		  Y = (float) (y - height*1.5);
+	  }
   }
 }
