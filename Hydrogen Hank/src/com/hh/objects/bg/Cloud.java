@@ -1,4 +1,4 @@
-package com.hh.objects;
+package com.hh.objects.bg;
 
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -8,6 +8,7 @@ import com.hh.Game;
 import com.hh.framework.*;
 import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.ArtAssets;
+import com.hh.objects.BackgroundElement;
 
 /**
  * COSC3550 Spring 2014 Homework 2
@@ -16,7 +17,7 @@ import com.hh.graphics.ArtAssets;
  * 
  * @author Mark Schlottke
  */
-public class Cloud extends GameObject
+public class Cloud extends BackgroundElement
 {
   private BufferedImage IMG;
   private ArtAssets art;
@@ -31,7 +32,7 @@ public class Cloud extends GameObject
     // cloud. For now I'm going to take it out, though. As I thought there
     // was a problem with my sorting algorithm :p
 
-    super(x, y, width, height, ObjectID.Background, (rand.nextBoolean() ? ObjectLayer.background
+    super(x, y, width, height, BackgroundElementType.Cloud, (rand.nextBoolean() ? ObjectLayer.background
         : ObjectLayer.foreground));
 
     art = Game.getArtAssets();
@@ -42,7 +43,7 @@ public class Cloud extends GameObject
 
   public Cloud(float x, float y, int width, int height, Vector2D v, boolean wrap)
   {
-    super(x, y, width, height, v, ObjectID.Background, (rand.nextBoolean() ? ObjectLayer.background
+    super(x, y, width, height, v, BackgroundElementType.Cloud, (rand.nextBoolean() ? ObjectLayer.background
         : ObjectLayer.foreground));
 
     art = Game.getArtAssets();

@@ -9,9 +9,9 @@ import com.hh.framework.Camera;
 import com.hh.framework.Handler;
 import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
-import com.hh.objects.Cloud;
 import com.hh.objects.Player;
 import com.hh.objects.Tile;
+import com.hh.objects.bg.Cloud;
 
 public class PlayState extends GameState {
 	public static Handler handler;

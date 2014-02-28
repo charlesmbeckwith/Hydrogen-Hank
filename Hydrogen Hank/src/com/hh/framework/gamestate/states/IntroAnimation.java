@@ -26,7 +26,7 @@ import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
-import com.hh.objects.Cloud;
+import com.hh.objects.bg.Cloud;
 
 public class IntroAnimation extends GameState
 {

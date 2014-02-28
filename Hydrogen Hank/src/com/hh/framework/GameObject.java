@@ -1,7 +1,6 @@
 package com.hh.framework;
 
 import java.awt.Graphics;
-import com.hh.framework.ObjectLayer;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -16,7 +15,13 @@ public abstract class GameObject
 {
   public enum ObjectID
   {
-    Background, Tile, Button, Player
+    Background, BackgroundElement, Tile, Button, Player, Enemy, Powerup
+  }
+  
+  public enum ObjectLayer
+  {
+    background, middleground, foreground, hud, toplevel
+
   }
 
   protected float X, Y;
