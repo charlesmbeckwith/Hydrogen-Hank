@@ -19,7 +19,7 @@ import javax.imageio.ImageIO;
 public class SpriteSheet {
 
 	public enum spriteID {
-		HANK, BALLOON
+		HANK, BALLOON, BIRD
 	}
 
 	private BufferedImage image;

@@ -9,9 +9,9 @@ import com.hh.framework.Camera;
 import com.hh.framework.Handler;
 import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
-import com.hh.objects.Player;
-import com.hh.objects.Tile;
-import com.hh.objects.bg.Cloud;
+import com.hh.objects.*;
+import com.hh.objects.bg.*;
+import com.hh.objects.enemies.*;
 
 public class PlayState extends GameState {
 	public static Handler handler;
@@ -62,6 +62,8 @@ public class PlayState extends GameState {
 		for (int i = start; i < start + Game.WIDTH * 2; i += 75) {
 			addBackground(i);
 		}
+		
+		handler.addObject(new Bird(-cam.getX(), -cam.getY(), 48, 48, new Vector2D(0,0)));
 
 		start = start + Game.WIDTH * 2;
 	}
