@@ -1,14 +1,14 @@
 package com.hh.framework.gamestate.states;
 
+import java.awt.Color;
 import java.awt.Graphics;
 
 import com.hh.Game;
 import com.hh.framework.Handler;
+import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
-import com.hh.graphics.SpriteSheet.spriteID;
-import com.hh.objects.MenuButton;
-import com.hh.objects.MenuButton.ButtonID;
+import com.hh.objects.Cloud;
 
 public class TitleMenuAnimState extends GameState
 {
@@ -17,56 +17,50 @@ public class TitleMenuAnimState extends GameState
   public static Handler handler;
   public boolean scrollingTitlesRunning = true;
   public boolean hitRightSide = false;
-  
-  public TitleMenuAnimState(){
-  	handler = new Handler();
+
+  public TitleMenuAnimState()
+  {
+    handler = new Handler();
+
+    // Adding Animated Clouds
+    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(0, 0), true));
+    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(0, 0), true));
+    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(0, 0), true));
+    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(0, 0), true));
+    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(0, 0), true));
+    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(0, 0), true));
   }
-  
+
   public void tick()
   {
   }
 
   public void render(Graphics g)
   {
-    g.drawImage(art.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+    g.setColor(new Color(109, 136, 253));
+    g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT); 	
 
-    //Draw Hank animation
-    //g.drawImage(art.getSpriteFrame(spriteID.HANK, 0), hankFlyingPosition+=2, (int) ( Game.HEIGHT - hankFlyingPosition), 150, 150, null);
-    //if(hankFlyingPosition > Game.WIDTH){
-    //	hankFlyingPosition = 0;
-    //}    	
-    
-    if(scrollingTitlesRunning){
-	    g.drawImage(art.mainTitle,
-	        (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), position + 20, null);
-	    g.drawImage(art.newButton,
-	        (Game.WIDTH / 2 - art.newButton.getWidth() / 2), position + 300, null);
-	    g.drawImage(art.scoresButton,
-	        (Game.WIDTH / 2 - art.scoresButton.getWidth() / 2), position + 375, null);
-	    g.drawImage(art.creditsButton,
-	        (Game.WIDTH / 2 - art.creditsButton.getWidth() / 2), position + 450, null);
-    }else{
-    	g.drawImage(art.mainTitle,(Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), 20, null);
-    	handler.render(g);
-    }    
+    if (scrollingTitlesRunning)
+    {
+      handler.render(g);
+      g.drawImage(art.mainTitle, (Game.WIDTH / 2 - art.mainTitle.getWidth() / 2), position + 20, Game.HEIGHT, (int) ((Game.HEIGHT/2)*.8),
+          null);
+      g.drawImage(art.newButton, (Game.WIDTH / 2 - art.newButton.getWidth() / 2), position + 300,
+          null);
+      g.drawImage(art.scoresButton, (Game.WIDTH / 2 - art.scoresButton.getWidth() / 2),
+          position + 375, null);
+      g.drawImage(art.creditsButton, (Game.WIDTH / 2 - art.creditsButton.getWidth() / 2),
+          position + 450, null);
+       
+    }
 
     if (position <= 0)
     {
-    	scrollingTitlesRunning = false;
-    	
-        handler.addObject(new MenuButton(art.newButton, art.newButton2,
-            Game.WIDTH / 2, Game.HEIGHT - 275, art.newButton.getWidth(),
-            art.newButton.getHeight(),ButtonID.NEWGAME));
-        handler.addObject(new MenuButton(art.scoresButton, art.scoresButton2,
-            Game.WIDTH / 2, Game.HEIGHT - 200, art.scoresButton.getWidth(),
-            art.scoresButton.getHeight(),ButtonID.HIGHSCORE));
-        handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2,
-            Game.WIDTH / 2, Game.HEIGHT - 125, art.creditsButton.getWidth(),
-            art.creditsButton.getHeight(),ButtonID.CREDITS));
-        
-        Game.manager.pop();
-    }else{
-    	position -= 3;
+      scrollingTitlesRunning = false;
+      Game.manager.pop();
+    } else
+    {
+      position -= 3;
     }
   }
 

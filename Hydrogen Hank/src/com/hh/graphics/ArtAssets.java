@@ -36,7 +36,7 @@ public class ArtAssets
     hydrogenhank_sheet = new SpriteSheet(spriteID.HANK, "/hydrogenhank/HydrogenHankSpriteSheet.png");
 
     mainBg = loadImage("/graphics/mainmenu/mainmenubackground.png");
-    mainTitle = loadImage("/graphics/mainmenu/HydrogenHankTitle.png");
+    mainTitle = loadImage("/graphics/mainmenu/Logo2.png");
     newButton = loadImage("/graphics/mainmenu/newGameButton.png");
     scoresButton = loadImage("/graphics/mainmenu/highScoresButton.png");
     creditsButton = loadImage("/graphics/mainmenu/creditsButton.png");
