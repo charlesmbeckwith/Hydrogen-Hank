@@ -16,48 +16,74 @@ import com.hh.graphics.ArtAssets;
  * 
  * @author Mark Schlottke
  */
-public class Cloud extends GameObject {
-	private BufferedImage IMG;
-	private ArtAssets art;
-	private static Random rand = new Random();
+public class Cloud extends GameObject
+{
+  private BufferedImage IMG;
+  private ArtAssets art;
+  private static Random rand = new Random();
+  private boolean WRAP;
 
-	public Cloud(float x, float y, int width, int height) {
-		// TODO: If we want to have particles/clouds in the foreground we should
-		// make sure they're bigger and maybe more atmospheric?
-		// TODO: Make another semi transparent fog overlay that comes in like a
-		// cloud. For now I'm going to take it out, though. As I thought there
-		// was a problem with my sorting algorithm :p
+  public Cloud(float x, float y, int width, int height)
+  {
+    // TODO: If we want to have particles/clouds in the foreground we should
+    // make sure they're bigger and maybe more atmospheric?
+    // TODO: Make another semi transparent fog overlay that comes in like a
+    // cloud. For now I'm going to take it out, though. As I thought there
+    // was a problem with my sorting algorithm :p
 
-		super(x, y, width, height, ObjectID.Background, (rand.nextBoolean() ?
-		 ObjectLayer.background : ObjectLayer.foreground));
-		
-		art = Game.getArtAssets();
-		IMG = art.cloud;
-		ALIVE = true;
-	}
+    super(x, y, width, height, ObjectID.Background, (rand.nextBoolean() ? ObjectLayer.background
+        : ObjectLayer.foreground));
 
-	public void tick() {
-	}
+    art = Game.getArtAssets();
+    IMG = art.cloud;
+    ALIVE = true;
+    WRAP = false;
+  }
 
-	public void render(Graphics g) {
-		if (X + WIDTH < -PlayState.cam.getX()) {
-			ALIVE = false;
-		}
+  public Cloud(float x, float y, int width, int height, Vector2D v, boolean wrap)
+  {
+    super(x, y, width, height, v, ObjectID.Background, (rand.nextBoolean() ? ObjectLayer.background
+        : ObjectLayer.foreground));
 
-		if (ALIVE) {
-			Graphics2D g2d = (Graphics2D) g.create();
-			g2d.setComposite(AlphaComposite.getInstance(
-					AlphaComposite.SRC_OVER, 0.8f));
-			g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
+    art = Game.getArtAssets();
+    IMG = art.cloud;
+    ALIVE = true;
+    WRAP = wrap;
+  }
 
-		}
-	}
+  public void tick()
+  {
+    X += V.DX * GameTime.delta();
 
-	public int getWidth() {
-		return WIDTH;
-	}
+    if (WRAP && X + WIDTH < 0)
+    {
+      X = 0+Game.WIDTH;
+    }
+  }
 
-	public int getHeight() {
-		return HEIGHT;
-	}
+  public void render(Graphics g)
+  {
+    if (X + WIDTH < -PlayState.cam.getX())
+    {
+      ALIVE = false;
+    }
+
+    if (ALIVE)
+    {
+      Graphics2D g2d = (Graphics2D) g.create();
+      g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
+      g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
+
+    }
+  }
+
+  public int getWidth()
+  {
+    return WIDTH;
+  }
+
+  public int getHeight()
+  {
+    return HEIGHT;
+  }
 }
