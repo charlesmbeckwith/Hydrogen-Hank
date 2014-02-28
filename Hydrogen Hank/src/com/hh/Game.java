@@ -48,7 +48,7 @@ public class Game extends Canvas implements Runnable
     artassets = new ArtAssets();
     playState = new PlayState();
     manager = new GameStateManager(playState);
-
+   
     KeyBinding.LOAD_BINDINGS();
     playState.restart();
     manager.push(playState);

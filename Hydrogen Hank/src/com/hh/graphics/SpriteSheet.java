@@ -2,18 +2,17 @@ package com.hh.graphics;
 
 import java.awt.image.BufferedImage;
 import java.io.BufferedReader;
-import java.io.File;
 import java.io.FileNotFoundException;
-import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
 
 import javax.imageio.ImageIO;
 
 /**
  * COSC3550 Spring 2014 Homework 3
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 26, 2014 
- * Purpose: Defines a BufferedImage as a SpriteSheet
+ * Created : Feb. 7, 2014 Last Updated : Feb. 26, 2014 Purpose: Defines a
+ * BufferedImage as a SpriteSheet
  * 
  * @author Mark Schlottke and Charlie Beckwith
  */
@@ -42,15 +41,15 @@ public class SpriteSheet {
 		ID = id;
 		parseSpriteSpecs();
 		getFrames();
-		
+
 	}
 
 	private void getFrames() {
-		sprites = new BufferedImage[COLUMNS*ROWS];
+		sprites = new BufferedImage[COLUMNS * ROWS];
 		int spriteNum = 0;
-		for(int row = 0; row < ROWS; row++){
-			for(int col = 0; col < COLUMNS; col++){
-				sprites[spriteNum] = grabImage(col+1,row+1,WIDTH,HEIGHT);
+		for (int row = 0; row < ROWS; row++) {
+			for (int col = 0; col < COLUMNS; col++) {
+				sprites[spriteNum] = grabImage(col + 1, row + 1, WIDTH, HEIGHT);
 				spriteNum++;
 			}
 		}
@@ -119,11 +118,11 @@ public class SpriteSheet {
 	private void parseSpriteSpecs() {
 		resourceSpecPath = resourcePath.substring(0, resourcePath.indexOf('.'))
 				.concat(".sheet");
-		File specSheet = new File(System.getProperty("user.dir")
-				+ "/res/" + resourceSpecPath);
 		BufferedReader br;
 		try {
-			br = new BufferedReader(new FileReader(specSheet));
+			br = new BufferedReader(new InputStreamReader(getClass()
+					.getResourceAsStream(resourceSpecPath)));
+
 			for (String line; (line = br.readLine()) != null;) {
 				int specVal = 1;
 				if (!line.isEmpty()) {
