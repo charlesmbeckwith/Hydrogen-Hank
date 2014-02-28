@@ -64,7 +64,6 @@ public class TitleMenuAnimState extends GameState
     if (scrollingTitlesRunning)
     {
       handler.render(g);
-      int yOffset = art.newButton.getHeight();
       
       //g.drawImage(art.newButton, 20, Game.HEIGHT - yOffset - 20, Game.WIDTH/3 - 15, yOffset, null);
       //g.drawImage(art.scoresButton, Game.WIDTH/2, Game.HEIGHT - 50, null);
