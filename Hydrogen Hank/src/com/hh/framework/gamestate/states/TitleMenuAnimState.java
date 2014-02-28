@@ -51,8 +51,7 @@ public class TitleMenuAnimState extends GameState
           position + 375, null);
       g.drawImage(art.creditsButton, (Game.WIDTH / 2 - art.creditsButton.getWidth() / 2),
           position + 450, null);
-      
-      
+       
     }
 
     if (position <= 0)
