@@ -58,7 +58,7 @@ public class PlayState extends GameState {
 		handler.addObject(player);
 		cam = new Camera(0,0);
 
-		start = -175;
+		start = -175-Game.WIDTH;
 		for (int i = start; i < start + Game.WIDTH * 2; i += 75) {
 			addBackground(i);
 		}

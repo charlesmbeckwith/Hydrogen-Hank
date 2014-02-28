@@ -32,7 +32,7 @@ public class Tile extends GameObject
 
   public void render(Graphics g)
   {
-    if (X + WIDTH < -PlayState.cam.getX())
+    if (X + WIDTH < -PlayState.cam.getX()-Game.WIDTH)
     {
       ALIVE = false;
     }
