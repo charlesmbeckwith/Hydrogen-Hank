@@ -1,5 +1,6 @@
 package com.hh.framework.gamestate.states;
 
+import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
@@ -38,6 +39,8 @@ public class IntroAnimation extends GameState {
 	private int charPtr = 0;
 	private Font animFont = new Font("Arial", Font.PLAIN, 50);
 	ListIterator<String> scriptIter;
+	
+	private int redBoxHeight = 0;
 
 	public IntroAnimation() {
 		parseScript();
@@ -45,6 +48,9 @@ public class IntroAnimation extends GameState {
 
 	}
 
+	/**
+	 * Basically keyframes for events to occur in the animation
+	 */
 	@Override
 	public void tick() {
 		hankXPosition -= 1;
@@ -67,6 +73,9 @@ public class IntroAnimation extends GameState {
 		}
 		if(scriptProgCounter % 600 == 0)
 			Game.manager.pop();
+		if(scriptProgCounter >225){
+			redBoxHeight+=4;
+		}
 
 	}
 
@@ -77,6 +86,15 @@ public class IntroAnimation extends GameState {
 		g2d.drawImage(art.getSpriteFrame(spriteID.HANK, 0),
 				(int) hankXPosition, (int) hankYPosition, hankSize, hankSize,
 				null);
+		renderText(g2d);
+		drawRedTint(g2d);
+
+	}
+	/**
+	 * Draws text with outline around it 
+	 * @param g2d -- graphics
+	 */
+	private void renderText(Graphics2D g2d){
 		g2d.setFont(animFont);
 
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
@@ -92,6 +110,8 @@ public class IntroAnimation extends GameState {
 		    affineTransform = g2d.getTransform();
 		    affineTransform.translate(150, 150);
 		    Graphics2D g2dd = (Graphics2D) g2d.create();
+		    g2dd.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
+					RenderingHints.VALUE_ANTIALIAS_ON);
 		    g2dd.transform(affineTransform);
 			g2dd.setColor(Color.white);
 			g2dd.setStroke(new BasicStroke(6.0f));
@@ -102,9 +122,20 @@ public class IntroAnimation extends GameState {
 		g2d.setColor(Color.black);
 		g2d.setStroke(new BasicStroke(1.0f));
 		g2d.drawString(lineToPrint, 150, 150);
-
 	}
 
+	/**
+	 * Draws a red semi-transparent box to signify a dramatic moment
+	 * @param g - graphics
+	 */
+	private void drawRedTint(Graphics2D g){
+		Graphics2D g2d = (Graphics2D) g.create();
+		//g2d.setColor(Color.red);
+		g2d.setColor(new Color(168, 5, 5).darker());
+		g2d.setComposite(AlphaComposite.getInstance(
+				AlphaComposite.SRC_OVER, 0.3f));
+		g2d.fillRect(0, Game.HEIGHT/2-redBoxHeight, Game.WIDTH, redBoxHeight*2);
+	}
 	/**
 	 * parses a "sprite spec sheet" detailing the height, width and number of
 	 * columns and rows a sprite sheet contains
