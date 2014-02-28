@@ -8,6 +8,12 @@ public class GameStateManager
 {
   private LinkedList<GameState> STATES = new LinkedList<GameState>();
   private int removeCount = 0;
+  private LinkedList<GameState> toAdd = new LinkedList<GameState>();
+
+  public GameStateManager(GameState state)
+  {
+    STATES.push(state);
+  }
 
   public void tick()
   {
@@ -47,31 +53,40 @@ public class GameStateManager
     {
       render(iter, iter.next(), g);
     }
-    
-    while(removeCount > 0){
+
+    while (removeCount > 0)
+    {
       STATES.pop();
       removeCount--;
     }
+
+    for (GameState gs : toAdd)
+    {
+      STATES.push(gs);
+    }
+
+    toAdd.clear();
   }
-  
+
   public void pop()
   {
     removeCount++;
   }
-  
+
   public void push(GameState state)
   {
-	  STATES.push(state);
+    toAdd.add(state);
+    //STATES.push(state);
   }
-  
+
   public GameState getFirstState()
   {
-	  return STATES.getFirst();
+    return STATES.getFirst();
   }
-  
+
   @SuppressWarnings("rawtypes")
   public Class getFirstClass()
   {
-	  return STATES.getFirst().getClass();
+    return STATES.getFirst().getClass();
   }
 }

@@ -40,7 +40,6 @@ public class Game extends Canvas implements Runnable
    */
   private void init()
   {
-    manager = new GameStateManager();
     WIDTH = getWidth();
     HEIGHT = getHeight();
     HEIGHTOFFSET = 50;
@@ -48,6 +47,7 @@ public class Game extends Canvas implements Runnable
     bs = getBufferStrategy();
     artassets = new ArtAssets();
     playState = new PlayState();
+    manager = new GameStateManager(playState);
 
     KeyBinding.LOAD_BINDINGS();
     playState.restart();
@@ -122,8 +122,9 @@ public class Game extends Canvas implements Runnable
    */
   public static void togglePause()
   {
-    if (manager.getFirstClass() == TitleMenuState.class || manager.getFirstClass() == PauseState.class
-        || manager.getFirstClass() == TitleMenuAnimState.class || manager.getFirstClass() == IntroAnimation.class)
+    if (manager.getFirstClass() == PauseState.class
+        || manager.getFirstClass() == TitleMenuAnimState.class
+        || manager.getFirstClass() == IntroAnimation.class)
     {
       manager.pop();
     } else if (manager.getFirstClass() == PlayState.class)
@@ -146,24 +147,30 @@ public class Game extends Canvas implements Runnable
       manager.push(new TitleMenuAnimState());
     }
   }
+
   /**
    * getArtAssets
    * @return returns instance of ArtAssets
    */
-  public static ArtAssets getArtAssets(){return artassets;}
+  public static ArtAssets getArtAssets()
+  {
+    return artassets;
+  }
 
-  
   //TODO: What. 
   public static Point getPosition()
   {
     return window.getPosition();
   }
-  
+
   /**
    * Debug toggle
    * @return if debug is toggled on or off
    */
-  public static boolean isDebug(){return debugOn;};
+  public static boolean isDebug()
+  {
+    return debugOn;
+  };
 
   /**
    * Main entry point for the program
@@ -174,7 +181,5 @@ public class Game extends Canvas implements Runnable
   {
     window = new Window(800, 600, "Hydrogen Hank", new Game());
   }
-  
-  
-  
+
 }
