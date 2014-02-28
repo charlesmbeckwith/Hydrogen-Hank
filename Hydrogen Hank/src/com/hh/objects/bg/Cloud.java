@@ -53,16 +53,18 @@ public class Cloud extends BackgroundElement
     ALIVE = true;
     WRAP = wrap;
 
-    double offset = rand.nextDouble()/2;
-    if (LAYER == ObjectLayer.foreground)
+    if (!WRAP)
     {
-      WIDTH *= 1 + offset;
-      HEIGHT *= 1 + offset;
-    }
-    else
-    {
-      WIDTH *= 1 - offset;
-      HEIGHT *= 1 - offset;
+      double offset = rand.nextDouble() / 2;
+      if (LAYER == ObjectLayer.foreground)
+      {
+        WIDTH *= 1 + offset;
+        HEIGHT *= 1 + offset;
+      } else
+      {
+        WIDTH *= 1 - offset;
+        HEIGHT *= 1 - offset;
+      }
     }
   }
 
