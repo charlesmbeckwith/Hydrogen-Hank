@@ -25,8 +25,9 @@ import com.hh.input.KeyInput;
 @SuppressWarnings("unused")
 public class Player extends GameObject {
 	private final float GRAVITY = 200f;
-	private int extraBalloons = 3; // How many balloons you start with 
-	private final int BALLOONCOST = 10; //How much hydrogen blowing up a balloon costs. 
+	private int extraBalloons = 50; // How many balloons you start with
+	private final int BALLOONCOST = 10; // How much hydrogen blowing up a
+										// balloon costs.
 	private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
 	private boolean BalloonAlreadyBlownUp = false;
 	private Animation RIGHT, CURRENT;
@@ -50,7 +51,7 @@ public class Player extends GameObject {
 		BUOYANCY = 0.0f;
 		HYDROGENLEVEL = 100f;
 
-		//balloons.add(new Balloon(x, y, width, height));
+		// balloons.add(new Balloon(x, y, width, height));
 
 		art = Game.getArtAssets();
 		initAnimations();
@@ -70,18 +71,17 @@ public class Player extends GameObject {
 			}
 
 			if (KeyInput.KEYSDOWN.contains(KeyBinding.BLOWUP_BALLOON.VALUE())) {
-				//TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST... 
-				if (extraBalloons > 0 && !BalloonAlreadyBlownUp) {
-					balloons.add(new Balloon(X, Y, WIDTH, HEIGHT));
+				// TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST...
+				if (extraBalloons > 0 && !BalloonAlreadyBlownUp
+						&& HYDROGENLEVEL > BALLOONCOST) {
+					balloons.push(new Balloon(X, Y, WIDTH, HEIGHT));
 					extraBalloons--;
 					HYDROGENLEVEL -= BALLOONCOST;
 					BalloonAlreadyBlownUp = true;
 				}
-			}else{
+			} else {
 				BalloonAlreadyBlownUp = false;
 			}
-			
-			
 
 			if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE())) {
 				BUOYANCY += 1.1f;
@@ -91,7 +91,10 @@ public class Player extends GameObject {
 				BUOYANCY = 0;
 			}
 			if (BUOYANCY < -(GRAVITY * 2)) {
-				BUOYANCY = -(GRAVITY * 2);
+				BUOYANCY = -((GRAVITY * 2) + GRAVITY * balloons.size());
+				// Trying to make buoyancy reflect how many balloons you have.
+				// Aka, the more balloons you have the less quickly you fall to
+				// the ground
 			}
 
 			if (V.DX < 500 && !collision) {
@@ -120,8 +123,14 @@ public class Player extends GameObject {
 
 		for (GameObject go : PlayState.handler.getObjects()) {
 			if (go != this && go.getID() == ObjectID.Enemy && collided(go)) {
-				go.Kill();
-				destroyBalloon();
+				Enemy enemy = (Enemy) go;
+				switch (enemy.getEnemyType()) {
+				case Bird:
+					go.Kill();
+					destroyBalloon();
+					break;
+				}
+
 			}
 
 			// check for ground collision
@@ -139,15 +148,15 @@ public class Player extends GameObject {
 
 			// Check for powerup collision
 			if (go != this && go.getID() == ObjectID.Powerup) {
-				//cast go as Powerup
+				// cast go as Powerup
 				Powerup pu = (Powerup) go;
 				switch (pu.getPowerupType()) {
 				case BalloonPack:
-					//Add an extra Balloon
+					// Add an extra Balloon
 					extraBalloons++;
 					break;
 				case HydrogenTank:
-					//Add hydrogen to tank
+					// Add hydrogen to tank
 					HYDROGENLEVEL += 50;
 					break;
 				}
@@ -253,7 +262,11 @@ public class Player extends GameObject {
 		String XYOffset = new String().concat("XOffset = "
 				+ PlayState.cam.getX() + " || YOffset = "
 				+ PlayState.cam.getY());
-		String BalloonValues = new String().concat("# of Balloons = " + extraBalloons + "  ||  # Balloons in Play = " + balloons.size());
+		String BalloonValues = new String().concat("# of Balloons = "
+				+ extraBalloons + "  ||  # Balloons in Play = "
+				+ balloons.size());
+		String deltaBuoyancy = new String().concat("deltaBuoyancy = "
+				+ (GRAVITY * 2) / balloons.size());
 		debugOptions.add(BouyancyDebug);
 		debugOptions.add(HydrogenLevelDebug);
 		debugOptions.add(AltitudeDebug);
@@ -261,6 +274,7 @@ public class Player extends GameObject {
 		debugOptions.add(VelocityDebug);
 		debugOptions.add(XYOffset);
 		debugOptions.add(BalloonValues);
+		debugOptions.add(deltaBuoyancy);
 	}
 
 	/**
@@ -284,7 +298,7 @@ public class Player extends GameObject {
 
 			Random rand = new Random();
 			balloonColor = rand.nextInt(3);
-			this.width = (int) (width * .8);
+			this.width = (int) (width);
 			this.height = height;
 			setOffset(x, y);
 

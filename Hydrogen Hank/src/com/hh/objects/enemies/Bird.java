@@ -32,7 +32,7 @@ public class Bird extends Enemy
    */
   public Bird(float x, float y, int width, int height, Vector2D v)
   {
-    super(x, y, width, height, v);
+    super(x, y, width, height, v, EnemyType.Bird);
     art = Game.getArtAssets();
     initAnimations();
     ALIVE = true;
@@ -50,9 +50,10 @@ public class Bird extends Enemy
   @Override
   public void render(Graphics g)
   {
+	  Graphics2D g2d = (Graphics2D) g.create();
     if (ALIVE)
     {
-      g.drawImage(ANIM.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
+      g2d.drawImage(ANIM.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
           WIDTH, HEIGHT, null);
     }
   }
