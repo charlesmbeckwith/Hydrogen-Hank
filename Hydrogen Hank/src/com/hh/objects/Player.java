@@ -25,7 +25,10 @@ import com.hh.input.KeyInput;
 @SuppressWarnings("unused")
 public class Player extends GameObject {
 	private final float GRAVITY = 200f;
-
+	private int extraBalloons = 3; // How many balloons you start with 
+	private final int BALLOONCOST = 10; //How much hydrogen blowing up a balloon costs. 
+	private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
+	private boolean BalloonAlreadyBlownUp = false;
 	private Animation RIGHT, CURRENT;
 	private ArtAssets art;
 	private float BUOYANCY;
@@ -33,9 +36,6 @@ public class Player extends GameObject {
 	private float startx, starty;
 	private LinkedList<String> debugOptions;
 
-	private int extraBalloons = 3;
-
-	private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
 	private float HYDROGENLEVEL;
 
 	public Player(float x, float y, int width, int height, Vector2D v) {
@@ -71,12 +71,17 @@ public class Player extends GameObject {
 
 			if (KeyInput.KEYSDOWN.contains(KeyBinding.BLOWUP_BALLOON.VALUE())) {
 				//TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST... 
-				if (extraBalloons > 0) {
+				if (extraBalloons > 0 && !BalloonAlreadyBlownUp) {
 					balloons.add(new Balloon(X, Y, WIDTH, HEIGHT));
 					extraBalloons--;
-					HYDROGENLEVEL -= 10;
+					HYDROGENLEVEL -= BALLOONCOST;
+					BalloonAlreadyBlownUp = true;
 				}
+			}else{
+				BalloonAlreadyBlownUp = false;
 			}
+			
+			
 
 			if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE())) {
 				BUOYANCY += 1.1f;
@@ -248,12 +253,14 @@ public class Player extends GameObject {
 		String XYOffset = new String().concat("XOffset = "
 				+ PlayState.cam.getX() + " || YOffset = "
 				+ PlayState.cam.getY());
+		String BalloonValues = new String().concat("# of Balloons = " + extraBalloons + "  ||  # Balloons in Play = " + balloons.size());
 		debugOptions.add(BouyancyDebug);
 		debugOptions.add(HydrogenLevelDebug);
 		debugOptions.add(AltitudeDebug);
 		debugOptions.add(PositionDebug);
 		debugOptions.add(VelocityDebug);
 		debugOptions.add(XYOffset);
+		debugOptions.add(BalloonValues);
 	}
 
 	/**
