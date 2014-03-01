@@ -17,24 +17,16 @@ import com.hh.input.KeyInput;
 /**
  * COSC3550 Spring 2014 Homework 3
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 28, 2014 Purpose: Defines the Dust
+ * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Defines the Dust
  * Bunny
  * 
- * @author Mark Schlottke, Charlie Beckwith
+ * @author Mark Schlottke
  */
 @SuppressWarnings("unused")
-public class Player extends GameObject {
-	private final float GRAVITY = 200f;
+public class Player extends GameObject
+{
+  private final float GRAVITY = 200f;
 
-<<<<<<< HEAD
-	private Animation RIGHT, CURRENT;
-	private ArtAssets art;
-	private float BUOYANCY;
-	private Color HUE;
-	private float startx, starty;
-	private LinkedList<String> debugOptions;
-	private Balloon balloon;
-=======
   private Animation RIGHT, CURRENT;
   private ArtAssets art;
   private float BUOYANCY;
@@ -43,20 +35,7 @@ public class Player extends GameObject {
   private LinkedList<String> debugOptions;
   private Balloon balloon;
   private float HYDROGENLEVEL;
->>>>>>> refs/remotes/origin/master
 
-<<<<<<< HEAD
-	public Player(float x, float y, int width, int height, Vector2D v) {
-		super(x, y, width - 30, height, v, ObjectID.Player,
-				ObjectLayer.foreground);
-		startx = x;
-		starty = y;
-		ALIVE = true;
-		Random rand = new Random();
-		HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200),
-				50 + rand.nextInt(200));
-		BUOYANCY = 0.0f;
-=======
   public Player(float x, float y, int width, int height, Vector2D v)
   {
     super(x, y, width - 30, height, v, ObjectID.Player, ObjectLayer.foreground);
@@ -73,15 +52,13 @@ public class Player extends GameObject {
     art = Game.getArtAssets();
     initAnimations();
   }
->>>>>>> refs/remotes/origin/master
 
-		balloon = new Balloon(x, y, width, height);
+  public void tick()
+  {
+    if (ALIVE)
+    {
+      boolean collision = collision();
 
-<<<<<<< HEAD
-		art = Game.getArtAssets();
-		initAnimations();
-	}
-=======
       if (KeyInput.KEYSDOWN.contains(KeyBinding.INFLATE.VALUE()))
       {
         if(HYDROGENLEVEL > 0 && BUOYANCY > -390)
@@ -93,54 +70,44 @@ public class Player extends GameObject {
           HYDROGENLEVEL = 0;
         }
       }
->>>>>>> refs/remotes/origin/master
 
-	public void tick() {
-		if (ALIVE) {
-			boolean collision = collision();
+      if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE()))
+      {
+        BUOYANCY += 1.1f;
+      }
 
-			if (KeyInput.KEYSDOWN.contains(KeyBinding.INFLATE.VALUE())) {
-				BUOYANCY -= 5.1f;
-			}
+      if (BUOYANCY > 0)
+      {
+        BUOYANCY = 0;
+      }
+      if (BUOYANCY < -(GRAVITY * 2))
+      {
+        BUOYANCY = -(GRAVITY * 2);
+      }
 
-			if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE())) {
-				BUOYANCY += 1.1f;
-			}
+      if (V.DX < 500 && !collision)
+      {
+        V.DX += 1;
+      }
 
-			if (BUOYANCY > 0) {
-				BUOYANCY = 0;
-			}
-			if (BUOYANCY < -(GRAVITY * 2)) {
-				BUOYANCY = -(GRAVITY * 2);
-			}
+      V.DY = BUOYANCY + GRAVITY;
 
-			if (V.DX < 500 && !collision) {
-				V.DX += 1;
-			}
+      X += V.DX * GameTime.delta();
+      Y += V.DY * GameTime.delta();
 
-			V.DY = BUOYANCY + GRAVITY;
+      CURRENT = RIGHT;
+      CURRENT.runAnimation();
 
-<<<<<<< HEAD
-			X += V.DX * GameTime.delta();
-			Y += V.DY * GameTime.delta();
-=======
       // Simulate a slow leak in the balloon
       BUOYANCY += 0.333;
       balloon.tick(X, Y);
     }
   }
->>>>>>> refs/remotes/origin/master
 
-			CURRENT = RIGHT;
-			CURRENT.runAnimation();
+  public boolean collision()
+  {
+    boolean col = false;
 
-<<<<<<< HEAD
-			// Simulate a slow leak in the balloon
-			BUOYANCY += 1;
-			balloon.tick(X, Y);
-		}
-	}
-=======
     for (GameObject go : PlayState.handler.getObjects())
     {
       if (go != this && go.getID() == ObjectID.Enemy && collided(go))
@@ -152,21 +119,15 @@ public class Player extends GameObject {
           && X > go.getX() && X < go.getX() + go.getWidth())
       {
         col = true;
->>>>>>> refs/remotes/origin/master
 
-	public boolean collision() {
-		boolean col = false;
+        Y = (go.getY() - (HEIGHT / 2) + 14);
+        V.DY = 0;
 
-		for (GameObject go : PlayState.handler.getObjects()) {
-			if (go != this && go.getID() == ObjectID.Tile
-					&& (Y + (HEIGHT / 2) - 14) >= go.getY() && X > go.getX()
-					&& X < go.getX() + go.getWidth()) {
-				col = true;
+        if (V.DX > 0)
+          V.DX -= (V.DX * 0.01);
+      }
+    }
 
-<<<<<<< HEAD
-				Y = (go.getY() - (HEIGHT / 2) + 14);
-				V.DY = 0;
-=======
     return col;
   }
 
@@ -211,31 +172,29 @@ public class Player extends GameObject {
 
     return collided;
   }
->>>>>>> refs/remotes/origin/master
 
-				if (V.DX > 0)
-					V.DX -= (V.DX * 0.01);
-			}
-		}
+  public void render(Graphics g)
+  {
+    if (ALIVE)
+    {
+      Graphics2D g2d = (Graphics2D) g.create();
 
-		return col;
-	}
+      // BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
+      // WIDTH, HEIGHT, HUE);
+      if (Game.isDebug())
+        debugOptions(g2d);
+      balloon.render(g2d);
+      g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
+          WIDTH + HEIGHT / 3, HEIGHT, null);
+    }
+  }
 
-	public void render(Graphics g) {
-		if (ALIVE) {
-			Graphics2D g2d = (Graphics2D) g.create();
+  private void debugOptions(Graphics2D g2d)
+  {
+    initDebug();
+    g2d.setColor(Color.BLACK);
+    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-<<<<<<< HEAD
-			// BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
-			// WIDTH, HEIGHT, HUE);
-			if (Game.isDebug())
-				debugOptions(g2d);
-			balloon.render(g2d);
-			g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)),
-					(int) (Y - (HEIGHT / 2)), WIDTH + HEIGHT / 3, HEIGHT, null);
-		}
-	}
-=======
     float relativeZeroX = -PlayState.cam.getX()+10;
     float relativeZeroY = -PlayState.cam.getY()+Game.HEIGHT-(11*(debugOptions.size()+1));
     int row = 1;
@@ -244,23 +203,9 @@ public class Player extends GameObject {
       g2d.drawString(x, relativeZeroX, relativeZeroY + 11 * row);
       row++;
     }
->>>>>>> refs/remotes/origin/master
 
-	private void debugOptions(Graphics2D g2d) {
-		initDebug();
-		g2d.setColor(Color.BLACK);
-		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING,
-				RenderingHints.VALUE_ANTIALIAS_ON);
+  }
 
-<<<<<<< HEAD
-		float relativeZeroX = -PlayState.cam.getX();
-		float relativeZeroY = -PlayState.cam.getY();
-		int row = 1;
-		for (String x : debugOptions) {
-			g2d.drawString(x, relativeZeroX, relativeZeroY + 11 * row);
-			row++;
-		}
-=======
   private void initDebug()
   {
     debugOptions = new LinkedList<String>();
@@ -279,81 +224,13 @@ public class Player extends GameObject {
     debugOptions.add(VelocityDebug);
     debugOptions.add(XYOffset);
   }
->>>>>>> refs/remotes/origin/master
 
-	}
+  /**
+   * initialize Animations
+   */
+  private void initAnimations()
+  {
 
-<<<<<<< HEAD
-	private void initDebug() {
-		debugOptions = new LinkedList<String>();
-		String BouyancyDebug = new String().concat("Bouyancy = "
-				+ (int) BUOYANCY);
-		String PositionDebug = new String().concat("XPosition: " + (int) X
-				+ " || YPosition: " + (int) Y);
-		String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);
-		String XYOffset = new String().concat("XOffset = "
-				+ PlayState.cam.getX() + " || YOffset = "
-				+ PlayState.cam.getY());
-		debugOptions.add(BouyancyDebug);
-		debugOptions.add(PositionDebug);
-		debugOptions.add(VelocityDebug);
-		debugOptions.add(XYOffset);
-	}
-
-	/**
-	 * initialize Animations
-	 */
-	private void initAnimations() {
-
-		RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0),
-				art.getSpriteFrame(spriteID.HANK, 1));
-		CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
-	}
-
-	/**
-	 * A balloon class that creates an instance of a balloon. The color of the
-	 * balloon is generated randomly.
-	 * 
-	 * @author charlie
-	 * 
-	 */
-	private class Balloon {
-		private float X;
-		private float Y;
-		private int balloonColor;
-		private boolean Alive = true;
-		private int width, height;
-
-		public Balloon(float x, float y, int width, int height) {
-			Random rand = new Random();
-			balloonColor = rand.nextInt(3);
-			this.width = (int) (width * .8);
-			this.height = height;
-			setOffset(x, y);
-		}
-
-		public void render(Graphics2D g) {
-			g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor),
-					(int) X, (int) Y, width, height, null);
-		}
-
-		public void tick(float x, float y) {
-			setOffset(x, y);
-		}
-
-		/**
-		 * Sets X,Y position to be offset by player position by a certain
-		 * amount.
-		 * 
-		 * @param x
-		 * @param y
-		 */
-		public void setOffset(float x, float y) {
-			X = x - width / 2;
-			Y = (float) (y - height * 1.5);
-		}
-	}
-=======
     RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0), art.getSpriteFrame(
         spriteID.HANK, 1));
     CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
@@ -400,5 +277,4 @@ public class Player extends GameObject {
       Y = (float) (y - height * 1.5);
     }
   }
->>>>>>> refs/remotes/origin/master
 }
