@@ -50,9 +50,7 @@ public class TitleMenuAnimState extends GameState
     }
 
     if (scrollingTitlesRunning)
-    {
-      handler.render(g);
-      
+    {      
       int xOffset = Game.WIDTH/2;
       int yOffset = Game.HEIGHT/3-150;
       int width = Game.WIDTH/3 - 15;
@@ -64,6 +62,8 @@ public class TitleMenuAnimState extends GameState
       g.drawImage(art.scoresButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
       yOffset += 75;
       g.drawImage(art.creditsButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
+      
+      handler.render(g);
     }
 
     if (position <= 0)

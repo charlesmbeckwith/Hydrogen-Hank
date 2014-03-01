@@ -25,12 +25,11 @@ public class MenuButton extends GameObject
 	  HIGHSCORE,
 	  CREDITS
   };
-  
 
   public MenuButton(BufferedImage base, BufferedImage selected, float x, float y, int width,
       int height, ButtonID buttontype)
   {
-    super(x, y, width, height, ObjectID.Tile, ObjectLayer.hud);
+    super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
     ALIVE = true;
     BASEIMG = base;
     SELECTIMG = selected;

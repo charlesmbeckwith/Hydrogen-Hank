@@ -22,13 +22,6 @@ public class TitleMenuState extends GameState
   public TitleMenuState()
   {
     handler = new Handler();
-    // Adding Animated Clouds
-    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(-120, 0), true));
-    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(-100, 0), true));
-    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(-50, 0), true));
-    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(-75, 0), true));
-    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(-85, 0), true));
-    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(-100, 0), true));
 
     // Adding Buttons
     int xOffset = Game.WIDTH / 2;
@@ -41,6 +34,14 @@ public class TitleMenuState extends GameState
     yOffset += 75;
     handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2, xOffset, yOffset,
         Game.WIDTH / 3 - 15, art.creditsButton.getHeight(), ButtonID.CREDITS));
+
+    // Adding Animated Clouds
+    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(-120, 0), true));
+    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(-100, 0), true));
+    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(-50, 0), true));
+    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(-75, 0), true));
+    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(-85, 0), true));
+    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(-100, 0), true));
   }
 
   public void tick()
@@ -54,7 +55,8 @@ public class TitleMenuState extends GameState
     {
       g.setColor(new Color(109, 136, 253));
       g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
-      //g.drawImage(art.mainBg, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+      g.drawImage(art.mainTitle, Game.WIDTH / 2 - 250, Game.HEIGHT / 3 - 150, 500, 300, null);
+      handler.render(g);
     }
 
     //Draw Hank animation
@@ -70,13 +72,6 @@ public class TitleMenuState extends GameState
     if (hankFlyingPosition > Game.WIDTH)
     {
       hankFlyingPosition = 0;
-    }
-
-    if (Game.manager.getFirstClass() == this.getClass())
-    {
-      handler.render(g);
-
-      g.drawImage(art.mainTitle, Game.WIDTH / 2 - 250, Game.HEIGHT / 3 - 150, 500, 300, null);
     }
   }
 }
