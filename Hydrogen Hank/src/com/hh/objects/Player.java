@@ -34,6 +34,7 @@ public class Player extends GameObject
   private float startx, starty;
   private LinkedList<String> debugOptions;
   private Balloon balloon;
+  private float HYDROGENLEVEL;
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
@@ -44,6 +45,7 @@ public class Player extends GameObject
     Random rand = new Random();
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
+    HYDROGENLEVEL = 100f;
 
     balloon = new Balloon(x, y, width, height);
 
@@ -59,7 +61,14 @@ public class Player extends GameObject
 
       if (KeyInput.KEYSDOWN.contains(KeyBinding.INFLATE.VALUE()))
       {
-        BUOYANCY -= 5.1f;
+        if(HYDROGENLEVEL > 0)
+        {
+          BUOYANCY -= 5.1f;
+          HYDROGENLEVEL -= 0.05;
+        }
+        else if(HYDROGENLEVEL < 0){
+          HYDROGENLEVEL = 0;
+        }
       }
 
       if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE()))
@@ -201,12 +210,16 @@ public class Player extends GameObject
   {
     debugOptions = new LinkedList<String>();
     String BouyancyDebug = new String().concat("Bouyancy = " + (int) BUOYANCY);
+    String HydrogenLevelDebug = new String().concat("Hydrogen Level = " +  HYDROGENLEVEL);
+    String AltitudeDebug = new String().concat("Altitude = " +  ((384-Y)/30)); // Measured in Meters
     String PositionDebug = new String().concat("XPosition: " + (int) X + " || YPosition: "
         + (int) Y);
     String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);
     String XYOffset = new String().concat("XOffset = " + PlayState.cam.getX() + " || YOffset = "
         + PlayState.cam.getY());
     debugOptions.add(BouyancyDebug);
+    debugOptions.add(HydrogenLevelDebug);
+    debugOptions.add(AltitudeDebug);
     debugOptions.add(PositionDebug);
     debugOptions.add(VelocityDebug);
     debugOptions.add(XYOffset);
