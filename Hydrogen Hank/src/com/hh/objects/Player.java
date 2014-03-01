@@ -33,7 +33,8 @@ public class Player extends GameObject
   private Color HUE;
   private float startx, starty;
   private LinkedList<String> debugOptions;
-  private Balloon balloon;
+
+  private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
   private float HYDROGENLEVEL;
 
   public Player(float x, float y, int width, int height, Vector2D v)
@@ -46,9 +47,9 @@ public class Player extends GameObject
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
     HYDROGENLEVEL = 100f;
-
-    balloon = new Balloon(x, y, width, height);
-
+    
+    balloons.add(new Balloon(x, y, width, height));
+    balloons.add(new Balloon(x, y, width, height));
     art = Game.getArtAssets();
     initAnimations();
   }
@@ -100,7 +101,10 @@ public class Player extends GameObject
 
       // Simulate a slow leak in the balloon
       BUOYANCY += 0.333;
-      balloon.tick(X, Y);
+      for(Balloon bloon: balloons){
+    	  bloon.tick(X,Y);
+      }
+
     }
   }
 
@@ -112,8 +116,8 @@ public class Player extends GameObject
     {
       if (go != this && go.getID() == ObjectID.Enemy && collided(go))
       {
-        // TODO: finish collision logic
-        //go.Kill();
+        go.Kill();
+        destroyBalloon();
       }
       if (go != this && go.getID() == ObjectID.Ground && (Y + (HEIGHT / 2) - 14) >= go.getY()
           && X > go.getX() && X < go.getX() + go.getWidth())
@@ -183,7 +187,9 @@ public class Player extends GameObject
       // WIDTH, HEIGHT, HUE);
       if (Game.isDebug())
         debugOptions(g2d);
-      balloon.render(g2d);
+      for(Balloon bloons: balloons){
+    	  bloons.render(g2d);
+      }
       g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
           WIDTH + HEIGHT / 3, HEIGHT, null);
     }
@@ -204,6 +210,15 @@ public class Player extends GameObject
       row++;
     }
 
+  }
+  
+  public void destroyBalloon(){
+	  if(!balloons.isEmpty()){
+		  balloons.pop();
+	  }
+	  else{
+		 Kill();
+	  }
   }
 
   private void initDebug()
