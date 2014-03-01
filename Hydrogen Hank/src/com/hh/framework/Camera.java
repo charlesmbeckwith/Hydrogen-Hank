@@ -19,25 +19,28 @@ public class Camera
 
   public void tick(GameObject go)
   {
-    if(KeyInput.KEYSDOWN.contains(KeyBinding.PAN_LEFT.VALUE()))
+    if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_LEFT.VALUE()))
     {
       panLeft();
     }
-      
-    if(KeyInput.KEYSDOWN.contains(KeyBinding.PAN_RIGHT.VALUE()))
+
+    if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_RIGHT.VALUE()))
     {
-      panRight(); 
+      panRight();
     }
-      
+
     x = -go.getX() + xOffset;
     y = -go.getY() + yOffset;
-    
-    if(x < (-go.getX()+go.getWidth()/2))
+
+    // Hits left side of screen
+    if (x < (-go.getX() + go.getWidth() / 2))
     {
-      x = (-go.getX()+go.getWidth()/2);
+      x = (-go.getX() + go.getWidth() / 2);
     }
-    else if(x > ((-go.getX()-go.getWidth())+Game.WIDTH)){
-      x = ((-go.getX()-go.getWidth())+Game.WIDTH);
+    // Hits right side of the screen
+    else if (x > ((-go.getX() - go.getWidth()) + Game.WIDTH))
+    {
+      x = ((-go.getX() - go.getWidth()) + Game.WIDTH);
     }
   }
 
@@ -64,10 +67,20 @@ public class Camera
   public void panRight()
   {
     xOffset -= 2;
+
+    if (xOffset < 0)
+    {
+      xOffset = 0;
+    }
   }
-  
+
   public void panLeft()
   {
     xOffset += 2;
+
+    if (xOffset > 800)
+    {
+      xOffset = 800;
+    }
   }
 }

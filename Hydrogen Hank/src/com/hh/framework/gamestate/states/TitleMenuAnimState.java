@@ -31,19 +31,7 @@ public class TitleMenuAnimState extends GameState
     handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(0, 0), true));
     handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(0, 0), true));
     handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(0, 0), true));
-    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(0, 0), true));
-    
-    // Adding Buttons
-    handler.addObject(new MenuButton(art.newButton, art.newButton2, art.newButton.getWidth()/2 - 20,
-        Game.HEIGHT - 50, Game.WIDTH/3 - 15, art.newButton.getHeight(), ButtonID.NEWGAME));
-    
-    handler.addObject(new MenuButton(art.scoresButton, art.scoresButton2, Game.WIDTH/2,
-        Game.HEIGHT - 50, Game.WIDTH/3 - 15, art.scoresButton.getHeight(),
-        ButtonID.HIGHSCORE));
-    
-    handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2, Game.WIDTH - art.creditsButton.getWidth()/2 + 20,
-        Game.HEIGHT - 50, Game.WIDTH/3 - 15, art.creditsButton.getHeight(),
-        ButtonID.CREDITS));   
+    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(0, 0), true)); 
   }
 
   public void tick()
@@ -62,15 +50,20 @@ public class TitleMenuAnimState extends GameState
     }
 
     if (scrollingTitlesRunning)
-    {
+    {      
+      int xOffset = Game.WIDTH/2;
+      int yOffset = Game.HEIGHT/3-150;
+      int width = Game.WIDTH/3 - 15;
+      int height = art.newButton.getHeight();
+      g.drawImage(art.mainTitle, Game.WIDTH/2-250, position+yOffset, 500, 300, null);
+      yOffset += 350;
+      g.drawImage(art.newButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
+      yOffset += 75;
+      g.drawImage(art.scoresButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
+      yOffset += 75;
+      g.drawImage(art.creditsButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
+      
       handler.render(g);
-      
-      //g.drawImage(art.newButton, 20, Game.HEIGHT - yOffset - 20, Game.WIDTH/3 - 15, yOffset, null);
-      //g.drawImage(art.scoresButton, Game.WIDTH/2, Game.HEIGHT - 50, null);
-      //g.drawImage(art.creditsButton, Game.WIDTH - art.creditsButton.getWidth()/2 + 20, Game.HEIGHT - 50, null);
-      
-      g.drawImage(art.mainTitle, (100), 20, Game.HEIGHT, position + (int) ((Game.HEIGHT)*.8), null);
-       
     }
 
     if (position <= 0)

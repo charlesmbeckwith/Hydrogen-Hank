@@ -32,24 +32,40 @@ public class Cloud extends BackgroundElement
     // cloud. For now I'm going to take it out, though. As I thought there
     // was a problem with my sorting algorithm :p
 
-    super(x, y, width, height, BackgroundElementType.Cloud, (rand.nextBoolean() ? ObjectLayer.background
-        : ObjectLayer.foreground));
+    super(x, y, width, height, BackgroundElementType.Cloud,
+        (rand.nextBoolean() ? ObjectLayer.background : ObjectLayer.foreground));
 
-    art = Game.getArtAssets();
-    IMG = art.cloud;
-    ALIVE = true;
-    WRAP = false;
+    init(false);
   }
 
   public Cloud(float x, float y, int width, int height, Vector2D v, boolean wrap)
   {
-    super(x, y, width, height, v, BackgroundElementType.Cloud, (rand.nextBoolean() ? ObjectLayer.background
-        : ObjectLayer.foreground));
+    super(x, y, width, height, v, BackgroundElementType.Cloud,
+        (rand.nextBoolean() ? ObjectLayer.background : ObjectLayer.foreground));
 
+    init(wrap);
+  }
+
+  public void init(boolean wrap)
+  {
     art = Game.getArtAssets();
     IMG = art.cloud;
     ALIVE = true;
     WRAP = wrap;
+
+    if (!WRAP)
+    {
+      double offset = rand.nextDouble() / 2;
+      if (LAYER == ObjectLayer.foreground)
+      {
+        WIDTH *= 1 + offset;
+        HEIGHT *= 1 + offset;
+      } else
+      {
+        WIDTH *= 1 - offset;
+        HEIGHT *= 1 - offset;
+      }
+    }
   }
 
   public void tick()
@@ -58,13 +74,13 @@ public class Cloud extends BackgroundElement
 
     if (WRAP && X + WIDTH < 0)
     {
-      X = 0+Game.WIDTH;
+      X = 0 + Game.WIDTH;
     }
   }
 
   public void render(Graphics g)
   {
-    if (X + WIDTH < -PlayState.cam.getX()-Game.WIDTH)
+    if (X + WIDTH < -PlayState.cam.getX() - Game.WIDTH)
     {
       ALIVE = false;
     }
@@ -77,7 +93,7 @@ public class Cloud extends BackgroundElement
 
     }
   }
-  
+
   public int getWidth()
   {
     return WIDTH;

@@ -74,7 +74,7 @@ public class PlayState extends GameState {
 			cloudYPosition = genCloudYPosition();
 		handler.addObject(new Cloud((int) (x + (Math.random() * 20)),
 				cloudYPosition, 256, 128));
-		handler.addObject(new Tile(x, 400, 75, 300));
+		handler.addObject(new Ground(x, 400, 75, 300));
 	}
 	
 	private int genCloudYPosition(){
