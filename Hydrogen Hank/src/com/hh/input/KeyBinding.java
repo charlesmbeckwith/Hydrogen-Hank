@@ -9,7 +9,7 @@ import java.io.InputStreamReader;
 public enum KeyBinding
 {
   INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), PAN_RIGHT(KeyEvent.VK_A), PAN_LEFT(KeyEvent.VK_D), FANON(
-      KeyEvent.VK_SPACE), PAUSE(KeyEvent.VK_P), RESTART(KeyEvent.VK_R);
+      KeyEvent.VK_SPACE), PAUSE(KeyEvent.VK_P), RESTART(KeyEvent.VK_R), BLOWUP_BALLOON(KeyEvent.VK_SPACE);
 
 	private static String controlsPath = "/config/controls.config";
 	private int value;
@@ -69,6 +69,8 @@ public enum KeyBinding
               } else if (line.contains("RESTART_KEY"))
               {
                 RESTART.SET(newVal);
+              }else if (line.contains("BLOWUP_BALLOON")){
+            	  BLOWUP_BALLOON.SET(newVal);
               }
             }
           }
