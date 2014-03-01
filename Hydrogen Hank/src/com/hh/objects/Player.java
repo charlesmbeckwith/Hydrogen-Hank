@@ -61,10 +61,10 @@ public class Player extends GameObject
 
       if (KeyInput.KEYSDOWN.contains(KeyBinding.INFLATE.VALUE()))
       {
-        if(HYDROGENLEVEL > 0)
+        if(HYDROGENLEVEL > 0 && BUOYANCY > -390)
         {
           BUOYANCY -= 5.1f;
-          HYDROGENLEVEL -= 0.05;
+          HYDROGENLEVEL -= 0.3;
         }
         else if(HYDROGENLEVEL < 0){
           HYDROGENLEVEL = 0;
@@ -99,7 +99,7 @@ public class Player extends GameObject
       CURRENT.runAnimation();
 
       // Simulate a slow leak in the balloon
-      BUOYANCY += 1;
+      BUOYANCY += 0.333;
       balloon.tick(X, Y);
     }
   }
@@ -195,8 +195,8 @@ public class Player extends GameObject
     g2d.setColor(Color.BLACK);
     g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
-    float relativeZeroX = -PlayState.cam.getX();
-    float relativeZeroY = -PlayState.cam.getY();
+    float relativeZeroX = -PlayState.cam.getX()+10;
+    float relativeZeroY = -PlayState.cam.getY()+Game.HEIGHT-(11*(debugOptions.size()+1));
     int row = 1;
     for (String x : debugOptions)
     {
