@@ -32,11 +32,6 @@ public class Ground extends GameObject
 
   public void render(Graphics g)
   {
-    if (X + WIDTH < -PlayState.cam.getX()-Game.WIDTH)
-    {
-      ALIVE = false;
-    }
-
     if (ALIVE)
     {
       Graphics2D g2d = (Graphics2D) g;

@@ -2,6 +2,7 @@ package com.hh.framework;
 
 import java.awt.Graphics;
 import java.util.LinkedList;
+import java.util.ArrayList;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -15,6 +16,7 @@ import java.util.LinkedList;
 public class Handler
 {
   private LinkedGameObjects objects = new LinkedGameObjects();
+  private ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
 
   private GameObject tempObj;
 
@@ -42,17 +44,9 @@ public class Handler
       tempObj.render(g);
     }
 
-    int index = 0;
-    while (index < objects.size())
+    for (GameObject go : toRemove)
     {
-      GameObject go = objects.get(index);
-      if (go.isAlive())
-      {
-        index++;
-      } else
-      {
-        objects.remove(index);
-      }
+      objects.remove(go);
     }
   }
 
@@ -72,7 +66,7 @@ public class Handler
   public void insertObject(GameObject object, int index)
   {
     objects.add(index, object);
-    
+
   }
 
   /**
@@ -82,8 +76,7 @@ public class Handler
   public void addObject(GameObject object)
   {
     objects.add(object);
-    
-    
+
   }
 
   /**
@@ -92,7 +85,7 @@ public class Handler
    */
   public void removeObject(GameObject object)
   {
-    objects.remove(object);
+    toRemove.add(object);
   }
 
   /**
