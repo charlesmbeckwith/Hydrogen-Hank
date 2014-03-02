@@ -24,7 +24,7 @@ public class Cloud extends BackgroundElement
   private static Random rand = new Random();
   private boolean WRAP;
 
-  public Cloud(float x, float y, int width, int height)
+  public Cloud(float x, float y, int width, int height, boolean background)
   {
     // TODO: If we want to have particles/clouds in the foreground we should
     // make sure they're bigger and maybe more atmospheric?
@@ -32,8 +32,8 @@ public class Cloud extends BackgroundElement
     // cloud. For now I'm going to take it out, though. As I thought there
     // was a problem with my sorting algorithm :p
 
-    super(x, y, width, height, BackgroundElementType.Cloud,
-        (rand.nextBoolean() ? ObjectLayer.background : ObjectLayer.foreground));
+    super(x, y, width, height, BackgroundElementType.Cloud, (background ? ObjectLayer.background
+        : ObjectLayer.foreground));
 
     init(false);
   }
@@ -58,12 +58,12 @@ public class Cloud extends BackgroundElement
       double offset = rand.nextDouble() / 2;
       if (LAYER == ObjectLayer.foreground)
       {
-        WIDTH *= 1 + offset;
-        HEIGHT *= 1 + offset;
+        WIDTH *= (1 + offset);
+        HEIGHT *= (1 + offset);
       } else
       {
-        WIDTH *= 1 - offset;
-        HEIGHT *= 1 - offset;
+        WIDTH *= (1 - offset);
+        HEIGHT *= (1 - offset);
       }
     }
   }

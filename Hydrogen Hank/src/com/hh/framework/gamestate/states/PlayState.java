@@ -5,10 +5,12 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.util.ArrayList;
+import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.Camera;
 import com.hh.framework.GameObject;
+import com.hh.framework.GameTime;
 import com.hh.framework.Handler;
 import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
@@ -22,7 +24,8 @@ public class PlayState extends GameState
   public static Camera cam;
 
   public Player player;
-  private int start;
+  private int xStart, DX;
+  private final int meter = 30;
 
   public PlayState()
   {
@@ -33,14 +36,19 @@ public class PlayState extends GameState
   public void tick()
   {
     removeOffscreenObjects();
-    if (handler.getObjects().size() < 100)
-    {
-      addBackground(start);
-      start += 75;
-    }
 
     handler.tick();
     cam.tick(player);
+    
+    for (int i = xStart; i < (-cam.getX() + Game.WIDTH); i += 75)
+    {
+      generateGround(xStart);
+      for (float j = 24; j < (24 - Game.HEIGHT); j += meter)
+      {
+        generateCloud(i, (int) j);
+      }
+      xStart += 75;
+    }
   }
 
   public void render(Graphics g)
@@ -64,20 +72,25 @@ public class PlayState extends GameState
   public void restart()
   {
     handler.clearObjects();
+    DX = 0;
 
     player = new Player(100, 100, 64, 64, new Vector2D(0, 50));
     handler.addObject(player);
     cam = new Camera(0, 0);
 
-    start = -175 - Game.WIDTH;
-    for (int i = start; i < start + Game.WIDTH * 2; i += 75)
+    xStart = -175 - Game.WIDTH;
+    for (int i = xStart; i < (xStart + Game.WIDTH * 3); i += 75)
     {
-      addBackground(i);
+      generateGround(i);
+      for (float j = 384 - (meter * 12); j < (-cam.getY() + Game.HEIGHT); j += meter)
+      {
+        generateCloud(i, (int) j);
+      }
     }
 
     handler.addObject(new Bird(-cam.getX(), -cam.getY(), 48, 48, new Vector2D(0, 0)));
 
-    start = start + Game.WIDTH * 2;
+    xStart = xStart + Game.WIDTH * 3;
   }
 
   private void removeOffscreenObjects()
@@ -94,18 +107,23 @@ public class PlayState extends GameState
     }
   }
 
-  private void addBackground(int x)
+  private void generateGround(int x)
   {
-    int cloudYPosition = genCloudYPosition();
-    while (cloudYPosition > 100)
-      cloudYPosition = genCloudYPosition();
-    handler.addObject(new Cloud((int) (x + (Math.random() * 20)), cloudYPosition, 256, 128));
     handler.addObject(new Ground(x, 400, 75, 300));
   }
 
-  private int genCloudYPosition()
+  private void generateCloud(int x, int y)
   {
-    return (int) (-cam.getY() + (Math.random() * 500));
+    Random rand = new Random();
+
+    int cloudY = y - (meter * 12);
+
+    switch (rand.nextInt(4))
+    {
+    case 1:
+      handler.addObject(new Cloud(x, cloudY, 192, 96, true));
+      break;
+    }
   }
 
   public Camera getCamera()

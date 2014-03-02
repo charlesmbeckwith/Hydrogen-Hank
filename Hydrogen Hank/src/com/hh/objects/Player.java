@@ -267,6 +267,8 @@ public class Player extends GameObject {
 				+ balloons.size());
 		String deltaBuoyancy = new String().concat("deltaBuoyancy = "
 				+ (GRAVITY * 2) / balloons.size());
+		String objectCount = new String().concat("Object Count = "
+        + PlayState.handler.getObjects().size());
 		debugOptions.add(BouyancyDebug);
 		debugOptions.add(HydrogenLevelDebug);
 		debugOptions.add(AltitudeDebug);
@@ -275,6 +277,7 @@ public class Player extends GameObject {
 		debugOptions.add(XYOffset);
 		debugOptions.add(BalloonValues);
 		debugOptions.add(deltaBuoyancy);
+		debugOptions.add(objectCount);
 	}
 
 	/**
