@@ -147,7 +147,7 @@ public class Player extends GameObject {
 			}
 
 			// Check for powerup collision
-			if (go != this && go.getID() == ObjectID.Powerup) {
+			if (go != this && go.getID() == ObjectID.Powerup && collided(go)) {
 				// cast go as Powerup
 				Powerup pu = (Powerup) go;
 				switch (pu.getPowerupType()) {
@@ -158,6 +158,10 @@ public class Player extends GameObject {
 				case HydrogenTank:
 					// Add hydrogen to tank
 					HYDROGENLEVEL += 50;
+					break;
+				case HydrogenMolecule:
+					HYDROGENLEVEL+=1;
+					go.Kill();
 					break;
 				}
 			}

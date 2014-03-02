@@ -8,7 +8,7 @@ import java.awt.Graphics;
 import com.hh.objects.Powerup;
 
 /**
- * @author blinginbeckwith
+ * @author Charlie Beckwith
  *
  */
 public class HydrogenTank extends Powerup {

@@ -6,7 +6,6 @@ import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
-import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.BackgroundElement;
 
@@ -15,7 +14,7 @@ import com.hh.objects.BackgroundElement;
  * 
  * Defines the Brick class
  * 
- * @author Mark Schlottke
+ * @author Mark Schlottke, Charlie Beckwith
  */
 public class Cloud extends BackgroundElement
 {

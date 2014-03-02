@@ -5,7 +5,6 @@ import java.awt.image.BufferedImage;
 
 import com.hh.Game;
 import com.hh.framework.*;
-import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.ArtAssets;
 
 /**

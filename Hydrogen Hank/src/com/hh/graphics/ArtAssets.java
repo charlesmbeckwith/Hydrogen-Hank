@@ -20,7 +20,7 @@ import com.hh.graphics.SpriteSheet.spriteID;
  */
 public class ArtAssets
 {
-  public SpriteSheet hydrogenhank_sheet, balloon_sheet, bird_sheet;
+  public SpriteSheet hydrogenhank_sheet, balloon_sheet, bird_sheet, hydrogen_sheet;
   
   public BufferedImage dirt, cloud, pauseScreen;
   public BufferedImage mainTitle, newButton, newButton2, scoresButton, scoresButton2,
@@ -34,6 +34,7 @@ public class ArtAssets
    
     hydrogenhank_sheet = new SpriteSheet(spriteID.HANK, "/hydrogenhank/HydrogenHankSpriteSheet.png");
     balloon_sheet = new SpriteSheet(spriteID.BALLOON, "/hydrogenhank/balloons/balloonvariations.png");
+    hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN, "/graphics/powerups/hydrogen/hydrogenv3.png" );
     bird_sheet = new SpriteSheet(spriteID.BIRD, "/oldgraphics/birdsheet.png");
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     newButton = loadImage("/graphics/mainmenu/newGameButton.png");
@@ -106,6 +107,8 @@ public class ArtAssets
 		  return balloon_sheet.getFrame(frame);
 	  case BIRD:
       return bird_sheet.getFrame(frame);
+	  case HYDROGEN:
+		  return hydrogen_sheet.getFrame(frame);
 	  default:
 		  return null;
 			  

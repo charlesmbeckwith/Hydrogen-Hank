@@ -14,7 +14,7 @@ import com.hh.framework.GameObject;
 public class Powerup extends GameObject {
 
 	public enum PowerupType{
-		BalloonPack, HydrogenTank
+		BalloonPack, HydrogenTank, HydrogenMolecule
 	}
 	protected PowerupType powerupType;
 	/**
@@ -26,8 +26,9 @@ public class Powerup extends GameObject {
 	 * @param layer
 	 */
 	public Powerup(float x, float y, int width, int height, PowerupType powerupType) {
-		super(x, y, width, height, ObjectID.Powerup, ObjectLayer.middleground);
+		super(x, y, width, height, ObjectID.Powerup, ObjectLayer.hud);
 		this.powerupType = powerupType;
+		ALIVE = true;
 	}
 
 	

@@ -43,7 +43,6 @@ public class Bird extends Enemy
   {
     this.X = -PlayState.cam.getX()+400;
     this.Y = -PlayState.cam.getY()+350;
-    
     ANIM.runAnimation();
   }
 
