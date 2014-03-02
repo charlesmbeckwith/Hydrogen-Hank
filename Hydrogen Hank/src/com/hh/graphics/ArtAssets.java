@@ -34,7 +34,7 @@ public class ArtAssets
    
     hydrogenhank_sheet = new SpriteSheet(spriteID.HANK, "/hydrogenhank/HydrogenHankSpriteSheet.png");
     balloon_sheet = new SpriteSheet(spriteID.BALLOON, "/hydrogenhank/balloons/balloonvariations.png");
-    hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN, "/graphics/powerups/hydrogen/hydrogenv3.png" );
+    hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN, "/graphics/powerups/hydrogen/hydrogenv4.png" );
     bird_sheet = new SpriteSheet(spriteID.BIRD, "/oldgraphics/birdsheet.png");
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     newButton = loadImage("/graphics/mainmenu/newGameButton.png");

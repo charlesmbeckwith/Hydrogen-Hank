@@ -28,7 +28,7 @@ public class SpriteSheet {
 
 	private String resourcePath = "";
 	private String resourceSpecPath = "";
-	private int WIDTH, HEIGHT, COLUMNS, ROWS = 1;
+	private double WIDTH, HEIGHT, COLUMNS, ROWS = 1;
 
 	/**
 	 * Initializes the SpriteSheet with the image
@@ -45,11 +45,11 @@ public class SpriteSheet {
 	}
 
 	private void getFrames() {
-		sprites = new BufferedImage[COLUMNS * ROWS];
+		sprites = new BufferedImage[(int) (COLUMNS * ROWS)];
 		int spriteNum = 0;
 		for (int row = 0; row < ROWS; row++) {
 			for (int col = 0; col < COLUMNS; col++) {
-				sprites[spriteNum] = grabImage(col + 1, row + 1, WIDTH, HEIGHT);
+				sprites[spriteNum] = grabImage(col + 1, row + 1, (int) WIDTH, (int) HEIGHT);
 				spriteNum++;
 			}
 		}
@@ -124,11 +124,11 @@ public class SpriteSheet {
 					.getResourceAsStream(resourceSpecPath)));
 
 			for (String line; (line = br.readLine()) != null;) {
-				int specVal = 1;
+				double specVal = 1;
 				if (!line.isEmpty()) {
 					if (line.charAt(0) != '#' && line.charAt(0) != '!') {
 						try {
-							specVal = Integer.parseInt(line.substring(line
+							specVal = Double.parseDouble(line.substring(line
 									.indexOf('=') + 1));
 						} catch (Exception e) {
 							e.printStackTrace();
