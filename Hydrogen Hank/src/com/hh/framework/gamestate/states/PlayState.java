@@ -50,14 +50,6 @@ public class PlayState extends GameState {
 			
 			xStart += 75;
 		}
-		
-		
-		
-		/*for(int i = -(int)cam.getX() + Game.WIDTH; i < ){
-    for (float j = yStart; j > yStart - Game.HEIGHT; j -= meter) {
-      generateCloud(i, (int) j);
-    }
-		}*/
 	}
 
 	public void render(Graphics g) {
@@ -118,7 +110,7 @@ public class PlayState extends GameState {
 	private void generateCloud(int x, int y) {
 		Random rand = new Random();
 		
-		switch (rand.nextInt(10)) {
+		switch (rand.nextInt(30)) {
 		case 4:
 			handler.addObject(new HydrogenMolecule(x + 10, y, 50, 50));
 			handler.addObject(new Cloud(x, y, 192, 96, true));
