@@ -25,12 +25,12 @@ public class TitleMenuAnimState extends GameState
     handler = new Handler();
 
     // Adding Animated Clouds
-    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(0, 0), true));
-    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(0, 0), true));
-    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(0, 0), true));
-    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(0, 0), true));
-    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(0, 0), true));
-    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(0, 0), true)); 
+    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(0, 0), true, true));
+    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(0, 0), true, true));
+    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(0, 0), true, true));
+    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(0, 0), true, true));
+    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(0, 0), true, true));
+    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(0, 0), true, true));
   }
 
   public void tick()
@@ -40,28 +40,33 @@ public class TitleMenuAnimState extends GameState
   public void render(Graphics g)
   {
     g.setColor(new Color(109, 136, 253));
-    g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT); 	
-    
-    for(GameObject go : handler.getObjects()){
-      if(go.getClass() == MenuButton.class){
-        go.setY(position+go.getY());        
+    g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+
+    for (GameObject go : handler.getObjects())
+    {
+      if (go.getClass() == MenuButton.class)
+      {
+        go.setY(position + go.getY());
       }
     }
 
     if (scrollingTitlesRunning)
-    {      
-      int xOffset = Game.WIDTH/2;
-      int yOffset = Game.HEIGHT/3-150;
-      int width = Game.WIDTH/3 - 15;
+    {
+      int xOffset = Game.WIDTH / 2;
+      int yOffset = Game.HEIGHT / 3 - 150;
+      int width = Game.WIDTH / 3 - 15;
       int height = art.newButton.getHeight();
-      g.drawImage(art.mainTitle, Game.WIDTH/2-250, position+yOffset, 500, 300, null);
+      g.drawImage(art.mainTitle, Game.WIDTH / 2 - 250, position + yOffset, 500, 300, null);
       yOffset += 350;
-      g.drawImage(art.newButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
+      g.drawImage(art.newButton, xOffset - width / 2, position + yOffset - height / 2, width,
+          height, null);
       yOffset += 75;
-      g.drawImage(art.scoresButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
+      g.drawImage(art.scoresButton, xOffset - width / 2, position + yOffset - height / 2, width,
+          height, null);
       yOffset += 75;
-      g.drawImage(art.creditsButton, xOffset - width/2, position + yOffset - height/2, width, height, null);
-      
+      g.drawImage(art.creditsButton, xOffset - width / 2, position + yOffset - height / 2, width,
+          height, null);
+
       handler.render(g);
     }
 

@@ -36,12 +36,12 @@ public class TitleMenuState extends GameState
         Game.WIDTH / 3 - 15, art.creditsButton.getHeight(), ButtonID.CREDITS));
 
     // Adding Animated Clouds
-    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(-120, 0), true));
-    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(-100, 0), true));
-    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(-50, 0), true));
-    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(-75, 0), true));
-    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(-85, 0), true));
-    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(-100, 0), true));
+    handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(-120, 0), true, true));
+    handler.addObject(new Cloud(100, 100, 256, 128, new Vector2D(-100, 0), true, true));
+    handler.addObject(new Cloud(450, 225, 256, 128, new Vector2D(-50, 0), true, true));
+    handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(-75, 0), true, true));
+    handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(-85, 0), true, true));
+    handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(-100, 0), true, true));
   }
 
   public void tick()
@@ -58,7 +58,6 @@ public class TitleMenuState extends GameState
       g.drawImage(art.mainTitle, Game.WIDTH / 2 - 250, Game.HEIGHT / 3 - 150, 500, 300, null);
       handler.render(g);
     }
-
 
     //Draw Hank animation
     g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 3), hankFlyingPosition - 12,

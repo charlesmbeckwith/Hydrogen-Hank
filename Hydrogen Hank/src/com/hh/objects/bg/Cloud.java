@@ -37,10 +37,10 @@ public class Cloud extends BackgroundElement
     init(false);
   }
 
-  public Cloud(float x, float y, int width, int height, Vector2D v, boolean wrap)
+  public Cloud(float x, float y, int width, int height, Vector2D v, boolean background, boolean wrap)
   {
-    super(x, y, width, height, v, BackgroundElementType.Cloud,
-        (rand.nextBoolean() ? ObjectLayer.background : ObjectLayer.foreground));
+    super(x, y, width, height, v, BackgroundElementType.Cloud, (background ? ObjectLayer.background
+        : ObjectLayer.foreground));
 
     init(wrap);
   }
