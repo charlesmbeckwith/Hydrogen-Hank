@@ -259,7 +259,7 @@ public class Player extends GameObject {
 		String HydrogenLevelDebug = new String().concat("Hydrogen Level = "
 				+ HYDROGENLEVEL);
 		String AltitudeDebug = new String().concat("Altitude = "
-				+ ((384 - Y) / 30)); // Measured in Meters
+				+ (((400-(HEIGHT/2)) - Y) / 30)); // Measured in Meters
 		String PositionDebug = new String().concat("XPosition: " + (int) X
 				+ " || YPosition: " + (int) Y);
 		String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);

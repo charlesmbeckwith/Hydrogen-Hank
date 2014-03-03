@@ -22,7 +22,8 @@ public class PlayState extends GameState {
 
 	public Player player;
 	@SuppressWarnings("unused")
-	private int xStart, DX;
+	private int xStart, yStart;
+	private int cloudYMin = 300 - (30 * 10);
 	private final int meter = 30;
 
 	public PlayState() {
@@ -35,14 +36,28 @@ public class PlayState extends GameState {
 
 		handler.tick();
 		cam.tick(player);
+		
+		float screenBottom = -cam.getY()+Game.HEIGHT;
+		float screenTop = -cam.getY()-Game.HEIGHT*2;
 
 		for (int i = xStart; i < (-cam.getX() + Game.WIDTH); i += 75) {
 			generateGround(xStart);
-			for (float j = 24; j < (24 - Game.HEIGHT); j += meter) {
-				generateCloud(i, (int) j);
+			
+			for(float j = screenBottom < cloudYMin ? screenBottom : cloudYMin; j > screenTop; j -= meter)
+			{
+			  generateCloud(i, (int) j);
 			}
+			
 			xStart += 75;
 		}
+		
+		
+		
+		/*for(int i = -(int)cam.getX() + Game.WIDTH; i < ){
+    for (float j = yStart; j > yStart - Game.HEIGHT; j -= meter) {
+      generateCloud(i, (int) j);
+    }
+		}*/
 	}
 
 	public void render(Graphics g) {
@@ -64,16 +79,16 @@ public class PlayState extends GameState {
 	 */
 	public void restart() {
 		handler.clearObjects();
-		DX = 0;
-
 		player = new Player(100, 100, 64, 64, new Vector2D(0, 50));
 		handler.addObject(player);
 		cam = new Camera(0, 0);
 
-		xStart = -175 - Game.WIDTH;
+		xStart = (int)cam.getX() - Game.WIDTH;
+		yStart = cloudYMin;
+		
 		for (int i = xStart; i < (xStart + Game.WIDTH * 3); i += 75) {
 			generateGround(i);
-			for (float j = 384 - (meter * 12); j < (-cam.getY() + Game.HEIGHT); j += meter) {
+			for (float j = yStart; j > yStart - Game.HEIGHT; j -= meter) {
 				generateCloud(i, (int) j);
 			}
 		}
@@ -82,6 +97,7 @@ public class PlayState extends GameState {
 				new Vector2D(0, 0)));
 
 		xStart = xStart + Game.WIDTH * 3;
+		yStart = yStart - Game.HEIGHT;
 	}
 
 	private void removeOffscreenObjects() {
@@ -101,13 +117,11 @@ public class PlayState extends GameState {
 
 	private void generateCloud(int x, int y) {
 		Random rand = new Random();
-
-		int cloudY = y - (meter * 12);
-
-		switch (rand.nextInt(4)) {
-		case 1:
-			handler.addObject(new HydrogenMolecule(x + 10, cloudY, 50, 50));
-			handler.addObject(new Cloud(x, cloudY, 192, 96, true));
+		
+		switch (rand.nextInt(10)) {
+		case 4:
+			handler.addObject(new HydrogenMolecule(x + 10, y, 50, 50));
+			handler.addObject(new Cloud(x, y, 192, 96, true));
 			break;
 		}
 	}
