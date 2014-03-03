@@ -21,7 +21,6 @@ public class PlayState extends GameState {
 	public static Camera cam;
 
 	public Player player;
-	@SuppressWarnings("unused")
 	private int xStart, yStart;
 	private int cloudYMin = 300 - (30 * 10);
 	private final int meter = 30;

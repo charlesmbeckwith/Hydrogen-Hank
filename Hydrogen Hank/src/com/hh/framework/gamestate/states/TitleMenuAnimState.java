@@ -10,7 +10,6 @@ import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.MenuButton;
-import com.hh.objects.MenuButton.ButtonID;
 import com.hh.objects.bg.Cloud;
 
 public class TitleMenuAnimState extends GameState

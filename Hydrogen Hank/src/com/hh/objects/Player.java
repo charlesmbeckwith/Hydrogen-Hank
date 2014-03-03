@@ -90,7 +90,7 @@ public class Player extends GameObject {
 			if (BUOYANCY > 0) {
 				BUOYANCY = 0;
 			}
-			if (BUOYANCY < -(GRAVITY * 2)) {
+			if (BUOYANCY < -((GRAVITY * 2) + GRAVITY * balloons.size())) {
 				BUOYANCY = -((GRAVITY * 2) + GRAVITY * balloons.size());
 				// Trying to make buoyancy reflect how many balloons you have.
 				// Aka, the more balloons you have the less quickly you fall to
