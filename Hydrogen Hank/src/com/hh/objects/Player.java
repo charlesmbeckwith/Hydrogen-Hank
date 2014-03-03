@@ -24,7 +24,7 @@ import com.hh.input.KeyInput;
  */
 @SuppressWarnings("unused")
 public class Player extends GameObject {
-	private final float GRAVITY = 200f;
+	private final float GRAVITY = 2f;
 	private int extraBalloons = 50; // How many balloons you start with
 	private final int BALLOONCOST = 10; // How much hydrogen blowing up a
 										// balloon costs.
@@ -63,7 +63,7 @@ public class Player extends GameObject {
 
 			if (KeyInput.KEYSDOWN.contains(KeyBinding.INFLATE.VALUE())) {
 				if (HYDROGENLEVEL > 0 && BUOYANCY > -390 && !balloons.isEmpty()) {
-					BUOYANCY -= 5.1f;
+					BUOYANCY -= 2.1f;
 					HYDROGENLEVEL -= 0.3;
 				} else if (HYDROGENLEVEL < 0) {
 					HYDROGENLEVEL = 0;
@@ -90,18 +90,18 @@ public class Player extends GameObject {
 			if (BUOYANCY > 0) {
 				BUOYANCY = 0;
 			}
-			if (BUOYANCY < -((GRAVITY * 2) + GRAVITY * balloons.size())) {
-				BUOYANCY = -((GRAVITY * 2) + GRAVITY * balloons.size());
+			if (BUOYANCY < -(GRAVITY * 2)) {
+				BUOYANCY = -(GRAVITY * 2);
 				// Trying to make buoyancy reflect how many balloons you have.
 				// Aka, the more balloons you have the less quickly you fall to
 				// the ground
 			}
 
-			if (V.DX < 500 && !collision) {
+			if (V.DX < 150 && !collision) {
 				V.DX += 1;
 			}
 
-			V.DY = BUOYANCY + GRAVITY;
+			V.DY += BUOYANCY + GRAVITY;
 
 			X += V.DX * GameTime.delta();
 			Y += V.DY * GameTime.delta();
@@ -110,7 +110,7 @@ public class Player extends GameObject {
 			CURRENT.runAnimation();
 
 			// Simulate a slow leak in the balloon
-			BUOYANCY += 0.333;
+			BUOYANCY += 0.0111;
 			for (Balloon bloon : balloons) {
 				bloon.tick(X, Y);
 			}
