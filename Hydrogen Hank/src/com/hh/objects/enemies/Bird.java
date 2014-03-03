@@ -7,6 +7,7 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 
 import com.hh.Game;
+import com.hh.framework.GameTime;
 import com.hh.framework.Vector2D;
 import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.Animation;
@@ -41,8 +42,9 @@ public class Bird extends Enemy
   @Override
   public void tick()
   {
-    this.X = -PlayState.cam.getX()+400;
-    this.Y = -PlayState.cam.getY()+350;
+    //this.X = -PlayState.cam.getX()+400;
+    //this.Y = -PlayState.cam.getY()+350;
+    X += V.DX * GameTime.delta();
     ANIM.runAnimation();
   }
 

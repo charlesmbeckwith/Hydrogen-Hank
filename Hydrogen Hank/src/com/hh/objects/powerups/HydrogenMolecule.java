@@ -44,7 +44,7 @@ public class HydrogenMolecule extends Powerup {
 
 	@Override
 	public void render(Graphics g) {
-		g.drawImage(IMG, (int) X, (int) Y, null);
+		g.drawImage(IMG, (int) (X - WIDTH/2), (int) (Y - HEIGHT/2), null);
 
 	}
 

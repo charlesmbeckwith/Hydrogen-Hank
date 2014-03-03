@@ -104,8 +104,6 @@ public class PlayState extends GameState
       }
     }
 
-    handler.addObject(new Bird(-cam.getX(), -cam.getY(), 48, 48, new Vector2D(0, 0)));
-
     xStart = xStart + Game.WIDTH * 3;
     yStart = yStart - Game.HEIGHT;
   }
@@ -133,20 +131,29 @@ public class PlayState extends GameState
   {
     Random rand = new Random();
 
-    switch (rand.nextInt(30))
+    switch (rand.nextInt(100))
     {
+    case 0:
+    case 1:
     case 2:
       handler.addObject(new HydrogenMolecule(x + 10, y, 50, 50));
       handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(-15 * (rand.nextInt(3) + 1), 0),
           true, false));
       break;
     case 3:
+    case 4:
+    case 5:
       handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(-15 * (rand.nextInt(3) + 1), 0),
           true, false));
       break;
+    case 6:
+    case 7:
     case 8:
       handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(-15 * (rand.nextInt(3) + 1), 0),
           false, false));
+      break;
+    case 9:
+      handler.addObject(new Bird(x, y, 48, 48, new Vector2D(-30, 0)));
       break;
     }
   }
