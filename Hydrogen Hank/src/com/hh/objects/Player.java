@@ -67,7 +67,7 @@ public class Player extends GameObject
       {
         if (HYDROGENLEVEL > 0 && BUOYANCY > -390 && !balloons.isEmpty())
         {
-          BUOYANCY -= 0.333f;
+          BUOYANCY -= 0.667f;
           HYDROGENLEVEL -= 0.333;
         } else if (HYDROGENLEVEL < 0)
         {
@@ -92,7 +92,7 @@ public class Player extends GameObject
 
       if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE()))
       {
-        BUOYANCY += 1.1f;
+        BUOYANCY += 1.67f;
       }
 
       if (BUOYANCY > 0)
@@ -126,7 +126,7 @@ public class Player extends GameObject
       CURRENT.runAnimation();
 
       // Simulate a slow leak in the balloon
-      BUOYANCY += 0.0111;
+      BUOYANCY += 0.0111/(balloons.size());
       for (Balloon bloon : balloons)
       {
         bloon.tick(X, Y);
