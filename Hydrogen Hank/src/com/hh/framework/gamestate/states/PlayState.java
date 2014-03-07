@@ -22,8 +22,8 @@ public class PlayState extends GameState
   public static Camera cam;
 
   public Player player;
-  private int xStart, yStart;
-  private int cloudYMin = 300 - (30 * 10);
+  private int xStart, yStartUp, yStartDown;
+  private int cloudYMin = 0;
   private final int meter = 30;
 
   public PlayState()
@@ -41,17 +41,41 @@ public class PlayState extends GameState
     cam.tick(player);
 
     float screenBottom = -cam.getY() + Game.HEIGHT;
-    float screenTop = -cam.getY() - Game.HEIGHT * 2;
-    // TODO: Generate Clouds in the direction of the players Y velocity
-    /*for (float i = -cam.getX() - Game.WIDTH; i < xStart; i += 75)
+    float screenTop = -cam.getY() - Game.HEIGHT;
+    float screenLeft = -cam.getX() - Game.WIDTH;
+    int preYStartUp = yStartUp;
+    int preYStartDown = yStartDown;
+    
+    for (float i = xStart; i > screenLeft; i -= 75)
     {
-      if (player.getVelocity().DY > 0)
+      if (player.getVelocity().DY < 0) // Player Rising
       {
-      } else
+    	  yStartUp = preYStartUp;
+    	  yStartDown = preYStartDown;
+          while (yStartUp > screenTop)
+          {
+            generateCloud((int)i, (int) yStartUp);
+            yStartUp -= meter;
+            
+            if(yStartDown - yStartUp >= Game.HEIGHT*2){
+            	yStartDown -= meter;
+            }
+          }
+      } else if(player.getVelocity().DY > 0) // Player Falling
       {
+    	  yStartUp = preYStartUp;
+    	  yStartDown = preYStartDown;
+    	  while (yStartDown < screenBottom && yStartDown < cloudYMin)
+          {
+            generateCloud((int)i, (int) yStartDown);
+            yStartDown += meter;
+            
+            if(yStartDown - yStartUp >= Game.HEIGHT*2){
+            	yStartUp += meter;
+            }
+          }
       }
-    }*/
-
+    }
     for (int i = xStart; i < (-cam.getX() + Game.WIDTH); i += 75)
     {
       generateGround(xStart);
@@ -91,26 +115,31 @@ public class PlayState extends GameState
     player = new Player(100, 100, 64, 64, new Vector2D(0, 50));
     handler.addObject(player);
     cam = new Camera(0, 0);
+    cam.tick(player);
 
     xStart = (int) cam.getX() - Game.WIDTH;
-    yStart = cloudYMin;
+    float screenTop = -cam.getY() - Game.HEIGHT;
 
     for (int i = xStart; i < (xStart + Game.WIDTH * 3); i += 75)
     {
       generateGround(i);
-      for (float j = yStart; j > yStart - Game.HEIGHT; j -= meter)
+      
+      yStartUp = yStartDown = cloudYMin;
+      while (yStartUp > screenTop)
       {
-        generateCloud(i, (int) j);
+        generateCloud(i, (int) yStartUp);
+        yStartUp -= meter;
       }
     }
 
     xStart = xStart + Game.WIDTH * 3;
-    yStart = yStart - Game.HEIGHT;
   }
 
   private void removeOffscreenObjects()
   {
     int left = (int) (player.getX() - Game.WIDTH);
+    int top = (int) (player.getY() - Game.HEIGHT*2);
+    int bottom = (int) (player.getY() + Game.HEIGHT*2);
 
     for (GameObject go : handler.getObjects())
     {
@@ -118,6 +147,15 @@ public class PlayState extends GameState
       if ((go.getX() + go.getWidth()) < left || !go.isAlive())
       {
         handler.removeObject(go);
+      }
+      
+      if(player.getVelocity().DY > 0 && go.getY() < top) // Player Falling
+      { 
+    	handler.removeObject(go);
+      }
+      else if(player.getVelocity().DY < 0 && go.getY() > bottom) // Player Rising
+      {
+    	handler.removeObject(go);
       }
     }
   }
@@ -130,6 +168,7 @@ public class PlayState extends GameState
   private void generateCloud(int x, int y)
   {
     Random rand = new Random();
+    float xVel = -15 * (rand.nextInt(3) + 1);
 
     switch (rand.nextInt(100))
     {
@@ -137,19 +176,19 @@ public class PlayState extends GameState
     case 1:
     case 2:
       handler.addObject(new HydrogenMolecule(x + 10, y, 50, 50));
-      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(-15 * (rand.nextInt(3) + 1), 0),
+      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0),
           true, false));
       break;
     case 3:
     case 4:
     case 5:
-      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(-15 * (rand.nextInt(3) + 1), 0),
+      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0),
           true, false));
       break;
     case 6:
     case 7:
     case 8:
-      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(-15 * (rand.nextInt(3) + 1), 0),
+      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0),
           false, false));
       break;
     case 9:

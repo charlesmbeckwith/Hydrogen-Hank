@@ -47,14 +47,15 @@ public class Game extends Canvas implements Runnable {
 		playState = new PlayState();
 		manager = new GameStateManager(playState);
 
-		KeyBinding.LOAD_BINDINGS();
+		KeyBinding.LOAD_BINDINGS();		
+		this.addKeyListener(new KeyInput());
+		this.addMouseListener(new MouseInput());
+		
 		playState.restart();
 		manager.push(playState);
 		manager.push(new TitleMenuState());
 		manager.push(new TitleMenuAnimState());
 		manager.push(new IntroAnimation());
-		this.addKeyListener(new KeyInput());
-		this.addMouseListener(new MouseInput());
 	}
 
 	/**
