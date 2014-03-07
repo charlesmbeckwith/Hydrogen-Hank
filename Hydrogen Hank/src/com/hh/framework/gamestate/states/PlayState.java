@@ -34,7 +34,6 @@ public class PlayState extends GameState
 
   public void tick()
   {
-    float origY = player.getY();
     removeOffscreenObjects();
 
     handler.tick();
