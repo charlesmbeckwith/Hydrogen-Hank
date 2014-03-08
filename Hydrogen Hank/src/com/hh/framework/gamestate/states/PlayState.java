@@ -10,6 +10,7 @@ import com.hh.framework.Camera;
 import com.hh.framework.GameObject;
 import com.hh.framework.Handler;
 import com.hh.framework.Vector2D;
+import com.hh.framework.GameObject.ObjectID;
 import com.hh.framework.gamestate.GameState;
 import com.hh.objects.*;
 import com.hh.objects.bg.*;
@@ -152,7 +153,7 @@ public class PlayState extends GameState
       { 
     	handler.removeObject(go);
       }
-      else if(player.getVelocity().DY < 0 && go.getY() > bottom) // Player Rising
+      else if(player.getVelocity().DY < 0 && go.getY() > bottom && go.getID() != ObjectID.Ground) // Player Rising
       {
     	handler.removeObject(go);
       }
