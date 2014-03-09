@@ -336,6 +336,10 @@ public class Player extends GameObject
   {
     return (HYDROGENLEVEL/MAXHYDROGENLEVEL);
   }
+  
+  public int getExtraBalloons(){
+    return extraBalloons;
+  }
 
   private class Balloon
   {

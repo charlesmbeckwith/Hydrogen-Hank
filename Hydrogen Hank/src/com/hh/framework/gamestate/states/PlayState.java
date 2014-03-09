@@ -115,24 +115,32 @@ public class PlayState extends GameState
 
   private void displayHUD(Graphics2D g)
   {
+    int tankStart = 30;
+    int tankEnd = tankStart+139;
+    int balloonsStart = 705;
+    
     g.drawImage(art.hud, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-    g.drawImage(art.emptytank, 15, 15, 140, 30, null);
+    g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
 
     float percent = 70 - 70 * player.getHydrogenLevelPercent();
     for (int i = 70; i >= percent + 1; i--)
     {
-      g.drawImage(art.fulltank_sheet.getFrame(i), 154 - (2 * (70 - i)), 15, 2, 30, null);
+      g.drawImage(art.fulltank_sheet.getFrame(i), tankEnd - (2 * (70 - i)), 15, 2, 30, null);
     }
 
     g.setFont(new Font("Arial", Font.PLAIN, 20));
     g.setColor(Color.black);
     int displayedPercent = (int) (100 * player.getHydrogenLevelPercent());
     if (displayedPercent / 100 >= 1)
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", 60, 36);
+      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart+45, 36);
     else if (displayedPercent / 10 >= 1)
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", 70, 36);
+      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart+55, 36);
     else
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", 75, 36);
+      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart+60, 36);
+    
+    
+    g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20, 30, null);
+    g.drawString(": "+player.getExtraBalloons(), balloonsStart+23, 35);
   }
 
   /**
