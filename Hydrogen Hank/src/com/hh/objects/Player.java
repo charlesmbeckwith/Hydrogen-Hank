@@ -39,6 +39,7 @@ public class Player extends GameObject
   private LinkedList<String> debugOptions;
 
   private float HYDROGENLEVEL;
+  private float MAXHYDROGENLEVEL = 200f;
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
@@ -49,7 +50,7 @@ public class Player extends GameObject
     Random rand = new Random();
     HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
     BUOYANCY = 0.0f;
-    HYDROGENLEVEL = 100f;
+    HYDROGENLEVEL = 200f;
 
     // balloons.add(new Balloon(x, y, width, height));
 
@@ -186,6 +187,10 @@ public class Player extends GameObject
           HYDROGENLEVEL += 1;
           go.Kill();
           break;
+        }
+        
+        if(HYDROGENLEVEL > MAXHYDROGENLEVEL){
+          HYDROGENLEVEL = MAXHYDROGENLEVEL;
         }
       }
     }
@@ -325,6 +330,11 @@ public class Player extends GameObject
     RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0), art.getSpriteFrame(
         spriteID.HANK, 1));
     CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
+  }
+  
+  public float getHydrogenLevelPercent()
+  {
+    return (HYDROGENLEVEL/MAXHYDROGENLEVEL);
   }
 
   private class Balloon

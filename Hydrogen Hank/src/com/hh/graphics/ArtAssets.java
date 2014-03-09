@@ -20,11 +20,11 @@ import com.hh.graphics.SpriteSheet.spriteID;
  */
 public class ArtAssets
 {
-  public SpriteSheet hydrogenhank_sheet, balloon_sheet, bird_sheet, hydrogen_sheet;
+  public SpriteSheet hydrogenhank_sheet, balloon_sheet, bird_sheet, hydrogen_sheet, fulltank_sheet;
   
   public BufferedImage dirt, cloud, pauseScreen;
   public BufferedImage mainTitle, newButton, newButton2, scoresButton, scoresButton2,
-      creditsButton, creditsButton2;
+      creditsButton, creditsButton2, hud, emptytank;
 
   /**
    * Initializes the art assets and loads them
@@ -36,6 +36,7 @@ public class ArtAssets
     balloon_sheet = new SpriteSheet(spriteID.BALLOON, "/hydrogenhank/balloons/balloonvariations.png");
     hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN, "/graphics/powerups/hydrogen/hydrogenv4.png" );
     bird_sheet = new SpriteSheet(spriteID.BIRD, "/oldgraphics/birdsheet.png");
+    
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     newButton = loadImage("/graphics/mainmenu/newGameButton.png");
     scoresButton = loadImage("/graphics/mainmenu/highScoresButton.png");
@@ -43,12 +44,14 @@ public class ArtAssets
     newButton2 = loadImage("/graphics/mainmenu/newGameButton2.png");
     scoresButton2 = loadImage("/graphics/mainmenu/highScoresButton2.png");
     creditsButton2 = loadImage("/graphics/mainmenu/creditsButton2.png");
+    
+    hud = loadImage("/graphics/hud/hud.png");
+    emptytank = loadImage("/graphics/hud/emptytank.png");
+    fulltank_sheet = new SpriteSheet(spriteID.TANK, "/graphics/hud/fulltank.png");
    
     dirt = loadImage("/oldgraphics/dirtblock.png");
     cloud = loadImage("/graphics/bgelements/cloud2.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
-
-   
   }
 
   /**

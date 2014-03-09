@@ -1,0 +1,17 @@
+# This is a sprite sheet for Hydrogen Hank
+#
+# The Syntax for naming the file is, it is the same name as the spritesheet, only .sheet
+# For Example --
+#      HydrogenHankSpriteSheet.png -> HydrogenHankSpriteSheet.sheet
+# Or Simply
+#      xxxx.png -> xxxx.sheet
+#
+# The general syntax is specify the WIDTH and HEIGHT of a single sprite in the sheet
+# then specify the number of sprites in a column
+# and finally number of rows of sprites
+
+
+WIDTH=5
+HEIGHT=64
+COLUMNS=70
+ROWS=1
