@@ -75,7 +75,7 @@ public class PlayState extends GameState
           generateCloud((int) i, (int) yStartUp);
           yStartUp -= meter;
 
-          if (yStartDown - yStartUp >= Game.HEIGHT * 2)
+          if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
           {
             yStartDown -= meter;
           }
@@ -89,7 +89,7 @@ public class PlayState extends GameState
           generateCloud((int) i, (int) yStartDown);
           yStartDown += meter;
 
-          if (yStartDown - yStartUp >= Game.HEIGHT * 2)
+          if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
           {
             yStartUp += meter;
           }
