@@ -127,7 +127,7 @@ public class Player extends GameObject
       CURRENT.runAnimation();
 
       // Simulate a slow leak in the balloon
-      BUOYANCY += 0.0111/(balloons.size());
+      BUOYANCY += 0.0111 / (balloons.size());
       for (Balloon bloon : balloons)
       {
         bloon.tick(X, Y);
@@ -188,8 +188,9 @@ public class Player extends GameObject
           go.Kill();
           break;
         }
-        
-        if(HYDROGENLEVEL > MAXHYDROGENLEVEL){
+
+        if (HYDROGENLEVEL > MAXHYDROGENLEVEL)
+        {
           HYDROGENLEVEL = MAXHYDROGENLEVEL;
         }
       }
@@ -327,17 +328,22 @@ public class Player extends GameObject
   private void initAnimations()
   {
 
-    RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0), art.getSpriteFrame(
-        spriteID.HANK, 1));
-    CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
+    //RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0), art.getSpriteFrame(
+    //    spriteID.HANK, 1));
+    //CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
+
+    RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 0), art.getSpriteFrame(
+        spriteID.HANK2, 1), art.getSpriteFrame(spriteID.HANK2, 1));
+    CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK2, 0));
   }
-  
+
   public float getHydrogenLevelPercent()
   {
-    return (HYDROGENLEVEL/MAXHYDROGENLEVEL);
+    return (HYDROGENLEVEL / MAXHYDROGENLEVEL);
   }
-  
-  public int getExtraBalloons(){
+
+  public int getExtraBalloons()
+  {
     return extraBalloons;
   }
 

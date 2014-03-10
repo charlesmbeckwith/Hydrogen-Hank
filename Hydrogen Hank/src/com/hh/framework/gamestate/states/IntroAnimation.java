@@ -110,7 +110,7 @@ public class IntroAnimation extends GameState
     g.setColor(new Color(109, 136, 253));
     g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
     handler.render(g);
-    g2d.drawImage(art.getSpriteFrame(spriteID.HANK, 0), (int) hankXPosition, (int) hankYPosition,
+    g2d.drawImage(art.getSpriteFrame(spriteID.HANK2, 0), (int) hankXPosition, (int) hankYPosition,
         hankSize, hankSize, null);
     renderText(g2d);
     drawRedTint(g2d);
