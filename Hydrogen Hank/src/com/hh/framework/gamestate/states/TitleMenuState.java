@@ -26,14 +26,14 @@ public class TitleMenuState extends GameState
     // Adding Buttons
     int xOffset = Game.WIDTH / 2;
     int yOffset = Game.HEIGHT / 3 - 150 + 350;
-    handler.addObject(new MenuButton(art.newButton, art.newButton2, xOffset, yOffset,
-        Game.WIDTH / 3 - 15, art.newButton.getHeight(), ButtonID.NEWGAME));
+    handler.addObject(new MenuButton("New Game", xOffset, yOffset, Game.WIDTH / 3 - 15, 64,
+        ButtonID.NEWGAME));
     yOffset += 75;
-    handler.addObject(new MenuButton(art.scoresButton, art.scoresButton2, xOffset, yOffset,
-        Game.WIDTH / 3 - 15, art.scoresButton.getHeight(), ButtonID.HIGHSCORE));
+    handler.addObject(new MenuButton("High Scores", xOffset, yOffset, Game.WIDTH / 3 - 15, 64,
+        ButtonID.HIGHSCORE));
     yOffset += 75;
-    handler.addObject(new MenuButton(art.creditsButton, art.creditsButton2, xOffset, yOffset,
-        Game.WIDTH / 3 - 15, art.creditsButton.getHeight(), ButtonID.CREDITS));
+    handler.addObject(new MenuButton("Credits", xOffset, yOffset, Game.WIDTH / 3 - 15, 64,
+        ButtonID.CREDITS));
 
     // Adding Animated Clouds
     handler.addObject(new Cloud(800, 20, 256, 128, new Vector2D(-120, 0), true, true));
