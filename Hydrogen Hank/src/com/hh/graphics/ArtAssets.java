@@ -21,7 +21,7 @@ import com.hh.graphics.SpriteSheet.spriteID;
 public class ArtAssets
 {
   public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2, balloon_sheet, bird_sheet,
-      hydrogen_sheet, fulltank_sheet;
+      hydrogen_sheet, fulltank_sheet, planes_sheet;
 
   public BufferedImage dirt, cloud, pauseScreen;
   public BufferedImage mainTitle, button, hud, emptytank;
@@ -42,6 +42,7 @@ public class ArtAssets
     hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN,
         "/graphics/powerups/hydrogen/hydrogenv4.png");
     bird_sheet = new SpriteSheet(spriteID.BIRD, "/oldgraphics/birdsheet.png");
+    planes_sheet = new SpriteSheet(spriteID.PLANES, "/graphics/enemies/planes.png");
 
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     button = loadImage("/graphics/mainmenu/button.png");
@@ -117,6 +118,8 @@ public class ArtAssets
       return bird_sheet.getFrame(frame);
     case HYDROGEN:
       return hydrogen_sheet.getFrame(frame);
+    case PLANES:
+    	return planes_sheet.getFrame(frame);
     default:
       return null;
 

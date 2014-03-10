@@ -15,7 +15,7 @@ import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.*;
 import com.hh.objects.bg.*;
-import com.hh.objects.enemies.Bird;
+import com.hh.objects.enemies.*;
 //import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
 
@@ -269,10 +269,15 @@ public class PlayState extends GameState
 	  Random rand = new Random();
 	  float xVel = -15 * (rand.nextInt(3) + 1);
 
-	  switch (rand.nextInt(300))
+	  switch (rand.nextInt(400))
 	  {
 	  case 0:
+	  case 1:
+	  case 2:
 		  handler.addObject(new Bird(x, y, 48, 48, new Vector2D(xVel, 0)));
+		  break;
+	  case 3:
+		  handler.addObject(new Plane(x, y, 250, 128, new Vector2D(xVel*3, 0)));
 	  }
   }
 
