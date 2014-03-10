@@ -347,6 +347,11 @@ public class Player extends GameObject
     return extraBalloons;
   }
 
+  public int getAltitude()
+  {
+    return (int) ((400 - (HEIGHT / 2)) - Y) / 30;
+  }
+
   private class Balloon
   {
     private float X;

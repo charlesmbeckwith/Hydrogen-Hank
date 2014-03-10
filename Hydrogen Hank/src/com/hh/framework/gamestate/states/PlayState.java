@@ -133,6 +133,7 @@ public class PlayState extends GameState
     int tankEnd = tankStart + 139;
     int tankOffset = 0;
     int timerStart = Game.WIDTH / 2 - 50;
+    int altStart = 500;
     int balloonsStart = 705;
 
     if (!Game.isPaused())
@@ -172,6 +173,12 @@ public class PlayState extends GameState
     String formattedDate = new SimpleDateFormat("mm:ss").format(date);
     renderText(g, new Font("Arial", Font.BOLD, 28), formattedDate, 1.25f, Color.black, Color.white,
         timerStart, 37);
+    
+    // Draw the Altitude
+    int altitude = player.getAltitude();
+    String altitudeStr = altitude+"m";
+    renderText(g, new Font("Arial", Font.BOLD, 28), "ALT:" + altitudeStr, 1.25f,
+        Color.black, Color.white, altStart, 37);
 
     // Draw the Extra Balloon Count
     g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20, 30, null);
