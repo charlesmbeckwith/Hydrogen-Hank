@@ -5,9 +5,11 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.font.FontRenderContext;
+import java.awt.font.GlyphVector;
 import java.awt.font.TextLayout;
 import java.awt.geom.AffineTransform;
 import java.text.SimpleDateFormat;
@@ -129,7 +131,8 @@ public class PlayState extends GameState
   {
     int tankStart = 30;
     int tankEnd = tankStart + 139;
-    int timerStart = Game.WIDTH/2 - 50;
+    int tankOffset = 0;
+    int timerStart = Game.WIDTH / 2 - 50;
     int balloonsStart = 705;
 
     if (!Game.isPaused())
@@ -139,10 +142,10 @@ public class PlayState extends GameState
 
     // Draw the HUD Background
     g.drawImage(art.hud, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-    
+
     // Draw the Empty Hydrogen Tank
     g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
-    
+
     // Fill in the Hydrogen Tank with the Hydrogen Levels
     float percent = 70 - 70 * player.getHydrogenLevelPercent();
     for (int i = 70; i >= percent + 1; i--)
@@ -155,48 +158,58 @@ public class PlayState extends GameState
     g.setColor(Color.black);
     int displayedPercent = (int) (100 * player.getHydrogenLevelPercent());
     if (displayedPercent / 100 >= 1)
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart + 45, 36);
+      tankOffset = 45;
     else if (displayedPercent / 10 >= 1)
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart + 55, 36);
+      tankOffset = 55;
     else
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart + 60, 36);
-    
+      tankOffset = 60;
+
+    renderText(g, new Font("Arial", Font.BOLD, 20), (int) (100 * player.getHydrogenLevelPercent())
+        + "%", 0.6f, Color.black, Color.white, tankStart + tankOffset, 36);
+
     // Draw the Play time
-    Date date = new Date((long)(playTime*1000));
+    Date date = new Date((long) (playTime * 1000));
     String formattedDate = new SimpleDateFormat("mm:ss").format(date);
-    renderText(g, new Font("Arial", Font.BOLD, 28), formattedDate, timerStart, 37, Color.black, Color.white);
+    renderText(g, new Font("Arial", Font.BOLD, 28), formattedDate, 1.25f, Color.black, Color.white,
+        timerStart, 37);
 
     // Draw the Extra Balloon Count
     g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20, 30, null);
-    renderText(g, new Font("Arial", Font.BOLD, 28), ":"+player.getExtraBalloons(), balloonsStart + 23, 37, Color.black, Color.white);
+    renderText(g, new Font("Arial", Font.BOLD, 28), ":" + player.getExtraBalloons(), 1.25f,
+        Color.black, Color.white, balloonsStart + 23, 37);
   }
-  
-  private void renderText(Graphics2D g2d, Font font, String line, int x, int y, Color outline, Color textColor)
+
+  private void renderText(Graphics2D g, Font font, String line, float thickness,
+      Color outlineColor, Color textColor, int x, int y)
   {
-    g2d.setFont(font);
+    Shape[] outlines = new Shape[line.length()];
 
-    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+    g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
 
-    FontRenderContext fontRendContext = g2d.getFontRenderContext();
-    if (line.length() > 0)
+    GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(), line);
+
+    // Get the shapes of each letter in the line
+    for (int i = 0; i < line.length(); i++)
     {
-      TextLayout text = new TextLayout(line, font, fontRendContext);
-      Shape shape = text.getOutline(null);
-      AffineTransform affineTransform = new AffineTransform();
-      affineTransform = g2d.getTransform();
-      affineTransform.translate(x, y);
-      Graphics2D g2dd = (Graphics2D) g2d.create();
-      g2dd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-      g2dd.transform(affineTransform);
-      g2dd.setColor(outline);
-      g2dd.setStroke(new BasicStroke(3f));
-      g2dd.draw(shape);
-      g2dd.setClip(shape);
+      outlines[i] = gv.getGlyphOutline(i);
     }
 
-    g2d.setColor(textColor);
-    g2d.setStroke(new BasicStroke(1.0f));
-    g2d.drawString(line, x, y);
+    // Outline the letters with a thickness-pixel wide line
+    g.setStroke(new BasicStroke(thickness));
+
+    // Translate g to the location to draw
+    g.translate(x, y);
+    for (int i = 0; i < outlines.length; i++)
+    {
+      g.setPaint(textColor);
+      g.fill(outlines[i]);
+      g.setPaint(outlineColor);
+      g.draw(outlines[i]);
+    }
+
+    // Translate g back to origianl position
+    g.translate(-x, -y);
   }
 
   /**
