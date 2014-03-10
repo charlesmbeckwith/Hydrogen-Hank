@@ -23,8 +23,7 @@ public class ArtAssets
   public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2, balloon_sheet, bird_sheet, hydrogen_sheet, fulltank_sheet;
   
   public BufferedImage dirt, cloud, pauseScreen;
-  public BufferedImage mainTitle, button, newButton, newButton2, scoresButton, scoresButton2,
-      creditsButton, creditsButton2, hud, emptytank;
+  public BufferedImage mainTitle, button, hud, emptytank;
 
   /**
    * Initializes the art assets and loads them
@@ -40,12 +39,6 @@ public class ArtAssets
     
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     button = loadImage("/graphics/mainmenu/button.png");
-    newButton = loadImage("/graphics/mainmenu/newGameButton.png");
-    scoresButton = loadImage("/graphics/mainmenu/highScoresButton.png");
-    creditsButton = loadImage("/graphics/mainmenu/creditsButton.png");
-    newButton2 = loadImage("/graphics/mainmenu/newGameButton2.png");
-    scoresButton2 = loadImage("/graphics/mainmenu/highScoresButton2.png");
-    creditsButton2 = loadImage("/graphics/mainmenu/creditsButton2.png");
     
     hud = loadImage("/graphics/hud/hud.png");
     emptytank = loadImage("/graphics/hud/emptytank.png");
