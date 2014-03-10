@@ -11,9 +11,8 @@ public class GameStateManager
   private int removeCount = 0;
   private ArrayList<GameState> toAdd = new ArrayList<GameState>();
 
-  public GameStateManager(GameState state)
+  public GameStateManager()
   {
-    STATES.push(state);
   }
 
   public void tick()
@@ -78,15 +77,19 @@ public class GameStateManager
   {
     toAdd.add(state);
   }
+  
+  public void forcePush(GameState state){
+    STATES.push(state);
+  }
 
   public GameState getFirstState()
   {
-    return STATES.getFirst();
+    return STATES.size() > 0 ? STATES.getFirst() : null;
   }
 
   @SuppressWarnings("rawtypes")
   public Class getFirstClass()
   {
-    return STATES.getFirst().getClass();
+    return STATES.size() > 0 ? STATES.getFirst().getClass() : null;
   }
 }

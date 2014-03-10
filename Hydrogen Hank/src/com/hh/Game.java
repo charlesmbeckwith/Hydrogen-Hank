@@ -34,11 +34,11 @@ public class Game extends Canvas implements Runnable
   public Thread thread;
 
   private static BufferStrategy bs;
-
+  
   /**
    * Initializes the game
    */
-  private void init()
+  public void init()
   {
     WIDTH = getWidth();
     HEIGHT = getHeight();
@@ -47,17 +47,17 @@ public class Game extends Canvas implements Runnable
     bs = getBufferStrategy();
     artassets = new ArtAssets();
     playState = new PlayState();
-    manager = new GameStateManager(playState);
+    manager = new GameStateManager();
 
     KeyBinding.LOAD_BINDINGS();
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
 
     playState.restart();
-    manager.push(playState);
-    manager.push(new TitleMenuState());
-    manager.push(new TitleMenuAnimState());
-    manager.push(new IntroAnimation());
+    manager.forcePush(playState);
+    manager.forcePush(new TitleMenuState());
+    manager.forcePush(new TitleMenuAnimState());
+    manager.forcePush(new IntroAnimation());
   }
 
   /**
