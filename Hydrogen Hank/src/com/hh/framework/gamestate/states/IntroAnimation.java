@@ -109,7 +109,7 @@ public class IntroAnimation extends GameState
     g2d.drawImage(art.getSpriteFrame(spriteID.HANK2, 0), (int) hankXPosition, (int) hankYPosition,
         hankSize, hankSize, null);
     renderHelp.outlinedText(g2d, animFont, lineToPrint, 1.25f, Color.white, Color.black, 150, 150);
-    renderHelp.tintedBox(g2d, new Color(168, 5, 5).darker(), 0, Game.HEIGHT / 2 - redBoxHeight, Game.WIDTH, redBoxHeight * 2);
+    renderHelp.tintedBox(g2d, new Color(168, 5, 5).darker(), 0.3f, 0, Game.HEIGHT / 2 - redBoxHeight, Game.WIDTH, redBoxHeight * 2);
   }
 
   /**

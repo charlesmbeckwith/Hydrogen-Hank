@@ -21,10 +21,10 @@ public class RenderHelper
    * @param g
    *            - graphics
    */
-  public void tintedBox(Graphics2D g, Color tint, int posX, int posY, int width, int height)
+  public void tintedBox(Graphics2D g, Color tint, float tintAmt, int posX, int posY, int width, int height)
   {
     g.setColor(tint);
-    g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.3f));
+    g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, tintAmt));
     g.fillRect(posX, posY, width, height);
   }
   
