@@ -61,11 +61,11 @@ public class TitleMenuState extends GameState
 
     //Draw Hank animation
     g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 3), hankFlyingPosition - 12,
-        (int) (Game.HEIGHT - hankFlyingPosition) - 86, 73, 100, null);
+        (int) (Game.HEIGHT - hankFlyingPosition) - 79, 73, 100, null);
     g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 2), hankFlyingPosition + 9,
-        (int) (Game.HEIGHT - hankFlyingPosition) - 90, 73, 100, null);
+        (int) (Game.HEIGHT - hankFlyingPosition) - 83, 73, 100, null);
     g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 1), hankFlyingPosition,
-        (int) (Game.HEIGHT - hankFlyingPosition) - 90, 73, 100, null);
+        (int) (Game.HEIGHT - hankFlyingPosition) - 83, 73, 100, null);
 
     g.drawImage(art.getSpriteFrame(spriteID.HANK2, 0), hankFlyingPosition += 2,
         (int) (Game.HEIGHT - hankFlyingPosition), 150, 150, null);

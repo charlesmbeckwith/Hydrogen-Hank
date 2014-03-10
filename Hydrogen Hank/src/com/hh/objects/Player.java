@@ -387,7 +387,7 @@ public class Player extends GameObject
     public void setOffset(float x, float y)
     {
       X = x - width / 2;
-      Y = (float) (y - height * 1.5);
+      Y = (float) (y - height * 1.4);
     }
   }
 }
