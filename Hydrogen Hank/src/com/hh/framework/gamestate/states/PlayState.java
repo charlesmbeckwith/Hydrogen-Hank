@@ -185,7 +185,7 @@ public class PlayState extends GameState
   public void restart()
   {
     handler.clearObjects();
-    player = new Player(100, 100, 64, 64, new Vector2D(0, 50));
+    player = new Player(100, 380, 64, 64, new Vector2D(0, 50));
     handler.addObject(player);
     cam = new Camera(0, 0);
     cam.tick(player);
