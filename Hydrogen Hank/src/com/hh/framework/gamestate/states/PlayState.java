@@ -87,7 +87,7 @@ public class PlayState extends GameState
         }
       }
     }
-    for (int i = xStart; i < (-cam.getX() + Game.WIDTH); i += 75)
+    for (int i = xStart; i < (-cam.getX() + Game.WIDTH+75); i += 75)
     {
       generateGround(xStart);
 
