@@ -1,14 +1,23 @@
 package com.hh.framework.gamestate.states;
 
+import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.RenderingHints;
+import java.awt.Shape;
+import java.awt.font.FontRenderContext;
+import java.awt.font.TextLayout;
+import java.awt.geom.AffineTransform;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.Camera;
 import com.hh.framework.GameObject;
+import com.hh.framework.GameTime;
 import com.hh.framework.Handler;
 import com.hh.framework.Vector2D;
 import com.hh.framework.GameObject.ObjectID;
@@ -25,6 +34,8 @@ public class PlayState extends GameState
   public static Camera cam;
 
   public Player player;
+
+  private float playTime;
   private int xStart, yStartUp, yStartDown;
   private int cloudYMin = 0;
   private final int meter = 30;
@@ -35,6 +46,7 @@ public class PlayState extends GameState
     handler = new Handler();
     cam = new Camera(0, 0);
     art = Game.getArtAssets();
+    playTime = 0;
   }
 
   public void tick()
@@ -116,31 +128,75 @@ public class PlayState extends GameState
   private void displayHUD(Graphics2D g)
   {
     int tankStart = 30;
-    int tankEnd = tankStart+139;
+    int tankEnd = tankStart + 139;
+    int timerStart = Game.WIDTH/2 - 50;
     int balloonsStart = 705;
-    
-    g.drawImage(art.hud, 0, 0, Game.WIDTH, Game.HEIGHT, null);
-    g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
 
+    if (!Game.isPaused())
+    {
+      playTime += GameTime.delta();
+    }
+
+    // Draw the HUD Background
+    g.drawImage(art.hud, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+    
+    // Draw the Empty Hydrogen Tank
+    g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
+    
+    // Fill in the Hydrogen Tank with the Hydrogen Levels
     float percent = 70 - 70 * player.getHydrogenLevelPercent();
     for (int i = 70; i >= percent + 1; i--)
     {
       g.drawImage(art.fulltank_sheet.getFrame(i), tankEnd - (2 * (70 - i)), 15, 2, 30, null);
     }
 
+    // Write the Percentage of Hydrogen in the Tank
     g.setFont(new Font("Arial", Font.PLAIN, 20));
     g.setColor(Color.black);
     int displayedPercent = (int) (100 * player.getHydrogenLevelPercent());
     if (displayedPercent / 100 >= 1)
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart+45, 36);
+      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart + 45, 36);
     else if (displayedPercent / 10 >= 1)
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart+55, 36);
+      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart + 55, 36);
     else
-      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart+60, 36);
+      g.drawString((int) (100 * player.getHydrogenLevelPercent()) + "%", tankStart + 60, 36);
     
-    
+    // Draw the Play time
+    Date date = new Date((long)(playTime*1000));
+    String formattedDate = new SimpleDateFormat("mm:ss").format(date);
+    renderText(g, new Font("Arial", Font.BOLD, 28), formattedDate, timerStart, 37, Color.black, Color.white);
+
+    // Draw the Extra Balloon Count
     g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20, 30, null);
-    g.drawString(": "+player.getExtraBalloons(), balloonsStart+23, 35);
+    renderText(g, new Font("Arial", Font.BOLD, 28), ":"+player.getExtraBalloons(), balloonsStart + 23, 37, Color.black, Color.white);
+  }
+  
+  private void renderText(Graphics2D g2d, Font font, String line, int x, int y, Color outline, Color textColor)
+  {
+    g2d.setFont(font);
+
+    g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+
+    FontRenderContext fontRendContext = g2d.getFontRenderContext();
+    if (line.length() > 0)
+    {
+      TextLayout text = new TextLayout(line, font, fontRendContext);
+      Shape shape = text.getOutline(null);
+      AffineTransform affineTransform = new AffineTransform();
+      affineTransform = g2d.getTransform();
+      affineTransform.translate(x, y);
+      Graphics2D g2dd = (Graphics2D) g2d.create();
+      g2dd.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+      g2dd.transform(affineTransform);
+      g2dd.setColor(outline);
+      g2dd.setStroke(new BasicStroke(3f));
+      g2dd.draw(shape);
+      g2dd.setClip(shape);
+    }
+
+    g2d.setColor(textColor);
+    g2d.setStroke(new BasicStroke(1.0f));
+    g2d.drawString(line, x, y);
   }
 
   /**
@@ -154,6 +210,7 @@ public class PlayState extends GameState
     handler.addObject(player);
     cam = new Camera(0, 0);
     cam.tick(player);
+    playTime = 0;
 
     xStart = (int) cam.getX() - Game.WIDTH;
     float screenTop = -cam.getY() - Game.HEIGHT;
