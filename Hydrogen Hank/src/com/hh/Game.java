@@ -29,6 +29,7 @@ public class Game extends Canvas implements Runnable
   public static PlayState playState;
   public static int WIDTH, HEIGHT, HEIGHTOFFSET;
   private static ArtAssets artassets;
+  private static ScoreKeeper scorekeeper;
   public static Window window;
   public static boolean debugOn = true;
   public boolean running = false;
@@ -46,6 +47,7 @@ public class Game extends Canvas implements Runnable
     createBufferStrategy(3);
     bs = getBufferStrategy();
     artassets = new ArtAssets();
+    scorekeeper = new ScoreKeeper();
     manager = new GameStateManager();
     
     manager.forcePush(new LoadState());
@@ -128,7 +130,8 @@ public class Game extends Canvas implements Runnable
   {
     if (manager.getFirstClass() == PauseState.class
         || manager.getFirstClass() == TitleMenuAnimState.class
-        || manager.getFirstClass() == IntroAnimation.class)
+        || manager.getFirstClass() == IntroAnimation.class 
+        || manager.getFirstClass() == HighScoresState.class)
     {
       manager.pop();
     } else if (manager.getFirstClass() == PlayState.class)
@@ -160,6 +163,10 @@ public class Game extends Canvas implements Runnable
   public static ArtAssets getArtAssets()
   {
     return artassets;
+  }
+  
+  public static ScoreKeeper getScoreKeeper(){
+	  return scorekeeper;
   }
 
   // TODO: What.

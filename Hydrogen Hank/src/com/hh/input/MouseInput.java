@@ -5,8 +5,7 @@ import java.awt.event.MouseEvent;
 
 import com.hh.Game;
 import com.hh.framework.GameObject;
-import com.hh.framework.gamestate.states.TitleMenuAnimState;
-import com.hh.framework.gamestate.states.TitleMenuState;
+import com.hh.framework.gamestate.states.*;
 import com.hh.objects.MenuButton;
 
 public class MouseInput extends MouseAdapter {
@@ -15,7 +14,9 @@ public class MouseInput extends MouseAdapter {
 	}
 
 	public void mouseReleased(MouseEvent e) {
-		if (Game.manager.getFirstClass() == TitleMenuAnimState.class) {
+		if (Game.manager.getFirstClass() == TitleMenuAnimState.class 
+				|| Game.manager.getFirstClass() == HighScoresState.class
+				|| Game.manager.getFirstClass() == IntroAnimation.class) {
 			Game.manager.pop();
 		}
 		else if(Game.manager.getFirstClass() == TitleMenuState.class) {
@@ -40,8 +41,7 @@ public class MouseInput extends MouseAdapter {
 			Game.manager.pop();
 			break;
 		case HIGHSCORE:
-			System.out.println("Highscore");
-			//Game.manager.STATES.push(new HighScoresState());
+		    Game.manager.push(new HighScoresState());
 			break;
 		case CREDITS:
 			System.out.println("Credits");

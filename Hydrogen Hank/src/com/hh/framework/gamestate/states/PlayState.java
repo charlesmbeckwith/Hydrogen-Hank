@@ -15,6 +15,7 @@ import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.*;
 import com.hh.objects.bg.*;
+import com.hh.objects.enemies.Bird;
 //import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
 
@@ -93,6 +94,7 @@ public class PlayState extends GameState
       for (float j = screenBottom < cloudYMin ? screenBottom : cloudYMin; j > screenTop; j -= meter)
       {
         generateCloud(i, (int) j);
+        generateEnemy(i, (int) j);
       }
 
       xStart += 75;
@@ -122,8 +124,8 @@ public class PlayState extends GameState
     int tankStart = 30;
     int tankEnd = tankStart + 139;
     int tankOffset = 0;
-    int timerStart = Game.WIDTH / 2 - 50;
-    int altStart = 500;
+    int timerStart = 400;
+    int altStart = 525;
     int balloonsStart = 705;
 
     if (!Game.isPaused())
@@ -259,10 +261,19 @@ public class PlayState extends GameState
     case 8:
       handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0), false, false));
       break;
-    case 9:
-      //handler.addObject(new Bird(x, y, 48, 48, new Vector2D(-30, 0)));
-      break;
     }
+  }
+  
+  private void generateEnemy(int x, int y)
+  {
+	  Random rand = new Random();
+	  float xVel = -15 * (rand.nextInt(3) + 1);
+
+	  switch (rand.nextInt(300))
+	  {
+	  case 0:
+		  handler.addObject(new Bird(x, y, 48, 48, new Vector2D(xVel, 0)));
+	  }
   }
 
   public Camera getCamera()
