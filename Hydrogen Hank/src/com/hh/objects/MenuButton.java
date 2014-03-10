@@ -19,7 +19,7 @@ public class MenuButton extends GameObject
   private BufferedImage IMG;
   public boolean SELECTED;
   private ButtonID BUTTONID;
-  private ArtAssets art = new ArtAssets();
+  private ArtAssets art;
   private RenderHelper renderHelp = new RenderHelper();
   private Font font;
   String text = "";
@@ -33,6 +33,7 @@ public class MenuButton extends GameObject
   {
     super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
     ALIVE = true;
+    art = Game.getArtAssets();
     IMG = art.button;
     font = new Font("Arial", Font.BOLD, 32);
     SELECTED = false;

@@ -20,8 +20,9 @@ import com.hh.graphics.SpriteSheet.spriteID;
  */
 public class ArtAssets
 {
-  public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2, balloon_sheet, bird_sheet, hydrogen_sheet, fulltank_sheet;
-  
+  public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2, balloon_sheet, bird_sheet,
+      hydrogen_sheet, fulltank_sheet;
+
   public BufferedImage dirt, cloud, pauseScreen;
   public BufferedImage mainTitle, button, hud, emptytank;
 
@@ -30,20 +31,25 @@ public class ArtAssets
    */
   public ArtAssets()
   {
-   
+  }
+
+  public void load()
+  {
     hydrogenhank_sheet = new SpriteSheet(spriteID.HANK, "/hydrogenhank/HydrogenHankSpriteSheet.png");
     hydrogenhank_sheet2 = new SpriteSheet(spriteID.HANK2, "/hydrogenhank/HydrogenHankSprite.png");
-    balloon_sheet = new SpriteSheet(spriteID.BALLOON, "/hydrogenhank/balloons/balloonvariations.png");
-    hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN, "/graphics/powerups/hydrogen/hydrogenv4.png" );
+    balloon_sheet = new SpriteSheet(spriteID.BALLOON,
+        "/hydrogenhank/balloons/balloonvariations.png");
+    hydrogen_sheet = new SpriteSheet(spriteID.HYDROGEN,
+        "/graphics/powerups/hydrogen/hydrogenv4.png");
     bird_sheet = new SpriteSheet(spriteID.BIRD, "/oldgraphics/birdsheet.png");
-    
+
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     button = loadImage("/graphics/mainmenu/button.png");
-    
+
     hud = loadImage("/graphics/hud/hud.png");
     emptytank = loadImage("/graphics/hud/emptytank.png");
     fulltank_sheet = new SpriteSheet(spriteID.TANK, "/graphics/hud/fulltank.png");
-   
+
     dirt = loadImage("/oldgraphics/dirtblock.png");
     cloud = loadImage("/graphics/bgelements/cloud2.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
@@ -89,7 +95,7 @@ public class ArtAssets
     g.drawImage(image, 0, 0, width, height, null);
     g.dispose();
     return newImage;
-  } 
+  }
 
   /**
    * 
@@ -97,22 +103,24 @@ public class ArtAssets
    * @param frame - frame number in sprite sheet to be grabbed
    * @return BufferedImage - return BufferedImage of sprite sheet called for
    */
-  public BufferedImage getSpriteFrame(spriteID id, int frame){
-	  switch(id){
-	  case HANK:
-		  return hydrogenhank_sheet.getFrame(frame);
-	  case HANK2:
+  public BufferedImage getSpriteFrame(spriteID id, int frame)
+  {
+    switch (id)
+    {
+    case HANK:
+      return hydrogenhank_sheet.getFrame(frame);
+    case HANK2:
       return hydrogenhank_sheet2.getFrame(frame);
-	  case BALLOON:
-		  return balloon_sheet.getFrame(frame);
-	  case BIRD:
+    case BALLOON:
+      return balloon_sheet.getFrame(frame);
+    case BIRD:
       return bird_sheet.getFrame(frame);
-	  case HYDROGEN:
-		  return hydrogen_sheet.getFrame(frame);
-	  default:
-		  return null;
-			  
-	  }
+    case HYDROGEN:
+      return hydrogen_sheet.getFrame(frame);
+    default:
+      return null;
+
+    }
   }
 
 }

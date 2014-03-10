@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
+
 import com.hh.framework.*;
 import com.hh.framework.gamestate.*;
 import com.hh.framework.gamestate.states.*;
@@ -42,22 +43,24 @@ public class Game extends Canvas implements Runnable
   {
     WIDTH = getWidth();
     HEIGHT = getHeight();
-    HEIGHTOFFSET = 50;
     createBufferStrategy(3);
     bs = getBufferStrategy();
     artassets = new ArtAssets();
-    playState = new PlayState();
     manager = new GameStateManager();
-
+    
+    manager.forcePush(new LoadState());
+    render();
+    
+    playState = new PlayState();
     KeyBinding.LOAD_BINDINGS();
     this.addKeyListener(new KeyInput());
     this.addMouseListener(new MouseInput());
 
     playState.restart();
-    manager.forcePush(playState);
-    manager.forcePush(new TitleMenuState());
-    manager.forcePush(new TitleMenuAnimState());
-    manager.forcePush(new IntroAnimation());
+    manager.push(playState);
+    manager.push(new TitleMenuState());
+    manager.push(new TitleMenuAnimState());
+    manager.push(new IntroAnimation());
   }
 
   /**
