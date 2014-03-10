@@ -1,33 +1,21 @@
 package com.hh.framework.gamestate.states;
 
-import java.awt.BasicStroke;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
-import java.awt.RenderingHints;
-import java.awt.Shape;
-import java.awt.font.FontRenderContext;
-import java.awt.font.GlyphVector;
-import java.awt.font.TextLayout;
-import java.awt.geom.AffineTransform;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Random;
 
 import com.hh.Game;
-import com.hh.framework.Camera;
-import com.hh.framework.GameObject;
-import com.hh.framework.GameTime;
-import com.hh.framework.Handler;
-import com.hh.framework.Vector2D;
+import com.hh.framework.*;
 import com.hh.framework.GameObject.ObjectID;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.*;
 import com.hh.objects.bg.*;
-import com.hh.objects.enemies.*;
+//import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
 
 public class PlayState extends GameState
@@ -42,12 +30,14 @@ public class PlayState extends GameState
   private int cloudYMin = 0;
   private final int meter = 30;
   private ArtAssets art;
+  private RenderHelper renderHelp;
 
   public PlayState()
   {
     handler = new Handler();
     cam = new Camera(0, 0);
     art = Game.getArtAssets();
+    renderHelp = new RenderHelper();
     playTime = 0;
   }
 
@@ -165,58 +155,25 @@ public class PlayState extends GameState
     else
       tankOffset = 60;
 
-    renderText(g, new Font("Arial", Font.BOLD, 20), (int) (100 * player.getHydrogenLevelPercent())
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 20), (int) (100 * player.getHydrogenLevelPercent())
         + "%", 0.6f, Color.black, Color.white, tankStart + tankOffset, 36);
 
     // Draw the Play time
     Date date = new Date((long) (playTime * 1000));
     String formattedDate = new SimpleDateFormat("mm:ss").format(date);
-    renderText(g, new Font("Arial", Font.BOLD, 28), formattedDate, 1.25f, Color.black, Color.white,
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), formattedDate, 1.25f, Color.black, Color.white,
         timerStart, 37);
     
     // Draw the Altitude
     int altitude = player.getAltitude();
     String altitudeStr = altitude+"m";
-    renderText(g, new Font("Arial", Font.BOLD, 28), "ALT:" + altitudeStr, 1.25f,
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), "ALT:" + altitudeStr, 1.25f,
         Color.black, Color.white, altStart, 37);
 
     // Draw the Extra Balloon Count
     g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20, 30, null);
-    renderText(g, new Font("Arial", Font.BOLD, 28), ":" + player.getExtraBalloons(), 1.25f,
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), ":" + player.getExtraBalloons(), 1.25f,
         Color.black, Color.white, balloonsStart + 23, 37);
-  }
-
-  private void renderText(Graphics2D g, Font font, String line, float thickness,
-      Color outlineColor, Color textColor, int x, int y)
-  {
-    Shape[] outlines = new Shape[line.length()];
-
-    g.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-    g.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
-
-    GlyphVector gv = font.createGlyphVector(g.getFontRenderContext(), line);
-
-    // Get the shapes of each letter in the line
-    for (int i = 0; i < line.length(); i++)
-    {
-      outlines[i] = gv.getGlyphOutline(i);
-    }
-
-    // Outline the letters with a thickness-pixel wide line
-    g.setStroke(new BasicStroke(thickness));
-
-    // Translate g to the location to draw
-    g.translate(x, y);
-    for (int i = 0; i < outlines.length; i++)
-    {
-      g.setPaint(textColor);
-      g.fill(outlines[i]);
-      g.setPaint(outlineColor);
-      g.draw(outlines[i]);
-    }
-
-    // Translate g back to origianl position
-    g.translate(-x, -y);
   }
 
   /**
