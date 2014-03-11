@@ -5,7 +5,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
-import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
 import java.util.Arrays;
 import java.util.Date;
@@ -13,7 +12,6 @@ import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
-import com.hh.framework.GameObject.ObjectID;
 import com.hh.framework.Handler.RemovalConditions;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
