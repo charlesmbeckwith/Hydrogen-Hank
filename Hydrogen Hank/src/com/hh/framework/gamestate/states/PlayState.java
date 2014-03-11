@@ -173,7 +173,7 @@ public class PlayState extends GameState
 					generateEnemy((int) i, (int) j);
 					yStartUp = (int) j;
 				}
-				xStart += 75;
+				xStart += 74;
 			}
 			else if (player.getVelocity().DY < 0) // Player Rising
 			{
