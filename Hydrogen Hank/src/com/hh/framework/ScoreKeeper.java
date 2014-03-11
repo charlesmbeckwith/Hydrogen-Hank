@@ -15,56 +15,73 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ScoreKeeper {
+public class ScoreKeeper
+{
 	private static String path = "highscores.sav";
 	private List<Score> scores;
 
-	public ScoreKeeper() {
+	public ScoreKeeper()
+	{
 		scores = loadScores();
 	}
 
-	public void addScore(Score score) {
+	public void addScore(Score score)
+	{
 		scores.add(score);
 	}
-	
-	public void removeScore(Score score){
+
+	public void removeScore(Score score)
+	{
 		scores.remove(score);
 	}
-	
-	public List<Score> getScores(){
+
+	public List<Score> getScores()
+	{
 		return scores;
 	}
 
-	public void saveScores() {
-		if(scores == null)
+	public void saveScores()
+	{
+		if (scores == null)
 			scores = new ArrayList<Score>();
-		
+
 		// serialize the List
 		try (OutputStream file = new FileOutputStream(path);
-				OutputStream buffer = new BufferedOutputStream(file);
-				ObjectOutput output = new ObjectOutputStream(buffer);) {
+		    OutputStream buffer = new BufferedOutputStream(file);
+		    ObjectOutput output = new ObjectOutputStream(buffer);)
+		{
 			output.writeObject(scores);
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
 
 	@SuppressWarnings("unchecked")
-	public List<Score> loadScores() {
+	public List<Score> loadScores()
+	{
 		List<Score> scores = new ArrayList<Score>();
 
 		// deserialize the file
 		try (InputStream file = new FileInputStream(path);
-				InputStream buffer = new BufferedInputStream(file);
-				ObjectInput input = new ObjectInputStream(buffer);) {
+		    InputStream buffer = new BufferedInputStream(file);
+		    ObjectInput input = new ObjectInputStream(buffer);)
+		{
 			// deserialize the List
 			scores = (List<Score>) input.readObject();
 
-		} catch (ClassNotFoundException e) {
+		}
+		catch (ClassNotFoundException e)
+		{
 			e.printStackTrace();
-		} catch(FileNotFoundException e){
-			saveScores();		
-		}catch (IOException e) {
+		}
+		catch (FileNotFoundException e)
+		{
+			saveScores();
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 

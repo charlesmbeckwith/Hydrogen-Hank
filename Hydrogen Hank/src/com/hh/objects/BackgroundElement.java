@@ -10,15 +10,18 @@ import com.hh.framework.Vector2D;
 
 /**
  * @author blinginbeckwith
- *
+ * 
  */
-public class BackgroundElement extends GameObject{
+public class BackgroundElement extends GameObject
+{
 
-	public enum BackgroundElementType{
+	public enum BackgroundElementType
+	{
 		Cloud
 	}
-	
+
 	protected BackgroundElementType BgElementType;
+
 	/**
 	 * @param x
 	 * @param y
@@ -27,10 +30,12 @@ public class BackgroundElement extends GameObject{
 	 * @param id
 	 * @param layer
 	 */
-	public BackgroundElement(float x, float y, int width, int height, BackgroundElementType BgElementType, ObjectLayer layer) {
+	public BackgroundElement(float x, float y, int width, int height,
+	    BackgroundElementType BgElementType, ObjectLayer layer)
+	{
 		super(x, y, width, height, ObjectID.BackgroundElement, layer);
 		this.BgElementType = BgElementType;
-		
+
 	}
 
 	/**
@@ -42,22 +47,25 @@ public class BackgroundElement extends GameObject{
 	 * @param cloud
 	 * @param objectLayer
 	 */
-	public BackgroundElement(float x, float y, int width, int height,
-			Vector2D v, BackgroundElementType BgElementType, ObjectLayer layer) {
+	public BackgroundElement(float x, float y, int width, int height, Vector2D v,
+	    BackgroundElementType BgElementType, ObjectLayer layer)
+	{
 		super(x, y, width, height, v, ObjectID.BackgroundElement, layer);
 		this.BgElementType = BgElementType;
 	}
 
 	@Override
-	public void tick() {
+	public void tick()
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g)
+	{
 		// TODO Auto-generated method stub
-		
+
 	}
 
 }

@@ -6,81 +6,81 @@ import com.hh.input.KeyInput;
 
 public class Camera
 {
-  private float x, y;
-  private float xOffset, yOffset;
+	private float x, y;
+	private float xOffset, yOffset;
 
-  public Camera(float x, float y)
-  {
-    this.x = x;
-    this.y = y;
-    this.xOffset = Game.WIDTH / 3;
-    this.yOffset = Game.HEIGHT * 5 / 9;
-  }
+	public Camera(float x, float y)
+	{
+		this.x = x;
+		this.y = y;
+		this.xOffset = Game.WIDTH / 3;
+		this.yOffset = Game.HEIGHT * 5 / 9;
+	}
 
-  public void tick(GameObject go)
-  {
-    if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_LEFT.VALUE()))
-    {
-      panLeft();
-    }
+	public void tick(GameObject go)
+	{
+		if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_LEFT.VALUE()))
+		{
+			panLeft();
+		}
 
-    if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_RIGHT.VALUE()))
-    {
-      panRight();
-    }
+		if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_RIGHT.VALUE()))
+		{
+			panRight();
+		}
 
-    x = -go.getX() + xOffset;
-    y = -go.getY() + yOffset;
+		x = -go.getX() + xOffset;
+		y = -go.getY() + yOffset;
 
-    // Hits left side of screen
-    if (x < (-go.getX() + go.getWidth() / 2))
-    {
-      x = (-go.getX() + go.getWidth() / 2);
-    }
-    // Hits right side of the screen
-    else if (x > ((-go.getX() - go.getWidth()) + Game.WIDTH))
-    {
-      x = ((-go.getX() - go.getWidth()) + Game.WIDTH);
-    }
-  }
+		// Hits left side of screen
+		if (x < (-go.getX() + go.getWidth() / 2))
+		{
+			x = (-go.getX() + go.getWidth() / 2);
+		}
+		// Hits right side of the screen
+		else if (x > ((-go.getX() - go.getWidth()) + Game.WIDTH))
+		{
+			x = ((-go.getX() - go.getWidth()) + Game.WIDTH);
+		}
+	}
 
-  public float getX()
-  {
-    return x;
-  }
+	public float getX()
+	{
+		return x;
+	}
 
-  public float getY()
-  {
-    return y;
-  }
+	public float getY()
+	{
+		return y;
+	}
 
-  public float getXOffset()
-  {
-    return xOffset;
-  }
+	public float getXOffset()
+	{
+		return xOffset;
+	}
 
-  public float getYOffset()
-  {
-    return yOffset;
-  }
+	public float getYOffset()
+	{
+		return yOffset;
+	}
 
-  public void panRight()
-  {
-    xOffset -= 2;
+	public void panRight()
+	{
+		xOffset -= 2;
 
-    if (xOffset < 0)
-    {
-      xOffset = 0;
-    }
-  }
+		if (xOffset < 0)
+		{
+			xOffset = 0;
+		}
+	}
 
-  public void panLeft()
-  {
-    xOffset += 2;
+	public void panLeft()
+	{
+		xOffset += 2;
 
-    if (xOffset > 800)
-    {
-      xOffset = 800;
-    }
-  }
+		if (xOffset > 800)
+		{
+			xOffset = 800;
+		}
+	}
 }

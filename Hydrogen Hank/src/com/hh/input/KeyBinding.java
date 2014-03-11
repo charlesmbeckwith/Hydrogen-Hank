@@ -8,100 +8,138 @@ import java.io.InputStreamReader;
 
 public enum KeyBinding
 {
-  INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), PAN_RIGHT(KeyEvent.VK_A), PAN_LEFT(KeyEvent.VK_D), FANON(
-      KeyEvent.VK_SPACE), PAUSE(KeyEvent.VK_P), RESTART(KeyEvent.VK_R), BLOWUP_BALLOON(KeyEvent.VK_SPACE);
+	INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), PAN_RIGHT(KeyEvent.VK_A), PAN_LEFT(KeyEvent.VK_D), FANON(
+	    KeyEvent.VK_SPACE), PAUSE(KeyEvent.VK_P), RESTART(KeyEvent.VK_R), BLOWUP_BALLOON(
+	    KeyEvent.VK_SPACE);
 
 	private static String controlsPath = "/config/controls.config";
 	private int value;
-	
 
-	private KeyBinding(final int value) {
+	private KeyBinding(final int value)
+	{
 		this.value = value;
 	}
 
-	public void SET(int value) {
+	public void SET(int value)
+	{
 		this.value = value;
 	}
 
-	public int VALUE() {
+	public int VALUE()
+	{
 		return value;
 	}
 
-	public static void LOAD_BINDINGS() {
+	public static void LOAD_BINDINGS()
+	{
 		BufferedReader br;
-		try {
-			br = new BufferedReader(new InputStreamReader(KeyBinding.class
-					.getResourceAsStream(controlsPath)));
-			for (String line; (line = br.readLine()) != null;) {
+		try
+		{
+			br = new BufferedReader(new InputStreamReader(
+			    KeyBinding.class.getResourceAsStream(controlsPath)));
+			for (String line; (line = br.readLine()) != null;)
+			{
 				int newVal = -1;
 
-				if (!line.isEmpty()) {
-					if (line.charAt(0) != '#') {
-						try {
-							newVal = parseKeyCode(line.substring(line
-									.indexOf('=') + 1));
+				if (!line.isEmpty())
+				{
+					if (line.charAt(0) != '#')
+					{
+						try
+						{
+							newVal = parseKeyCode(line.substring(line.indexOf('=') + 1));
 
-						} catch (Exception e) {
+						}
+						catch (Exception e)
+						{
 							e.printStackTrace();
 							break;
 						}
 
-            if (newVal != -1)
-            {
-              if (line.contains("INFLATE_KEY"))
-              {
-                INFLATE.SET(newVal);
-              } else if (line.contains("DEFLATE_KEY"))
-              {
-                DEFLATE.SET(newVal);
-              } else if (line.contains("PAN_RIGHT_KEY"))
-              {
-                PAN_RIGHT.SET(newVal);
-              } else if (line.contains("PAN_LEFT_KEY"))
-              {
-                PAN_LEFT.SET(newVal);
-              } else if (line.contains("FANON_KEY"))
-              {
-                FANON.SET(newVal);
-              } else if (line.contains("PAUSE_KEY"))
-              {
-                PAUSE.SET(newVal);
-              } else if (line.contains("RESTART_KEY"))
-              {
-                RESTART.SET(newVal);
-              }else if (line.contains("BLOWUP_BALLOON")){
-            	  BLOWUP_BALLOON.SET(newVal);
-              }
-            }
-          }
-        }
+						if (newVal != -1)
+						{
+							if (line.contains("INFLATE_KEY"))
+							{
+								INFLATE.SET(newVal);
+							}
+							else if (line.contains("DEFLATE_KEY"))
+							{
+								DEFLATE.SET(newVal);
+							}
+							else if (line.contains("PAN_RIGHT_KEY"))
+							{
+								PAN_RIGHT.SET(newVal);
+							}
+							else if (line.contains("PAN_LEFT_KEY"))
+							{
+								PAN_LEFT.SET(newVal);
+							}
+							else if (line.contains("FANON_KEY"))
+							{
+								FANON.SET(newVal);
+							}
+							else if (line.contains("PAUSE_KEY"))
+							{
+								PAUSE.SET(newVal);
+							}
+							else if (line.contains("RESTART_KEY"))
+							{
+								RESTART.SET(newVal);
+							}
+							else if (line.contains("BLOWUP_BALLOON"))
+							{
+								BLOWUP_BALLOON.SET(newVal);
+							}
+						}
+					}
+				}
 
 			}
 			br.close();
-		} catch (FileNotFoundException e) {
+		}
+		catch (FileNotFoundException e)
+		{
 			e.printStackTrace();
-		} catch (IOException e) {
+		}
+		catch (IOException e)
+		{
 			e.printStackTrace();
 		}
 	}
 
-	private static int parseKeyCode(String keyStr) {
+	private static int parseKeyCode(String keyStr)
+	{
 
-		if (keyStr.length() == 1) {
+		if (keyStr.length() == 1)
+		{
 			return keyStr.charAt(0);
-		} else if (keyStr.equalsIgnoreCase("spacebar")) {
+		}
+		else if (keyStr.equalsIgnoreCase("spacebar"))
+		{
 			return KeyEvent.VK_SPACE;
-		} else if (keyStr.equalsIgnoreCase("up")) {
+		}
+		else if (keyStr.equalsIgnoreCase("up"))
+		{
 			return KeyEvent.VK_UP;
-		} else if (keyStr.equalsIgnoreCase("down")) {
+		}
+		else if (keyStr.equalsIgnoreCase("down"))
+		{
 			return KeyEvent.VK_DOWN;
-		} else if (keyStr.equalsIgnoreCase("left")) {
+		}
+		else if (keyStr.equalsIgnoreCase("left"))
+		{
 			return KeyEvent.VK_LEFT;
-		} else if (keyStr.equalsIgnoreCase("right")) {
+		}
+		else if (keyStr.equalsIgnoreCase("right"))
+		{
 			return KeyEvent.VK_RIGHT;
-		} else if (keyStr.equalsIgnoreCase("enter")) {
+		}
+		else if (keyStr.equalsIgnoreCase("enter"))
+		{
 			return KeyEvent.VK_ENTER;
-		} else {
+		}
+		else
+		{
 			return -1;
 		}
 	}

@@ -9,9 +9,10 @@ import com.hh.objects.Powerup;
 
 /**
  * @author blinginbeckwith
- *
+ * 
  */
-public class BalloonPack extends Powerup {
+public class BalloonPack extends Powerup
+{
 
 	/**
 	 * @param x
@@ -20,22 +21,23 @@ public class BalloonPack extends Powerup {
 	 * @param height
 	 * @param powerupType
 	 */
-	public BalloonPack(float x, float y, int width, int height) {
+	public BalloonPack(float x, float y, int width, int height)
+	{
 		super(x, y, width, height, PowerupType.BalloonPack);
 		// TODO Auto-generated constructor stub
-		
+
 	}
 
-
 	@Override
-	public void tick() {
+	public void tick()
+	{
 		// TODO Auto-generated method stub
 
 	}
 
-
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g)
+	{
 		// TODO Auto-generated method stub
 
 	}

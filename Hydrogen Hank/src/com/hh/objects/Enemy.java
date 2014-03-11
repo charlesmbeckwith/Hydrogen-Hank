@@ -10,15 +10,18 @@ import com.hh.framework.Vector2D;
 
 /**
  * @author blinginbeckwith
- *
+ * 
  */
-public class Enemy extends GameObject {
+public class Enemy extends GameObject
+{
 
-	public enum EnemyType{
+	public enum EnemyType
+	{
 		Bird
 	}
-	
+
 	protected EnemyType enemyType;
+
 	/**
 	 * @param x
 	 * @param y
@@ -26,25 +29,29 @@ public class Enemy extends GameObject {
 	 * @param id
 	 * @param layer
 	 */
-	public Enemy(float x, float y, int width, int height, Vector2D v, EnemyType enemyType) {
+	public Enemy(float x, float y, int width, int height, Vector2D v, EnemyType enemyType)
+	{
 		super(x, y, width, height, v, ObjectID.Enemy, ObjectLayer.middleground);
 		this.enemyType = enemyType;
 	}
 
-	
 	@Override
-	public void tick() {
+	public void tick()
+	{
 		// TODO Auto-generated method stub
 
 	}
 
-	
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g)
+	{
 		// TODO Auto-generated method stub
 
 	}
-	
-	public EnemyType getEnemyType(){return enemyType;}
+
+	public EnemyType getEnemyType()
+	{
+		return enemyType;
+	}
 
 }

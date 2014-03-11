@@ -9,9 +9,10 @@ import com.hh.objects.Powerup;
 
 /**
  * @author Charlie Beckwith
- *
+ * 
  */
-public class HydrogenTank extends Powerup {
+public class HydrogenTank extends Powerup
+{
 
 	/**
 	 * @param x
@@ -20,20 +21,22 @@ public class HydrogenTank extends Powerup {
 	 * @param height
 	 * @param powerupType
 	 */
-	public HydrogenTank(float x, float y, int width, int height) {
+	public HydrogenTank(float x, float y, int width, int height)
+	{
 		super(x, y, width, height, PowerupType.HydrogenTank);
 		// TODO Auto-generated constructor stub
 	}
-	
+
 	@Override
-	public void tick() {
+	public void tick()
+	{
 		// TODO Auto-generated method stub
 
 	}
 
-
 	@Override
-	public void render(Graphics g) {
+	public void render(Graphics g)
+	{
 		// TODO Auto-generated method stub
 
 	}

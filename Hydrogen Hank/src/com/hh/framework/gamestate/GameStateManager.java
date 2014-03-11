@@ -7,89 +7,90 @@ import java.util.ListIterator;
 
 public class GameStateManager
 {
-  private LinkedList<GameState> STATES = new LinkedList<GameState>();
-  private int removeCount = 0;
-  private ArrayList<GameState> toAdd = new ArrayList<GameState>();
+	private LinkedList<GameState> STATES = new LinkedList<GameState>();
+	private int removeCount = 0;
+	private ArrayList<GameState> toAdd = new ArrayList<GameState>();
 
-  public GameStateManager()
-  {
-  }
+	public GameStateManager()
+	{
+	}
 
-  public void tick()
-  {
-    ListIterator<GameState> iter = STATES.listIterator();
+	public void tick()
+	{
+		ListIterator<GameState> iter = STATES.listIterator();
 
-    if (iter.hasNext())
-    {
-      tick(iter, iter.next());
-    }
-  }
+		if (iter.hasNext())
+		{
+			tick(iter, iter.next());
+		}
+	}
 
-  private void tick(ListIterator<GameState> iter, GameState state)
-  {
-    state.tick();
+	private void tick(ListIterator<GameState> iter, GameState state)
+	{
+		state.tick();
 
-    if (iter.hasNext() && !state.BLOCK_TICK)
-    {
-      tick(iter, iter.next());
-    }
-  }
+		if (iter.hasNext() && !state.BLOCK_TICK)
+		{
+			tick(iter, iter.next());
+		}
+	}
 
-  public void render(Graphics g)
-  {
-    ListIterator<GameState> iter = STATES.listIterator();
+	public void render(Graphics g)
+	{
+		ListIterator<GameState> iter = STATES.listIterator();
 
-    if (iter.hasNext())
-    {
-      render(iter, iter.next(), g);
-    }
-  }
+		if (iter.hasNext())
+		{
+			render(iter, iter.next(), g);
+		}
+	}
 
-  private void render(ListIterator<GameState> iter, GameState state, Graphics g)
-  {
-    state.render(g);
+	private void render(ListIterator<GameState> iter, GameState state, Graphics g)
+	{
+		state.render(g);
 
-    if (iter.hasNext() && !state.BLOCK_RENDER)
-    {
-      render(iter, iter.next(), g);
-    }
+		if (iter.hasNext() && !state.BLOCK_RENDER)
+		{
+			render(iter, iter.next(), g);
+		}
 
-    while (removeCount > 0)
-    {
-      STATES.pop();
-      removeCount--;
-    }
+		while (removeCount > 0)
+		{
+			STATES.pop();
+			removeCount--;
+		}
 
-    for (GameState gs : toAdd)
-    {
-      STATES.push(gs);
-    }
+		for (GameState gs : toAdd)
+		{
+			STATES.push(gs);
+		}
 
-    toAdd.clear();
-  }
+		toAdd.clear();
+	}
 
-  public void pop()
-  {
-    removeCount++;
-  }
+	public void pop()
+	{
+		removeCount++;
+	}
 
-  public void push(GameState state)
-  {
-    toAdd.add(state);
-  }
-  
-  public void forcePush(GameState state){
-    STATES.push(state);
-  }
+	public void push(GameState state)
+	{
+		toAdd.add(state);
+	}
 
-  public GameState getFirstState()
-  {
-    return STATES.size() > 0 ? STATES.getFirst() : null;
-  }
+	public void forcePush(GameState state)
+	{
+		STATES.push(state);
+	}
 
-  @SuppressWarnings("rawtypes")
-  public Class getFirstClass()
-  {
-    return STATES.size() > 0 ? STATES.getFirst().getClass() : null;
-  }
+	public GameState getFirstState()
+	{
+		return STATES.size() > 0 ? STATES.getFirst() : null;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Class getFirstClass()
+	{
+		return STATES.size() > 0 ? STATES.getFirst().getClass() : null;
+	}
 }

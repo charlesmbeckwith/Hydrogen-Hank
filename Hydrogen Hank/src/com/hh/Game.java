@@ -16,188 +16,190 @@ import com.hh.input.MouseInput;
 /**
  * COSC3550 Spring 2014 Homework 3
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Create and run
- * the game thread for the 'Dust Bunny Mayhem' game
+ * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Create and run the game thread for
+ * the 'Dust Bunny Mayhem' game
  * 
  * @author Mark Schlottke
  */
 public class Game extends Canvas implements Runnable
 {
-  private static final long serialVersionUID = 5679202415177178318L;
+	private static final long serialVersionUID = 5679202415177178318L;
 
-  public static GameStateManager manager;
-  public static PlayState playState;
-  public static int WIDTH, HEIGHT, HEIGHTOFFSET;
-  private static ArtAssets artassets;
-  private static ScoreKeeper scorekeeper;
-  public static Window window;
-  public static boolean debugOn = true;
-  public boolean running = false;
-  public Thread thread;
+	public static GameStateManager manager;
+	public static PlayState playState;
+	public static int WIDTH, HEIGHT, HEIGHTOFFSET;
+	private static ArtAssets artassets;
+	private static ScoreKeeper scorekeeper;
+	public static Window window;
+	public static boolean debugOn = true;
+	public boolean running = false;
+	public Thread thread;
 
-  private static BufferStrategy bs;
-  
-  /**
-   * Initializes the game
-   */
-  public void init()
-  {
-    WIDTH = getWidth();
-    HEIGHT = getHeight();
-    createBufferStrategy(3);
-    bs = getBufferStrategy();
-    artassets = new ArtAssets();
-    scorekeeper = new ScoreKeeper();
-    manager = new GameStateManager();
-    
-    manager.forcePush(new LoadState());
-    render();
-    
-    playState = new PlayState();
-    KeyBinding.LOAD_BINDINGS();
-    this.addKeyListener(new KeyInput());
-    this.addMouseListener(new MouseInput());
+	private static BufferStrategy bs;
 
-    playState.restart();
-    manager.push(playState);
-    manager.push(new TitleMenuState());
-    manager.push(new TitleMenuAnimState());
-    manager.push(new IntroAnimation());
-  }
+	/**
+	 * Initializes the game
+	 */
+	public void init()
+	{
+		WIDTH = getWidth();
+		HEIGHT = getHeight();
+		createBufferStrategy(3);
+		bs = getBufferStrategy();
+		artassets = new ArtAssets();
+		scorekeeper = new ScoreKeeper();
+		manager = new GameStateManager();
 
-  /**
-   * Starts the game thread
-   */
-  public synchronized void start()
-  {
-    if (!running)
-    {
-      running = true;
-      thread = new Thread(this);
-      thread.start();
-    }
-  }
+		manager.forcePush(new LoadState());
+		render();
 
-  /**
-   * Primary routine for the game
-   */
-  public void run()
-  {
-    init();
-    this.requestFocus();
+		playState = new PlayState();
+		KeyBinding.LOAD_BINDINGS();
+		this.addKeyListener(new KeyInput());
+		this.addMouseListener(new MouseInput());
 
-    GameTime.start();
-    while (running)
-    {
+		playState.restart();
+		manager.push(playState);
+		manager.push(new TitleMenuState());
+		manager.push(new TitleMenuAnimState());
+		manager.push(new IntroAnimation());
+	}
 
-      GameTime.update();
-      tick();
-      render();
+	/**
+	 * Starts the game thread
+	 */
+	public synchronized void start()
+	{
+		if (!running)
+		{
+			running = true;
+			thread = new Thread(this);
+			thread.start();
+		}
+	}
 
-      try
-      {
-        Thread.sleep(10);
-      } catch (InterruptedException e)
-      {
-        e.printStackTrace();
-      }
-    }
-  }
+	/**
+	 * Primary routine for the game
+	 */
+	public void run()
+	{
+		init();
+		this.requestFocus();
 
-  /**
-   * Advances the gameobjects
-   */
-  private void tick()
-  {
-    manager.tick();
-  }
+		GameTime.start();
+		while (running)
+		{
 
-  /**
-   * Renders the graphics for the game
-   */
-  private void render()
-  {
-    Graphics g = bs.getDrawGraphics();
-    manager.render(g);
-    g.dispose();
-    bs.show();
-  }
+			GameTime.update();
+			tick();
+			render();
 
-  /**
-   * Toggles the game between the 'Running' and 'Paused' states
-   */
-  public static void togglePause()
-  {
-    if (manager.getFirstClass() == PauseState.class
-        || manager.getFirstClass() == TitleMenuAnimState.class
-        || manager.getFirstClass() == IntroAnimation.class 
-        || manager.getFirstClass() == HighScoresState.class)
-    {
-      manager.pop();
-    } else if (manager.getFirstClass() == PlayState.class)
-    {
-      manager.push(new PauseState());
-    }
-  }
+			try
+			{
+				Thread.sleep(10);
+			}
+			catch (InterruptedException e)
+			{
+				e.printStackTrace();
+			}
+		}
+	}
 
-  /**
-   * Used to call the restart routine Only callable if the game is in the
-   * 'Paused' state
-   */
-  public static void doRestart()
-  {
-    if (manager.getFirstClass() == PauseState.class)
-    {
-      playState.restart();
-      manager.pop();
-      manager.push(new TitleMenuState());
-      manager.push(new TitleMenuAnimState());
-    }
-  }
+	/**
+	 * Advances the gameobjects
+	 */
+	private void tick()
+	{
+		manager.tick();
+	}
 
-  /**
-   * getArtAssets
-   * 
-   * @return returns instance of ArtAssets
-   */
-  public static ArtAssets getArtAssets()
-  {
-    return artassets;
-  }
-  
-  public static ScoreKeeper getScoreKeeper(){
-	  return scorekeeper;
-  }
+	/**
+	 * Renders the graphics for the game
+	 */
+	private void render()
+	{
+		Graphics g = bs.getDrawGraphics();
+		manager.render(g);
+		g.dispose();
+		bs.show();
+	}
 
-  // TODO: What.
-  public static Point getPosition()
-  {
-    return window.getPosition();
-  }
+	/**
+	 * Toggles the game between the 'Running' and 'Paused' states
+	 */
+	public static void togglePause()
+	{
+		if (manager.getFirstClass() == PauseState.class
+		    || manager.getFirstClass() == TitleMenuAnimState.class
+		    || manager.getFirstClass() == IntroAnimation.class
+		    || manager.getFirstClass() == HighScoresState.class)
+		{
+			manager.pop();
+		}
+		else if (manager.getFirstClass() == PlayState.class)
+		{
+			manager.push(new PauseState());
+		}
+	}
 
-  public static boolean isPaused()
-  {
-    return (manager.getFirstClass() != PlayState.class);
-  }
+	/**
+	 * Used to call the restart routine Only callable if the game is in the 'Paused' state
+	 */
+	public static void doRestart()
+	{
+		if (manager.getFirstClass() == PauseState.class)
+		{
+			playState.restart();
+			manager.pop();
+			manager.push(new TitleMenuState());
+			manager.push(new TitleMenuAnimState());
+		}
+	}
 
-  /**
-   * Debug toggle
-   * 
-   * @return if debug is toggled on or off
-   */
-  public static boolean isDebug()
-  {
-    return debugOn;
-  }
+	/**
+	 * getArtAssets
+	 * 
+	 * @return returns instance of ArtAssets
+	 */
+	public static ArtAssets getArtAssets()
+	{
+		return artassets;
+	}
 
-  /**
-   * Main entry point for the program
-   * 
-   * @param args
-   */
-  public static void main(String args[])
-  {
-    window = new Window(800, 600, "Hydrogen Hank", new Game());
-  }
+	public static ScoreKeeper getScoreKeeper()
+	{
+		return scorekeeper;
+	}
+
+	// TODO: What.
+	public static Point getPosition()
+	{
+		return window.getPosition();
+	}
+
+	public static boolean isPaused()
+	{
+		return (manager.getFirstClass() != PlayState.class);
+	}
+
+	/**
+	 * Debug toggle
+	 * 
+	 * @return if debug is toggled on or off
+	 */
+	public static boolean isDebug()
+	{
+		return debugOn;
+	}
+
+	/**
+	 * Main entry point for the program
+	 * 
+	 * @param args
+	 */
+	public static void main(String args[])
+	{
+		window = new Window(800, 600, "Hydrogen Hank", new Game());
+	}
 
 }
