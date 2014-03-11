@@ -4,13 +4,17 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
+import java.lang.reflect.Array;
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
 import com.hh.framework.GameObject.ObjectID;
+import com.hh.framework.Handler.RemovalConditions;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.*;
@@ -27,6 +31,7 @@ public class PlayState extends GameState
 	public Player player;
 
 	private float playTime;
+	private boolean genGround = false;
 	private int xStart, yStartUp, yStartDown;
 	private int cloudYMin = 0;
 	private final int meter = 30;
@@ -36,6 +41,8 @@ public class PlayState extends GameState
 	public PlayState()
 	{
 		handler = new Handler();
+		handler.setRemovalConditions(Arrays.asList(RemovalConditions.OffscreenLeft,
+		    RemovalConditions.OffscreenTop, RemovalConditions.OffscreenBottom, RemovalConditions.Dead));
 		cam = new Camera(0, 0);
 		art = Game.getArtAssets();
 		renderHelp = new RenderHelper();
@@ -44,62 +51,9 @@ public class PlayState extends GameState
 
 	public void tick()
 	{
-		removeOffscreenObjects();
-
 		handler.tick();
 		cam.tick(player);
-
-		float screenBottom = -cam.getY() + Game.HEIGHT;
-		float screenTop = -cam.getY() - Game.HEIGHT;
-		float screenLeft = -cam.getX() - Game.WIDTH;
-		int preYStartUp = yStartUp;
-		int preYStartDown = yStartDown;
-
-		for (float i = xStart; i > screenLeft; i -= 75)
-		{
-			if (player.getVelocity().DY < 0) // Player Rising
-			{
-				yStartUp = preYStartUp;
-				yStartDown = preYStartDown;
-				while (yStartUp > screenTop)
-				{
-					generateCloud((int) i, (int) yStartUp);
-					yStartUp -= meter;
-
-					if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
-					{
-						yStartDown -= meter;
-					}
-				}
-			}
-			else if (player.getVelocity().DY > 0) // Player Falling
-			{
-				yStartUp = preYStartUp;
-				yStartDown = preYStartDown;
-				while (yStartDown < screenBottom && yStartDown < cloudYMin)
-				{
-					generateCloud((int) i, (int) yStartDown);
-					yStartDown += meter;
-
-					if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
-					{
-						yStartUp += meter;
-					}
-				}
-			}
-		}
-		for (int i = xStart; i < (-cam.getX() + Game.WIDTH + 75); i += 75)
-		{
-			generateGround(xStart);
-
-			for (float j = screenBottom < cloudYMin ? screenBottom : cloudYMin; j > screenTop; j -= meter)
-			{
-				generateCloud(i, (int) j);
-				generateEnemy(i, (int) j);
-			}
-
-			xStart += 75;
-		}
+		generateScene();
 	}
 
 	public void render(Graphics g)
@@ -189,47 +143,78 @@ public class PlayState extends GameState
 		cam = new Camera(0, 0);
 		cam.tick(player);
 		playTime = 0;
-
 		xStart = (int) cam.getX() - Game.WIDTH;
-		float screenTop = -cam.getY() - Game.HEIGHT;
-
-		for (int i = xStart; i < (xStart + Game.WIDTH * 3); i += 75)
-		{
-			generateGround(i);
-
-			yStartUp = yStartDown = cloudYMin;
-			while (yStartUp > screenTop)
-			{
-				generateCloud(i, (int) yStartUp);
-				yStartUp -= meter;
-			}
-		}
-
-		xStart = xStart + Game.WIDTH * 3;
+		yStartDown = cloudYMin;
+		generateScene();
 	}
 
-	private void removeOffscreenObjects()
+	private void generateScene()
 	{
-		int left = (int) (player.getX() - Game.WIDTH);
-		int top = (int) (player.getY() - Game.HEIGHT * 2);
-		int bottom = (int) (player.getY() + Game.HEIGHT * 2);
+		int offset = 75;
+		Rectangle sceneWindow = new Rectangle((int) (player.getX() - Game.WIDTH - offset),
+		    (int) (player.getY() - Game.HEIGHT - offset), (int) (offset + Game.WIDTH) * 2,
+		    (int) (offset + Game.HEIGHT) * 2);
+		handler.setSceneWindow(sceneWindow);
+		int preYStartUp = yStartUp;
+		int preYStartDown = yStartDown;
 
-		for (GameObject go : handler.getObjects())
+		for (float i = sceneWindow.x; i < sceneWindow.x + sceneWindow.width; i += 75)
 		{
-			// Remove objects outside of the scene
-			if ((go.getX() + go.getWidth()) < left || !go.isAlive())
-			{
-				handler.removeObject(go);
-			}
+			yStartUp = preYStartUp;
+			yStartDown = preYStartDown;
 
-			if (player.getVelocity().DY > 0 && go.getY() < top) // Player Falling
+			if (i > xStart)
 			{
-				handler.removeObject(go);
+				generateGround((int) i);
+				for (float j = (sceneWindow.y + sceneWindow.height) < cloudYMin ? (sceneWindow.y + sceneWindow.height)
+				    : cloudYMin; j > sceneWindow.y; j -= meter)
+				{
+					generateCloud((int) i, (int) j);
+					generateEnemy((int) i, (int) j);
+					yStartUp = (int) j;
+				}
+				xStart += 75;
 			}
-			else if (player.getVelocity().DY < 0 && go.getY() > bottom && go.getID() != ObjectID.Ground) // Player
-																																																	 // Rising
+			else if (player.getVelocity().DY < 0) // Player Rising
 			{
-				handler.removeObject(go);
+				if (player.getY() < 400 - Game.HEIGHT)
+				{
+					genGround = true;
+				}
+
+				while (yStartUp > sceneWindow.y)
+				{
+					generateCloud((int) i, (int) yStartUp);
+					yStartUp -= meter;
+
+					if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
+					{
+						yStartDown -= meter;
+					}
+				}
+			}
+			else if (player.getVelocity().DY > 0) // Player Falling
+			{
+				if (genGround && player.getY() > 400 - Game.HEIGHT)
+				{
+					if ((i + 75) >= (sceneWindow.x + sceneWindow.width))
+					{
+						genGround = false;
+					}
+
+					generateGround((int) i);
+				}
+
+				while (yStartDown < (sceneWindow.y + sceneWindow.height) && yStartDown < cloudYMin)
+				{
+					generateCloud((int) i, (int) yStartDown);
+					yStartDown += meter;
+
+					if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
+					{
+						yStartUp += meter;
+					}
+				}
 			}
 		}
 	}

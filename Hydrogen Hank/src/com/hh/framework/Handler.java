@@ -1,8 +1,10 @@
 package com.hh.framework;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.util.LinkedList;
 import java.util.ArrayList;
+import java.util.List;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -14,9 +16,15 @@ import java.util.ArrayList;
  */
 public class Handler
 {
+	public enum RemovalConditions
+	{
+		OffscreenLeft, OffscreenRight, OffscreenTop, OffscreenBottom, Dead
+	}
+
+	private Rectangle sceneWindow;
+	private List<RemovalConditions> conditions;
 	private LinkedGameObjects objects = new LinkedGameObjects();
 	private ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
-
 	private GameObject tempObj;
 
 	/**
@@ -28,6 +36,24 @@ public class Handler
 		{
 			tempObj = objects.get(i);
 			tempObj.tick();
+			if (sceneWindow != null && conditions != null)
+			{
+				float x = tempObj.X;
+				float y = tempObj.Y;
+				float xOffset = tempObj.WIDTH / 2;
+				float yOffset = tempObj.HEIGHT / 2;
+
+				if ((conditions.contains(RemovalConditions.Dead) && !tempObj.isAlive())
+				    || (conditions.contains(RemovalConditions.OffscreenLeft) && x + xOffset < sceneWindow.x)
+				    || (conditions.contains(RemovalConditions.OffscreenRight) && x - xOffset > sceneWindow.x
+				        + sceneWindow.width)
+				    || (conditions.contains(RemovalConditions.OffscreenTop) && y + yOffset < sceneWindow.y)
+				    || (conditions.contains(RemovalConditions.OffscreenBottom) && y - yOffset > sceneWindow.y
+				        + sceneWindow.height))
+				{
+					toRemove.add(tempObj);
+				}
+			}
 		}
 	}
 
@@ -45,9 +71,7 @@ public class Handler
 
 		for (GameObject go : toRemove)
 		{
-
 			objects.remove(go);
-
 		}
 		toRemove.clear();
 	}
@@ -104,5 +128,15 @@ public class Handler
 	public LinkedList<GameObject> getObjects()
 	{
 		return objects;
+	}
+
+	public void setSceneWindow(Rectangle sceneWindow)
+	{
+		this.sceneWindow = sceneWindow;
+	}
+
+	public void setRemovalConditions(List<RemovalConditions> conditions)
+	{
+		this.conditions = conditions;
 	}
 }
