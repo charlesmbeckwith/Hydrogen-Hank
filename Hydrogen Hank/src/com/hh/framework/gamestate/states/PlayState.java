@@ -100,8 +100,6 @@ public class PlayState extends GameState
 
 			xStart += 75;
 		}
-
-		// TODO: Generate the Enemies
 	}
 
 	public void render(Graphics g)
@@ -129,7 +127,7 @@ public class PlayState extends GameState
 		int altStart = 525;
 		int balloonsStart = 705;
 
-		if (!Game.isPaused())
+		if (!Game.isPaused() && player.getAltitude() >= 10)
 		{
 			playTime += GameTime.delta();
 		}
