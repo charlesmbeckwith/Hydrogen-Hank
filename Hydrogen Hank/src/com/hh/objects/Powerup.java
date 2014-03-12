@@ -31,7 +31,7 @@ public class Powerup extends GameObject
 	 */
 	public Powerup(float x, float y, int width, int height, PowerupType powerupType)
 	{
-		super(x, y, width, height, ObjectID.Powerup, ObjectLayer.hud);
+		super(x, y, width, height, ObjectID.Powerup, ObjectLayer.middleground);
 		this.powerupType = powerupType;
 		ALIVE = true;
 	}

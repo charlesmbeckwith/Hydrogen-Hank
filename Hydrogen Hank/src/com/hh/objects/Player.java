@@ -42,7 +42,7 @@ public class Player extends GameObject
 
 	public Player(float x, float y, int width, int height, Vector2D v)
 	{
-		super(x, y, width - 30, height, v, ObjectID.Player, ObjectLayer.foreground);
+		super(x, y, width - 30, height, v, ObjectID.Player, ObjectLayer.middleground);
 		startx = x;
 		starty = y;
 		ALIVE = true;

@@ -20,7 +20,6 @@ public abstract class GameObject
 	public enum ObjectLayer
 	{
 		background, middleground, foreground, hud, toplevel
-
 	}
 
 	protected float X, Y;

@@ -21,7 +21,7 @@ public class Ground extends GameObject
 
 	public Ground(float x, float y, int width, int height)
 	{
-		super(x, y, width, height, ObjectID.Ground, ObjectLayer.middleground);
+		super(x, y, width, height, ObjectID.Ground, ObjectLayer.background);
 		IMG = art.dirt;
 		ALIVE = true;
 	}
