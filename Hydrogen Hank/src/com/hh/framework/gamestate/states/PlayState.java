@@ -136,7 +136,7 @@ public class PlayState extends GameState
 	public void restart()
 	{
 		handler.clearObjects();
-		player = new Player(100, 380, 64, 64, new Vector2D(0, 50));
+		player = new Player(100, 380, 55, 64, new Vector2D(0, 50));
 		handler.addObject(player);
 		cam = new Camera(0, 0);
 		cam.tick(player);
@@ -232,7 +232,7 @@ public class PlayState extends GameState
 		case 0:
 		case 1:
 		case 2:
-			handler.addObject(new HydrogenMolecule(x + 10, y, 50, 50));
+			handler.addObject(new HydrogenMolecule(x + 10, y, 25, 25));
 			handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0), true, false));
 			break;
 		case 3:

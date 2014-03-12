@@ -13,6 +13,7 @@ import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.input.KeyBinding;
 import com.hh.input.KeyInput;
+import com.hh.objects.bg.Ground;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -42,7 +43,7 @@ public class Player extends GameObject
 
 	public Player(float x, float y, int width, int height, Vector2D v)
 	{
-		super(x, y, width - 30, height, v, ObjectID.Player, ObjectLayer.middleground);
+		super(x, y, width, height, v, ObjectID.Player, ObjectLayer.middleground);
 		startx = x;
 		starty = y;
 		ALIVE = true;
@@ -57,6 +58,7 @@ public class Player extends GameObject
 		initAnimations();
 	}
 
+	@Override
 	public void tick()
 	{
 		if (ALIVE)
@@ -157,7 +159,7 @@ public class Player extends GameObject
 			}
 
 			// check for ground collision
-			if (go != this && go.getID() == ObjectID.Ground && (Y + (HEIGHT / 2) - 14) >= go.getY()
+			if (go != this && go.getClass() == Ground.class && (Y + (HEIGHT / 2) - 14) >= go.getY()
 			    && X > go.getX() && X < go.getX() + go.getWidth())
 			{
 				col = true;
@@ -202,48 +204,10 @@ public class Player extends GameObject
 
 	public boolean collided(GameObject go)
 	{
-		// TODO: Implement a better collision detection algorithm instead of
-		// just rectangle-rectangle collision
-		boolean collided = false;
-		boolean leftin = false, rightin = false, topin = false, bottomin = false;
-
-		float goLeft = go.getX() - go.getWidth() / 2;
-		float goRight = go.getX() + go.getWidth() / 2;
-		float goTop = go.getY() - go.getHeight() / 2;
-		float goBottom = go.getY() + go.getHeight() / 2;
-		float left = X - WIDTH / 2;
-		float right = X + WIDTH / 2;
-		float top = Y - HEIGHT / 2;
-		float bottom = Y + HEIGHT / 2;
-
-		if (right > goLeft && right < goRight)
-		{
-			rightin = true;
-		}
-
-		if (left < goRight && left > goLeft)
-		{
-			leftin = true;
-		}
-
-		if (top < goBottom && top > goTop)
-		{
-			topin = true;
-		}
-
-		if (bottom > goTop && bottom < goBottom)
-		{
-			bottomin = true;
-		}
-
-		if ((rightin || leftin) && (topin || bottomin))
-		{
-			collided = true;
-		}
-
-		return collided;
+		return this.boundingBox().intersects(go.boundingBox());
 	}
 
+	@Override
 	public void render(Graphics g)
 	{
 		if (ALIVE)
@@ -252,15 +216,25 @@ public class Player extends GameObject
 
 			// BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
 			// WIDTH, HEIGHT, HUE);
-			if (Game.isDebug())
+			if (Game.debugOptions().contains("Info"))
+			{
+				g2d.setColor(Color.black);
+				g2d.draw(this.boundingBox());
 				debugOptions(g2d);
+			}
 			for (Balloon bloons : balloons)
 			{
 				bloons.render(g2d);
 			}
 			g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
-			    WIDTH + HEIGHT / 3, HEIGHT, null);
+			    WIDTH, HEIGHT, null);
 		}
+	}
+
+	@Override
+	public Rectangle boundingBox()
+	{
+		return new Rectangle((int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT);
 	}
 
 	private void debugOptions(Graphics2D g2d)
@@ -302,8 +276,8 @@ public class Player extends GameObject
 		String BouyancyDebug = new String().concat("Bouyancy = " + (int) BUOYANCY);
 		String HydrogenLevelDebug = new String().concat("Hydrogen Level = " + HYDROGENLEVEL);
 		String AltitudeDebug = new String().concat("Altitude = " + (((400 - (HEIGHT / 2)) - Y) / 30)); // Measured
-																																																	 // in
-																																																	 // Meters
+		                                                                                               // in
+		                                                                                               // Meters
 		String PositionDebug = new String().concat("XPosition: " + (int) X + " || YPosition: "
 		    + (int) Y);
 		String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);

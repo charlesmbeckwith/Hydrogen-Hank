@@ -1,6 +1,7 @@
 package com.hh.objects.powerups;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -45,8 +46,14 @@ public class HydrogenMolecule extends Powerup
 	@Override
 	public void render(Graphics g)
 	{
-		g.drawImage(IMG, (int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), null);
-
+		g.drawImage(IMG, (int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT,null);
+		
+		super.render(g);
+	}
+	
+	@Override
+	public Rectangle boundingBox(){
+		return super.boundingBox();
 	}
 
 }

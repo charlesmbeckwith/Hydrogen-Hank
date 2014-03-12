@@ -1,6 +1,7 @@
 package com.hh.framework;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 /**
  * COSC3550 Spring 2014 Homework 3
@@ -153,6 +154,12 @@ public abstract class GameObject
 	 *          - Graphics object to draw with
 	 */
 	public abstract void render(Graphics g);
+	
+	/**
+	 * Gets the object's bounding box
+	 * @return
+	 */
+	public abstract Rectangle boundingBox();
 
 	/**
 	 * Gets the current X position of the gameobject

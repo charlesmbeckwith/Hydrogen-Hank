@@ -41,6 +41,7 @@ public class MenuButton extends GameObject
 		this.text = text;
 	}
 
+	@Override
 	public void tick()
 	{
 		Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
@@ -59,6 +60,7 @@ public class MenuButton extends GameObject
 		}
 	}
 
+	@Override
 	public void render(Graphics g)
 	{
 		if (ALIVE)
@@ -79,6 +81,11 @@ public class MenuButton extends GameObject
 				renderHelp.outlinedText(g2d, font, text, 1.25f, Color.black, Color.red, textX, textY);
 			}
 		}
+	}
+	
+	@Override
+	public Rectangle boundingBox(){
+		return new Rectangle((int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT);
 	}
 
 	public int getWidth()

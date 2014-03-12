@@ -3,8 +3,12 @@
  */
 package com.hh.objects;
 
+import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.Rectangle;
 
+import com.hh.Game;
 import com.hh.framework.GameObject;
 import com.hh.framework.Vector2D;
 
@@ -17,7 +21,8 @@ public class BackgroundElement extends GameObject
 
 	public enum BackgroundElementType
 	{
-		Cloud
+		Cloud,
+		Ground
 	}
 
 	protected BackgroundElementType BgElementType;
@@ -65,7 +70,17 @@ public class BackgroundElement extends GameObject
 	public void render(Graphics g)
 	{
 		// TODO Auto-generated method stub
-
+		Graphics2D g2d = (Graphics2D) g;
+		if (Game.debugOptions().contains("bg"))
+		{
+			g2d.setColor(Color.black);
+			g2d.draw(this.boundingBox());
+		}
+	}
+	
+	@Override
+	public Rectangle boundingBox(){
+		return new Rectangle((int) (X), (int) (Y), WIDTH, HEIGHT);
 	}
 
 }

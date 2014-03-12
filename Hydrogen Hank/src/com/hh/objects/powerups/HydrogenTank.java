@@ -4,6 +4,7 @@
 package com.hh.objects.powerups;
 
 import java.awt.Graphics;
+import java.awt.Rectangle;
 
 import com.hh.objects.Powerup;
 
@@ -38,7 +39,12 @@ public class HydrogenTank extends Powerup
 	public void render(Graphics g)
 	{
 		// TODO Auto-generated method stub
-
+		super.render(g);
+	}
+	
+	@Override
+	public Rectangle boundingBox(){
+		return super.boundingBox();
 	}
 
 }

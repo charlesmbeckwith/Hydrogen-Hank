@@ -68,6 +68,7 @@ public class Cloud extends BackgroundElement
 		}
 	}
 
+	@Override
 	public void tick()
 	{
 		X += V.DX * GameTime.delta();
@@ -78,6 +79,7 @@ public class Cloud extends BackgroundElement
 		}
 	}
 
+	@Override
 	public void render(Graphics g)
 	{
 		if (ALIVE)
@@ -85,8 +87,14 @@ public class Cloud extends BackgroundElement
 			Graphics2D g2d = (Graphics2D) g.create();
 			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
 			g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
-
 		}
+		
+		super.render(g);
+	}
+	
+	@Override
+	public Rectangle boundingBox(){
+		return super.boundingBox();
 	}
 
 	public int getWidth()

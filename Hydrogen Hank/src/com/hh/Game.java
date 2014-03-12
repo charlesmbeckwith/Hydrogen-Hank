@@ -4,6 +4,7 @@ import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
+import java.util.List;
 
 import com.hh.framework.*;
 import com.hh.framework.gamestate.*;
@@ -31,7 +32,7 @@ public class Game extends Canvas implements Runnable
 	private static ArtAssets artassets;
 	private static ScoreKeeper scorekeeper;
 	public static Window window;
-	public static boolean debugOn = true;
+	public static List<String> debugOptions;
 	public boolean running = false;
 	public Thread thread;
 
@@ -187,19 +188,8 @@ public class Game extends Canvas implements Runnable
 	 * 
 	 * @return if debug is toggled on or off
 	 */
-	public static boolean isDebug()
+	public static List<String> debugOptions()
 	{
-		return debugOn;
+		return debugOptions;
 	}
-
-	/**
-	 * Main entry point for the program
-	 * 
-	 * @param args
-	 */
-	public static void main(String args[])
-	{
-		window = new Window(800, 600, "Hydrogen Hank", new Game());
-	}
-
 }

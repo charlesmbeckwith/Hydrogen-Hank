@@ -5,6 +5,7 @@ package com.hh.objects.enemies;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Rectangle;
 import java.util.Random;
 
 import com.hh.Game;
@@ -55,6 +56,17 @@ public class Plane extends Enemy
 			g2d.drawImage(ANIM.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
 			    WIDTH, HEIGHT, null);
 		}
+		
+		super.render(g);
+	}
+	
+	@Override
+	public Rectangle boundingBox(){
+		float offsetX = WIDTH * 0.08f;
+		float offsetY = HEIGHT * 0.13f;
+
+		return new Rectangle((int) (X - WIDTH / 2 + offsetX), (int) (Y - HEIGHT / 2 + offsetY),
+		    (int) (WIDTH - offsetX * 2), (int) (HEIGHT - offsetY * 2));
 	}
 
 	/**
