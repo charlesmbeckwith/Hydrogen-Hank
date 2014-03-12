@@ -35,7 +35,7 @@ public class PauseState extends GameState
 		// TODO: Find a better fix for the shaky pause screen...
 		Game.playState.render(g); // Solves the shaky pause screen issue
 
-		renderHelp.tintedBox(g2d, Color.black, 0.9f, (int) (Game.WIDTH / 2 - boxWidth),
+		renderHelp.tintedBox(g2d, Color.black, 0.7f, (int) (Game.WIDTH / 2 - boxWidth),
 		    (int) (Game.HEIGHT / 2 - boxHeight), (int) (boxWidth * 2), (int) (boxHeight * 2));
 
 		if (boxWidth >= Game.WIDTH / 2 && boxHeight >= Game.HEIGHT / 2)

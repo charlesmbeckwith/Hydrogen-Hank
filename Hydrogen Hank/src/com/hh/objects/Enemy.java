@@ -21,7 +21,7 @@ public class Enemy extends GameObject
 
 	public enum EnemyType
 	{
-		Bird
+		Bird, Plane
 	}
 
 	protected EnemyType enemyType;

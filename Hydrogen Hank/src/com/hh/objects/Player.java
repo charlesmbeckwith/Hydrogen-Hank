@@ -8,6 +8,8 @@ import java.util.Random;
 import com.hh.Game;
 import com.hh.framework.*;
 import com.hh.framework.gamestate.states.PlayState;
+import com.hh.framework.gamestate.states.TitleMenuAnimState;
+import com.hh.framework.gamestate.states.TitleMenuState;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
@@ -83,7 +85,7 @@ public class Player extends GameObject
 				// TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST...
 				if (extraBalloons > 0 && !BalloonAlreadyBlownUp && HYDROGENLEVEL > BALLOONCOST)
 				{
-					balloons.push(new Balloon(X, Y, WIDTH, HEIGHT));
+					balloons.push(new Balloon(X, Y, WIDTH / 2, HEIGHT));
 					extraBalloons--;
 					HYDROGENLEVEL -= BALLOONCOST;
 					BalloonAlreadyBlownUp = true;
@@ -154,6 +156,10 @@ public class Player extends GameObject
 					go.Kill();
 					destroyBalloon();
 					break;
+				case Plane:
+					go.Kill();
+					destroyBalloon();
+					break;
 				}
 
 			}
@@ -163,6 +169,11 @@ public class Player extends GameObject
 			    && X > go.getX() && X < go.getX() + go.getWidth())
 			{
 				col = true;
+				
+				if(V.DY > 300 || (balloons.isEmpty() && HYDROGENLEVEL < 10) || HYDROGENLEVEL == 0 || extraBalloons == 0)
+				{
+					Kill();
+				}
 
 				Y = (go.getY() - (HEIGHT / 2) + 14);
 				V.DY = 0;
@@ -266,8 +277,18 @@ public class Player extends GameObject
 		}
 		else
 		{
-
+			Kill();
 		}
+	}
+
+	@Override
+	public void Kill()
+	{
+		// TODO: Kill Hank - Game Over
+		Game.manager.push(new TitleMenuState());
+		Game.manager.push(new TitleMenuAnimState());
+		Game.playState.restart = true;
+		super.Kill();
 	}
 
 	private void initDebug()

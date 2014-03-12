@@ -35,6 +35,7 @@ public class PlayState extends GameState
 	private final int meter = 30;
 	private ArtAssets art;
 	private RenderHelper renderHelp;
+	public boolean restart;
 
 	public PlayState()
 	{
@@ -45,10 +46,16 @@ public class PlayState extends GameState
 		art = Game.getArtAssets();
 		renderHelp = new RenderHelper();
 		playTime = 0;
+		restart = true;
 	}
 
 	public void tick()
 	{
+		if(restart){
+			restart();
+			restart = false;
+		}
+		
 		handler.tick();
 		cam.tick(player);
 		generateScene();

@@ -59,7 +59,6 @@ public class Game extends Canvas implements Runnable
 		this.addKeyListener(new KeyInput());
 		this.addMouseListener(new MouseInput());
 
-		playState.restart();
 		manager.push(playState);
 		manager.push(new TitleMenuState());
 		manager.push(new TitleMenuAnimState());

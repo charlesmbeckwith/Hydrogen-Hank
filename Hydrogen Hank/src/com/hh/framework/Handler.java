@@ -107,6 +107,7 @@ public class Handler
   public void clearObjects()
   {
     objects.clear();
+    counts = new int[]{0,0,0,0,0};
   }
 
   /**
