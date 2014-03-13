@@ -83,7 +83,7 @@ public class Player extends GameObject
 			if (KeyInput.KEYSDOWN.contains(KeyBinding.BLOWUP_BALLOON.VALUE()))
 			{
 				// TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST...
-				if (extraBalloons > 0 && !BalloonAlreadyBlownUp && HYDROGENLEVEL > BALLOONCOST)
+				if (extraBalloons > 0 && !BalloonAlreadyBlownUp && HYDROGENLEVEL > BALLOONCOST && balloons.size() < 3)
 				{
 					balloons.push(new Balloon(X, Y, WIDTH / 2, HEIGHT));
 					extraBalloons--;
@@ -157,7 +157,7 @@ public class Player extends GameObject
 					destroyBalloon();
 					break;
 				case Plane:
-					go.Kill();
+					//go.Kill();
 					destroyBalloon();
 					break;
 				}
@@ -170,7 +170,7 @@ public class Player extends GameObject
 			{
 				col = true;
 				
-				if(V.DY > 300 || (balloons.isEmpty() && HYDROGENLEVEL < 10) || HYDROGENLEVEL == 0 || extraBalloons == 0)
+				if(V.DY > 300 || (balloons.isEmpty() && HYDROGENLEVEL < 10) || HYDROGENLEVEL == 0 || (extraBalloons == 0 && balloons.isEmpty()))
 				{
 					Kill();
 				}
