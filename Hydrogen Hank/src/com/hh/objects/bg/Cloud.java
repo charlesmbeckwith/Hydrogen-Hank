@@ -18,10 +18,10 @@ import com.hh.objects.BackgroundElement;
  */
 public class Cloud extends BackgroundElement
 {
-	private BufferedImage IMG;
+	private BufferedImage img;
 	private ArtAssets art;
 	private static Random rand = new Random();
-	private boolean WRAP;
+	private boolean wrap;
 
 	public Cloud(float x, float y, int width, int height, boolean background)
 	{
@@ -48,22 +48,22 @@ public class Cloud extends BackgroundElement
 	public void init(boolean wrap)
 	{
 		art = Game.getArtAssets();
-		IMG = art.cloud;
-		ALIVE = true;
-		WRAP = wrap;
+		img = art.cloud;
+		alive = true;
+		this.wrap = wrap;
 
-		if (!WRAP)
+		if (!wrap)
 		{
 			double offset = rand.nextDouble() / 2;
-			if (LAYER == ObjectLayer.foreground)
+			if (layer == ObjectLayer.foreground)
 			{
-				WIDTH *= (1 + offset);
-				HEIGHT *= (1 + offset);
+				width *= (1 + offset);
+				height *= (1 + offset);
 			}
 			else
 			{
-				WIDTH *= (1 - offset);
-				HEIGHT *= (1 - offset);
+				width *= (1 - offset);
+				height *= (1 - offset);
 			}
 		}
 	}
@@ -71,39 +71,30 @@ public class Cloud extends BackgroundElement
 	@Override
 	public void tick()
 	{
-		X += V.DX * GameTime.delta();
+		x += v.dx * GameTime.delta();
 
-		if (WRAP && X + WIDTH < 0)
+		if (wrap && x + width < 0)
 		{
-			X = 0 + Game.WIDTH;
+			x = 0 + Game.width;
 		}
 	}
 
 	@Override
 	public void render(Graphics g)
 	{
-		if (ALIVE)
+		if (alive)
 		{
 			Graphics2D g2d = (Graphics2D) g.create();
 			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
-			g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
+			g2d.drawImage(img, (int) x, (int) y, (int) width, (int) height, null);
 		}
-		
+
 		super.render(g);
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
+	public Rectangle boundingBox()
+	{
 		return super.boundingBox();
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
 	}
 }

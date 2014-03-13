@@ -51,11 +51,12 @@ public class PlayState extends GameState
 
 	public void tick()
 	{
-		if(restart){
+		if (restart)
+		{
 			restart();
 			restart = false;
 		}
-		
+
 		handler.tick();
 		cam.tick(player);
 		generateScene();
@@ -66,7 +67,7 @@ public class PlayState extends GameState
 		Graphics2D g2d = (Graphics2D) g;
 
 		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+		g.fillRect(0, 0, Game.width, Game.height);
 
 		g2d.translate(cam.getX(), cam.getY()); // begin cam
 		// Begin Drawing
@@ -92,7 +93,7 @@ public class PlayState extends GameState
 		}
 
 		// Draw the HUD Background
-		g.drawImage(art.hud, 0, 0, Game.WIDTH, Game.HEIGHT, null);
+		g.drawImage(art.hud, 0, 0, Game.width, Game.height, null);
 
 		// Draw the Empty Hydrogen Tank
 		g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
@@ -148,7 +149,7 @@ public class PlayState extends GameState
 		cam = new Camera(0, 0);
 		cam.tick(player);
 		playTime = 0;
-		xStart = (int) cam.getX() - Game.WIDTH;
+		xStart = (int) cam.getX() - Game.width;
 		yStartDown = cloudYMin;
 		generateScene();
 	}
@@ -156,9 +157,9 @@ public class PlayState extends GameState
 	private void generateScene()
 	{
 		int offset = 75;
-		Rectangle sceneWindow = new Rectangle((int) (player.getX() - Game.WIDTH - offset),
-		    (int) (player.getY() - Game.HEIGHT - offset), (int) (offset + Game.WIDTH) * 2,
-		    (int) (offset + Game.HEIGHT) * 2);
+		Rectangle sceneWindow = new Rectangle((int) (player.getX() - Game.width - offset),
+		    (int) (player.getY() - Game.height - offset), (int) (offset + Game.width) * 2,
+		    (int) (offset + Game.height) * 2);
 		handler.setSceneWindow(sceneWindow);
 		int preYStartUp = yStartUp;
 		int preYStartDown = yStartDown;
@@ -180,9 +181,9 @@ public class PlayState extends GameState
 				}
 				xStart += 74;
 			}
-			else if (player.getVelocity().DY < 0) // Player Rising
+			else if (player.getVelocity().dy < 0) // Player Rising
 			{
-				if (player.getY() < 400 - Game.HEIGHT)
+				if (player.getY() < 400 - Game.height)
 				{
 					genGround = true;
 				}
@@ -192,15 +193,15 @@ public class PlayState extends GameState
 					generateCloud((int) i, (int) yStartUp);
 					yStartUp -= meter;
 
-					if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
+					if (yStartDown - yStartUp >= Game.height * 2.5)
 					{
 						yStartDown -= meter;
 					}
 				}
 			}
-			else if (player.getVelocity().DY > 0) // Player Falling
+			else if (player.getVelocity().dy > 0) // Player Falling
 			{
-				if (genGround && player.getY() > 400 - Game.HEIGHT)
+				if (genGround && player.getY() > 400 - Game.height)
 				{
 					if ((i + 75) >= (sceneWindow.x + sceneWindow.width))
 					{
@@ -215,7 +216,7 @@ public class PlayState extends GameState
 					generateCloud((int) i, (int) yStartDown);
 					yStartDown += meter;
 
-					if (yStartDown - yStartUp >= Game.HEIGHT * 2.5)
+					if (yStartDown - yStartUp >= Game.height * 2.5)
 					{
 						yStartUp += meter;
 					}

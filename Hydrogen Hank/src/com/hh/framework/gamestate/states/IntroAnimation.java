@@ -24,7 +24,7 @@ public class IntroAnimation extends GameState
 {
 	private ArtAssets art = Game.getArtAssets();
 	private float hankXPosition = 100;
-	private float hankYPosition = (Game.HEIGHT / 2);
+	private float hankYPosition = (Game.height / 2);
 	private int heightShift = 2;
 	private int hankSize = 500;
 	private int scriptProgCounter = 0;
@@ -80,7 +80,7 @@ public class IntroAnimation extends GameState
 		{
 			hankSize *= 1.5;
 			heightShift++;
-			hankYPosition = (Game.HEIGHT / heightShift);
+			hankYPosition = (Game.height / heightShift);
 		}
 		if (scriptProgCounter % 600 == 0)
 			Game.manager.pop();
@@ -105,13 +105,13 @@ public class IntroAnimation extends GameState
 	{
 		Graphics2D g2d = (Graphics2D) g.create();
 		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+		g.fillRect(0, 0, Game.width, Game.height);
 		handler.render(g);
 		g2d.drawImage(art.getSpriteFrame(spriteID.HANK2, 0), (int) hankXPosition, (int) hankYPosition,
 		    hankSize, hankSize, null);
 		renderHelp.outlinedText(g2d, animFont, lineToPrint, 1.25f, Color.white, Color.black, 150, 150);
-		renderHelp.tintedBox(g2d, new Color(168, 5, 5).darker(), 0.3f, 0, Game.HEIGHT / 2
-		    - redBoxHeight, Game.WIDTH, redBoxHeight * 2);
+		renderHelp.tintedBox(g2d, new Color(168, 5, 5).darker(), 0.3f, 0, Game.height / 2
+		    - redBoxHeight, Game.width, redBoxHeight * 2);
 	}
 
 	/**

@@ -30,7 +30,7 @@ public class SpriteSheet
 
 	private String resourcePath = "";
 	private String resourceSpecPath = "";
-	private double WIDTH, HEIGHT, COLUMNS, ROWS = 1;
+	private double width, height, columns, rows = 1;
 
 	/**
 	 * Initializes the SpriteSheet with the image
@@ -49,13 +49,13 @@ public class SpriteSheet
 
 	private void getFrames()
 	{
-		sprites = new BufferedImage[(int) (COLUMNS * ROWS)];
+		sprites = new BufferedImage[(int) (columns * rows)];
 		int spriteNum = 0;
-		for (int row = 0; row < ROWS; row++)
+		for (int row = 0; row < rows; row++)
 		{
-			for (int col = 0; col < COLUMNS; col++)
+			for (int col = 0; col < columns; col++)
 			{
-				sprites[spriteNum] = grabImage(col + 1, row + 1, (int) WIDTH, (int) HEIGHT);
+				sprites[spriteNum] = grabImage(col + 1, row + 1, (int) width, (int) height);
 				spriteNum++;
 			}
 		}
@@ -157,19 +157,19 @@ public class SpriteSheet
 						{
 							if (line.contains("WIDTH"))
 							{
-								WIDTH = specVal;
+								width = specVal;
 							}
 							else if (line.contains("HEIGHT"))
 							{
-								HEIGHT = specVal;
+								height = specVal;
 							}
 							else if (line.contains("COLUMNS"))
 							{
-								COLUMNS = specVal;
+								columns = specVal;
 							}
 							else if (line.contains("ROWS"))
 							{
-								ROWS = specVal;
+								rows = specVal;
 							}
 						}
 					}

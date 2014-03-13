@@ -36,7 +36,7 @@ public class Bird extends Enemy
 		super(x, y, width, height, v, EnemyType.Bird);
 		art = Game.getArtAssets();
 		initAnimations();
-		ALIVE = true;
+		alive = true;
 	}
 
 	@Override
@@ -44,7 +44,7 @@ public class Bird extends Enemy
 	{
 		// this.X = -PlayState.cam.getX()+400;
 		// this.Y = -PlayState.cam.getY()+350;
-		X += V.DX * GameTime.delta();
+		x += v.dx * GameTime.delta();
 		ANIM.runAnimation();
 	}
 
@@ -52,10 +52,10 @@ public class Bird extends Enemy
 	public void render(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g.create();
-		if (ALIVE)
+		if (alive)
 		{
-			g2d.drawImage(ANIM.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
-			    WIDTH, HEIGHT, null);
+			g2d.drawImage(ANIM.getAnimationFrame(), (int) (x - (width / 2)), (int) (y - (height / 2)),
+			    (int) width, (int) height, null);
 		}
 
 		super.render(g);
@@ -64,11 +64,11 @@ public class Bird extends Enemy
 	@Override
 	public Rectangle boundingBox()
 	{
-		float offsetX = WIDTH * 0.0412f;
-		float offsetY = HEIGHT * 0.25f;
+		float offsetX = width * 0.0412f;
+		float offsetY = height * 0.25f;
 
-		return new Rectangle((int) (X - WIDTH / 2 + offsetX), (int) (Y - HEIGHT / 2 + offsetY),
-		    (int) (WIDTH - offsetX * 2), (int) (HEIGHT - offsetY * 2));
+		return new Rectangle((int) (x - width / 2 + offsetX), (int) (y - height / 2 + offsetY),
+		    (int) (width - offsetX * 2), (int) (height - offsetY * 2));
 	}
 
 	/**

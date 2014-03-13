@@ -10,15 +10,15 @@ package com.hh.framework;
  */
 public class Vector2D
 {
-	public float DX, DY;
+	public float dx, dy;
 
 	/**
 	 * Initializes an zero vector
 	 */
 	public Vector2D()
 	{
-		DX = 0;
-		DY = 0;
+		this.dx = 0;
+		this.dy = 0;
 	}
 
 	/**
@@ -29,8 +29,8 @@ public class Vector2D
 	 */
 	public Vector2D(float dx, float dy)
 	{
-		DX = dx;
-		DY = dy;
+		this.dx = dx;
+		this.dy = dy;
 	}
 
 	/**
@@ -40,7 +40,7 @@ public class Vector2D
 	 */
 	public float magnitude()
 	{
-		return (float) (Math.sqrt(DX * DX + DY * DY));
+		return (float) (Math.sqrt(this.dx * this.dx + this.dy * this.dy));
 	}
 
 	/**
@@ -50,8 +50,8 @@ public class Vector2D
 	 */
 	public void add(Vector2D v)
 	{
-		DX += v.DX;
-		DY += v.DY;
+		this.dx += v.dx;
+		this.dy += v.dy;
 	}
 
 	/**
@@ -61,8 +61,8 @@ public class Vector2D
 	 */
 	public void subtract(Vector2D v)
 	{
-		DX -= v.DX;
-		DY -= v.DY;
+		this.dx -= v.dx;
+		this.dy -= v.dy;
 	}
 
 	/**
@@ -71,8 +71,8 @@ public class Vector2D
 	public void unitVector()
 	{
 		float mag = magnitude();
-		DX = DX / mag;
-		DY = DY / mag;
+		this.dx = this.dx / mag;
+		this.dy = this.dy / mag;
 	}
 
 	/**
@@ -82,7 +82,7 @@ public class Vector2D
 	 */
 	public void scale(float scale)
 	{
-		DX = DX * scale;
-		DY = DY * scale;
+		this.dx = this.dx * scale;
+		this.dy = this.dy * scale;
 	}
 }

@@ -37,7 +37,7 @@ public class Powerup extends GameObject
 	{
 		super(x, y, width, height, ObjectID.Powerup, ObjectLayer.middleground);
 		this.powerupType = powerupType;
-		ALIVE = true;
+		alive = true;
 	}
 
 	@Override
@@ -58,10 +58,11 @@ public class Powerup extends GameObject
 			g2d.draw(this.boundingBox());
 		}
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
-		return new Rectangle((int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT);
+	public Rectangle boundingBox()
+	{
+		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
 	}
 
 	public PowerupType getPowerupType()

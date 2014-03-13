@@ -13,18 +13,18 @@ public class Camera
 	{
 		this.x = x;
 		this.y = y;
-		this.xOffset = Game.WIDTH / 3;
-		this.yOffset = Game.HEIGHT * 5 / 9;
+		this.xOffset = Game.width / 3;
+		this.yOffset = Game.height * 5 / 9;
 	}
 
 	public void tick(GameObject go)
 	{
-		if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_LEFT.VALUE()))
+		if (KeyInput.keysDown.contains(KeyBinding.PAN_LEFT.VALUE()))
 		{
 			panLeft();
 		}
 
-		if (KeyInput.KEYSDOWN.contains(KeyBinding.PAN_RIGHT.VALUE()))
+		if (KeyInput.keysDown.contains(KeyBinding.PAN_RIGHT.VALUE()))
 		{
 			panRight();
 		}
@@ -38,9 +38,9 @@ public class Camera
 			x = (-go.getX() + go.getWidth() / 2);
 		}
 		// Hits right side of the screen
-		else if (x > ((-go.getX() - go.getWidth()) + Game.WIDTH))
+		else if (x > ((-go.getX() - go.getWidth()) + Game.width))
 		{
-			x = ((-go.getX() - go.getWidth()) + Game.WIDTH);
+			x = ((-go.getX() - go.getWidth()) + Game.width);
 		}
 	}
 

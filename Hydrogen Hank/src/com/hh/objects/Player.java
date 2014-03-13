@@ -27,32 +27,26 @@ import com.hh.objects.bg.Ground;
 @SuppressWarnings("unused")
 public class Player extends GameObject
 {
-	private final float GRAVITY = 2f;
+	private final float gravity = 2f;
 	private int extraBalloons = 50; // How many balloons you start with
-	private final int BALLOONCOST = 10; // How much hydrogen blowing up a
+	private final int balloonCost = 10; // How much hydrogen blowing up a
 	// balloon costs.
 	private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
-	private boolean BalloonAlreadyBlownUp = false;
-	private Animation RIGHT, CURRENT;
+	private boolean balloonAlreadyBlownUp = false;
+	private Animation normal, death, current;
 	private ArtAssets art;
-	private float BUOYANCY;
-	private Color HUE;
-	private float startx, starty;
+	private float buoyancy;
 	private LinkedList<String> debugOptions;
 
-	private float HYDROGENLEVEL;
-	private float MAXHYDROGENLEVEL = 200f;
+	private float hLevel;
+	private float maxHLevel = 200f;
 
 	public Player(float x, float y, int width, int height, Vector2D v)
 	{
 		super(x, y, width, height, v, ObjectID.Player, ObjectLayer.middleground);
-		startx = x;
-		starty = y;
-		ALIVE = true;
-		Random rand = new Random();
-		HUE = new Color(50 + rand.nextInt(200), 50 + rand.nextInt(200), 50 + rand.nextInt(200));
-		BUOYANCY = 0.0f;
-		HYDROGENLEVEL = 200f;
+		alive = true;
+		buoyancy = 0.0f;
+		hLevel = 200f;
 
 		// balloons.add(new Balloon(x, y, width, height));
 
@@ -63,79 +57,80 @@ public class Player extends GameObject
 	@Override
 	public void tick()
 	{
-		if (ALIVE)
+		if (alive)
 		{
 			boolean collision = collision();
 
-			if (KeyInput.KEYSDOWN.contains(KeyBinding.INFLATE.VALUE()))
+			if (KeyInput.keysDown.contains(KeyBinding.INFLATE.VALUE()))
 			{
-				if (HYDROGENLEVEL > 0 && BUOYANCY > -390 && !balloons.isEmpty())
+				if (hLevel > 0 && buoyancy > -390 && !balloons.isEmpty())
 				{
-					BUOYANCY -= 0.667f;
-					HYDROGENLEVEL -= 0.333;
+					buoyancy -= 0.667f;
+					hLevel -= 0.333;
 				}
-				else if (HYDROGENLEVEL < 0)
+				else if (hLevel < 0)
 				{
-					HYDROGENLEVEL = 0;
+					hLevel = 0;
 				}
 			}
 
-			if (KeyInput.KEYSDOWN.contains(KeyBinding.BLOWUP_BALLOON.VALUE()))
+			if (KeyInput.keysDown.contains(KeyBinding.BLOWUP_BALLOON.VALUE()))
 			{
 				// TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST...
-				if (extraBalloons > 0 && !BalloonAlreadyBlownUp && HYDROGENLEVEL > BALLOONCOST && balloons.size() < 3)
+				if (extraBalloons > 0 && !balloonAlreadyBlownUp && hLevel > balloonCost
+				    && balloons.size() < 3)
 				{
-					balloons.push(new Balloon(X-12, Y+10, WIDTH / 2, HEIGHT));
+					balloons.push(new Balloon(x - 12, y + 10, (int) (width / 2), (int) height));
 					extraBalloons--;
-					HYDROGENLEVEL -= BALLOONCOST;
-					BalloonAlreadyBlownUp = true;
+					hLevel -= balloonCost;
+					balloonAlreadyBlownUp = true;
 				}
 			}
 			else
 			{
-				BalloonAlreadyBlownUp = false;
+				balloonAlreadyBlownUp = false;
 			}
 
-			if (KeyInput.KEYSDOWN.contains(KeyBinding.DEFLATE.VALUE()))
+			if (KeyInput.keysDown.contains(KeyBinding.DEFLATE.VALUE()))
 			{
-				BUOYANCY += 1.67f;
+				buoyancy += 1.67f;
 			}
 
-			if (BUOYANCY > 0)
+			if (buoyancy > 0)
 			{
-				BUOYANCY = 0;
+				buoyancy = 0;
 			}
-			if (BUOYANCY < -(GRAVITY * 2))
+			if (buoyancy < -(gravity * 2))
 			{
-				BUOYANCY = -(GRAVITY * 2);
+				buoyancy = -(gravity * 2);
 				// Trying to make buoyancy reflect how many balloons you have.
 				// Aka, the more balloons you have the less quickly you fall to
 				// the ground
 			}
 
-			if (V.DX < 150 && !collision)
+			if (v.dx < 150 && !collision)
 			{
-				V.DX += 1;
+				v.dx += 1;
 			}
 
-			V.DY += BUOYANCY + GRAVITY;
+			v.dy += buoyancy + gravity;
 
-			if (V.DY > 1200)
+			if (v.dy > 1200)
 			{
-				V.DY = 1200;
+				v.dy = 1200;
 			}
 
-			X += V.DX * GameTime.delta();
-			Y += V.DY * GameTime.delta();
+			x += v.dx * GameTime.delta();
+			y += v.dy * GameTime.delta();
 
-			CURRENT = RIGHT;
-			CURRENT.runAnimation();
+			current = normal;
+			current.runAnimation();
 
 			// Simulate a slow leak in the balloon
-			BUOYANCY += 0.0111 / (balloons.size());
+			buoyancy += 0.0111 / (balloons.size());
 			for (Balloon bloon : balloons)
 			{
-				bloon.tick(X-12, Y+10);
+				bloon.tick(x - 12, y + 10);
 			}
 
 		}
@@ -147,17 +142,17 @@ public class Player extends GameObject
 
 		for (GameObject go : PlayState.handler.getObjects())
 		{
-			if (go != this && go.getID() == ObjectID.Enemy && collided(go))
+			if (go != this && go.getId() == ObjectID.Enemy && collided(go))
 			{
 				Enemy enemy = (Enemy) go;
 				switch (enemy.getEnemyType())
 				{
 				case Bird:
-					go.Kill();
+					go.kill();
 					destroyBalloon();
 					break;
 				case Plane:
-					//go.Kill();
+					// go.Kill();
 					destroyBalloon();
 					break;
 				}
@@ -165,25 +160,26 @@ public class Player extends GameObject
 			}
 
 			// check for ground collision
-			if (go != this && go.getClass() == Ground.class && (Y + (HEIGHT / 2) - 14) >= go.getY()
-			    && X > go.getX() && X < go.getX() + go.getWidth())
+			if (go != this && go.getClass() == Ground.class && (y + (height / 2) - 14) >= go.getY()
+			    && x > go.getX() && x < go.getX() + go.getWidth())
 			{
 				col = true;
-				
-				if(V.DY > 300 || (balloons.isEmpty() && HYDROGENLEVEL < BALLOONCOST) || HYDROGENLEVEL == 0 || (extraBalloons == 0 && balloons.isEmpty()))
+
+				if (v.dy > 300 || (balloons.isEmpty() && hLevel < balloonCost) || hLevel == 0
+				    || (extraBalloons == 0 && balloons.isEmpty()))
 				{
-					Kill();
+					kill();
 				}
 
-				Y = (go.getY() - (HEIGHT / 2) + 14);
-				V.DY = 0;
+				y = (go.getY() - (height / 2) + 14);
+				v.dy = 0;
 
-				if (V.DX > 0)
-					V.DX -= (V.DX * 0.01);
+				if (v.dx > 0)
+					v.dx -= (v.dx * 0.01);
 			}
 
 			// Check for powerup collision
-			if (go != this && go.getID() == ObjectID.Powerup && collided(go))
+			if (go != this && go.getId() == ObjectID.Powerup && collided(go))
 			{
 				// cast go as Powerup
 				Powerup pu = (Powerup) go;
@@ -195,17 +191,17 @@ public class Player extends GameObject
 					break;
 				case HydrogenTank:
 					// Add hydrogen to tank
-					HYDROGENLEVEL += 50;
+					hLevel += 50;
 					break;
 				case HydrogenMolecule:
-					HYDROGENLEVEL += 1;
-					go.Kill();
+					hLevel += 1;
+					go.kill();
 					break;
 				}
 
-				if (HYDROGENLEVEL > MAXHYDROGENLEVEL)
+				if (hLevel > maxHLevel)
 				{
-					HYDROGENLEVEL = MAXHYDROGENLEVEL;
+					hLevel = maxHLevel;
 				}
 			}
 		}
@@ -221,12 +217,12 @@ public class Player extends GameObject
 	@Override
 	public void render(Graphics g)
 	{
-		if (ALIVE)
+		if (alive)
 		{
 			Graphics2D g2d = (Graphics2D) g.create();
 
 			// BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
-			// WIDTH, HEIGHT, HUE);
+			// width, height, HUE);
 			if (Game.debugOptions().contains("Info"))
 			{
 				g2d.setColor(Color.black);
@@ -237,15 +233,15 @@ public class Player extends GameObject
 			{
 				bloons.render(g2d);
 			}
-			g2d.drawImage(CURRENT.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
-			    WIDTH, HEIGHT, null);
+			g2d.drawImage(current.getAnimationFrame(), (int) (x - (width / 2)), (int) (y - (height / 2)),
+			    (int) width, (int) height, null);
 		}
 	}
 
 	@Override
 	public Rectangle boundingBox()
 	{
-		return new Rectangle((int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT);
+		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
 	}
 
 	private void debugOptions(Graphics2D g2d)
@@ -255,7 +251,7 @@ public class Player extends GameObject
 		g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
 
 		float relativeZeroX = -PlayState.cam.getX() + 10;
-		float relativeZeroY = -PlayState.cam.getY() + Game.HEIGHT - (11 * (debugOptions.size() + 1));
+		float relativeZeroY = -PlayState.cam.getY() + Game.height - (11 * (debugOptions.size() + 1));
 		int row = 1;
 		for (String x : debugOptions)
 		{
@@ -272,42 +268,42 @@ public class Player extends GameObject
 			balloons.pop();
 			if (balloons.isEmpty())
 			{
-				BUOYANCY = 0f;
+				buoyancy = 0f;
 			}
 		}
 		else
 		{
-			Kill();
+			kill();
 		}
 	}
 
 	@Override
-	public void Kill()
+	public void kill()
 	{
 		// TODO: Kill Hank - Game Over
 		Game.manager.push(new TitleMenuState());
 		Game.manager.push(new TitleMenuAnimState());
 		Game.playState.restart = true;
-		super.Kill();
+		super.kill();
 	}
 
 	private void initDebug()
 	{
 		debugOptions = new LinkedList<String>();
-		String BouyancyDebug = new String().concat("Bouyancy = " + (int) BUOYANCY);
-		String HydrogenLevelDebug = new String().concat("Hydrogen Level = " + HYDROGENLEVEL);
-		String AltitudeDebug = new String().concat("Altitude = " + (((400 - (HEIGHT / 2)) - Y) / 30)); // Measured
+		String BouyancyDebug = new String().concat("Bouyancy = " + (int) buoyancy);
+		String HydrogenLevelDebug = new String().concat("Hydrogen Level = " + hLevel);
+		String AltitudeDebug = new String().concat("Altitude = " + (((400 - (height / 2)) - y) / 30)); // Measured
 		                                                                                               // in
 		                                                                                               // Meters
-		String PositionDebug = new String().concat("XPosition: " + (int) X + " || YPosition: "
-		    + (int) Y);
-		String VelocityDebug = new String().concat("XVelocity: " + (int) V.DX);
+		String PositionDebug = new String().concat("XPosition: " + (int) x + " || YPosition: "
+		    + (int) y);
+		String VelocityDebug = new String().concat("XVelocity: " + (int) v.dx);
 		String XYOffset = new String().concat("XOffset = " + PlayState.cam.getX() + " || YOffset = "
 		    + PlayState.cam.getY());
 		String BalloonValues = new String().concat("# of Balloons = " + extraBalloons
 		    + "  ||  # Balloons in Play = " + balloons.size());
 		String deltaBuoyancy = new String()
-		    .concat("deltaBuoyancy = " + (GRAVITY * 2) / balloons.size());
+		    .concat("deltaBuoyancy = " + (gravity * 2) / balloons.size());
 		String objectCount = new String().concat("Object Count = "
 		    + PlayState.handler.getObjects().size());
 		debugOptions.add(BouyancyDebug);
@@ -326,19 +322,14 @@ public class Player extends GameObject
 	 */
 	private void initAnimations()
 	{
-
-		// RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK, 0), art.getSpriteFrame(
-		// spriteID.HANK, 1));
-		// CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK, 0));
-
-		RIGHT = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 0), art.getSpriteFrame(
+		normal = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 0), art.getSpriteFrame(
 		    spriteID.HANK2, 1), art.getSpriteFrame(spriteID.HANK2, 1));
-		CURRENT = new Animation(3, art.getSpriteFrame(spriteID.HANK2, 0));
+		current = new Animation(3, art.getSpriteFrame(spriteID.HANK2, 0));
 	}
 
 	public float getHydrogenLevelPercent()
 	{
-		return (HYDROGENLEVEL / MAXHYDROGENLEVEL);
+		return (hLevel / maxHLevel);
 	}
 
 	public int getExtraBalloons()
@@ -348,15 +339,15 @@ public class Player extends GameObject
 
 	public int getAltitude()
 	{
-		return (int) ((400 - (HEIGHT / 2)) - Y) / 30;
+		return (int) ((400 - (height / 2)) - y) / 30;
 	}
 
 	private class Balloon
 	{
-		private float X;
-		private float Y;
+		private float x;
+		private float y;
 		private int balloonColor;
-		private boolean Alive = true;
+		private boolean alive = true;
 		private int width, height;
 
 		public Balloon(float x, float y, int width, int height)
@@ -372,7 +363,7 @@ public class Player extends GameObject
 
 		public void render(Graphics2D g)
 		{
-			g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor), (int) X, (int) Y, width,
+			g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor), (int) x, (int) y, width,
 			    height, null);
 		}
 
@@ -389,8 +380,8 @@ public class Player extends GameObject
 		 */
 		public void setOffset(float x, float y)
 		{
-			X = x - width / 2;
-			Y = (float) (y - height * 1.4);
+			this.x = x - width / 2;
+			this.y = (float) (y - height * 1.4);
 		}
 	}
 }

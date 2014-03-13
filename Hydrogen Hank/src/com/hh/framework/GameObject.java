@@ -23,12 +23,12 @@ public abstract class GameObject
 		background, middleground, foreground, hud, toplevel
 	}
 
-	protected float X, Y;
-	protected int WIDTH, HEIGHT;
-	protected Vector2D V;
-	protected ObjectID ID;
-	protected boolean ALIVE;
-	protected ObjectLayer LAYER;
+	protected float x, y;
+	protected float width, height;
+	protected Vector2D v;
+	protected ObjectID id;
+	protected boolean alive;
+	protected ObjectLayer layer;
 
 	/**
 	 * Creates a stationary gameobject
@@ -42,10 +42,10 @@ public abstract class GameObject
 	 */
 	public GameObject(float x, float y, ObjectID id)
 	{
-		X = x;
-		Y = y;
-		V = new Vector2D();
-		ID = id;
+		this.x = x;
+		this.y = y;
+		this.v = new Vector2D();
+		this.id = id;
 	}
 
 	/**
@@ -62,10 +62,10 @@ public abstract class GameObject
 	 */
 	public GameObject(float x, float y, ObjectID id, ObjectLayer layer)
 	{
-		X = x;
-		Y = y;
-		V = new Vector2D();
-		ID = id;
+		this.x = x;
+		this.y = y;
+		this.v = new Vector2D();
+		this.id = id;
 	}
 
 	/**
@@ -84,13 +84,13 @@ public abstract class GameObject
 	 */
 	public GameObject(float x, float y, int width, int height, ObjectID id, ObjectLayer layer)
 	{
-		X = x;
-		Y = y;
-		WIDTH = width;
-		HEIGHT = height;
-		V = new Vector2D();
-		ID = id;
-		LAYER = layer;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.v = new Vector2D();
+		this.id = id;
+		this.layer = layer;
 	}
 
 	/**
@@ -107,11 +107,11 @@ public abstract class GameObject
 	 */
 	public GameObject(float x, float y, Vector2D v, ObjectID id, ObjectLayer layer)
 	{
-		X = x;
-		Y = y;
-		V = v;
-		ID = id;
-		LAYER = layer;
+		this.x = x;
+		this.y = y;
+		this.v = v;
+		this.id = id;
+		this.layer = layer;
 	}
 
 	/**
@@ -133,13 +133,13 @@ public abstract class GameObject
 	public GameObject(float x, float y, int width, int height, Vector2D v, ObjectID id,
 	    ObjectLayer layer)
 	{
-		X = x;
-		Y = y;
-		WIDTH = width;
-		HEIGHT = height;
-		V = v;
-		ID = id;
-		LAYER = layer;
+		this.x = x;
+		this.y = y;
+		this.width = width;
+		this.height = height;
+		this.v = v;
+		this.id = id;
+		this.layer = layer;
 	}
 
 	/**
@@ -154,131 +154,179 @@ public abstract class GameObject
 	 *          - Graphics object to draw with
 	 */
 	public abstract void render(Graphics g);
-	
+
 	/**
 	 * Gets the object's bounding box
+	 * 
 	 * @return
 	 */
 	public abstract Rectangle boundingBox();
 
 	/**
-	 * Gets the current X position of the gameobject
+	 * Kills the gameobject Used to tag it for removal
+	 */
+	public void kill()
+	{
+		this.alive = false;
+	}
+
+	/**
+	 * Gets the GameObject's X postion
 	 * 
-	 * @return - current x position
+	 * @return
 	 */
 	public float getX()
 	{
-		return X;
+		return this.x;
 	}
 
 	/**
-	 * Sets the current X position of the gameobject
+	 * Sets the GameObject's X postion
 	 * 
-	 * @param x
-	 *          - the new x position
+	 * @return
 	 */
 	public void setX(float x)
 	{
-		X = x;
+		this.x = x;
 	}
 
 	/**
-	 * Gets the current Y position of the gameobject
+	 * Gets the GameObject's Y postion
 	 * 
-	 * @return - current y position
+	 * @return
 	 */
 	public float getY()
 	{
-		return Y;
+		return this.y;
 	}
 
 	/**
-	 * Sets the current Y position of the gameobject
+	 * Sets the GameObject's Y postion
 	 * 
-	 * @param y
-	 *          - the new y position
+	 * @return
 	 */
 	public void setY(float y)
 	{
-		Y = y;
+		this.y = y;
 	}
 
 	/**
-	 * Gets the width of the gameobject
+	 * Gets the GameObject's width
 	 * 
 	 * @return
 	 */
-	public int getWidth()
+	public float getWidth()
 	{
-		return WIDTH;
+		return this.width;
 	}
 
 	/**
-	 * Gets the height of the gameobject
+	 * Sets the GameObject's width
 	 * 
 	 * @return
 	 */
-	public int getHeight()
+	public void setWidth(float width)
 	{
-		return HEIGHT;
+		this.width = width;
 	}
 
 	/**
-	 * Gets the velocity vector of the gameobject
+	 * Gets the GameObject's height
+	 * 
+	 * @return
+	 */
+	public float getHeight()
+	{
+		return this.height;
+	}
+
+	/**
+	 * Sets the GameObject's height
+	 * 
+	 * @return
+	 */
+	public void setHeight(float height)
+	{
+		this.height = height;
+	}
+
+	/**
+	 * Gets the GameObject's velocity
 	 * 
 	 * @return
 	 */
 	public Vector2D getVelocity()
 	{
-		return V;
+		return this.v;
 	}
 
 	/**
-	 * Sets the width of the gameobject
+	 * Sets the GameObject's velocity
 	 * 
-	 * @param v
-	 *          - new velocity vector
+	 * @return
 	 */
 	public void setVelocity(Vector2D v)
 	{
-		V = v;
+		this.v = v;
 	}
 
 	/**
-	 * Kills the gameobject Used to tag it for removal
-	 */
-	public void Kill()
-	{
-		ALIVE = false;
-	}
-
-	/**
-	 * Determines if the gameobject is active
+	 * Gets if the GameObject is alive
 	 * 
 	 * @return
 	 */
 	public boolean isAlive()
 	{
-		return ALIVE;
+		return this.alive;
 	}
 
 	/**
-	 * Gets the ObjectID of the gameobject Used to determine the class of the object
+	 * Sets if the GameObject is alive
 	 * 
 	 * @return
 	 */
-	public ObjectID getID()
+	public void setAlive(boolean alive)
 	{
-		return ID;
+		this.alive = alive;
 	}
 
 	/**
-	 * Getter for gameobject layer
+	 * Gets the GameObject's id
 	 * 
-	 * @return returns layer of the gameobject
+	 * @return
+	 */
+	public ObjectID getId()
+	{
+		return this.id;
+	}
+
+	/**
+	 * Sets the GameObject's object id
+	 * 
+	 * @return
+	 */
+	public void setId(ObjectID id)
+	{
+		this.id = id;
+	}
+
+	/**
+	 * Gets the GameObject's render layer
+	 * 
+	 * @return
 	 */
 	public ObjectLayer getLayer()
 	{
-		return LAYER;
+		return this.layer;
+	}
+
+	/**
+	 * Sets the GameObject's render layer
+	 * 
+	 * @return
+	 */
+	public void setLayer(ObjectLayer layer)
+	{
+		this.layer = layer;
 	}
 }

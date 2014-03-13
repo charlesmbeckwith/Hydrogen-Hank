@@ -4,8 +4,8 @@ import java.awt.Graphics;
 
 public abstract class GameState
 {
-	public boolean BLOCK_TICK = true;
-	public boolean BLOCK_RENDER = true;
+	public boolean blockTick = true;
+	public boolean blockRender = true;
 
 	public abstract void tick();
 

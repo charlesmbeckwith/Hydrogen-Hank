@@ -22,11 +22,11 @@ public class Score implements Serializable
 
 	public int getValue()
 	{
-		return value;
+		return this.value;
 	}
 
 	public ScoreType getType()
 	{
-		return type;
+		return this.type;
 	}
 }

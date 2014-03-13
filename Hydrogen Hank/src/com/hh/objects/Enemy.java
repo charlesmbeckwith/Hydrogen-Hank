@@ -57,10 +57,11 @@ public class Enemy extends GameObject
 			g2d.draw(this.boundingBox());
 		}
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
-		return new Rectangle((int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT);
+	public Rectangle boundingBox()
+	{
+		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
 	}
 
 	public EnemyType getEnemyType()

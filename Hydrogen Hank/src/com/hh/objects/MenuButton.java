@@ -17,8 +17,8 @@ import com.hh.graphics.ArtAssets;
 public class MenuButton extends GameObject
 {
 	private BufferedImage IMG;
-	public boolean SELECTED;
-	private ButtonID BUTTONID;
+	private boolean selected;
+	private ButtonID buttonId;
 	private ArtAssets art;
 	private RenderHelper renderHelp = new RenderHelper();
 	private Font font;
@@ -32,12 +32,12 @@ public class MenuButton extends GameObject
 	public MenuButton(String text, float x, float y, int width, int height, ButtonID buttontype)
 	{
 		super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
-		ALIVE = true;
+		alive = true;
 		art = Game.getArtAssets();
 		IMG = art.button;
 		font = new Font("Arial", Font.BOLD, 32);
-		SELECTED = false;
-		BUTTONID = buttontype;
+		selected = false;
+		buttonId = buttontype;
 		this.text = text;
 	}
 
@@ -47,32 +47,32 @@ public class MenuButton extends GameObject
 		Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
 		mouseLoc.x -= Game.getPosition().x;
 		mouseLoc.y -= Game.getPosition().y + 25; // 25 pixels is roughly the size of the top of the
-																						 // window
+		                                         // window
 
-		if (mouseLoc.x > (X - WIDTH / 2) && mouseLoc.y > (Y - HEIGHT / 2)
-		    && mouseLoc.x < (X + WIDTH / 2) && mouseLoc.y < (Y + HEIGHT / 2))
+		if (this.boundingBox().contains(mouseLoc))
 		{
-			SELECTED = true;
+			selected = true;
 		}
 		else
 		{
-			SELECTED = false;
+			selected = false;
 		}
 	}
 
 	@Override
 	public void render(Graphics g)
 	{
-		if (ALIVE)
+		if (alive)
 		{
 			Graphics2D g2d = (Graphics2D) g;
 
-			g2d.drawImage(IMG, (int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT, null);
+			g2d.drawImage(IMG, (int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height,
+			    null);
 
 			FontMetrics metrics = g.getFontMetrics(font);
-			int textX = (int) (X - (metrics.stringWidth(text) / 2) + (WIDTH * 0.04));
-			int textY = (int) Y + (metrics.getHeight() / 4);
-			if (!SELECTED)
+			int textX = (int) (x - (metrics.stringWidth(text) / 2) + (width * 0.04));
+			int textY = (int) y + (metrics.getHeight() / 4);
+			if (!selected)
 			{
 				renderHelp.outlinedText(g2d, font, text, 1.25f, Color.black, Color.white, textX, textY);
 			}
@@ -82,24 +82,20 @@ public class MenuButton extends GameObject
 			}
 		}
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
-		return new Rectangle((int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT);
-	}
-
-	public int getWidth()
+	public Rectangle boundingBox()
 	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
+		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
 	}
 
 	public ButtonID getButtonID()
 	{
-		return BUTTONID;
+		return buttonId;
+	}
+
+	public boolean isSelected()
+	{
+		return selected;
 	}
 }

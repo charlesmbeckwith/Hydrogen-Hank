@@ -21,8 +21,7 @@ public class BackgroundElement extends GameObject
 
 	public enum BackgroundElementType
 	{
-		Cloud,
-		Ground
+		Cloud, Ground
 	}
 
 	protected BackgroundElementType BgElementType;
@@ -77,10 +76,11 @@ public class BackgroundElement extends GameObject
 			g2d.draw(this.boundingBox());
 		}
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
-		return new Rectangle((int) (X), (int) (Y), WIDTH, HEIGHT);
+	public Rectangle boundingBox()
+	{
+		return new Rectangle((int) (x), (int) (y), (int) width, (int) height);
 	}
 
 }

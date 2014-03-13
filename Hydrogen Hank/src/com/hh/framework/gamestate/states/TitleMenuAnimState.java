@@ -15,7 +15,7 @@ import com.hh.objects.bg.Cloud;
 
 public class TitleMenuAnimState extends GameState
 {
-	private int position = Game.HEIGHT;
+	private int position = Game.height;
 	private ArtAssets art = Game.getArtAssets();
 	public static Handler handler;
 	public boolean scrollingTitlesRunning = true;
@@ -26,15 +26,15 @@ public class TitleMenuAnimState extends GameState
 		handler = new Handler();
 
 		// Adding Buttons
-		int xOffset = Game.WIDTH / 2;
-		int yOffset = Game.HEIGHT / 3 - 150 + 350;
-		handler.addObject(new MenuButton("New Game", xOffset, position + yOffset, Game.WIDTH / 3 - 15,
+		int xOffset = Game.width / 2;
+		int yOffset = Game.height / 3 - 150 + 350;
+		handler.addObject(new MenuButton("New Game", xOffset, position + yOffset, Game.width / 3 - 15,
 		    64, ButtonID.NEWGAME));
 		yOffset += 75;
 		handler.addObject(new MenuButton("High Scores", xOffset, position + yOffset,
-		    Game.WIDTH / 3 - 15, 64, ButtonID.HIGHSCORE));
+		    Game.width / 3 - 15, 64, ButtonID.HIGHSCORE));
 		yOffset += 75;
-		handler.addObject(new MenuButton("Credits", xOffset, position + yOffset, Game.WIDTH / 3 - 15,
+		handler.addObject(new MenuButton("Credits", xOffset, position + yOffset, Game.width / 3 - 15,
 		    64, ButtonID.CREDITS));
 
 		// Adding Animated Clouds
@@ -60,12 +60,12 @@ public class TitleMenuAnimState extends GameState
 	public void render(Graphics g)
 	{
 		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+		g.fillRect(0, 0, Game.width, Game.height);
 
 		if (scrollingTitlesRunning)
 		{
-			int yOffset = Game.HEIGHT / 3 - 150;
-			g.drawImage(art.mainTitle, Game.WIDTH / 2 - 250, position + yOffset, 500, 300, null);
+			int yOffset = Game.height / 3 - 150;
+			g.drawImage(art.mainTitle, Game.width / 2 - 250, position + yOffset, 500, 300, null);
 			handler.render(g);
 		}
 

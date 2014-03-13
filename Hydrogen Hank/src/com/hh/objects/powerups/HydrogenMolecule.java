@@ -46,13 +46,14 @@ public class HydrogenMolecule extends Powerup
 	@Override
 	public void render(Graphics g)
 	{
-		g.drawImage(IMG, (int) (X - WIDTH / 2), (int) (Y - HEIGHT / 2), WIDTH, HEIGHT,null);
-		
+		g.drawImage(IMG, (int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height, null);
+
 		super.render(g);
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
+	public Rectangle boundingBox()
+	{
 		return super.boundingBox();
 	}
 

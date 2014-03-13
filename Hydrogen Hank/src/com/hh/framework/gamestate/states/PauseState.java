@@ -18,15 +18,15 @@ public class PauseState extends GameState
 
 	public void tick()
 	{
-		if (boxHeight < Game.HEIGHT / 2)
-			boxHeight += Game.HEIGHT / 25;
+		if (boxHeight < Game.height / 2)
+			boxHeight += Game.height / 25;
 		else
-			boxHeight = Game.HEIGHT;
+			boxHeight = Game.height;
 
-		if (boxWidth < Game.WIDTH / 2)
-			boxWidth += Game.WIDTH / 25;
+		if (boxWidth < Game.width / 2)
+			boxWidth += Game.width / 25;
 		else
-			boxWidth = Game.WIDTH;
+			boxWidth = Game.width;
 	}
 
 	public void render(Graphics g)
@@ -35,13 +35,13 @@ public class PauseState extends GameState
 		// TODO: Find a better fix for the shaky pause screen...
 		Game.playState.render(g); // Solves the shaky pause screen issue
 
-		renderHelp.tintedBox(g2d, Color.black, 0.7f, (int) (Game.WIDTH / 2 - boxWidth),
-		    (int) (Game.HEIGHT / 2 - boxHeight), (int) (boxWidth * 2), (int) (boxHeight * 2));
+		renderHelp.tintedBox(g2d, Color.black, 0.7f, (int) (Game.width / 2 - boxWidth),
+		    (int) (Game.height / 2 - boxHeight), (int) (boxWidth * 2), (int) (boxHeight * 2));
 
-		if (boxWidth >= Game.WIDTH / 2 && boxHeight >= Game.HEIGHT / 2)
+		if (boxWidth >= Game.width / 2 && boxHeight >= Game.height / 2)
 		{
-			g.drawImage(art.pauseScreen, (Game.WIDTH / 2 - art.pauseScreen.getWidth() / 2),
-			    (Game.HEIGHT / 2 - 150), null);
+			g.drawImage(art.pauseScreen, (Game.width / 2 - art.pauseScreen.getWidth() / 2),
+			    (Game.height / 2 - 150), null);
 		}
 	}
 

@@ -16,14 +16,14 @@ import com.hh.objects.BackgroundElement;
  */
 public class Ground extends BackgroundElement
 {
-	private BufferedImage IMG;
+	private BufferedImage img;
 	private ArtAssets art = Game.getArtAssets();
 
 	public Ground(float x, float y, int width, int height)
 	{
 		super(x, y, width, height, BackgroundElementType.Ground, ObjectLayer.background);
-		IMG = art.dirt;
-		ALIVE = true;
+		img = art.dirt;
+		alive = true;
 	}
 
 	@Override
@@ -34,27 +34,18 @@ public class Ground extends BackgroundElement
 	@Override
 	public void render(Graphics g)
 	{
-		if (ALIVE)
+		if (alive)
 		{
 			Graphics2D g2d = (Graphics2D) g;
-			g2d.drawImage(IMG, (int) X, (int) Y, WIDTH, HEIGHT, null);
+			g2d.drawImage(img, (int) x, (int) y, (int) width, (int) height, null);
 		}
-		
+
 		super.render(g);
 	}
-	
+
 	@Override
-	public Rectangle boundingBox(){
+	public Rectangle boundingBox()
+	{
 		return super.boundingBox();
-	}
-
-	public int getWidth()
-	{
-		return WIDTH;
-	}
-
-	public int getHeight()
-	{
-		return HEIGHT;
 	}
 }

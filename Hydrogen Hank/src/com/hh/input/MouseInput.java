@@ -30,7 +30,7 @@ public class MouseInput extends MouseAdapter
 				if (go.getClass() == MenuButton.class)
 				{
 					MenuButton button = (MenuButton) go;
-					if (button.SELECTED)
+					if (button.isSelected())
 					{
 						switchMenuButton(button);
 					}

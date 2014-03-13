@@ -7,7 +7,7 @@ import java.util.ListIterator;
 
 public class GameStateManager
 {
-	private LinkedList<GameState> STATES = new LinkedList<GameState>();
+	private LinkedList<GameState> states = new LinkedList<GameState>();
 	private int removeCount = 0;
 	private ArrayList<GameState> toAdd = new ArrayList<GameState>();
 
@@ -17,7 +17,7 @@ public class GameStateManager
 
 	public void tick()
 	{
-		ListIterator<GameState> iter = STATES.listIterator();
+		ListIterator<GameState> iter = states.listIterator();
 
 		if (iter.hasNext())
 		{
@@ -29,7 +29,7 @@ public class GameStateManager
 	{
 		state.tick();
 
-		if (iter.hasNext() && !state.BLOCK_TICK)
+		if (iter.hasNext() && !state.blockTick)
 		{
 			tick(iter, iter.next());
 		}
@@ -37,7 +37,7 @@ public class GameStateManager
 
 	public void render(Graphics g)
 	{
-		ListIterator<GameState> iter = STATES.listIterator();
+		ListIterator<GameState> iter = states.listIterator();
 
 		if (iter.hasNext())
 		{
@@ -49,20 +49,20 @@ public class GameStateManager
 	{
 		state.render(g);
 
-		if (iter.hasNext() && !state.BLOCK_RENDER)
+		if (iter.hasNext() && !state.blockRender)
 		{
 			render(iter, iter.next(), g);
 		}
 
 		while (removeCount > 0)
 		{
-			STATES.pop();
+			states.pop();
 			removeCount--;
 		}
 
 		for (GameState gs : toAdd)
 		{
-			STATES.push(gs);
+			states.push(gs);
 		}
 
 		toAdd.clear();
@@ -80,17 +80,17 @@ public class GameStateManager
 
 	public void forcePush(GameState state)
 	{
-		STATES.push(state);
+		states.push(state);
 	}
 
 	public GameState getFirstState()
 	{
-		return STATES.size() > 0 ? STATES.getFirst() : null;
+		return states.size() > 0 ? states.getFirst() : null;
 	}
 
 	@SuppressWarnings("rawtypes")
 	public Class getFirstClass()
 	{
-		return STATES.size() > 0 ? STATES.getFirst().getClass() : null;
+		return states.size() > 0 ? states.getFirst().getClass() : null;
 	}
 }

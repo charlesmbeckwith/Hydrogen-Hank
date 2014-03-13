@@ -30,10 +30,10 @@ public class LoadState extends GameState
 	public void render(Graphics g)
 	{
 		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+		g.fillRect(0, 0, Game.width, Game.height);
 		FontMetrics metrics = g.getFontMetrics(font);
-		int textX = (int) (Game.WIDTH / 2 - (metrics.stringWidth("Loading") / 2));
-		int textY = (int) Game.HEIGHT / 2 + (metrics.getHeight());
+		int textX = (int) (Game.width / 2 - (metrics.stringWidth("Loading") / 2));
+		int textY = (int) Game.height / 2 + (metrics.getHeight());
 		renderHelp.outlinedText((Graphics2D) g, font, "Loading", 1.25f, Color.black, Color.white,
 		    textX, textY);
 

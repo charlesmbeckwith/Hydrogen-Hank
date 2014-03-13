@@ -16,14 +16,14 @@ import com.hh.*;
  */
 public class KeyInput extends KeyAdapter
 {
-	public static LinkedList<Integer> KEYSDOWN;
+	public static LinkedList<Integer> keysDown;
 
 	/**
 	 * Initializes the list of keys held down
 	 */
 	public KeyInput()
 	{
-		KEYSDOWN = new LinkedList<Integer>();
+		keysDown = new LinkedList<Integer>();
 	}
 
 	/**
@@ -31,9 +31,9 @@ public class KeyInput extends KeyAdapter
 	 */
 	public void keyPressed(KeyEvent e)
 	{
-		if (!KEYSDOWN.contains(e.getKeyCode()))
+		if (!keysDown.contains(e.getKeyCode()))
 		{
-			KEYSDOWN.add(e.getKeyCode());
+			keysDown.add(e.getKeyCode());
 		}
 
 		if (e.getKeyCode() == KeyBinding.RESTART.VALUE())
@@ -47,9 +47,9 @@ public class KeyInput extends KeyAdapter
 	 */
 	public void keyReleased(KeyEvent e)
 	{
-		if (KEYSDOWN.contains(e.getKeyCode()))
+		if (keysDown.contains(e.getKeyCode()))
 		{
-			KEYSDOWN.remove((Integer) e.getKeyCode());
+			keysDown.remove((Integer) e.getKeyCode());
 		}
 
 		if (e.getKeyCode() == KeyBinding.PAUSE.VALUE())

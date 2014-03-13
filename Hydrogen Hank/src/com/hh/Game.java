@@ -28,7 +28,7 @@ public class Game extends Canvas implements Runnable
 
 	public static GameStateManager manager;
 	public static PlayState playState;
-	public static int WIDTH, HEIGHT, HEIGHTOFFSET;
+	public static int width, height, heightOffset;
 	private static ArtAssets artassets;
 	private static ScoreKeeper scorekeeper;
 	public static Window window;
@@ -43,8 +43,8 @@ public class Game extends Canvas implements Runnable
 	 */
 	public void init()
 	{
-		WIDTH = getWidth();
-		HEIGHT = getHeight();
+		width = getWidth();
+		height = getHeight();
 		createBufferStrategy(3);
 		bs = getBufferStrategy();
 		artassets = new ArtAssets();

@@ -10,7 +10,7 @@ package com.hh.framework;
  */
 public class GameTime
 {
-	private static long START, PREVIOUS, CURRENT;
+	private static long start, previous, current;
 	private static final float NS = 1000000000.0f;
 
 	/**
@@ -18,7 +18,7 @@ public class GameTime
 	 */
 	public static void start()
 	{
-		START = CURRENT = PREVIOUS = System.nanoTime();
+		start = current = previous = System.nanoTime();
 	}
 
 	/**
@@ -26,8 +26,8 @@ public class GameTime
 	 */
 	public static void update()
 	{
-		PREVIOUS = CURRENT;
-		CURRENT = System.nanoTime();
+		previous = current;
+		current = System.nanoTime();
 	}
 
 	/**
@@ -37,7 +37,7 @@ public class GameTime
 	 */
 	public static float runtime()
 	{
-		return (CURRENT - START) / NS;
+		return (current - start) / NS;
 	}
 
 	/**
@@ -47,6 +47,6 @@ public class GameTime
 	 */
 	public static float delta()
 	{
-		return (CURRENT - PREVIOUS) / NS;
+		return (current - previous) / NS;
 	}
 }

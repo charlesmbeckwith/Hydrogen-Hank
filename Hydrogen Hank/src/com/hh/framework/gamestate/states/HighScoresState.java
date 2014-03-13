@@ -41,7 +41,7 @@ public class HighScoresState extends GameState
 		int position = 100;
 
 		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.WIDTH, Game.HEIGHT);
+		g.fillRect(0, 0, Game.width, Game.height);
 
 		for (Score score : scorekeeper.getScores())
 		{

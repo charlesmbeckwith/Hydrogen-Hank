@@ -22,7 +22,7 @@ import com.hh.objects.Enemy;
  */
 public class Plane extends Enemy
 {
-	private Animation ANIM;
+	private Animation anim;
 	private ArtAssets art;
 
 	/**
@@ -37,36 +37,37 @@ public class Plane extends Enemy
 		super(x, y, width, height, v, EnemyType.Bird);
 		art = Game.getArtAssets();
 		initAnimations();
-		ALIVE = true;
+		alive = true;
 	}
 
 	@Override
 	public void tick()
 	{
-		X += V.DX * GameTime.delta();
-		ANIM.runAnimation();
+		x += v.dx * GameTime.delta();
+		anim.runAnimation();
 	}
 
 	@Override
 	public void render(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g.create();
-		if (ALIVE)
+		if (alive)
 		{
-			g2d.drawImage(ANIM.getAnimationFrame(), (int) (X - (WIDTH / 2)), (int) (Y - (HEIGHT / 2)),
-			    WIDTH, HEIGHT, null);
+			g2d.drawImage(anim.getAnimationFrame(), (int) (x - (width / 2)), (int) (y - (height / 2)),
+			    (int) width, (int) height, null);
 		}
-		
+
 		super.render(g);
 	}
-	
-	@Override
-	public Rectangle boundingBox(){
-		float offsetX = WIDTH * 0.08f;
-		float offsetY = HEIGHT * 0.13f;
 
-		return new Rectangle((int) (X - WIDTH / 2 + offsetX), (int) (Y - HEIGHT / 2 + offsetY),
-		    (int) (WIDTH - offsetX * 2), (int) (HEIGHT - offsetY * 2));
+	@Override
+	public Rectangle boundingBox()
+	{
+		float offsetX = width * 0.08f;
+		float offsetY = height * 0.13f;
+
+		return new Rectangle((int) (x - width / 2 + offsetX), (int) (y - height / 2 + offsetY),
+		    (int) (width - offsetX * 2), (int) (height - offsetY * 2));
 	}
 
 	/**
@@ -79,22 +80,22 @@ public class Plane extends Enemy
 		switch (rand.nextInt(4))
 		{
 		case 1:
-			ANIM = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 4), art.getSpriteFrame(
+			anim = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 4), art.getSpriteFrame(
 			    spriteID.PLANES, 5), art.getSpriteFrame(spriteID.PLANES, 6), art.getSpriteFrame(
 			    spriteID.PLANES, 7));
 			break;
 		case 2:
-			ANIM = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 8), art.getSpriteFrame(
+			anim = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 8), art.getSpriteFrame(
 			    spriteID.PLANES, 9), art.getSpriteFrame(spriteID.PLANES, 10), art.getSpriteFrame(
 			    spriteID.PLANES, 11));
 			break;
 		case 3:
-			ANIM = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 12), art.getSpriteFrame(
+			anim = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 12), art.getSpriteFrame(
 			    spriteID.PLANES, 13), art.getSpriteFrame(spriteID.PLANES, 14), art.getSpriteFrame(
 			    spriteID.PLANES, 15));
 			break;
 		default:
-			ANIM = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 0), art.getSpriteFrame(
+			anim = new Animation(1, art.getSpriteFrame(spriteID.PLANES, 0), art.getSpriteFrame(
 			    spriteID.PLANES, 1), art.getSpriteFrame(spriteID.PLANES, 2), art.getSpriteFrame(
 			    spriteID.PLANES, 3));
 			break;
