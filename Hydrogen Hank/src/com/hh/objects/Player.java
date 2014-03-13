@@ -85,7 +85,7 @@ public class Player extends GameObject
 				// TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST...
 				if (extraBalloons > 0 && !BalloonAlreadyBlownUp && HYDROGENLEVEL > BALLOONCOST && balloons.size() < 3)
 				{
-					balloons.push(new Balloon(X, Y, WIDTH / 2, HEIGHT));
+					balloons.push(new Balloon(X-12, Y+10, WIDTH / 2, HEIGHT));
 					extraBalloons--;
 					HYDROGENLEVEL -= BALLOONCOST;
 					BalloonAlreadyBlownUp = true;
@@ -135,7 +135,7 @@ public class Player extends GameObject
 			BUOYANCY += 0.0111 / (balloons.size());
 			for (Balloon bloon : balloons)
 			{
-				bloon.tick(X, Y);
+				bloon.tick(X-12, Y+10);
 			}
 
 		}
@@ -170,7 +170,7 @@ public class Player extends GameObject
 			{
 				col = true;
 				
-				if(V.DY > 300 || (balloons.isEmpty() && HYDROGENLEVEL < 10) || HYDROGENLEVEL == 0 || (extraBalloons == 0 && balloons.isEmpty()))
+				if(V.DY > 300 || (balloons.isEmpty() && HYDROGENLEVEL < BALLOONCOST) || HYDROGENLEVEL == 0 || (extraBalloons == 0 && balloons.isEmpty()))
 				{
 					Kill();
 				}
