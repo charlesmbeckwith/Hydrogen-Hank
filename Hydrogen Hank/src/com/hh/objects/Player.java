@@ -37,6 +37,8 @@ public class Player extends GameObject
 	private ArtAssets art;
 	private float buoyancy;
 	private LinkedList<String> debugOptions;
+	private boolean startDeath = false;
+	private int deathCountdown = 100;
 
 	private float hLevel;
 	private float maxHLevel = 200f;
@@ -52,6 +54,7 @@ public class Player extends GameObject
 
 		art = Game.getArtAssets();
 		initAnimations();
+		current = normal;
 	}
 
 	@Override
@@ -59,6 +62,16 @@ public class Player extends GameObject
 	{
 		if (alive)
 		{
+			if (startDeath)
+			{
+				if (deathCountdown == 0)
+				{
+					kill();
+				}
+
+				deathCountdown--;
+			}
+
 			boolean collision = collision();
 
 			if (KeyInput.keysDown.contains(KeyBinding.INFLATE.VALUE()))
@@ -123,7 +136,6 @@ public class Player extends GameObject
 			x += v.dx * GameTime.delta();
 			y += v.dy * GameTime.delta();
 
-			current = normal;
 			current.runAnimation();
 
 			// Simulate a slow leak in the balloon
@@ -152,7 +164,6 @@ public class Player extends GameObject
 					destroyBalloon();
 					break;
 				case Plane:
-					// go.Kill();
 					destroyBalloon();
 					break;
 				}
@@ -168,7 +179,7 @@ public class Player extends GameObject
 				if (v.dy > 300 || (balloons.isEmpty() && hLevel < balloonCost) || hLevel == 0
 				    || (extraBalloons == 0 && balloons.isEmpty()))
 				{
-					kill();
+					startKill();
 				}
 
 				y = (go.getY() - (height / 2) + 14);
@@ -273,8 +284,14 @@ public class Player extends GameObject
 		}
 		else
 		{
-			kill();
+			startKill();
 		}
+	}
+
+	public void startKill()
+	{
+		current = death;
+		startDeath = true;
 	}
 
 	@Override
@@ -324,7 +341,8 @@ public class Player extends GameObject
 	{
 		normal = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 0), art.getSpriteFrame(
 		    spriteID.HANK2, 1), art.getSpriteFrame(spriteID.HANK2, 1));
-		current = new Animation(3, art.getSpriteFrame(spriteID.HANK2, 0));
+		death = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 2), art.getSpriteFrame(
+		    spriteID.HANK2, 3), art.getSpriteFrame(spriteID.HANK2, 1));
 	}
 
 	public float getHydrogenLevelPercent()
