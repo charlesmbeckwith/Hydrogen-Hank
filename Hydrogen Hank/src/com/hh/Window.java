@@ -65,10 +65,10 @@ public class Window
 	public static void main(String args[])
 	{
 		Game game = new Game();
+		game.debugOptions = new ArrayList<String>();
 
 		if (args != null && args.length > 0 && args[0].equals("-debug"))
 		{
-			game.debugOptions = new ArrayList<String>();
 			game.debugOptions.add("Info");
 
 			for (int i = 1; i < args.length; i++)
