@@ -27,28 +27,29 @@ import com.hh.objects.bg.Ground;
 @SuppressWarnings("unused")
 public class Player extends GameObject
 {
-  private final float gravity = 200f;
+  private final float gravity = 9f;
   private Animation normal, death, current;
   private ArtAssets art;
-  private float buoyancy;
   private LinkedList<String> debugOptions;
   private boolean startDeath = false;
   private int deathCountdown = 100;
   private float hLevel;
   private float maxHLevel = 200f;
   private boolean grounded = false;
+  private float weight = 180f;
+  private float buoyancy;
 
   private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
   private boolean balloonAlreadyBlownUp = false;
   private int extraBalloons = 50; // How many balloons you start with
   private final int balloonCost = 10; // How much hydrogen blowing up a balloon costs.
-  private final int maxBalloons = 5;
+  private final int maxBalloons = 10;
   private boolean inflate = false;
   private boolean deflate = false;
   private float gInc = 0f;
   private final float inflateAmt = 3.0f;
   private final float deflateAmt = 3.0f;
-  private final float leakAmt = 0.1f;
+  private final float leakAmt = 0.01f;
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
@@ -86,12 +87,15 @@ public class Player extends GameObject
         v.dx += 1;
       }
 
-      v.dy = buoyancy + gravity;
-
-      if (v.dy > 1200)
+      if (v.dy > (weight - buoyancy))
       {
-        v.dy = 1200;
+        v.dy += (weight - buoyancy) * 0.01f;
+      } else if (v.dy < weight * gravity)
+      {
+        v.dy += gravity;
       }
+
+      System.out.println("V.DY: " + v.dy + " Weight: " + weight + " Buoyancy: " + buoyancy);
 
       x += v.dx * GameTime.delta();
       y += v.dy * GameTime.delta();
@@ -154,24 +158,9 @@ public class Player extends GameObject
         bloon.deflate(deflateAmt / balloons.size());
       }
 
-      buoyancy += bloon.getFillLevel() * -gravity;
+      buoyancy += (bloon.getFillLevel()) * gravity * 0.1f;
       bloon.deflate(leakAmt);
     }
-
-    if (buoyancy == 0 && !grounded)
-    {
-      gInc += gravity * 0.03f;
-    } else if (gInc > 0)
-    {
-      gInc -= gravity * 0.03f;
-
-      if (gInc < 0)
-      {
-        gInc = 0;
-      }
-    }
-
-    buoyancy += gInc;
 
     inflate = false;
     deflate = false;
@@ -207,7 +196,7 @@ public class Player extends GameObject
         col = true;
         grounded = true;
 
-        if (v.dy > 300 || (balloons.isEmpty() && hLevel < balloonCost) || hLevel == 0
+        if (v.dy > weight * 3 || (balloons.isEmpty() && hLevel < balloonCost) || hLevel == 0
             || (extraBalloons == 0 && balloons.isEmpty()))
         {
           startKill();
@@ -398,6 +387,7 @@ public class Player extends GameObject
     private int width, height, adjWidth, adjHeight;
     private float fillLevel;
     private BufferedImage img;
+    private int moveCounter;
     private Random rand = new Random();
 
     public Balloon(float x, float y, int width, int height)
@@ -406,11 +396,12 @@ public class Player extends GameObject
       this.width = (int) (width);
       this.height = height;
       fillLevel = 100;
+      moveCounter = 0;
       img = art.balloon_sheet2.getFrame(balloonColor);
       xOffset = rand.nextBoolean() ? -rand.nextFloat() * 10 : rand.nextFloat() * 10;
       yOffset = rand.nextBoolean() ? -rand.nextFloat() * 15 : rand.nextFloat() * 4;
-      adjWidth = (int) (getFillLevel() * width);
-      adjHeight = (int) (getFillLevel() * height);
+      adjWidth = (int) ((getFillLevel() / 100) * width);
+      adjHeight = (int) ((getFillLevel() / 100) * height);
     }
 
     public void tick(float x, float y)
@@ -420,16 +411,25 @@ public class Player extends GameObject
 
       if (fillLevel > 35)
       {
-        adjWidth = (int) (getFillLevel() * width);
-        adjHeight = (int) (getFillLevel() * height);
+        adjWidth = (int) ((getFillLevel() / 100) * width);
+        adjHeight = (int) ((getFillLevel() / 100) * height);
       }
-      
-      xOffset += rand.nextBoolean() ? -rand.nextFloat() : rand.nextFloat();
-      
-      if(xOffset > 10){
+
+      if (moveCounter == 10)
+      {
+        xOffset += rand.nextBoolean() ? -rand.nextFloat() : rand.nextFloat();
+        moveCounter = 0;
+      }
+      else
+      {
+        moveCounter++;
+      }
+
+      if (xOffset > 10)
+      {
         xOffset = 10;
-      }
-      else if(xOffset < -10){
+      } else if (xOffset < -10)
+      {
         xOffset = -10;
       }
 
@@ -466,7 +466,7 @@ public class Player extends GameObject
 
     public float getFillLevel()
     {
-      return fillLevel / 100;
+      return fillLevel;
     }
   }
 }
