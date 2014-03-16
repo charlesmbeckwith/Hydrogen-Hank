@@ -21,7 +21,7 @@ public class SpriteSheet
 
 	public enum spriteID
 	{
-		HANK, HANK2, BALLOON, BIRD, HYDROGEN, TANK, PLANES
+		HANK, HANK2, BALLOON, BALLOON2, BIRD, HYDROGEN, TANK, PLANES
 	}
 
 	private BufferedImage image;

@@ -129,7 +129,8 @@ public class Player extends GameObject
       if (extraBalloons > 0 && !balloonAlreadyBlownUp && hLevel > balloonCost
           && balloons.size() < maxBalloons)
       {
-        balloons.push(new Balloon(x - 12, y + 10, (int) (width / 2), (int) height));
+        balloons.add(new Balloon(x - 12, y - height / 2 + 6, (int) (width * 0.9),
+            (int) (height * 0.9)));
         extraBalloons--;
         hLevel -= balloonCost;
         balloonAlreadyBlownUp = true;
@@ -141,7 +142,7 @@ public class Player extends GameObject
 
     for (Balloon bloon : balloons)
     {
-      bloon.tick(x - 12, y + 10);
+      bloon.tick(x - 12, y - height / 2 + 6);
 
       if (inflate)
       {
@@ -391,36 +392,56 @@ public class Player extends GameObject
 
   private class Balloon
   {
-    private float x;
-    private float y;
+    private float x, y, rX, rY, xOffset, yOffset;
     private int balloonColor;
     private boolean alive = true;
     private int width, height, adjWidth, adjHeight;
     private float fillLevel;
+    private BufferedImage img;
+    private Random rand = new Random();
 
     public Balloon(float x, float y, int width, int height)
     {
-
-      Random rand = new Random();
-      balloonColor = rand.nextInt(3);
+      balloonColor = rand.nextInt(8);
       this.width = (int) (width);
       this.height = height;
       fillLevel = 100;
-      setOffset(x, y);
-
+      img = art.balloon_sheet2.getFrame(balloonColor);
+      xOffset = rand.nextBoolean() ? -rand.nextFloat() * 10 : rand.nextFloat() * 10;
+      yOffset = rand.nextBoolean() ? -rand.nextFloat() * 15 : rand.nextFloat() * 4;
+      adjWidth = (int) (getFillLevel() * width);
+      adjHeight = (int) (getFillLevel() * height);
     }
-    
+
     public void tick(float x, float y)
     {
-      adjWidth = (int)(getFillLevel() * width);
-      adjHeight = (int)(getFillLevel() * height);
-      setOffset(x, y);
+      this.x = x;
+      this.y = y;
+
+      if (fillLevel > 35)
+      {
+        adjWidth = (int) (getFillLevel() * width);
+        adjHeight = (int) (getFillLevel() * height);
+      }
+      
+      xOffset += rand.nextBoolean() ? -rand.nextFloat() : rand.nextFloat();
+      
+      if(xOffset > 10){
+        xOffset = 10;
+      }
+      else if(xOffset < -10){
+        xOffset = -10;
+      }
+
+      rX = (int) x - adjWidth / 2 + xOffset;
+      rY = (int) y - 10 - adjHeight + yOffset;
     }
 
     public void render(Graphics2D g)
     {
-      g.drawImage(art.getSpriteFrame(spriteID.BALLOON, balloonColor), (int) x, (int) y, adjWidth,
-          height, null);
+      g.setColor(Color.gray);
+      g.drawLine((int) rX + adjWidth / 2, (int) rY + adjHeight - 5, (int) x, (int) y);
+      g.drawImage(img, (int) rX, (int) rY, adjWidth, adjHeight, null);
     }
 
     public void inflate(float amt)
@@ -446,18 +467,6 @@ public class Player extends GameObject
     public float getFillLevel()
     {
       return fillLevel / 100;
-    }
-
-    /**
-     * Sets X,Y position to be offset by player position by a certain amount.
-     * 
-     * @param x
-     * @param y
-     */
-    public void setOffset(float x, float y)
-    {
-      this.x = x - adjWidth / 2;
-      this.y = (float) (y - height * 1.4);
     }
   }
 }
