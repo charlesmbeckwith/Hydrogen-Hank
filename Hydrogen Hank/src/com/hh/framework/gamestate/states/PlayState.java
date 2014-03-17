@@ -191,6 +191,7 @@ public class PlayState extends GameState
 				while (yStartUp > sceneWindow.y)
 				{
 					generateCloud((int) i, (int) yStartUp);
+					generateEnemy((int) i, (int) yStartUp);
 					yStartUp -= meter;
 
 					if (yStartDown - yStartUp >= Game.height * 2.5)
