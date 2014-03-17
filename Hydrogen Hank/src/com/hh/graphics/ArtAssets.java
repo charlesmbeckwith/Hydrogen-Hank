@@ -20,10 +20,10 @@ import com.hh.graphics.SpriteSheet.spriteID;
 public class ArtAssets
 {
   public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2, balloon_sheet, balloon_sheet2,
-      bird_sheet, hydrogen_sheet, fulltank_sheet, planes_sheet;
+      bird_sheet, hydrogen_sheet, fulltank_sheet, planes_sheet, tab_sheet;
 
   public BufferedImage dirt, cloud, pauseScreen;
-  public BufferedImage mainTitle, button, hud, emptytank;
+  public BufferedImage mainTitle, button, hud, emptytank, highScoreBG;
 
   /**
    * Initializes the art assets and loads them
@@ -44,6 +44,7 @@ public class ArtAssets
         "/graphics/powerups/hydrogen/hydrogenv4.png");
     bird_sheet = new SpriteSheet(spriteID.BIRD, "/oldgraphics/birdsheet.png");
     planes_sheet = new SpriteSheet(spriteID.PLANES, "/graphics/enemies/planes.png");
+    tab_sheet = new SpriteSheet(spriteID.TABS, "/graphics/highscores/tabsheet.png");
 
     mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
     button = loadImage("/graphics/mainmenu/button.png");
@@ -55,6 +56,8 @@ public class ArtAssets
     dirt = loadImage("/oldgraphics/dirtblock.png");
     cloud = loadImage("/graphics/bgelements/cloud2.png");
     pauseScreen = loadImage("/oldgraphics/PauseScreen.png");
+    
+    highScoreBG = loadImage("/graphics/highscores/highscoresBG.png");
   }
 
   /**

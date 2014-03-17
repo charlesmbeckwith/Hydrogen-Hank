@@ -18,7 +18,6 @@ public class MouseInput extends MouseAdapter
 	public void mouseReleased(MouseEvent e)
 	{
 		if (Game.manager.getFirstClass() == TitleMenuAnimState.class
-		    || Game.manager.getFirstClass() == HighScoresState.class
 		    || Game.manager.getFirstClass() == IntroAnimation.class)
 		{
 			Game.manager.pop();

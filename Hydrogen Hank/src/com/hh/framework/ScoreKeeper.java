@@ -15,6 +15,8 @@ import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.hh.framework.Score.ScoreType;
+
 public class ScoreKeeper
 {
 	private static String path = "highscores.sav";
@@ -38,6 +40,18 @@ public class ScoreKeeper
 	public List<Score> getScores()
 	{
 		return scores;
+	}
+
+	public List<Score> getScores(ScoreType type)
+	{
+		List<Score> scoreList = new ArrayList();
+		for (Score score : scores)
+		{
+			if (score.getType() == type)
+				scoreList.add(score);
+		}
+
+		return scoreList;
 	}
 
 	public void saveScores()

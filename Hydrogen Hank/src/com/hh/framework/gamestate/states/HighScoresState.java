@@ -4,24 +4,32 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.util.ArrayList;
 
 import com.hh.Game;
+import com.hh.framework.Handler;
 import com.hh.framework.RenderHelper;
 import com.hh.framework.Score;
 import com.hh.framework.Score.ScoreType;
 import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.GameState;
+import com.hh.graphics.ArtAssets;
+import com.hh.objects.ScoreTab;
 
 public class HighScoresState extends GameState
 {
+	private Handler handler = new Handler();
 	private RenderHelper renderHelp = new RenderHelper();
 	private ScoreKeeper scorekeeper;
 	private Font font;
+	private ArtAssets art;
 
 	public HighScoresState()
 	{
+		int tabX = 250;
 		scorekeeper = Game.getScoreKeeper();
 		font = new Font("Arial", Font.PLAIN, 20);
+		art = Game.getArtAssets();
 
 		if (scorekeeper.getScores().size() == 0)
 		{
@@ -29,25 +37,26 @@ public class HighScoresState extends GameState
 			scorekeeper.addScore(new Score(50, ScoreType.ALTITUDE));
 			scorekeeper.addScore(new Score(50, ScoreType.TIME));
 		}
+
+		handler.addObject(new ScoreTab("Overall", scorekeeper.getScores(ScoreType.OVERALL), tabX, 90,
+		    150, 64, true));
+		handler.addObject(new ScoreTab("Altitude", scorekeeper.getScores(ScoreType.ALTITUDE),
+		    tabX + 150, 90, 150, 64, false));
+		handler.addObject(new ScoreTab("Flight Time", scorekeeper.getScores(ScoreType.TIME),
+		    tabX + 300, 90, 150, 64, false));
 	}
 
 	public void tick()
 	{
-
+		handler.tick();
 	}
 
 	public void render(Graphics g)
 	{
-		int position = 100;
-
 		g.setColor(new Color(109, 136, 253));
 		g.fillRect(0, 0, Game.width, Game.height);
 
-		for (Score score : scorekeeper.getScores())
-		{
-			renderHelp.outlinedText((Graphics2D) g, font, String.valueOf(score.getValue()), 0.9f,
-			    Color.black, Color.white, 100, position);
-			position += 50;
-		}
+		g.drawImage(art.highScoreBG, 100, 100, 600, 425, null);
+		handler.render(g);
 	}
 }
