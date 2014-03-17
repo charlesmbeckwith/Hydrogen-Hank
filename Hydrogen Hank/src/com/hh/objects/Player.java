@@ -135,7 +135,7 @@ public class Player extends GameObject
       if (extraBalloons > 0 && !balloonAlreadyBlownUp && hLevel > balloonCost
           && balloons.size() < maxBalloons)
       {
-        balloons.add(new Balloon(x - 12, y - height / 2 + 6, (int) (width * 0.9),
+        balloons.push(new Balloon(x - 12, y - height / 2 + 6, (int) (width * 0.9),
             (int) (height * 0.9)));
         extraBalloons--;
         hLevel -= balloonCost;

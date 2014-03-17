@@ -7,6 +7,7 @@ import com.hh.Game;
 import com.hh.framework.GameObject;
 import com.hh.framework.gamestate.states.*;
 import com.hh.objects.MenuButton;
+import com.hh.objects.ScoreTab;
 
 public class MouseInput extends MouseAdapter
 {
@@ -32,6 +33,23 @@ public class MouseInput extends MouseAdapter
 					if (button.isSelected())
 					{
 						switchMenuButton(button);
+					}
+				}
+			}
+		}
+		else if (Game.manager.getFirstClass() == HighScoresState.class)
+		{
+			for (GameObject go : HighScoresState.handler.getObjects())
+			{
+				if (go.getClass() == ScoreTab.class)
+				{
+					ScoreTab tab = (ScoreTab) go;
+					if (tab.isHoveringOver())
+					{
+						tab.setSelected(true);
+					}
+					else{
+						tab.setSelected(false);
 					}
 				}
 			}

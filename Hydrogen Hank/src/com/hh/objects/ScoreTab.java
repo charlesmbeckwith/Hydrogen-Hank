@@ -41,7 +41,7 @@ public class ScoreTab extends GameObject
 		IMG = art.tab_sheet.getFrame(1);
 		IMGSelected = art.tab_sheet.getFrame(0);
 		font = new Font("Arial", Font.BOLD, 20);
-		this.selected = false;
+		this.selected = selected;
 		this.text = text;
 		this.scores = scores;
 	}
@@ -49,19 +49,6 @@ public class ScoreTab extends GameObject
 	@Override
 	public void tick()
 	{
-		Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
-		mouseLoc.x -= Game.getPosition().x;
-		mouseLoc.y -= Game.getPosition().y + 25; // 25 pixels is roughly the size of the top of the
-		                                         // window
-
-		if (this.boundingBox().contains(mouseLoc))
-		{
-			selected = true;
-		}
-		else
-		{
-			selected = false;
-		}
 	}
 
 	@Override
@@ -101,9 +88,18 @@ public class ScoreTab extends GameObject
 	{
 		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
 	}
+	
+	public boolean isHoveringOver(){
+		Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+		mouseLoc.x -= Game.getPosition().x;
+		mouseLoc.y -= Game.getPosition().y + 25; // 25 pixels is roughly the size of the top of the
+		                                         // window
+		
+		return this.boundingBox().contains(mouseLoc);
+	}
 
-	public boolean isSelected()
+	public void setSelected(boolean selected)
 	{
-		return selected;
+		this.selected = selected;
 	}
 }

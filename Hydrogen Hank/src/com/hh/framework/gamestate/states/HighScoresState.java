@@ -18,7 +18,7 @@ import com.hh.objects.ScoreTab;
 
 public class HighScoresState extends GameState
 {
-	private Handler handler = new Handler();
+	public static Handler handler = new Handler();
 	private RenderHelper renderHelp = new RenderHelper();
 	private ScoreKeeper scorekeeper;
 	private Font font;
