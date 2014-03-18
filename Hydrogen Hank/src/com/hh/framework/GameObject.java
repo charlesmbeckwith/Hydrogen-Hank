@@ -6,20 +6,17 @@ import java.awt.Rectangle;
 /**
  * COSC3550 Spring 2014 Homework 3
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Defines the generic GameObject super
- * class
+ * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Defines the
+ * generic GameObject super class
  * 
  * @author Mark Schlottke, Charlie Beckwith
  */
-public abstract class GameObject
-{
-	public enum ObjectID
-	{
+public abstract class GameObject {
+	public enum ObjectID {
 		Background, BackgroundElement, Tile, Ground, Button, Player, Enemy, Powerup
 	}
 
-	public enum ObjectLayer
-	{
+	public enum ObjectLayer {
 		background, middleground, foreground, hud, toplevel
 	}
 
@@ -34,14 +31,13 @@ public abstract class GameObject
 	 * Creates a stationary gameobject
 	 * 
 	 * @param x
-	 *          - x position of the gameobject
+	 *            - x position of the gameobject
 	 * @param y
-	 *          - y position of the gameobject
+	 *            - y position of the gameobject
 	 * @param id
-	 *          - ObjectID of the gameobject
+	 *            - ObjectID of the gameobject
 	 */
-	public GameObject(float x, float y, ObjectID id)
-	{
+	public GameObject(float x, float y, ObjectID id) {
 		this.x = x;
 		this.y = y;
 		this.v = new Vector2D();
@@ -52,16 +48,15 @@ public abstract class GameObject
 	 * Creates a stationary gameobject with an object layer
 	 * 
 	 * @param x
-	 *          - x position of the gameobject
+	 *            - x position of the gameobject
 	 * @param y
-	 *          - y position of the gameobject
+	 *            - y position of the gameobject
 	 * @param id
-	 *          - ObjectID of the gameobject
+	 *            - ObjectID of the gameobject
 	 * @param layer
-	 *          - ObjectLayer of the gameobject
+	 *            - ObjectLayer of the gameobject
 	 */
-	public GameObject(float x, float y, ObjectID id, ObjectLayer layer)
-	{
+	public GameObject(float x, float y, ObjectID id, ObjectLayer layer) {
 		this.x = x;
 		this.y = y;
 		this.v = new Vector2D();
@@ -72,18 +67,18 @@ public abstract class GameObject
 	 * Creates a stationary gameobject
 	 * 
 	 * @param x
-	 *          - x position of the gameobject
+	 *            x position of the gameobject
 	 * @param y
-	 *          - y position of the gameobject
+	 *            y position of the gameobject
 	 * @param width
-	 *          - width of the gameobject
+	 *            width of the gameobject
 	 * @param height
-	 *          - height of the gameobject
+	 *            height of the gameobject
 	 * @param id
-	 *          - ObjectID of the gameobject
+	 *            ObjectID of the gameobject
 	 */
-	public GameObject(float x, float y, int width, int height, ObjectID id, ObjectLayer layer)
-	{
+	public GameObject(float x, float y, int width, int height, ObjectID id,
+			ObjectLayer layer) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -97,16 +92,16 @@ public abstract class GameObject
 	 * Creates a stationary gameobject
 	 * 
 	 * @param x
-	 *          - x position of the gameobject
+	 *            - x position of the gameobject
 	 * @param y
-	 *          - y position of the gameobject
+	 *            - y position of the gameobject
 	 * @param v
-	 *          - velocity vector of the gameobject
+	 *            - velocity vector of the gameobject
 	 * @param id
-	 *          - ObjectID of the gameobject
+	 *            - ObjectID of the gameobject
 	 */
-	public GameObject(float x, float y, Vector2D v, ObjectID id, ObjectLayer layer)
-	{
+	public GameObject(float x, float y, Vector2D v, ObjectID id,
+			ObjectLayer layer) {
 		this.x = x;
 		this.y = y;
 		this.v = v;
@@ -118,21 +113,20 @@ public abstract class GameObject
 	 * Creates a stationary gameobject
 	 * 
 	 * @param x
-	 *          - x position of the gameobject
+	 *            - x position of the gameobject
 	 * @param y
-	 *          - y position of the gameobject
+	 *            - y position of the gameobject
 	 * @param width
-	 *          - width of the gameobject
+	 *            - width of the gameobject
 	 * @param height
-	 *          - height of the gameobject
+	 *            - height of the gameobject
 	 * @param v
-	 *          - velocity vector of the gameobject
+	 *            - velocity vector of the gameobject
 	 * @param id
-	 *          - ObjectID of the gameobject
+	 *            - ObjectID of the gameobject
 	 */
-	public GameObject(float x, float y, int width, int height, Vector2D v, ObjectID id,
-	    ObjectLayer layer)
-	{
+	public GameObject(float x, float y, int width, int height, Vector2D v,
+			ObjectID id, ObjectLayer layer) {
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -151,7 +145,7 @@ public abstract class GameObject
 	 * Draws the gameobject with the given graphics object
 	 * 
 	 * @param g
-	 *          - Graphics object to draw with
+	 *            - Graphics object to draw with
 	 */
 	public abstract void render(Graphics g);
 
@@ -165,8 +159,7 @@ public abstract class GameObject
 	/**
 	 * Kills the gameobject Used to tag it for removal
 	 */
-	public void kill()
-	{
+	public void kill() {
 		this.alive = false;
 	}
 
@@ -175,8 +168,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public float getX()
-	{
+	public float getX() {
 		return this.x;
 	}
 
@@ -185,8 +177,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setX(float x)
-	{
+	public void setX(float x) {
 		this.x = x;
 	}
 
@@ -195,8 +186,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public float getY()
-	{
+	public float getY() {
 		return this.y;
 	}
 
@@ -205,8 +195,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setY(float y)
-	{
+	public void setY(float y) {
 		this.y = y;
 	}
 
@@ -215,8 +204,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public float getWidth()
-	{
+	public float getWidth() {
 		return this.width;
 	}
 
@@ -225,8 +213,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setWidth(float width)
-	{
+	public void setWidth(float width) {
 		this.width = width;
 	}
 
@@ -235,8 +222,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public float getHeight()
-	{
+	public float getHeight() {
 		return this.height;
 	}
 
@@ -245,8 +231,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setHeight(float height)
-	{
+	public void setHeight(float height) {
 		this.height = height;
 	}
 
@@ -255,8 +240,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public Vector2D getVelocity()
-	{
+	public Vector2D getVelocity() {
 		return this.v;
 	}
 
@@ -265,8 +249,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setVelocity(Vector2D v)
-	{
+	public void setVelocity(Vector2D v) {
 		this.v = v;
 	}
 
@@ -275,8 +258,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public boolean isAlive()
-	{
+	public boolean isAlive() {
 		return this.alive;
 	}
 
@@ -285,8 +267,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setAlive(boolean alive)
-	{
+	public void setAlive(boolean alive) {
 		this.alive = alive;
 	}
 
@@ -295,8 +276,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public ObjectID getId()
-	{
+	public ObjectID getId() {
 		return this.id;
 	}
 
@@ -305,8 +285,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setId(ObjectID id)
-	{
+	public void setId(ObjectID id) {
 		this.id = id;
 	}
 
@@ -315,8 +294,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public ObjectLayer getLayer()
-	{
+	public ObjectLayer getLayer() {
 		return this.layer;
 	}
 
@@ -325,8 +303,7 @@ public abstract class GameObject
 	 * 
 	 * @return
 	 */
-	public void setLayer(ObjectLayer layer)
-	{
+	public void setLayer(ObjectLayer layer) {
 		this.layer = layer;
 	}
 }
