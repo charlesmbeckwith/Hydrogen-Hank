@@ -11,3 +11,6 @@ Controls(Controlled by the config,config file):
 [DOWN]	: Slightly deflate all balloons
 [LEFT] 	: Pans the camera to the left
 [RIGHT]	: Pans the camera to the right
+[ENTER]	: Pause/Unpause/Return
+
+The left mouse click is used in menu selection.
