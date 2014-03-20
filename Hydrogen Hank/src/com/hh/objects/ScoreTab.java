@@ -16,9 +16,11 @@ import com.hh.framework.*;
 import com.hh.graphics.ArtAssets;
 
 /**
- * COSC3550 Spring 2014 Homework 2
+ * COSC3550 Spring 2014
  * 
- * Defines the Brick class
+ * Created : Mar. 5, 2014 
+ * Last Updated : Mar. 5, 2014 
+ * Purpose: Defines the Tab for the High Scores state
  * 
  * @author Mark Schlottke
  */

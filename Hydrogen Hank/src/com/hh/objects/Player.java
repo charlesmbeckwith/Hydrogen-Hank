@@ -18,11 +18,13 @@ import com.hh.input.KeyInput;
 import com.hh.objects.bg.Ground;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Defines the Dust Bunny
+ * Created : Feb. 25, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines the player
  * 
- * @author Mark Schlottke
+ * @author Mark Schlottke & Charlie Beckwith
  */
 @SuppressWarnings("unused")
 public class Player extends GameObject

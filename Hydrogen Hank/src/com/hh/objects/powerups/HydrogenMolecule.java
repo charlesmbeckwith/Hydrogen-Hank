@@ -11,8 +11,13 @@ import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Powerup;
 
 /**
- * @author Charlie Beckwith
+ * COSC3550 Spring 2014
  * 
+ * Created : Feb. 28, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Defines a hydrogen molecule powerup
+ * 
+ * @author Charlie Beckwith
  */
 public class HydrogenMolecule extends Powerup
 {

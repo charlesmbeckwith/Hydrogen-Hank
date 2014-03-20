@@ -9,8 +9,13 @@ import java.awt.Rectangle;
 import com.hh.objects.Powerup;
 
 /**
- * @author Charlie Beckwith
+ * COSC3550 Spring 2014
  * 
+ * Created : Feb. 28, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Defines a hydrogen tank powerup
+ * 
+ * @author Charlie Beckwith
  */
 public class HydrogenTank extends Powerup
 {

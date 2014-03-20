@@ -10,11 +10,13 @@ import com.hh.graphics.ArtAssets;
 import com.hh.objects.BackgroundElement;
 
 /**
- * COSC3550 Spring 2014 Homework 2
+ * COSC3550 Spring 2014
  * 
- * Defines the Brick class
+ * Created : Feb. 25, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Defines the ground
  * 
- * @author Mark Schlottke, Charlie Beckwith
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public class Cloud extends BackgroundElement
 {

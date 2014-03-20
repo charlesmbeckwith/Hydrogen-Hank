@@ -9,8 +9,13 @@ import java.awt.Rectangle;
 import com.hh.objects.Powerup;
 
 /**
- * @author blinginbeckwith
+ * COSC3550 Spring 2014
  * 
+ * Created : Feb. 28, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Defines a balloon pack powerup
+ * 
+ * @author Charlie Beckwith
  */
 public class BalloonPack extends Powerup
 {

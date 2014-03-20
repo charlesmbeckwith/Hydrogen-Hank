@@ -16,8 +16,13 @@ import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Enemy;
 
 /**
- * @author blinginbeckwith
+ * COSC3550 Spring 2014
  * 
+ * Created : Feb. 28, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines a bird enemy
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public class Bird extends Enemy
 {

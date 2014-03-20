@@ -12,8 +12,13 @@ import com.hh.Game;
 import com.hh.framework.GameObject;
 
 /**
- * @author blinginbeckwith
+ * COSC3550 Spring 2014
  * 
+ * Created : Feb. 28, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Defines a powerup
+ * 
+ * @author Charlie Beckwith
  */
 public class Powerup extends GameObject
 {

@@ -17,8 +17,13 @@ import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Enemy;
 
 /**
- * @author blinginbeckwith
+ * COSC3550 Spring 2014
  * 
+ * Created : Mar. 5, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines a plane
+ * 
+ * @author Mark Schlottke
  */
 public class Plane extends Enemy
 {
