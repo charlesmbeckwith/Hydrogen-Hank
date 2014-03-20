@@ -4,12 +4,13 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Defines the
- * generic GameObject super class
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Generic Game Object
  * 
- * @author Mark Schlottke, Charlie Beckwith
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public abstract class GameObject {
 	public enum ObjectID {

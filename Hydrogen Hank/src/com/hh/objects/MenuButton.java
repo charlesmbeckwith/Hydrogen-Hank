@@ -8,9 +8,11 @@ import com.hh.framework.*;
 import com.hh.graphics.ArtAssets;
 
 /**
- * COSC3550 Spring 2014 Homework 2
+ * COSC3550 Spring 2014
  * 
- * Defines the Brick class
+ * Created : Feb. 25, 2014 
+ * Last Updated : Feb. 25, 2014 
+ * Purpose: Defines a menu button
  * 
  * @author Mark Schlottke
  */

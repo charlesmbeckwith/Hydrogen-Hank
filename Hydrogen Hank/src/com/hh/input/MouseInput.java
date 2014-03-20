@@ -9,6 +9,15 @@ import com.hh.framework.gamestate.states.*;
 import com.hh.objects.MenuButton;
 import com.hh.objects.ScoreTab;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Allows mouseclicks
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public class MouseInput extends MouseAdapter
 {
 	public void mousePressed(MouseEvent e)

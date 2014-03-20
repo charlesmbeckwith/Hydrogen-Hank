@@ -10,6 +10,15 @@ import com.hh.Game;
 import com.hh.framework.RenderHelper;
 import com.hh.framework.gamestate.GameState;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines the Loading state for the game
+ * 
+ * @author Mark Schlottke
+ */
 public class LoadState extends GameState
 {
 	private RenderHelper renderHelp;

@@ -10,12 +10,14 @@ import javax.imageio.ImageIO;
 import com.hh.graphics.SpriteSheet.spriteID;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Loads an provides access to Art
- * Assets for the 'Dust Bunny Mayhem' game
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Loads an provides access to Art
+ * Assets for the 'Hydrogen Hank' game
  * 
- * @author Mark Schlottke
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public class ArtAssets
 {

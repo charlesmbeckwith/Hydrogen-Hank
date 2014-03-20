@@ -15,12 +15,14 @@ import com.hh.input.KeyInput;
 import com.hh.input.MouseInput;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014 Homework 5
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 11, 2014 Purpose: Create and run the game thread for
- * the 'Dust Bunny Mayhem' game
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Create and run the game thread for
+ * the 'Hydrogen Hank' game
  * 
- * @author Mark Schlottke
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public class Game extends Canvas implements Runnable
 {

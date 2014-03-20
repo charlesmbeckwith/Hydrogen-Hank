@@ -16,6 +16,15 @@ import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.ScoreTab;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines the High Scores state for the game
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public class HighScoresState extends GameState
 {
 	public static Handler handler = new Handler();

@@ -4,6 +4,15 @@ import com.hh.Game;
 import com.hh.input.KeyBinding;
 import com.hh.input.KeyInput;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Simulates a camera
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public class Camera
 {
 	private float x, y;

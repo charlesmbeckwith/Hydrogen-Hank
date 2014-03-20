@@ -6,6 +6,15 @@ import javax.sound.midi.MidiSystem;
 import javax.sound.midi.MidiUnavailableException;
 import javax.sound.midi.Synthesizer;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Feb. 25, 2014 
+ * Purpose: Accesses and plays the synthesizer
+ * 
+ * @author Charlie Beckwith
+ */
 public class SynthSound
 {
 	private Synthesizer synth;

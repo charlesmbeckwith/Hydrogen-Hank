@@ -17,6 +17,15 @@ import java.util.List;
 
 import com.hh.framework.Score.ScoreType;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Mar. 11, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Loads, saves, and sorts the scores for display
+ * 
+ * @author Mark Schlottke
+ */
 public class ScoreKeeper
 {
 	private static String path = "highscores.sav";

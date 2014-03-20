@@ -9,6 +9,15 @@ import java.awt.RenderingHints;
 import java.awt.Shape;
 import java.awt.font.GlyphVector;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Mar. 4, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Object to contain common rendering techniques
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public class RenderHelper
 {
 	public RenderHelper()

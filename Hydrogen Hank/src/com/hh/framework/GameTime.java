@@ -1,10 +1,11 @@
 package com.hh.framework;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 7, 2014 Purpose: Maintains the runtime of the game and
- * provides the delta time for movement of gameobjects
+ * Created : Feb. 7, 2014 
+ * Last Updated : Feb. 7, 2014
+ * Purpose: Keeps track of the game time
  * 
  * @author Mark Schlottke
  */

@@ -8,9 +8,12 @@ import java.util.ArrayList;
 /**
  * COSC3550 Spring 2014
  * 
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Create the game window for
+ * the 'Hydrogen Hank' game
  * 
- * 
- * @author Mark Schlottke
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public class Window
 {

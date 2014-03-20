@@ -4,11 +4,13 @@ import java.awt.image.BufferedImage;
 import java.awt.*;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 7, 2014 Purpose: Creates a flipbook animation.
+ * Created : Feb. 7, 2014 
+ * Last Updated : Feb. 7, 2014 
+ * Purpose: Creates a flipbook animation.
  * 
- * @author Mark
+ * @author Mark Schlottke
  */
 public class Animation
 {

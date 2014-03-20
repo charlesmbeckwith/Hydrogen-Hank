@@ -6,10 +6,15 @@ import java.util.LinkedList;
 import com.hh.framework.GameObject.ObjectLayer;
 
 /**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 20, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: * 
  * 
  * @author Charlie Beckwith
  * @comments subclass of LinkedList to implement a sorting algorithm and potentially other features.
- * 
+ * @comments deprecated until further notice
  */
 public class LinkedGameObjects extends LinkedList<GameObject>
 {

@@ -7,9 +7,11 @@ import java.util.LinkedList;
 import com.hh.*;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 10, 2014 Purpose: Gives the player control over
+ * Created : Feb. 7, 2014 
+ * Last Updated : Feb. 10, 2014 
+ * Purpose: Gives the player control over
  * aspects of the game
  * 
  * @author Mark Schlottke

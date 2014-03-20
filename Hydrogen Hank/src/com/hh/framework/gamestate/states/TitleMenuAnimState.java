@@ -13,6 +13,15 @@ import com.hh.objects.MenuButton;
 import com.hh.objects.MenuButton.ButtonID;
 import com.hh.objects.bg.Cloud;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines the Animation for the Main Menu state
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public class TitleMenuAnimState extends GameState
 {
 	private int position = Game.height;

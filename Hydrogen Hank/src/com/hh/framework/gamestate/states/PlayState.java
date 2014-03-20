@@ -21,6 +21,15 @@ import com.hh.objects.enemies.*;
 // import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines the Main Play state for the game
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public class PlayState extends GameState
 {
 	public static Handler handler;

@@ -6,12 +6,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 8, 2014 Purpose: Helper class to handle to the
- * gameobject list
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Handles a set of game objects' ticks and renders
  * 
- * @author Mark Schlottke
+ * @author Mark Schlottke & Charlie Beckwith
  */
 public class Handler
 {

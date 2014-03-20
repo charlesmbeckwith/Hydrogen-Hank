@@ -89,7 +89,6 @@ public class Player extends GameObject
 
       if (v.dy > (weight - buoyancy))
       {
-        System.out.println("V.DY: " + v.dy + " Weight: " + weight + " Buoyancy: " + buoyancy);
         v.dy += (weight - buoyancy) * 0.01f;
       } else if (v.dy < weight * gravity )
       {

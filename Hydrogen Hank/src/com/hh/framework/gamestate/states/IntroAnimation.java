@@ -20,6 +20,15 @@ import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.bg.Cloud;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines the Intro Animation state for the game
+ * 
+ * @author Charlie Beckwith
+ */
 public class IntroAnimation extends GameState
 {
 	private ArtAssets art = Game.getArtAssets();

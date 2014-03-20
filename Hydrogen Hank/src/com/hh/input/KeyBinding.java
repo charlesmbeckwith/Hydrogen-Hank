@@ -6,6 +6,15 @@ import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.InputStreamReader;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Feb. 28, 2014 
+ * Purpose: Defines and loads the keybindings
+ * 
+ * @author Mark Schlottke & Charlie Beckwith
+ */
 public enum KeyBinding
 {
 	INFLATE(KeyEvent.VK_W), DEFLATE(KeyEvent.VK_S), PAN_RIGHT(KeyEvent.VK_A), PAN_LEFT(KeyEvent.VK_D), FANON(

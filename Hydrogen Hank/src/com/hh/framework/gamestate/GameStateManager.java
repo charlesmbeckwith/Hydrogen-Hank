@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.ListIterator;
 
+/**
+ * COSC3550 Spring 2014
+ * 
+ * Created : Feb. 25, 2014 
+ * Last Updated : Feb. 25, 2014 
+ * Purpose: Manages a linked list of GameState objects' ticks and renders 
+ * 
+ * @author Mark Schlottke
+ */
 public class GameStateManager
 {
 	private LinkedList<GameState> states = new LinkedList<GameState>();

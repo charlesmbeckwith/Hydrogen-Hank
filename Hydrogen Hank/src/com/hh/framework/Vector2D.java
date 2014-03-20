@@ -1,9 +1,11 @@
 package com.hh.framework;
 
 /**
- * COSC3550 Spring 2014 Homework 3
+ * COSC3550 Spring 2014
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 7, 2014 Purpose: Defines a Vector2D object Primarily
+ * Created : Feb. 7, 2014 
+ * Last Updated : Feb. 7, 2014 
+ * Purpose: Defines a Vector2D object Primarily
  * used for gameobject velocities
  * 
  * @author Mark Schlottke

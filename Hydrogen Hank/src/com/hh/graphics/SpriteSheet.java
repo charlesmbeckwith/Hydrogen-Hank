@@ -11,7 +11,9 @@ import javax.imageio.ImageIO;
 /**
  * COSC3550 Spring 2014 Homework 3
  * 
- * Created : Feb. 7, 2014 Last Updated : Feb. 26, 2014 Purpose: Defines a BufferedImage as a
+ * Created : Feb. 7, 2014 
+ * Last Updated : Mar. 19, 2014 
+ * Purpose: Defines a BufferedImage as a
  * SpriteSheet
  * 
  * @author Mark Schlottke and Charlie Beckwith
