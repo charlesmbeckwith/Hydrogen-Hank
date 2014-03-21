@@ -8,7 +8,6 @@ import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
-import com.hh.Game;
 import com.hh.framework.DebugManager;
 import com.hh.framework.GameObject;
 

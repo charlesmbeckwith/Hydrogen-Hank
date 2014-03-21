@@ -494,7 +494,7 @@ public class Player
     {
       g.setColor(Color.gray);
       g.drawLine((int) rX + adjWidth / 2, (int) rY + adjHeight - 5, (int) x,
-                 (int) y);
+                 (int) y+10);
       g.drawImage(img, (int) rX, (int) rY, adjWidth, adjHeight, null);
     }
 

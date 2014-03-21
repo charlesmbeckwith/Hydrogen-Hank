@@ -53,7 +53,7 @@ public class ScoreKeeper
 
 	public List<Score> getScores(ScoreType type)
 	{
-		List<Score> scoreList = new ArrayList();
+		List<Score> scoreList = new ArrayList<Score>();
 		for (Score score : scores)
 		{
 			if (score.getType() == type)

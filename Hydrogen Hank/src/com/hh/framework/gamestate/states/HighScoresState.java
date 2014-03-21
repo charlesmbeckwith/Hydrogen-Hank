@@ -3,9 +3,6 @@ package com.hh.framework.gamestate.states;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.util.ArrayList;
-
 import com.hh.Game;
 import com.hh.framework.Handler;
 import com.hh.framework.RenderHelper;
@@ -28,9 +25,11 @@ import com.hh.objects.ScoreTab;
 public class HighScoresState extends GameState
 {
 	public static Handler handler = new Handler();
-	private RenderHelper renderHelp = new RenderHelper();
+	@SuppressWarnings("unused")
+  private RenderHelper renderHelp = new RenderHelper();
 	private ScoreKeeper scorekeeper;
-	private Font font;
+	@SuppressWarnings("unused")
+  private Font font;
 	private ArtAssets art;
 
 	public HighScoresState()
