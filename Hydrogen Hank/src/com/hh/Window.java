@@ -6,12 +6,8 @@ import java.awt.*;
 import java.util.ArrayList;
 
 /**
- * COSC3550 Spring 2014
- * 
- * Created : Feb. 7, 2014 
- * Last Updated : Mar. 19, 2014 
- * Purpose: Create the game window for
- * the 'Hydrogen Hank' game
+ * COSC3550 Spring 2014 Created : Feb. 7, 2014 Last Updated : Mar. 19, 2014
+ * Purpose: Create the game window for the 'Hydrogen Hank' game
  * 
  * @author Mark Schlottke & Charlie Beckwith
  */
@@ -68,19 +64,22 @@ public class Window
 	public static void main(String args[])
 	{
 		Game game = new Game();
-		game.debugOptions = new ArrayList<String>();
+		Game.debugOptions = new ArrayList<String>();
 
-		if (args != null && args.length > 0 && args[0].equals("-debug"))
+		if (args != null && args.length > 0)
 		{
-			game.debugOptions.add("Info");
+		  if(args[0].equals("-debug"))
+		    {
+			Game.debugOptions.add("Info");
 
 			for (int i = 1; i < args.length; i++)
 			{
-				game.debugOptions.add(args[i]);
+				Game.debugOptions.add(args[i]);
 			}
+		    }
 		}
 
-		game.window = new Window(800, 600, "Hydrogen Hank", game);
+		Game.window = new Window(800, 600, "Hydrogen Hank", game);
 	}
 
 }

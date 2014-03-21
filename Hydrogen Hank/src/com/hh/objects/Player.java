@@ -257,7 +257,7 @@ public class Player extends GameObject
 
       // BufferedImage image = art.hueImg(CURRENT.getAnimationFrame(),
       // width, height, HUE);
-      if (Game.debugOptions().contains("Info"))
+      if (DebugManager.showBounds)
       {
         g2d.setColor(Color.black);
         g2d.draw(this.boundingBox());
@@ -267,7 +267,7 @@ public class Player extends GameObject
       {
         bloons.render(g2d);
       }
-      g2d.drawImage(current.getAnimationFrame(), (int) (x - (width / 2)), (int) (y - (height / 2)),
+      g2d.drawImage(current.getAnimationFrame(), (int) center.getX(), (int) center.getY(),
           (int) width, (int) height, null);
     }
   }
@@ -275,7 +275,7 @@ public class Player extends GameObject
   @Override
   public Rectangle boundingBox()
   {
-    return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
+    return new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height);
   }
 
   private void debugOptions(Graphics2D g2d)
@@ -391,18 +391,17 @@ public class Player extends GameObject
     private float fillLevel;
     private BufferedImage img;
     private int moveCounter;
-    private Random rand = new Random();
-
+   
     public Balloon(float x, float y, int width, int height)
     {
-      balloonColor = rand.nextInt(8);
+      balloonColor = Game.Rand.nextInt(8);
       this.width = (int) (width);
       this.height = height;
       fillLevel = 100;
       moveCounter = 0;
       img = art.balloon_sheet2.getFrame(balloonColor);
-      xOffset = rand.nextBoolean() ? -rand.nextFloat() * 10 : rand.nextFloat() * 10;
-      yOffset = rand.nextBoolean() ? -rand.nextFloat() * 15 : rand.nextFloat() * 4;
+      xOffset = Game.Rand.nextBoolean() ? -Game.Rand.nextFloat() * 10 : Game.Rand.nextFloat() * 10;
+      yOffset = Game.Rand.nextBoolean() ? -Game.Rand.nextFloat() * 15 : Game.Rand.nextFloat() * 4;
       adjWidth = (int) ((getFillLevel() / 100) * width);
       adjHeight = (int) ((getFillLevel() / 100) * height);
     }
@@ -420,7 +419,7 @@ public class Player extends GameObject
 
       if (moveCounter == 10)
       {
-        xOffset += rand.nextBoolean() ? -rand.nextFloat() : rand.nextFloat();
+        xOffset += Game.Rand.nextBoolean() ? -Game.Rand.nextFloat() : Game.Rand.nextFloat();
         moveCounter = 0;
       }
       else

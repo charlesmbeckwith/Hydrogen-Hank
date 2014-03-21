@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 
 import com.hh.Game;
+import com.hh.framework.DebugManager;
 import com.hh.framework.GameObject;
 
 /**
@@ -57,7 +58,7 @@ public class Powerup extends GameObject
 	{
 		// TODO Auto-generated method stub
 		Graphics2D g2d = (Graphics2D) g;
-		if (Game.debugOptions().contains("power"))
+		if (DebugManager.showBounds)
 		{
 			g2d.setColor(Color.black);
 			g2d.draw(this.boundingBox());
@@ -67,7 +68,7 @@ public class Powerup extends GameObject
 	@Override
 	public Rectangle boundingBox()
 	{
-		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
+		return new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height);
 	}
 
 	public PowerupType getPowerupType()

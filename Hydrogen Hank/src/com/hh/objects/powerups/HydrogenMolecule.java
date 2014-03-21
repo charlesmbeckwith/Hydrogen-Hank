@@ -1,65 +1,95 @@
+
+
 package com.hh.objects.powerups;
 
+
 import java.awt.Graphics;
+import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.util.Random;
-
 import com.hh.Game;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Powerup;
 
 /**
- * COSC3550 Spring 2014
- * 
- * Created : Feb. 28, 2014 
- * Last Updated : Feb. 28, 2014 
+ * COSC3550 Spring 2014 Created : Feb. 28, 2014 Last Updated : Feb. 28, 2014
  * Purpose: Defines a hydrogen molecule powerup
  * 
  * @author Charlie Beckwith
  */
-public class HydrogenMolecule extends Powerup
+public class HydrogenMolecule
+    extends Powerup
 {
 
-	private BufferedImage IMG;
-	private ArtAssets art;
+  private BufferedImage IMG;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param powerupType
-	 */
-	public HydrogenMolecule(float x, float y, int width, int height)
-	{
-		super(x, y, width, height, PowerupType.HydrogenMolecule);
-		art = Game.getArtAssets();
-		Random rand = new Random();
-		int frame = rand.nextInt(5);
-		IMG = art.getSpriteFrame(spriteID.HYDROGEN, frame);
+  private ArtAssets art;
 
-	}
+  private double rotationRadian;
 
-	@Override
-	public void tick()
-	{
+  /**
+   * @param x
+   * @param y
+   * @param width
+   * @param height
+   * @param powerupType
+   */
+  public HydrogenMolecule(float x, float y, int width, int height)
+  {
+    super(x, y, width, height, PowerupType.HydrogenMolecule);
+    art = Game.getArtAssets();
+    Random rand = new Random();
+    int frame = rand.nextInt(5);
+    IMG = art.getSpriteFrame(spriteID.HYDROGEN, frame);
 
-	}
+    rotationRadian = Math.toRadians((double) (Game.Rand.nextInt(360)));
 
-	@Override
-	public void render(Graphics g)
-	{
-		g.drawImage(IMG, (int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height, null);
+  }
 
-		super.render(g);
-	}
+  @Override
+  public void tick()
+  {
+    rotationRadian += .1;
 
-	@Override
-	public Rectangle boundingBox()
-	{
-		return super.boundingBox();
-	}
+  }
+
+  public void randomizeMovement(){
+    int moveAmt = 3;
+    switch (Game.Rand.nextInt(4))
+      {
+
+      case 0:
+         x+=moveAmt;
+        break;
+      case 1:
+         x-=moveAmt;
+        break;
+      case 2:
+         y+=moveAmt;
+        break;
+      case 3:
+         y-=moveAmt;
+        break;
+      }
+  }
+  @Override
+  public void render(Graphics g)
+  {
+    Graphics2D g2d = (Graphics2D) g.create();
+    g2d.rotate(rotationRadian, x, y);
+    g2d.drawImage(IMG, (int) center.getX(), (int) center.getY(), (int) width,
+                  (int) height, null);
+
+    g2d.dispose();
+    super.render(g);
+  }
+
+  @Override
+  public Rectangle boundingBox()
+  {
+    return super.boundingBox();
+  }
 
 }

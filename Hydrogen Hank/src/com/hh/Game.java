@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Point;
 import java.awt.image.BufferStrategy;
 import java.util.List;
+import java.util.Random;
 
 import com.hh.framework.*;
 import com.hh.framework.gamestate.*;
@@ -36,6 +37,7 @@ public class Game extends Canvas implements Runnable
 	public static Window window;
 	public static List<String> debugOptions;
 	public boolean running = false;
+	public static Random Rand = new Random();
 	public Thread thread;
 
 	private static BufferStrategy bs;
@@ -65,6 +67,8 @@ public class Game extends Canvas implements Runnable
 		manager.push(new TitleMenuState());
 		manager.push(new TitleMenuAnimState());
 		manager.push(new IntroAnimation());
+		
+		new DebugManager();
 	}
 
 	/**

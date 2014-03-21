@@ -59,7 +59,7 @@ public class Bird extends Enemy
 		Graphics2D g2d = (Graphics2D) g.create();
 		if (alive)
 		{
-			g2d.drawImage(ANIM.getAnimationFrame(), (int) (x - (width / 2)), (int) (y - (height / 2)),
+			g2d.drawImage(ANIM.getAnimationFrame(), (int) center.getX(), (int) center.getY(),
 			    (int) width, (int) height, null);
 		}
 
@@ -72,7 +72,7 @@ public class Bird extends Enemy
 		float offsetX = width * 0.0412f;
 		float offsetY = height * 0.25f;
 
-		return new Rectangle((int) (x - width / 2 + offsetX), (int) (y - height / 2 + offsetY),
+		return new Rectangle((int) (center.getX() + offsetX), (int) (center.getY() + offsetY),
 		    (int) (width - offsetX * 2), (int) (height - offsetY * 2));
 	}
 

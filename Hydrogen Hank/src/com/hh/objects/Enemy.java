@@ -66,7 +66,7 @@ public class Enemy extends GameObject
 	@Override
 	public Rectangle boundingBox()
 	{
-		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
+		return new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height);
 	}
 
 	public EnemyType getEnemyType()
