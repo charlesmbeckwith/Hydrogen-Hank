@@ -206,7 +206,7 @@ public class PlayState
                 generateEnemy((int) i, (int) j);
                 yStartUp = (int) j;
               }
-            xStart += 74;
+            xStart += 70;
           }
         else if (player.getVelocity().dy < 0) // Player Rising
           {
@@ -256,7 +256,7 @@ public class PlayState
 
   private void generateGround(int x)
   {
-    handler.addObject(new Ground(x, 400, 75, 300));
+    handler.addObject(new Ground(x-5, 400, 75, 300));
   }
 
   private void generateCloud(int x, int y)
