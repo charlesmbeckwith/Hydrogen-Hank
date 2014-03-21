@@ -3,6 +3,8 @@
 package com.hh.objects;
 
 import java.awt.*;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.LinkedList;
 import java.util.Random;
@@ -274,7 +276,11 @@ public class Player
 
   public boolean collided(GameObject go)
   {
-    return this.boundingBox().intersects(go.boundingBox());
+
+    Area player = new Area(this.boundingBox());
+    player.intersect(go.boundingBox());
+    return !player.isEmpty();
+
   }
 
   @Override
@@ -302,10 +308,10 @@ public class Player
   }
 
   @Override
-  public Rectangle boundingBox()
+  public Area boundingBox()
   {
-    return new Rectangle((int) center.getX(), (int) center.getY(), (int) width,
-                         (int) height);
+    return new Area(new Ellipse2D.Double(center.getX(), center.getY(), width-5, height-5));
+
   }
 
   private void debugOptions(Graphics2D g2d)

@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Area;
 
 import com.hh.Game;
 import com.hh.framework.GameObject;
@@ -64,9 +65,9 @@ public class Enemy extends GameObject
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
-		return new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height);
+		return new Area(new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height));
 	}
 
 	public EnemyType getEnemyType()

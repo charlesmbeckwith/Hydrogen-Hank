@@ -5,9 +5,11 @@ package com.hh.objects.powerups;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.Rectangle;
+import java.awt.geom.Area;
+import java.awt.geom.Ellipse2D;
 import java.awt.image.BufferedImage;
 import java.util.Random;
+
 import com.hh.Game;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
@@ -87,9 +89,10 @@ public class HydrogenMolecule
   }
 
   @Override
-  public Rectangle boundingBox()
+  public Area boundingBox()
   {
-    return super.boundingBox();
+    return new Area(new Ellipse2D.Double(center.getX(), center.getY(), width/2, height/2));
+
   }
 
 }

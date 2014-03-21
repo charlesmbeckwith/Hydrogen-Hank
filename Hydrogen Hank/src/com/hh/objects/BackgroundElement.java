@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Area;
 
 import com.hh.Game;
 import com.hh.framework.GameObject;
@@ -83,9 +84,9 @@ public class BackgroundElement extends GameObject
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
-		return new Rectangle((int) (x), (int) (y), (int) width, (int) height);
+		return new Area(new Rectangle((int) (x), (int) (y), (int) width, (int) height));
 	}
 
 }

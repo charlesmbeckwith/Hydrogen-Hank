@@ -8,6 +8,7 @@ import java.awt.Graphics2D;
 import java.awt.MouseInfo;
 import java.awt.Point;
 import java.awt.Rectangle;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.List;
 
@@ -86,9 +87,9 @@ public class ScoreTab extends GameObject
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
-		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
+		return new Area (new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height));
 	}
 	
 	public boolean isHoveringOver(){

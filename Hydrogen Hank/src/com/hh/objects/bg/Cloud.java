@@ -1,6 +1,7 @@
 package com.hh.objects.bg;
 
 import java.awt.*;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 import java.util.Random;
 
@@ -95,7 +96,7 @@ public class Cloud extends BackgroundElement
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
 		return super.boundingBox();
 	}

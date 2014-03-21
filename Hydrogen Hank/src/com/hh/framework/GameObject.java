@@ -3,7 +3,7 @@
 package com.hh.framework;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.geom.Area;
 
 /**
  * COSC3550 Spring 2014 Created : Feb. 7, 2014 Last Updated : Mar. 19, 2014
@@ -164,7 +164,7 @@ public abstract class GameObject
    * 
    * @return
    */
-  public abstract Rectangle boundingBox();
+  public abstract Area boundingBox();
 
   /**
    * Kills the gameobject Used to tag it for removal

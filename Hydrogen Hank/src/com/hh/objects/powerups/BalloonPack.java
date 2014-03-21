@@ -4,7 +4,7 @@
 package com.hh.objects.powerups;
 
 import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.geom.Area;
 
 import com.hh.objects.Powerup;
 
@@ -50,7 +50,7 @@ public class BalloonPack extends Powerup
 	}
 	
 	@Override
-	public Rectangle boundingBox(){
-		return super.boundingBox();
+	public Area boundingBox(){
+		return new Area(super.boundingBox());
 	}
 }

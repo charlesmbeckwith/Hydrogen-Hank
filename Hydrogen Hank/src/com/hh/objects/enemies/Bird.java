@@ -6,6 +6,7 @@ package com.hh.objects.enemies;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Area;
 
 import com.hh.Game;
 import com.hh.framework.GameTime;
@@ -67,13 +68,13 @@ public class Bird extends Enemy
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
 		float offsetX = width * 0.0412f;
 		float offsetY = height * 0.25f;
 
-		return new Rectangle((int) (center.getX() + offsetX), (int) (center.getY() + offsetY),
-		    (int) (width - offsetX * 2), (int) (height - offsetY * 2));
+		return new Area(new Rectangle((int) (center.getX() + offsetX), (int) (center.getY() + offsetY),
+		    (int) (width - offsetX * 2), (int) (height - offsetY * 2)));
 	}
 
 	/**

@@ -1,6 +1,7 @@
 package com.hh.objects.bg;
 
 import java.awt.*;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 import com.hh.Game;
@@ -46,7 +47,7 @@ public class Ground extends BackgroundElement
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
 		return super.boundingBox();
 	}

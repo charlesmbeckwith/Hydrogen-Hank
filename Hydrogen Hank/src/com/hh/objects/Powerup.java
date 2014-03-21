@@ -7,6 +7,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
+import java.awt.geom.Area;
 
 import com.hh.framework.DebugManager;
 import com.hh.framework.GameObject;
@@ -65,9 +66,9 @@ public class Powerup extends GameObject
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
-		return new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height);
+		return new Area(new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height));
 	}
 
 	public PowerupType getPowerupType()

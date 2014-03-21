@@ -1,6 +1,7 @@
 package com.hh.objects;
 
 import java.awt.*;
+import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 import com.hh.Game;
@@ -86,9 +87,9 @@ public class MenuButton extends GameObject
 	}
 
 	@Override
-	public Rectangle boundingBox()
+	public Area boundingBox()
 	{
-		return new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height);
+		return new Area(new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height));
 	}
 
 	public ButtonID getButtonID()
