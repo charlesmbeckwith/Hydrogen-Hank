@@ -28,7 +28,8 @@ import com.hh.input.MouseInput;
 public class Game extends Canvas implements Runnable
 {
 	private static final long serialVersionUID = 5679202415177178318L;
-
+	private static final int MIL = 1000000;
+	private static final int SLEEPTIME = 10;
 	public static GameStateManager manager;
 	public static PlayState playState;
 	public static int width, height, heightOffset;
@@ -41,6 +42,10 @@ public class Game extends Canvas implements Runnable
 	public Thread thread;
 
 	private static BufferStrategy bs;
+	
+	public static long prevTime;
+	public static long currTime;
+	public static double FPS = 0;
 
 	/**
 	 * Initializes the game
@@ -96,13 +101,14 @@ public class Game extends Canvas implements Runnable
 		while (running)
 		{
 
+		    prevTime = System.nanoTime()/MIL;
 			GameTime.update();
 			tick();
 			render();
-
+			currTime = System.nanoTime()/MIL;
 			try
 			{
-				Thread.sleep(10);
+				Thread.sleep(SLEEPTIME);
 			}
 			catch (InterruptedException e)
 			{

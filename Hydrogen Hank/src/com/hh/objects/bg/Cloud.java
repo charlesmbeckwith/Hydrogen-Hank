@@ -90,6 +90,7 @@ public class Cloud extends BackgroundElement
 			Graphics2D g2d = (Graphics2D) g.create();
 			g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, 0.8f));
 			g2d.drawImage(img, (int) x, (int) y, (int) width, (int) height, null);
+			g2d.dispose();
 		}
 
 		super.render(g);

@@ -78,7 +78,7 @@ public class Player
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
-    super(x, y, width, height, v, ObjectID.Player, ObjectLayer.middleground);
+    super(x, y, width, height, v, ObjectID.Player, ObjectLayer.foreground);
     alive = true;
     buoyancy = 0.0f;
     hLevel = 200f;
@@ -276,7 +276,7 @@ public class Player
 
   public boolean collided(GameObject go)
   {
-
+    
     Area player = new Area(this.boundingBox());
     player.intersect(go.boundingBox());
     return !player.isEmpty();

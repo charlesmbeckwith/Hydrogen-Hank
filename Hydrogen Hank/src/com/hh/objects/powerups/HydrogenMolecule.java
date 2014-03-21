@@ -91,7 +91,7 @@ public class HydrogenMolecule
   @Override
   public Area boundingBox()
   {
-    return new Area(new Ellipse2D.Double(center.getX(), center.getY(), width/2, height/2));
+    return new Area(new Ellipse2D.Double(center.getX()+width/4, center.getY()+height/4, width/2, height/2));
 
   }
 
