@@ -78,7 +78,7 @@ public class ScoreTab extends GameObject
 				renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.red, textX, textY);
 				for (Score score : scores)
 				{
-					renderHelp.outlinedText((Graphics2D) g, font, String.valueOf(score.getValue()), 0.9f,
+					renderHelp.outlinedText((Graphics2D) g, font, score.getName() + " : " + String.valueOf(score.getValue()), 0.9f,
 					    Color.black, Color.DARK_GRAY, Game.width/2, position);
 					position += 50;
 				}

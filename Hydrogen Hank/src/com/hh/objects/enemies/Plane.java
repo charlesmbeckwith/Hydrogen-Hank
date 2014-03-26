@@ -40,7 +40,7 @@ public class Plane extends Enemy
 	 */
 	public Plane(float x, float y, int width, int height, Vector2D v)
 	{
-		super(x, y, width, height, v, EnemyType.Bird);
+		super(x, y, width, height, v, EnemyType.Plane);
 		art = Game.getArtAssets();
 		initAnimations();
 		alive = true;

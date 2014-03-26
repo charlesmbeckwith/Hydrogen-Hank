@@ -9,7 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
 
-import com.hh.Game;
+import com.hh.framework.DebugManager;
 import com.hh.framework.GameObject;
 import com.hh.framework.Vector2D;
 
@@ -57,7 +57,7 @@ public class Enemy extends GameObject
 	{
 		// TODO Auto-generated method stub
 		Graphics2D g2d = (Graphics2D) g;
-		if (Game.debugOptions().contains("enemy"))
+		if (DebugManager.showBoundsAll)
 		{
 			g2d.setColor(Color.black);
 			g2d.draw(this.boundingBox());

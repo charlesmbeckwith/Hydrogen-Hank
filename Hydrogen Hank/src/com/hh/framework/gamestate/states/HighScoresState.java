@@ -16,9 +16,8 @@ import com.hh.objects.ScoreTab;
 /**
  * COSC3550 Spring 2014
  * 
- * Created : Feb. 25, 2014 
- * Last Updated : Mar. 19, 2014 
- * Purpose: Defines the High Scores state for the game
+ * Created : Feb. 25, 2014 Last Updated : Mar. 19, 2014 Purpose: Defines the
+ * High Scores state for the game
  * 
  * @author Mark Schlottke & Charlie Beckwith
  */
@@ -26,10 +25,10 @@ public class HighScoresState extends GameState
 {
 	public static Handler handler = new Handler();
 	@SuppressWarnings("unused")
-  private RenderHelper renderHelp = new RenderHelper();
+	private RenderHelper renderHelp = new RenderHelper();
 	private ScoreKeeper scorekeeper;
 	@SuppressWarnings("unused")
-  private Font font;
+	private Font font;
 	private ArtAssets art;
 
 	public HighScoresState()
@@ -41,17 +40,16 @@ public class HighScoresState extends GameState
 
 		if (scorekeeper.getScores().size() == 0)
 		{
-			scorekeeper.addScore(new Score(100, ScoreType.OVERALL));
-			scorekeeper.addScore(new Score(50, ScoreType.ALTITUDE));
-			scorekeeper.addScore(new Score(50, ScoreType.TIME));
+			newScore(100,50,15);
 		}
-
-		handler.addObject(new ScoreTab("Overall", scorekeeper.getScores(ScoreType.OVERALL), tabX, 90,
-		    150, 64, true));
-		handler.addObject(new ScoreTab("Altitude", scorekeeper.getScores(ScoreType.ALTITUDE),
-		    tabX + 150, 90, 150, 64, false));
-		handler.addObject(new ScoreTab("Flight Time", scorekeeper.getScores(ScoreType.TIME),
-		    tabX + 300, 90, 150, 64, false));
+		newScore(15,30,25);
+		handler.addObject(new ScoreTab("Overall", scorekeeper
+				.getScores(ScoreType.OVERALL), tabX, 90, 150, 64, true));
+		handler.addObject(new ScoreTab("Altitude", scorekeeper
+				.getScores(ScoreType.ALTITUDE), tabX + 150, 90, 150, 64,
+				false));
+		handler.addObject(new ScoreTab("Flight Time", scorekeeper
+				.getScores(ScoreType.TIME), tabX + 300, 90, 150, 64, false));
 	}
 
 	public void tick()
@@ -67,4 +65,12 @@ public class HighScoresState extends GameState
 		g.drawImage(art.highScoreBG, 100, 100, 600, 425, null);
 		handler.render(g);
 	}
+
+	public void newScore(int overall, int altitude, int time)
+	{
+		scorekeeper.addScore(new Score(overall, ScoreType.OVERALL));
+		scorekeeper.addScore(new Score(altitude, ScoreType.ALTITUDE));
+		scorekeeper.addScore(new Score(time, ScoreType.TIME));
+	}
+
 }
