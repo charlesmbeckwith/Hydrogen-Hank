@@ -26,7 +26,7 @@ public class HighScoresState extends GameState
 	public static Handler handler = new Handler();
 	@SuppressWarnings("unused")
 	private RenderHelper renderHelp = new RenderHelper();
-	private ScoreKeeper scorekeeper;
+	private static ScoreKeeper scorekeeper;
 	@SuppressWarnings("unused")
 	private Font font;
 	private ArtAssets art;
@@ -40,9 +40,9 @@ public class HighScoresState extends GameState
 
 		if (scorekeeper.getScores().size() == 0)
 		{
-			newScore(100,50,15);
+			ScoreKeeper.newScore(100,50,15);
 		}
-		newScore(15,30,25);
+	
 		handler.addObject(new ScoreTab("Overall", scorekeeper
 				.getScores(ScoreType.OVERALL), tabX, 90, 150, 64, true));
 		handler.addObject(new ScoreTab("Altitude", scorekeeper
@@ -66,11 +66,5 @@ public class HighScoresState extends GameState
 		handler.render(g);
 	}
 
-	public void newScore(int overall, int altitude, int time)
-	{
-		scorekeeper.addScore(new Score(overall, ScoreType.OVERALL));
-		scorekeeper.addScore(new Score(altitude, ScoreType.ALTITUDE));
-		scorekeeper.addScore(new Score(time, ScoreType.TIME));
-	}
 
 }

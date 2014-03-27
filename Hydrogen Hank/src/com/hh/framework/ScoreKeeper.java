@@ -29,14 +29,14 @@ import com.hh.framework.Score.ScoreType;
 public class ScoreKeeper
 {
 	private static String path = "highscores.sav";
-	private List<Score> scores;
+	private static List<Score> scores;
 
 	public ScoreKeeper()
 	{
 		scores = loadScores();
 	}
 
-	public void addScore(Score score)
+	public static void addScore(Score score)
 	{
 		scores.add(score);
 	}
@@ -79,6 +79,12 @@ public class ScoreKeeper
 		{
 			e.printStackTrace();
 		}
+	}
+	public static void newScore(int overall, int altitude, int time)
+	{
+		addScore(new Score(overall, ScoreType.OVERALL));
+		addScore(new Score(altitude, ScoreType.ALTITUDE));
+		addScore(new Score(time, ScoreType.TIME));
 	}
 
 	@SuppressWarnings("unchecked")

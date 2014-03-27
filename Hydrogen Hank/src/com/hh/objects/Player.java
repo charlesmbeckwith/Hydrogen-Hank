@@ -11,6 +11,7 @@ import java.util.Random;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.framework.gamestate.states.HighScoresState;
 import com.hh.framework.gamestate.states.PlayState;
 import com.hh.framework.gamestate.states.TitleMenuAnimState;
 import com.hh.framework.gamestate.states.TitleMenuState;
@@ -75,6 +76,11 @@ public class Player
   private final float deflateAmt = 3.0f;
 
   private final float leakAmt = 0.01f;
+  
+  private int balloonsUsed = 0;
+  private int heliumUsed = 0;
+
+  private float inflationCost = (float) 0.333;
 
   public Player(float x, float y, int width, int height, Vector2D v)
   {
@@ -101,6 +107,7 @@ public class Player
           {
             if (deathCountdown == 0)
               {
+            	
                 kill();
               }
 
@@ -144,7 +151,8 @@ public class Player
         if (hLevel > 0 && ! balloons.isEmpty())
           {
             inflate = true;
-            hLevel -= 0.333;
+            hLevel -= inflationCost ;
+            heliumUsed+=inflationCost;
           }
         else if (hLevel < 0)
           {
@@ -168,6 +176,8 @@ public class Player
             if (! DebugManager.infiniteBalloons)
               extraBalloons--;
             hLevel -= balloonCost;
+            heliumUsed+= balloonCost;
+            balloonsUsed++;
             balloonAlreadyBlownUp = true;
           }
       }
@@ -362,7 +372,12 @@ public class Player
     Game.manager.push(new TitleMenuState());
     Game.manager.push(new TitleMenuAnimState());
     Game.playState.restart = true;
+    ScoreKeeper.newScore(calculateScore(), Game.playState.maxAltitude, (int) Game.playState.getPlayTime());
     super.kill();
+  }
+  
+  public int calculateScore(){
+	  return (int) (Game.playState.getPlayTime()/(balloonsUsed*heliumUsed));
   }
 
   private void initDebug()
