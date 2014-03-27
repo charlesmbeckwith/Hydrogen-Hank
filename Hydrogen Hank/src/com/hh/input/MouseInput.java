@@ -5,6 +5,7 @@ import java.awt.event.MouseEvent;
 
 import com.hh.Game;
 import com.hh.framework.GameObject;
+import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.states.*;
 import com.hh.objects.MenuButton;
 import com.hh.objects.ScoreTab;
@@ -83,6 +84,10 @@ public class MouseInput extends MouseAdapter
 		case CREDITS:
 			System.out.println("Credits");
 			// Game.manager.STATES.push(new CreditsState());
+			break;
+		case RESETSCORES:
+			ScoreKeeper.resetScores();
+			
 			break;
 
 		}

@@ -29,7 +29,7 @@ public class MenuButton extends GameObject
 
 	public enum ButtonID
 	{
-		NEWGAME, HIGHSCORE, CREDITS
+		NEWGAME, HIGHSCORE, CREDITS, RESETSCORES
 	};
 
 	public MenuButton(String text, float x, float y, int width, int height, ButtonID buttontype)

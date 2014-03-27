@@ -11,7 +11,9 @@ import com.hh.framework.Score.ScoreType;
 import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
+import com.hh.objects.MenuButton;
 import com.hh.objects.ScoreTab;
+import com.hh.objects.MenuButton.ButtonID;
 
 /**
  * COSC3550 Spring 2014
@@ -26,7 +28,6 @@ public class HighScoresState extends GameState
 	public static Handler handler = new Handler();
 	@SuppressWarnings("unused")
 	private RenderHelper renderHelp = new RenderHelper();
-	private static ScoreKeeper scorekeeper;
 	@SuppressWarnings("unused")
 	private Font font;
 	private ArtAssets art;
@@ -34,7 +35,7 @@ public class HighScoresState extends GameState
 	public HighScoresState()
 	{
 		int tabX = 250;
-		scorekeeper = Game.getScoreKeeper();
+		ScoreKeeper scorekeeper = Game.getScoreKeeper();
 		font = new Font("Arial", Font.PLAIN, 20);
 		art = Game.getArtAssets();
 
@@ -50,6 +51,9 @@ public class HighScoresState extends GameState
 				false));
 		handler.addObject(new ScoreTab("Flight Time", scorekeeper
 				.getScores(ScoreType.TIME), tabX + 300, 90, 150, 64, false));
+		
+		handler.addObject(new MenuButton("Reset Scores", Game.width/2, Game.height - 64/2, Game.width / 3 - 15, 64,
+		        ButtonID.NEWGAME));
 	}
 
 	public void tick()

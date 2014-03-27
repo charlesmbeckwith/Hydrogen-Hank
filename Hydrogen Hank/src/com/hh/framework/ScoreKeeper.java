@@ -56,14 +56,23 @@ public class ScoreKeeper
 		List<Score> scoreList = new ArrayList<Score>();
 		for (Score score : scores)
 		{
+			
 			if (score.getType() == type)
 				scoreList.add(score);
 		}
 
 		return scoreList;
 	}
+	
+	public static void resetScores()
+	{
+		scores = null;
+		System.out.println(scores.size());
+		saveScores();
+		
+	}
 
-	public void saveScores()
+	public static void saveScores()
 	{
 		if (scores == null)
 			scores = new ArrayList<Score>();
