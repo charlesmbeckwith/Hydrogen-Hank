@@ -62,6 +62,14 @@ public class MouseInput extends MouseAdapter
 						tab.setSelected(false);
 					}
 				}
+				if(go.getClass() == MenuButton.class)
+				{
+					MenuButton button = (MenuButton) go;
+					if(button.isSelected())
+					{
+						switchMenuButton(button);
+					}
+				}
 			}
 		}
 	}
@@ -86,8 +94,8 @@ public class MouseInput extends MouseAdapter
 			// Game.manager.STATES.push(new CreditsState());
 			break;
 		case RESETSCORES:
+			System.out.println("Reset Scores");
 			ScoreKeeper.resetScores();
-			
 			break;
 
 		}

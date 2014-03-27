@@ -53,7 +53,7 @@ public class HighScoresState extends GameState
 				.getScores(ScoreType.TIME), tabX + 300, 90, 150, 64, false));
 		
 		handler.addObject(new MenuButton("Reset Scores", Game.width/2, Game.height - 64/2, Game.width / 3 - 15, 64,
-		        ButtonID.NEWGAME));
+		        ButtonID.RESETSCORES));
 	}
 
 	public void tick()
