@@ -44,13 +44,10 @@ public class HighScoresState extends GameState
 			ScoreKeeper.newScore(100,50,15);
 		}
 	
-		handler.addObject(new ScoreTab("Overall", scorekeeper
-				.getScores(ScoreType.OVERALL), tabX, 90, 150, 64, true));
-		handler.addObject(new ScoreTab("Altitude", scorekeeper
-				.getScores(ScoreType.ALTITUDE), tabX + 150, 90, 150, 64,
+		handler.addObject(new ScoreTab("Overall", Score.ScoreType.OVERALL, tabX, 90, 150, 64, true));
+		handler.addObject(new ScoreTab("Altitude", Score.ScoreType.ALTITUDE, tabX + 150, 90, 150, 64,
 				false));
-		handler.addObject(new ScoreTab("Flight Time", scorekeeper
-				.getScores(ScoreType.TIME), tabX + 300, 90, 150, 64, false));
+		handler.addObject(new ScoreTab("Flight Time", Score.ScoreType.TIME, tabX + 300, 90, 150, 64, false));
 		
 		handler.addObject(new MenuButton("Reset Scores", Game.width/2, Game.height - 64/2, Game.width / 3 - 15, 64,
 		        ButtonID.RESETSCORES));

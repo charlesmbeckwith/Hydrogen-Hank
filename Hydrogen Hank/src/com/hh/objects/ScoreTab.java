@@ -33,9 +33,11 @@ public class ScoreTab extends GameObject
 	private RenderHelper renderHelp = new RenderHelper();
 	private Font font;
 	String text = "";
-	List<Score> scores;
+	Score.ScoreType ScoreType;
+	
+	
 
-	public ScoreTab(String text, List<Score> scores, float x, float y, int width, int height,
+	public ScoreTab(String text, Score.ScoreType ScoreType, float x, float y, int width, int height,
 	    boolean selected)
 	{
 		super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
@@ -46,7 +48,7 @@ public class ScoreTab extends GameObject
 		font = new Font("Arial", Font.BOLD, 20);
 		this.selected = selected;
 		this.text = text;
-		this.scores = scores;
+		this.ScoreType = ScoreType;
 	}
 
 	@Override
@@ -59,6 +61,7 @@ public class ScoreTab extends GameObject
 	{
 		if (alive)
 		{
+			List<Score> scores = Game.getScoreKeeper().getScores(ScoreType);
 			Graphics2D g2d = (Graphics2D) g;
 			FontMetrics metrics = g.getFontMetrics(font);
 			int textX = (int) (x - (metrics.stringWidth(text) / 2));
@@ -78,6 +81,7 @@ public class ScoreTab extends GameObject
 				renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.red, textX, textY);
 				for (Score score : scores)
 				{
+					
 					renderHelp.outlinedText((Graphics2D) g, font, score.getName() + " : " + String.valueOf(score.getValue()), 0.9f,
 					    Color.black, Color.DARK_GRAY, Game.width/2, position);
 					position += 50;
