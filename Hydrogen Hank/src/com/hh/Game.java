@@ -1,5 +1,6 @@
 package com.hh;
 
+import java.applet.AudioClip;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;
@@ -14,6 +15,8 @@ import com.hh.graphics.ArtAssets;
 import com.hh.input.KeyBinding;
 import com.hh.input.KeyInput;
 import com.hh.input.MouseInput;
+import com.hh.sound.SoundManager;
+import com.hh.sound.SoundManager.SoundFile;
 
 /**
  * COSC3550 Spring 2014 Homework 5
@@ -40,6 +43,7 @@ public class Game extends Canvas implements Runnable
 	public boolean running = false;
 	public static Random Rand = new Random();
 	public Thread thread;
+	public SoundManager soundManager;
 
 	private static BufferStrategy bs;
 	
@@ -59,7 +63,8 @@ public class Game extends Canvas implements Runnable
 		artassets = new ArtAssets();
 		scorekeeper = new ScoreKeeper();
 		manager = new GameStateManager();
-
+		soundManager = new SoundManager();
+		soundManager.playAudioClip(SoundFile.Theme);
 		manager.forcePush(new LoadState());
 		render();
 

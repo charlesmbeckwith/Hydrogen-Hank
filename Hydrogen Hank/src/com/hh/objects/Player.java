@@ -428,15 +428,15 @@ public class Player
   /**
    * initialize Animations
    */
-  private void initAnimations()
-  {
-    normal = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 0),
-                           art.getSpriteFrame(spriteID.HANK2, 1),
-                           art.getSpriteFrame(spriteID.HANK2, 1));
-    death = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 2),
-                          art.getSpriteFrame(spriteID.HANK2, 3),
-                          art.getSpriteFrame(spriteID.HANK2, 1));
-  }
+	private void initAnimations()
+	{
+		normal = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 0),
+				art.getSpriteFrame(spriteID.HANK2, 1), art.getSpriteFrame(
+						spriteID.HANK2, 1));
+		death = new Animation(10, art.getSpriteFrame(spriteID.HANK2, 2),
+				art.getSpriteFrame(spriteID.HANK2, 3), art.getSpriteFrame(
+						spriteID.HANK2, 1));
+	}
 
   public float getHydrogenLevelPercent()
   {

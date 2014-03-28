@@ -23,7 +23,7 @@ public class SpriteSheet
 
 	public enum spriteID
 	{
-		HANK, HANK2, BALLOON, BALLOON2, BIRD, HYDROGEN, TANK, PLANES, TABS
+		HANK, HANK2, BALLOON, BALLOON2, BIRD, HYDROGEN, TANK, PLANES, TABS, TANKPOWERUP
 	}
 
 	private BufferedImage image;

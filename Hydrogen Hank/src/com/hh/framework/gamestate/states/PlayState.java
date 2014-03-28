@@ -19,6 +19,7 @@ import com.hh.objects.bg.*;
 import com.hh.objects.enemies.*;
 // import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
+import com.hh.objects.powerups.HydrogenTank;
 
 /**
  * COSC3550 Spring 2014 Created : Feb. 25, 2014 Last Updated : Mar. 19, 2014
@@ -303,6 +304,8 @@ public class PlayState extends GameState
 			handler.addObject(new HydrogenMolecule(x + randX + 10, y
 					+ randY, 25, 25));
 		}
+		
+		handler.addObject(new HydrogenTank(x,y,90,90));
 	}
 
 	private void generateEnemy(int x, int y)

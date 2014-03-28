@@ -66,9 +66,6 @@ public class ScoreKeeper
 						temp.remove(score);
 					
 				}
-
-				
-
 			}
 		}
 		scores = temp;
