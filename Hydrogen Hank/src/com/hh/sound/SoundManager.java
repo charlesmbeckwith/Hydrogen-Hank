@@ -71,6 +71,7 @@ public class SoundManager
 		@SuppressWarnings("restriction")
 		public void playClip(){
 			 AudioPlayer.player.start(audioStream);
+			 
 		}
 	}
 	
