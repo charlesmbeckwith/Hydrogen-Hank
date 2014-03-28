@@ -7,7 +7,6 @@ import com.hh.Game;
 import com.hh.framework.Handler;
 import com.hh.framework.RenderHelper;
 import com.hh.framework.Score;
-import com.hh.framework.Score.ScoreType;
 import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
@@ -41,7 +40,7 @@ public class HighScoresState extends GameState
 
 		if (scorekeeper.getScores().size() == 0)
 		{
-			ScoreKeeper.newScore(100,50,15);
+			ScoreKeeper.newScore(100,50,25);
 		}
 	
 		handler.addObject(new ScoreTab("Overall", Score.ScoreType.OVERALL, tabX, 90, 150, 64, true));

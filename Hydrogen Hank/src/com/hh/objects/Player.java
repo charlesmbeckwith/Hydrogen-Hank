@@ -159,6 +159,15 @@ public class Player
             hLevel = 0;
           }
       }
+    
+   /*Insta-Kill*/
+    if(KeyInput.keysDown.contains(KeyBinding.KILL.VALUE()))
+    {
+    	if(DebugManager.debugMode)
+    	{
+    		kill();
+    	}
+    }
 
     if (KeyInput.keysDown.contains(KeyBinding.DEFLATE.VALUE()))
       {
