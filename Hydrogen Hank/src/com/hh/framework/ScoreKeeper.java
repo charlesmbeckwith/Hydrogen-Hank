@@ -13,7 +13,6 @@ import java.io.ObjectOutput;
 import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
-import java.util.LinkedList;
 import java.util.List;
 
 import com.hh.framework.Score.ScoreType;
@@ -30,6 +29,7 @@ public class ScoreKeeper
 {
 	private static String path = "highscores.sav";
 	private static List<Score> scores;
+	private static final int MAXENTRIES = 8;
 
 	public ScoreKeeper()
 	{
@@ -40,6 +40,68 @@ public class ScoreKeeper
 	{
 		scores.add(score);
 		sortSweep();
+		if(isFull())
+			trimScores();
+		saveScores();
+	}
+
+	/**
+	 * Trim High Score list down to MAXENTRIES specified
+	 */
+	public static void trimScores()
+	{
+		ScoreType scoreType[] = { ScoreType.OVERALL, ScoreType.ALTITUDE,
+				ScoreType.TIME };
+		List<Score> temp = createTemp();
+		for (int i = 0; i < 3; i++)
+		{
+			int counter = 0;
+			ScoreType type = scoreType[i];
+			for (Score score : scores)
+			{
+				if (score.getType() == type)
+				{
+					counter++;
+					if (counter > MAXENTRIES)
+						temp.remove(score);
+					
+				}
+
+				
+
+			}
+		}
+		scores = temp;
+	}
+
+	public static List<Score> createTemp()
+	{
+
+		List<Score> temp = new ArrayList<Score>();
+		for (Score score : scores)
+		{
+			temp.add(score);
+		}
+		return temp;
+	}
+
+	public static boolean isFull()
+	{
+		ScoreType scoreType[] = { ScoreType.OVERALL, ScoreType.ALTITUDE,
+				ScoreType.TIME };
+		int counter = 0;
+		for (int i = 0; i < 3; i++)
+		{
+			ScoreType type = scoreType[i];
+			for (Score score : scores)
+			{
+				if (score.getType() == type)
+					counter++;
+			}
+			if (counter > MAXENTRIES)
+				return true;
+		}
+		return false;
 	}
 
 	public static void sortSweep()
@@ -47,9 +109,7 @@ public class ScoreKeeper
 		if (scores.isEmpty())
 			return;
 		int length = scores.size();
-		sortList(ScoreType.OVERALL, 0, length - 1);
-		sortList(ScoreType.ALTITUDE, 0, length - 1);
-		sortList(ScoreType.TIME, 0, length - 1);
+		sortList(0, length - 1);
 	}
 
 	public void removeScore(Score score)
@@ -63,7 +123,7 @@ public class ScoreKeeper
 	}
 
 	/* quick-sort implementation for sorting high-scores */
-	public static void sortList(ScoreType type, int low, int high)
+	public static void sortList(int low, int high)
 	{
 		int i = low, j = high;
 		Score pivot = scores.get(low + (high - low) / 2);
@@ -86,9 +146,9 @@ public class ScoreKeeper
 			}
 		}
 		if (low < j)
-			sortList(type, low, j);
+			sortList(low, j);
 		if (i < high)
-			sortList(type, i, high);
+			sortList(i, high);
 	}
 
 	/* Element swap method used for quick-sort implementation */
@@ -111,16 +171,6 @@ public class ScoreKeeper
 			}
 		}
 		return scoreList;
-	}
-
-	public static void printLinkedList(LinkedList<Score> scores)
-	{
-		System.out.print("{ ");
-		for (Score score : scores)
-		{
-			System.out.print(score.getValue() + ",");
-		}
-		System.out.print("}\n");
 	}
 
 	public static void resetScores()

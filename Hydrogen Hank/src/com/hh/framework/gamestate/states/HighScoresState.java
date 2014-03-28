@@ -41,7 +41,33 @@ public class HighScoresState extends GameState
 		if (scorekeeper.getScores().size() == 0)
 		{
 			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore(100,50,25);
 		}
+		
 	
 		handler.addObject(new ScoreTab("Overall", Score.ScoreType.OVERALL, tabX, 90, 150, 64, true));
 		handler.addObject(new ScoreTab("Altitude", Score.ScoreType.ALTITUDE, tabX + 150, 90, 150, 64,
