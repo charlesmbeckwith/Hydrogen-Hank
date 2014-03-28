@@ -21,7 +21,8 @@ public class ArtAssets
 {
 	public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2,
 			balloon_sheet, balloon_sheet2, bird_sheet, hydrogen_sheet,
-			fulltank_sheet, planes_sheet, tab_sheet, hydrogen_tank;
+			fulltank_sheet, planes_sheet, tab_sheet, hydrogen_tank,
+			explosion;
 
 	public BufferedImage dirt, cloud, pauseScreen;
 	public BufferedImage mainTitle, button, hud, emptytank, highScoreBG;
@@ -53,6 +54,8 @@ public class ArtAssets
 				"/graphics/highscores/tabsheet.png");
 		hydrogen_tank = new SpriteSheet(spriteID.TANKPOWERUP,
 				"/graphics/powerups/hydrogentank/hydrogentank.png");
+		explosion = new SpriteSheet(spriteID.EXPLOSION,
+				"/graphics/bgelements/explosion.png");
 
 		mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
 		button = loadImage("/graphics/mainmenu/button.png");
@@ -147,6 +150,35 @@ public class ArtAssets
 			return planes_sheet.getFrame(frame);
 		case TANKPOWERUP:
 			return hydrogen_tank.getFrame(frame);
+		case EXPLOSION:
+			return explosion.getFrame(frame);
+
+		default:
+			return null;
+
+		}
+	}
+
+	public BufferedImage[] getSpriteSheet(spriteID id)
+	{
+		switch (id)
+		{
+		case HANK:
+			return hydrogenhank_sheet.getSheet();
+		case HANK2:
+			return hydrogenhank_sheet2.getSheet();
+		case BALLOON:
+			return balloon_sheet.getSheet();
+		case BIRD:
+			return bird_sheet.getSheet();
+		case HYDROGEN:
+			return hydrogen_sheet.getSheet();
+		case PLANES:
+			return planes_sheet.getSheet();
+		case TANKPOWERUP:
+			return hydrogen_tank.getSheet();
+		case EXPLOSION:
+			return explosion.getSheet();
 		default:
 			return null;
 

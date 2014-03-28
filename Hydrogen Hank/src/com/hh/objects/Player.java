@@ -20,6 +20,7 @@ import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.input.KeyBinding;
 import com.hh.input.KeyInput;
+import com.hh.objects.bg.Explosion;
 import com.hh.objects.bg.Ground;
 
 /**
@@ -105,6 +106,7 @@ public class Player
           hLevel = 200f;
         if (startDeath)
           {
+        	PlayState.handler.addObject(new Explosion(x,y,128,128));
             if (deathCountdown == 0)
               {
             	
@@ -364,6 +366,7 @@ public class Player
       }
     else
       {
+    	
         startKill();
       }
   }

@@ -25,6 +25,7 @@ public class Handler
 	private List<RemovalConditions> conditions;
 	private ArrayList<GameObject> objects = new ArrayList<GameObject>();
 	private ArrayList<GameObject> toRemove = new ArrayList<GameObject>();
+	private ArrayList<GameObject> queuedObjects = new ArrayList<GameObject>();
 	private GameObject tempObj;
 	private int[] counts;
 
@@ -61,6 +62,7 @@ public class Handler
 				}
 			}
 		}
+		addQueued();
 	}
 
 	/**
@@ -119,33 +121,7 @@ public class Handler
 	 */
 	public void addObject(GameObject object)
 	{
-		int index = objects.size();
-
-		switch (object.getLayer())
-		{
-		case background:
-			index = counts[0];
-			counts[0] += 1;
-			break;
-		case middleground:
-			index = counts[0] + counts[1];
-			counts[1] += 1;
-			break;
-		case foreground:
-			index = counts[0] + counts[1] + counts[2];
-			counts[2] += 1;
-			break;
-		case hud:
-			index = counts[0] + counts[1] + counts[2] + counts[3];
-			counts[3] += 1;
-			break;
-		case toplevel:
-			index = counts[0] + counts[1] + counts[2] + counts[3] + counts[4];
-			counts[4] += 1;
-			break;
-		}
-
-		objects.add(index, object);
+		queuedObjects.add(object);
 	}
 
 	/**
@@ -157,6 +133,40 @@ public class Handler
 	public void removeObject(GameObject object)
 	{
 		this.toRemove.add(object);
+	}
+	
+	public void addQueued(){
+		for(GameObject object : queuedObjects)
+		{
+			int index = objects.size();
+
+			switch (object.getLayer())
+			{
+			case background:
+				index = counts[0];
+				counts[0] += 1;
+				break;
+			case middleground:
+				index = counts[0] + counts[1];
+				counts[1] += 1;
+				break;
+			case foreground:
+				index = counts[0] + counts[1] + counts[2];
+				counts[2] += 1;
+				break;
+			case hud:
+				index = counts[0] + counts[1] + counts[2] + counts[3];
+				counts[3] += 1;
+				break;
+			case toplevel:
+				index = counts[0] + counts[1] + counts[2] + counts[3] + counts[4];
+				counts[4] += 1;
+				break;
+			}
+
+			objects.add(index, object);
+		}
+		queuedObjects.clear();
 	}
 
 	/**

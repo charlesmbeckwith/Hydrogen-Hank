@@ -97,6 +97,7 @@ public class IntroAnimation extends GameState
 		{
 			redBoxHeight += 4;
 		}
+		
 
 		try
 		{

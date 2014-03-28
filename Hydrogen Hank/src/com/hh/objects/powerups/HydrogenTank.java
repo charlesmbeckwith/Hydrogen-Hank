@@ -6,8 +6,6 @@ package com.hh.objects.powerups;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
-import java.awt.image.BufferedImage;
-
 import com.hh.Game;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;

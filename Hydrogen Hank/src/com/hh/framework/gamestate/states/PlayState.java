@@ -304,8 +304,9 @@ public class PlayState extends GameState
 			handler.addObject(new HydrogenMolecule(x + randX + 10, y
 					+ randY, 25, 25));
 		}
+		if(Game.Rand.nextInt(500) == 250)
+			handler.addObject(new HydrogenTank(x,y,90,90));
 		
-		handler.addObject(new HydrogenTank(x,y,90,90));
 	}
 
 	private void generateEnemy(int x, int y)

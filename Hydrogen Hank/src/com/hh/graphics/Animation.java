@@ -3,6 +3,9 @@ package com.hh.graphics;
 import java.awt.image.BufferedImage;
 import java.awt.*;
 
+import com.hh.Game;
+import com.hh.graphics.SpriteSheet.spriteID;
+
 /**
  * COSC3550 Spring 2014
  * 
@@ -42,6 +45,19 @@ public class Animation
 		}
 
 		frames = args.length;
+	}
+	
+	public Animation(int speed, spriteID id)
+	{
+		this.speed = speed;
+		ArtAssets art = Game.getArtAssets();
+		BufferedImage[] spritesheet = art.getSpriteSheet(id);
+		frames = spritesheet.length;
+		images = new BufferedImage[frames];
+		for(int i = 0; i < frames; i++)
+		{
+			images[i] = spritesheet[i];
+		}
 	}
 
 	/**

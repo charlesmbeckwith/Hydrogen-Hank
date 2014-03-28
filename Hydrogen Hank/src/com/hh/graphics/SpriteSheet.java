@@ -23,7 +23,7 @@ public class SpriteSheet
 
 	public enum spriteID
 	{
-		HANK, HANK2, BALLOON, BALLOON2, BIRD, HYDROGEN, TANK, PLANES, TABS, TANKPOWERUP
+		HANK, HANK2, BALLOON, BALLOON2, BIRD, HYDROGEN, TANK, PLANES, TABS, TANKPOWERUP, EXPLOSION
 	}
 
 	private BufferedImage image;
@@ -100,6 +100,10 @@ public class SpriteSheet
 			return sprites[frame];
 		else
 			return null;
+	}
+	
+	public BufferedImage[] getSheet(){
+		return sprites;
 	}
 
 	/**
