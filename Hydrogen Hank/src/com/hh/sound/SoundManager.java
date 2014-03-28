@@ -14,10 +14,10 @@ import sun.audio.*;
 public class SoundManager
 {
 	@SuppressWarnings("restriction")
-	private AudioClip themesong;
+	private AudioClip themesong, explosion,fuse;
 	
 	public enum SoundFile{
-		Theme
+		Theme, explosion, fuse
 	}
 
 	public SoundManager()
@@ -25,6 +25,8 @@ public class SoundManager
 		try
 		{
 			themesong = new AudioClip(SoundFile.Theme, "/sound/music/themesong.wav");
+			explosion= new AudioClip(SoundFile.explosion, "/sound/fx/explosion.wav");
+			fuse = new AudioClip(SoundFile.fuse, "/sound/fx/fuse.wav");
 		} catch (IOException e)
 		{
 			// TODO Auto-generated catch block
@@ -41,6 +43,12 @@ public class SoundManager
 		case Theme:
 			themesong.playClip();
 			break;
+		case explosion:
+			explosion.playClip();
+			break;
+		case fuse:
+			fuse.playClip();
+			break;
 			
 		}
 	}
@@ -56,22 +64,26 @@ public class SoundManager
 		{
 			this.sound = sound;
 			this.path = path;
-			try
-			{
-				InputStream in = getClass().getResourceAsStream(path);
-				audioStream = new AudioStream(in);
-				
-			} catch (FileNotFoundException e)
-			{
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+			load();
 		}
 		
 		@SuppressWarnings("restriction")
 		public void playClip(){
 			 AudioPlayer.player.start(audioStream);
-			 
+			 load();
+		}
+		
+		public void load()
+		{
+			InputStream in = getClass().getResourceAsStream(path);
+			try
+			{
+				audioStream = new AudioStream(in);
+			} catch (IOException e)
+			{
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
 		}
 	}
 	

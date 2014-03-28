@@ -22,6 +22,7 @@ import com.hh.input.KeyInput;
 import com.hh.objects.Powerup.PowerupType;
 import com.hh.objects.bg.Explosion;
 import com.hh.objects.bg.Ground;
+import com.hh.sound.SoundManager.SoundFile;
 
 /**
  * COSC3550 Spring 2014 Created : Feb. 25, 2014 Last Updated : Mar. 19, 2014
@@ -42,7 +43,7 @@ public class Player extends GameObject
 
 	private boolean startDeath = false;
 
-	private int deathCountdown = 100;
+	private int deathCountdown = 80;
 
 	private float hLevel;
 
@@ -105,22 +106,6 @@ public class Player extends GameObject
 		{
 			if (DebugManager.infiniteHelium)
 				hLevel = 200f;
-			if (startDeath)
-			{
-				if (deathCountdown > 40)
-					PlayState.handler.addObject(new Explosion(x, y, 128,
-							128,ObjectLayer.middleground));
-				if (deathCountdown == 40)
-					PlayState.handler.addObject(new Explosion(x, y, 512,
-							512, ObjectLayer.hud));
-				if (deathCountdown == 0)
-				{
-
-					kill();
-				}
-
-				deathCountdown--;
-			}
 
 			boolean collision = collision();
 
@@ -139,7 +124,7 @@ public class Player extends GameObject
 
 			if (v.dy > weight * gravity)
 				v.dy = weight * gravity;
-			if (deathCountdown > 25)
+			if (deathCountdown > 40)
 			{
 				x += v.dx * GameTime.delta();
 				y += v.dy * GameTime.delta();
@@ -148,6 +133,30 @@ public class Player extends GameObject
 			current.runAnimation();
 
 			tickBalloons();
+
+			if (startDeath)
+			{
+				if (deathCountdown == 80)
+					Game.soundManager.playAudioClip(SoundFile.fuse);
+				if (deathCountdown > 40)
+				{
+					PlayState.handler.addObject(new Explosion(x, y, 128,
+							128, ObjectLayer.middleground));
+				}
+				if (deathCountdown == 40)
+				{
+					PlayState.handler.addObject(new Explosion(x, y, 512,
+							512, ObjectLayer.hud));
+					Game.soundManager.playAudioClip(SoundFile.explosion);
+				}
+				if (deathCountdown == 0)
+				{
+
+					kill();
+				}
+
+				deathCountdown--;
+			}
 		}
 	}
 
@@ -167,13 +176,16 @@ public class Player extends GameObject
 				hLevel = 0;
 			}
 		}
-
-		/* Insta-Kill */
-		if (KeyInput.keysDown.contains(KeyBinding.KILL.VALUE()))
+		if (DebugManager.debugMode)
 		{
-			if (DebugManager.debugMode)
+			/* Insta-Kill */
+			if (KeyInput.keysDown.contains(KeyBinding.KILL.VALUE()))
 			{
-				startDeath = true;
+				startKill();
+			}
+			if (KeyInput.keysDown.contains(KeyBinding.POPALL.VALUE()))
+			{
+				balloons.clear();
 			}
 		}
 
@@ -261,6 +273,7 @@ public class Player extends GameObject
 						|| hLevel == 0
 						|| (extraBalloons == 0 && balloons.isEmpty()))
 				{
+					deathCountdown = 40;
 					startKill();
 				}
 
@@ -331,9 +344,10 @@ public class Player extends GameObject
 			{
 				bloons.render(g2d);
 			}
-			if(deathCountdown>40)
-			g2d.drawImage(current.getAnimationFrame(), (int) center.getX(),
-					(int) center.getY(), (int) width, (int) height, null);
+			if (deathCountdown > 40)
+				g2d.drawImage(current.getAnimationFrame(),
+						(int) center.getX(), (int) center.getY(),
+						(int) width, (int) height, null);
 		}
 	}
 

@@ -43,7 +43,7 @@ public class Game extends Canvas implements Runnable
 	public boolean running = false;
 	public static Random Rand = new Random();
 	public Thread thread;
-	public SoundManager soundManager;
+	public static SoundManager soundManager;
 
 	private static BufferStrategy bs;
 	
