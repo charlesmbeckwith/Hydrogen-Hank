@@ -45,6 +45,12 @@ public class Powerup extends GameObject
 		this.powerupType = powerupType;
 		alive = true;
 	}
+	public Powerup(float x, float y, int width, int height, PowerupType powerupType, ObjectLayer layer)
+	{
+		super(x, y, width, height, ObjectID.Powerup, layer);
+		this.powerupType = powerupType;
+		alive = true;
+	}
 
 	@Override
 	public void tick()

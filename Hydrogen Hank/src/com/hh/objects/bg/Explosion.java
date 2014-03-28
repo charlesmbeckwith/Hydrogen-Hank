@@ -9,6 +9,7 @@ import java.awt.geom.Area;
 
 import com.hh.Game;
 import com.hh.framework.GameObject;
+import com.hh.framework.GameObject.ObjectLayer;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
@@ -24,9 +25,10 @@ public class Explosion extends Powerup
 	private int ticker;
 
 	private ArtAssets art;
-	  public Explosion(float x, float y, int width, int height)
+	  public Explosion(float x, float y, int width, int height, ObjectLayer layer)
 	  {
-	    super(x, y, width, height, PowerupType.HydrogenTank);
+			 super(x, y, width, height, PowerupType.HydrogenTank, layer);
+
 	
 	    art = Game.getArtAssets();
 		initAnimation();
