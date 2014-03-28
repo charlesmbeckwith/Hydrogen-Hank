@@ -6,7 +6,6 @@ package com.hh.sound;
 import java.io.*;
 import javax.sound.sampled.*;
 
-import sun.audio.*;
 
 /**
  * @author blinginbeckwith
@@ -73,7 +72,6 @@ public class SoundManager
 		private String path;
 		@SuppressWarnings("unused")
 		private boolean fileLoaded;
-
 		private boolean loop = false;
 		private boolean lengthSet = false;
 		private int length;
@@ -115,6 +113,7 @@ public class SoundManager
 
 		}
 
+		@SuppressWarnings("unused")
 		private void playSound()
 		{
 
