@@ -15,7 +15,7 @@ public abstract class GameObject
 {
   public enum ObjectID
   {
-    Background, BackgroundElement, Tile, Ground, Button, Player, Enemy, Powerup, Explosion
+    Background, BackgroundElement, Tile, Ground, Button, Player, Enemy, Powerup, Explosion, VFX
   }
 
   public enum ObjectLayer

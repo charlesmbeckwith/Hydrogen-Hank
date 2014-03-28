@@ -1,7 +1,7 @@
 /**
  * 
  */
-package com.hh.objects.bg;
+package com.hh.objects.vfx;
 
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -9,19 +9,20 @@ import java.awt.geom.Area;
 import com.hh.graphics.Animation;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Powerup;
+import com.hh.objects.VisualEffect;
 
 /**
  * @author blinginbeckwith
  *
  */
-public class Explosion extends Powerup
+public class Explosion extends VisualEffect
 {
 	private Animation animation;
 	private int ticker;
 
 	  public Explosion(float x, float y, int width, int height, ObjectLayer layer)
 	  {
-			 super(x, y, width, height, PowerupType.HydrogenTank, layer);
+			 super(x, y, width, height, layer);
 
 	
 	    
@@ -35,8 +36,8 @@ public class Explosion extends Powerup
 	{
 		
 		animation.runAnimation();
-		ticker++;
-		if(ticker >25){
+
+		if(animation.finished()){
 			kill();
 		}
 		

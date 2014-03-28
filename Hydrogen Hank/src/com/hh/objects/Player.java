@@ -20,8 +20,9 @@ import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.input.KeyBinding;
 import com.hh.input.KeyInput;
 import com.hh.objects.Powerup.PowerupType;
-import com.hh.objects.bg.Explosion;
 import com.hh.objects.bg.Ground;
+import com.hh.objects.vfx.Explosion;
+import com.hh.objects.vfx.Smoke;
 import com.hh.sound.SoundManager.SoundFile;
 
 /**
@@ -113,6 +114,7 @@ public class Player extends GameObject
 			{
 				v.dx += 1;
 			}
+				
 
 			if (v.dy > (weight - buoyancy))
 			{
@@ -140,8 +142,12 @@ public class Player extends GameObject
 					Game.soundManager.playAudioClip(SoundFile.fuse);
 				if (deathCountdown > 40)
 				{
+					/*
 					PlayState.handler.addObject(new Explosion(x, y, 128,
 							128, ObjectLayer.middleground));
+							*/
+					PlayState.handler.addObject(new Smoke(x, y, 64,
+							64, ObjectLayer.middleground));
 				}
 				if (deathCountdown == 40)
 				{

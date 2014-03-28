@@ -25,7 +25,7 @@ public class Animation
 
 	private BufferedImage[] images;
 	private BufferedImage currentImg;
-
+	private boolean hasFinished = false;
 	/**
 	 * Creates the Animation object
 	 * 
@@ -91,8 +91,13 @@ public class Animation
 
 		if (count > frames)
 		{
+			hasFinished = true;
 			count = 0;
 		}
+	}
+	
+	public boolean finished(){
+		return hasFinished;
 	}
 
 	/**

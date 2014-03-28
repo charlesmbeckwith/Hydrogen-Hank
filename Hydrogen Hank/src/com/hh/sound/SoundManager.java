@@ -169,7 +169,6 @@ public class SoundManager
 				while (nBytesRead != -1 && counter < length)
 				{
 					counter++;
-					System.out.println(counter);
 					try
 					{
 						nBytesRead = audioInputStream.read(abData, 0,
