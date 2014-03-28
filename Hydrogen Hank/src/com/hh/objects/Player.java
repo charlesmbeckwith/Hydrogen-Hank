@@ -201,6 +201,7 @@ public class Player extends GameObject
 					&& hLevel > balloonCost
 					&& balloons.size() < maxBalloons)
 			{
+				Game.soundManager.playAudioClip(SoundFile.blow);
 				balloons.push(new Balloon(x - 12, y - height / 2 + 6,
 						(int) (width * 0.9), (int) (height * 0.9)));
 				if (!DebugManager.infiniteBalloons)
@@ -382,6 +383,7 @@ public class Player extends GameObject
 	{
 		if (!balloons.isEmpty())
 		{
+			Game.soundManager.playAudioClip(SoundFile.pop);
 			balloons.pop();
 			if (balloons.isEmpty())
 			{
