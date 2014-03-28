@@ -82,7 +82,7 @@ public class Bird extends Enemy
 	 */
 	private void initAnimations()
 	{
-		ANIM = new Animation(6, art.getSpriteFrame(spriteID.BIRD, 0), art.getSpriteFrame(spriteID.BIRD,
+		ANIM = new Animation(3, art.getSpriteFrame(spriteID.BIRD, 0), art.getSpriteFrame(spriteID.BIRD,
 		    1), art.getSpriteFrame(spriteID.BIRD, 2), art.getSpriteFrame(spriteID.BIRD, 3));
 	}
 

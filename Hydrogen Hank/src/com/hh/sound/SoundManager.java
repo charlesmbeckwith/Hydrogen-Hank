@@ -6,7 +6,6 @@ package com.hh.sound;
 import java.io.*;
 import javax.sound.sampled.*;
 
-
 /**
  * @author blinginbeckwith
  * 
@@ -189,7 +188,7 @@ public class SoundManager
 			if (loop)
 				playSound();
 			else
-				playing=false;
+				playing = false;
 		}
 
 	}

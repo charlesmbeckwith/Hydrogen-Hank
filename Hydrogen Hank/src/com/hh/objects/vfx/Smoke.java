@@ -3,14 +3,13 @@
  */
 package com.hh.objects.vfx;
 
+import java.awt.AlphaComposite;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
 
-import com.hh.framework.GameObject.ObjectLayer;
 import com.hh.graphics.Animation;
 import com.hh.graphics.SpriteSheet.spriteID;
-import com.hh.objects.Powerup;
 import com.hh.objects.VisualEffect;
 
 /**
@@ -20,8 +19,7 @@ import com.hh.objects.VisualEffect;
 public class Smoke extends VisualEffect
 {
 	private Animation animation;
-	private int ticker;
-
+	private float opacity = 1.0f;
 	  public Smoke(float x, float y, int width, int height, ObjectLayer layer)
 	  {
 			 super(x, y, width, height, layer);
@@ -38,7 +36,8 @@ public class Smoke extends VisualEffect
 	{
 		
 		animation.runAnimation();
-
+		if(opacity > .03)
+			opacity-=.03;
 		if(animation.finished()){
 			kill();
 		}
@@ -50,6 +49,7 @@ public class Smoke extends VisualEffect
 	public void render(Graphics g)
 	{
 		Graphics2D g2d = (Graphics2D) g.create();
+		g2d.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, opacity));
 		g2d.drawImage(animation.getAnimationFrame(), (int) center.getX(),
 				(int) center.getY(), (int) width, (int) height, null);
 		g2d.dispose();

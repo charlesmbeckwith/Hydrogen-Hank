@@ -15,16 +15,13 @@ import com.hh.framework.GameObject;
 /**
  * COSC3550 Spring 2014
  * 
- * Created : Feb. 28, 2014 
- * Last Updated : Feb. 28, 2014 
- * Purpose: Defines a powerup
+ * Created : Feb. 28, 2014 Last Updated : Feb. 28, 2014 Purpose: Defines a
+ * powerup
  * 
  * @author Charlie Beckwith
  */
 public class VisualEffect extends GameObject
 {
-
-
 
 	/**
 	 * @param x
@@ -40,7 +37,9 @@ public class VisualEffect extends GameObject
 
 		alive = true;
 	}
-	public VisualEffect(float x, float y, int width, int height, ObjectLayer layer)
+
+	public VisualEffect(float x, float y, int width, int height,
+			ObjectLayer layer)
 	{
 		super(x, y, width, height, ObjectID.VFX, layer);
 
@@ -50,8 +49,7 @@ public class VisualEffect extends GameObject
 	@Override
 	public void tick()
 	{
-		// TODO Auto-generated method stub
-
+		
 	}
 
 	@Override
@@ -69,8 +67,8 @@ public class VisualEffect extends GameObject
 	@Override
 	public Area boundingBox()
 	{
-		return new Area(new Rectangle((int) center.getX(), (int) center.getY(), (int) width, (int) height));
+		return new Area(new Rectangle((int) center.getX(),
+				(int) center.getY(), (int) width, (int) height));
 	}
-
 
 }

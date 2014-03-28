@@ -114,7 +114,6 @@ public class Player extends GameObject
 			{
 				v.dx += 1;
 			}
-				
 
 			if (v.dy > (weight - buoyancy))
 			{
@@ -143,11 +142,11 @@ public class Player extends GameObject
 				if (deathCountdown > 40)
 				{
 					/*
-					PlayState.handler.addObject(new Explosion(x, y, 128,
-							128, ObjectLayer.middleground));
-							*/
-					PlayState.handler.addObject(new Smoke(x, y, 64,
-							64, ObjectLayer.middleground));
+					 * PlayState.handler.addObject(new Explosion(x, y, 128, 128,
+					 * ObjectLayer.middleground));
+					 */
+					PlayState.handler.addObject(new Smoke(x, y, 64, 64,
+							ObjectLayer.middleground));
 				}
 				if (deathCountdown == 40)
 				{

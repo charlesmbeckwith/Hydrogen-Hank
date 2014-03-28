@@ -8,7 +8,6 @@ import java.awt.Graphics2D;
 import java.awt.geom.Area;
 import com.hh.graphics.Animation;
 import com.hh.graphics.SpriteSheet.spriteID;
-import com.hh.objects.Powerup;
 import com.hh.objects.VisualEffect;
 
 /**
@@ -18,7 +17,6 @@ import com.hh.objects.VisualEffect;
 public class Explosion extends VisualEffect
 {
 	private Animation animation;
-	private int ticker;
 
 	  public Explosion(float x, float y, int width, int height, ObjectLayer layer)
 	  {
@@ -33,8 +31,7 @@ public class Explosion extends VisualEffect
 
 	@Override
 	public void tick()
-	{
-		
+	{	
 		animation.runAnimation();
 
 		if(animation.finished()){
@@ -42,7 +39,6 @@ public class Explosion extends VisualEffect
 		}
 		
 	}
-
 
 	@Override
 	public void render(Graphics g)
@@ -63,7 +59,6 @@ public class Explosion extends VisualEffect
 	
 	private void initAnimation()
 	  {
-	    animation = new Animation(1, spriteID.EXPLOSION);
-		
+	    animation = new Animation(1, spriteID.EXPLOSION);	
 	  }
 }
