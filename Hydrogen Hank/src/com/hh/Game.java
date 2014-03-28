@@ -1,6 +1,5 @@
 package com.hh;
 
-import java.applet.AudioClip;
 import java.awt.Canvas;
 import java.awt.Graphics;
 import java.awt.Point;

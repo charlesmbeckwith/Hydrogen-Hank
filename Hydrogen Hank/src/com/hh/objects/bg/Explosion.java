@@ -6,12 +6,7 @@ package com.hh.objects.bg;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
-
-import com.hh.Game;
-import com.hh.framework.GameObject;
-import com.hh.framework.GameObject.ObjectLayer;
 import com.hh.graphics.Animation;
-import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Powerup;
 
@@ -24,13 +19,12 @@ public class Explosion extends Powerup
 	private Animation animation;
 	private int ticker;
 
-	private ArtAssets art;
 	  public Explosion(float x, float y, int width, int height, ObjectLayer layer)
 	  {
 			 super(x, y, width, height, PowerupType.HydrogenTank, layer);
 
 	
-	    art = Game.getArtAssets();
+	    
 		initAnimation();
 
 	  }
@@ -63,13 +57,12 @@ public class Explosion extends Powerup
 	@Override
 	public Area boundingBox()
 	{
-		// TODO Auto-generated method stub
 		return new Area(super.boundingBox());
 	}
 	
 	private void initAnimation()
 	  {
 	    animation = new Animation(1, spriteID.EXPLOSION);
-		//animation = new Animation(3, art.getSpriteFrame(spriteID.EXPLOSION, 0));
+		
 	  }
 }

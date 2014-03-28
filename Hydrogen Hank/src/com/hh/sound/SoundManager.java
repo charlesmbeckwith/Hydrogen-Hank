@@ -13,7 +13,6 @@ import sun.audio.*;
  */
 public class SoundManager
 {
-	@SuppressWarnings("restriction")
 	private AudioClip themesong, explosion,fuse;
 	
 	public enum SoundFile{
@@ -55,11 +54,13 @@ public class SoundManager
 	
 	public class AudioClip
 	{
+		@SuppressWarnings("unused")
 		private SoundFile sound;
 		private String path;
+		@SuppressWarnings("unused")
 		private boolean fileLoaded;
-		private AudioStream audioStream;
 		@SuppressWarnings("restriction")
+		private AudioStream audioStream;
 		public AudioClip(SoundFile sound, String path) throws IOException
 		{
 			this.sound = sound;
@@ -73,6 +74,7 @@ public class SoundManager
 			 load();
 		}
 		
+		@SuppressWarnings("restriction")
 		public void load()
 		{
 			InputStream in = getClass().getResourceAsStream(path);
