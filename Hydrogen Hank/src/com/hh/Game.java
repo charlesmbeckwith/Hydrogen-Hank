@@ -59,6 +59,8 @@ public class Game extends Canvas implements Runnable
 		height = getHeight();
 		createBufferStrategy(3);
 		bs = getBufferStrategy();
+		
+		new DebugManager();
 		artassets = new ArtAssets();
 		scorekeeper = new ScoreKeeper();
 		manager = new GameStateManager();
@@ -77,7 +79,6 @@ public class Game extends Canvas implements Runnable
 		manager.push(new TitleMenuAnimState());
 		manager.push(new IntroAnimation());
 		
-		new DebugManager();
 	}
 
 	/**

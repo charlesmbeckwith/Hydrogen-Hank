@@ -55,6 +55,8 @@ public class PlayState extends GameState
 	
 	public int maxAltitude = 0;
 
+	private int[] prevHydroCloud = {0,0};
+
 	public PlayState()
 	{
 		handler = new Handler();
@@ -175,7 +177,7 @@ public class PlayState extends GameState
 	 */
 	public void restart()
 	{
-		
+		prevHydroCloud[0] = 0; prevHydroCloud[1] = 0;
 		handler.clearObjects();
 		player = new Player(100, 380, 55, 64, new Vector2D(0, 50));
 		handler.addObject(player);
@@ -211,7 +213,9 @@ public class PlayState extends GameState
 				for (float j = (sceneWindow.y + sceneWindow.height) < cloudYMin ? (sceneWindow.y + sceneWindow.height)
 						: cloudYMin; j > sceneWindow.y; j -= meter)
 				{
-					generateCloud((int) i, (int) j);
+				 
+				      generateCloud((int) i, (int) j);
+				     
 					generateEnemy((int) i, (int) j);
 					yStartUp = (int) j;
 				}
@@ -270,13 +274,16 @@ public class PlayState extends GameState
 	{
 
 		float xVel = -15 * (Game.Rand.nextInt(3) + 1);
-
 		switch (Game.Rand.nextInt(100))
 		{
 		case 0:
 		case 1:
 		case 2:
-			generateHydrogenCloud(x, y);
+		  if(x > prevHydroCloud[0]+300 && (y > prevHydroCloud[1]+300 || y < prevHydroCloud[1] - 300))   
+		  {
+		    generateHydrogenCloud(x, y);
+		    prevHydroCloud[0] = x; prevHydroCloud[1]=y;
+		  }
 			handler.addObject(new Cloud(x, y, 192, 96,
 					new Vector2D(xVel, 0), true, false));
 			break;
@@ -297,13 +304,16 @@ public class PlayState extends GameState
 
 	private void generateHydrogenCloud(int x, int y)
 	{
-		for (int t = 0; t < hydrogenCloudSize; t++)
-		{
-			int randX = Game.Rand.nextInt(50);
-			int randY = Game.Rand.nextInt(50);
-			handler.addObject(new HydrogenMolecule(x + randX + 10, y
-					+ randY, 25, 25));
+
+		//Generating a random number of clouds spaced out by a random amount. 
+		int sizeVariable = Game.Rand.nextInt(25)+25;
+		for (int t = 0; t < 720; t++){
+		  if(t % sizeVariable == 0){
+		  handler.addObject(new HydrogenMolecule(x , y
+		                                         , 25, 25));
+		  }
 		}
+		
 		if(Game.Rand.nextInt(100) == 50)
 			handler.addObject(new HydrogenTank(x,y,90,90));
 		
