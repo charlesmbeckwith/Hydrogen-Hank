@@ -32,62 +32,40 @@ import com.hh.sound.SoundManager.SoundFile;
  * @author Mark Schlottke & Charlie Beckwith
  */
 @SuppressWarnings("unused")
-public class Player extends GameObject 
+public class Player extends GameObject
 {
 	private final float gravity = 9f;
-
 	private Animation normal, death, current;
-
 	private ArtAssets art;
-
 	private LinkedList<String> debugOptions;
-
 	private boolean startDeath = false;
-
 	private int deathCountdown = 80;
-
 	private float hLevel;
-
 	private float maxHLevel = 200f;
-
 	private boolean grounded = false;
-
 	private float weight = 180f;
-
 	private float buoyancy;
-
 	private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
-
 	private boolean balloonAlreadyBlownUp = false;
-
 	private int extraBalloons = 50; // How many balloons you start with
-
 	private final int balloonCost = 10; // How much hydrogen blowing up a
 										// balloon
 										// costs.
 
 	private final int maxBalloons = 10;
-
 	private boolean inflate = false;
-
 	private boolean deflate = false;
-
 	private float gInc = 0f;
-
 	private final float inflateAmt = 3.0f;
-
 	private final float deflateAmt = 3.0f;
-
 	private final float leakAmt = 0.01f;
-
 	private int balloonsUsed = 0;
 	private int heliumUsed = 0;
-
 	private float inflationCost = (float) 0.333;
-	
+
 	private boolean collision = false;
 
-  private int moleculesPickedUp = 0;
+	private int moleculesPickedUp = 0;
 
 	public Player(float x, float y, int width, int height, Vector2D v)
 	{
@@ -97,11 +75,10 @@ public class Player extends GameObject
 		buoyancy = 0.0f;
 		hLevel = 200f;
 
-		// balloons.add(new Balloon(x, y, width, height));
-
 		art = Game.getArtAssets();
 		initAnimations();
 		current = normal;
+		Game.soundManager.playAudioClip(SoundFile.hank);
 	}
 
 	@Override
@@ -112,9 +89,7 @@ public class Player extends GameObject
 			if (DebugManager.infiniteHelium)
 				hLevel = 200f;
 
-			 collision = collision();
-			//Thread t = new Thread(this);
-            //t.start();
+			collision = collision();
 
 			if (v.dx < 150 && !collision)
 			{
@@ -145,24 +120,22 @@ public class Player extends GameObject
 			{
 				if (deathCountdown == 80)
 				{
+					// Play "explosion imminent" noise and scream sound.
 					Game.soundManager.playAudioClip(SoundFile.fuse);
 					Game.soundManager.playAudioClip(SoundFile.scream);
 				}
-					
+
 				if (deathCountdown > 40)
 				{
-					/*
-					 * PlayState.handler.addObject(new Explosion(x, y, 128, 128,
-					 * ObjectLayer.middleground));
-					 */
+					// Add smoke effect behind player as he falls.
 					PlayState.handler.addObject(new Smoke(x, y, 64, 64,
 							ObjectLayer.middleground));
 				}
 				if (deathCountdown == 40)
 				{
+					// Add gigantic explosion indicating player death
 					PlayState.handler.addObject(new Explosion(x, y, 512,
 							512, ObjectLayer.hud));
-					Game.soundManager.playAudioClip(SoundFile.explosion);
 				}
 				if (deathCountdown == 0)
 				{
@@ -216,7 +189,6 @@ public class Player extends GameObject
 					&& hLevel > balloonCost
 					&& balloons.size() < maxBalloons)
 			{
-				Game.soundManager.playAudioClip(SoundFile.blow);
 				balloons.push(new Balloon(x - 12, y - height / 2 + 6,
 						(int) (width * 0.9), (int) (height * 0.9)));
 				if (!DebugManager.infiniteBalloons)
@@ -260,9 +232,9 @@ public class Player extends GameObject
 
 		for (final GameObject go : PlayState.handler.getObjects())
 		{
-		  
-		  boolean collided = collided(go);
-		    
+
+			boolean collided = collided(go);
+
 			if (go != this && go.getId() == ObjectID.Enemy && collided)
 			{
 				Enemy enemy = (Enemy) go;
@@ -278,7 +250,7 @@ public class Player extends GameObject
 				}
 
 			}
-			
+
 			// check for ground collision
 			if (go != this && go.getClass() == Ground.class
 					&& (y + (height / 2) - 14) >= go.getY()
@@ -304,8 +276,7 @@ public class Player extends GameObject
 			}
 
 			// Check for powerup collision
-			if (go != this && go.getId() == ObjectID.Powerup
-					&& collided)
+			if (go != this && go.getId() == ObjectID.Powerup && collided)
 			{
 				// cast go as Powerup
 				Powerup pu = (Powerup) go;
@@ -321,7 +292,7 @@ public class Player extends GameObject
 					break;
 				case HydrogenMolecule:
 					hLevel += 1;
-					moleculesPickedUp ++;
+					moleculesPickedUp++;
 					go.kill();
 					break;
 				}
@@ -398,10 +369,15 @@ public class Player extends GameObject
 
 	}
 
+	/**
+	 * Destroy one balloon attached to Hank
+	 * 
+	 */
 	public void destroyBalloon()
 	{
 		if (!balloons.isEmpty())
 		{
+			//Play popping sound
 			Game.soundManager.playAudioClip(SoundFile.pop);
 			balloons.pop();
 			if (balloons.isEmpty())
@@ -435,7 +411,7 @@ public class Player extends GameObject
 
 	public int calculateScore()
 	{
-		return (int) (moleculesPickedUp*(heliumUsed/balloonsUsed));
+		return (int) (moleculesPickedUp * (heliumUsed / balloonsUsed));
 	}
 
 	private void initDebug()
@@ -487,16 +463,28 @@ public class Player extends GameObject
 						spriteID.HANK2, 1));
 	}
 
+	/**
+	 * return the hydrogen level percentage
+	 * @return float
+	 */
 	public float getHydrogenLevelPercent()
 	{
 		return (hLevel / maxHLevel);
 	}
 
+	/**
+	 * return how many extra balloons are left
+	 * @return int
+	 */
 	public int getExtraBalloons()
 	{
 		return extraBalloons;
 	}
 
+	/**
+	 * get current "altitude" of player
+	 * @return int
+	 */
 	public int getAltitude()
 	{
 		return (int) ((400 - (height / 2)) - y) / 30;
@@ -505,17 +493,11 @@ public class Player extends GameObject
 	private class Balloon
 	{
 		private float x, y, rX, rY, xOffset, yOffset;
-
 		private int balloonColor;
-
 		private boolean alive = true;
-
 		private int width, height, adjWidth, adjHeight;
-
 		private float fillLevel;
-
 		private BufferedImage img;
-
 		private int moveCounter;
 
 		public Balloon(float x, float y, int width, int height)
@@ -532,6 +514,9 @@ public class Player extends GameObject
 					: Game.Rand.nextFloat() * 4;
 			adjWidth = (int) ((getFillLevel() / 100) * width);
 			adjHeight = (int) ((getFillLevel() / 100) * height);
+
+			// Play sound of balloon blowing up
+			Game.soundManager.playAudioClip(SoundFile.blow);
 		}
 
 		public void tick(float x, float y)

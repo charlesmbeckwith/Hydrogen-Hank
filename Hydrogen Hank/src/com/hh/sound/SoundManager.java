@@ -17,11 +17,11 @@ import com.hh.framework.DebugManager;
 public class SoundManager
 {
 	private AudioClip themesong, explosion, fuse, blow, pop, scream, caww,
-			caww2, helicopter;
+			caww2, helicopter, hankstartsound, sucks;
 
 	public enum SoundFile
 	{
-		Theme, explosion, fuse, blow, pop, scream, caww, helicopter;
+		Theme, explosion, fuse, blow, pop, scream, caww, helicopter, hank;
 	}
 
 	public SoundManager()
@@ -44,6 +44,8 @@ public class SoundManager
 			helicopter = new AudioClip(SoundFile.helicopter,
 					"/sound/fx/helicopter.wav");
 			helicopter.setLength(1);
+			hankstartsound = new AudioClip(SoundFile.hank, "/sound/fx/bitchin.wav");
+			
 
 		} catch (IOException e)
 		{
@@ -88,6 +90,8 @@ public class SoundManager
 		case helicopter:
 			helicopter.playClip();
 			break;
+		case hank:
+			hankstartsound.playClip();
 		default:
 			break;
 
