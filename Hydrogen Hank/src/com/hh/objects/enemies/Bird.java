@@ -51,11 +51,9 @@ public class Bird extends Enemy
 	{
 		// this.X = -PlayState.cam.getX()+400;
 		// this.Y = -PlayState.cam.getY()+350;
-		if(Game.Rand.nextInt(500) == 112 )
-		{
+		if(Game.Rand.nextInt(50) == 1 && isVisible())
 			Game.soundManager.playAudioClip(SoundFile.caww);
-		}
-		x += v.dx * GameTime.delta();
+		x += 2*v.dx * GameTime.delta();
 		ANIM.runAnimation();
 	}
 

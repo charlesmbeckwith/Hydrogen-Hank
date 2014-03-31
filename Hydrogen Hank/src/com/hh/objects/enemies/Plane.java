@@ -12,10 +12,12 @@ import java.util.Random;
 import com.hh.Game;
 import com.hh.framework.GameTime;
 import com.hh.framework.Vector2D;
+import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Enemy;
+import com.hh.objects.vfx.Smoke;
 import com.hh.sound.SoundManager.SoundFile;
 
 /**
@@ -29,6 +31,7 @@ public class Plane extends Enemy
 {
 	private Animation anim;
 	private ArtAssets art;
+	private int smokeCounter;
 
 	/**
 	 * @param x
@@ -49,13 +52,18 @@ public class Plane extends Enemy
 	public void tick()
 	{
 		if (isVisible())
-		{
 			Game.soundManager.playAudioClip(SoundFile.helicopter);
-			System.out.println("I'm visible lol " + id);
-		}
-		
+
 		x += v.dx * GameTime.delta();
 		anim.runAnimation();
+		smokeCounter++;
+		if (smokeCounter == 15)
+		{
+			// addSmoke
+			PlayState.handler.addObject(new Smoke(x + width/2-15,
+					y-height/2, 32, 32, ObjectLayer.middleground));
+			smokeCounter = 0;
+		}
 	}
 
 	@Override
@@ -66,6 +74,7 @@ public class Plane extends Enemy
 		{
 			g2d.drawImage(anim.getAnimationFrame(), (int) center.getX(),
 					(int) center.getY(), (int) width, (int) height, null);
+
 		}
 
 		super.render(g);
