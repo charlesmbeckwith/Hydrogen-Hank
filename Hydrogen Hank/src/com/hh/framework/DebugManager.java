@@ -22,6 +22,7 @@ public class DebugManager
   public static boolean showBoundsAll=false;
   public static boolean infiniteHelium = false;
   public static boolean infiniteBalloons = false;
+  public static boolean muteSound = false;
 
   public DebugManager()
   {
@@ -33,6 +34,8 @@ public class DebugManager
     }
     if (Game.debugOptions().contains("-inf_helium"))
       infiniteHelium = true;
+    if (Game.debugOptions().contains("-mute"))
+      muteSound = true;
     if (Game.debugOptions().contains("-inf_balloons"))
       infiniteBalloons = true;
     if (Game.debugOptions().contains("Info"))

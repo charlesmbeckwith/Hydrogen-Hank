@@ -26,10 +26,9 @@ public class HydrogenMolecule
 {
 
   private BufferedImage IMG;
-
   private ArtAssets art;
-
   private double rotationRadian;
+  
 
   /**
    * @param x
@@ -54,27 +53,17 @@ public class HydrogenMolecule
   public void tick()
   {
     rotationRadian += .1;
+    archimedesSpiralMovement(rotationRadian);
 
   }
 
-  public void randomizeMovement(){
-    int moveAmt = 3;
-    switch (Game.Rand.nextInt(4))
-      {
+  /* Movement that causes the molecules to move in a archemedes sprial */
+  public void archimedesSpiralMovement(double theta){
+    
+    double a = -5; 
+  y += (float) ((a*theta)/(2*Math.PI)*Math.cos(theta));
+  x += (float) ((a*theta)/(2*Math.PI)*Math.sin(theta));
 
-      case 0:
-         x+=moveAmt;
-        break;
-      case 1:
-         x-=moveAmt;
-        break;
-      case 2:
-         y+=moveAmt;
-        break;
-      case 3:
-         y-=moveAmt;
-        break;
-      }
   }
   @Override
   public void render(Graphics g)
@@ -83,7 +72,6 @@ public class HydrogenMolecule
     g2d.rotate(rotationRadian, x, y);
     g2d.drawImage(IMG, (int) center.getX(), (int) center.getY(), (int) width,
                   (int) height, null);
-
     g2d.dispose();
     super.render(g);
   }

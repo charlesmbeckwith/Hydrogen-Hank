@@ -32,7 +32,7 @@ import com.hh.sound.SoundManager.SoundFile;
  * @author Mark Schlottke & Charlie Beckwith
  */
 @SuppressWarnings("unused")
-public class Player extends GameObject
+public class Player extends GameObject 
 {
 	private final float gravity = 9f;
 
@@ -84,6 +84,10 @@ public class Player extends GameObject
 	private int heliumUsed = 0;
 
 	private float inflationCost = (float) 0.333;
+	
+	private boolean collision = false;
+
+  private int moleculesPickedUp = 0;
 
 	public Player(float x, float y, int width, int height, Vector2D v)
 	{
@@ -108,7 +112,9 @@ public class Player extends GameObject
 			if (DebugManager.infiniteHelium)
 				hLevel = 200f;
 
-			boolean collision = collision();
+			 collision = collision();
+			//Thread t = new Thread(this);
+            //t.start();
 
 			if (v.dx < 150 && !collision)
 			{
@@ -248,9 +254,12 @@ public class Player extends GameObject
 		boolean col = false;
 		grounded = false;
 
-		for (GameObject go : PlayState.handler.getObjects())
+		for (final GameObject go : PlayState.handler.getObjects())
 		{
-			if (go != this && go.getId() == ObjectID.Enemy && collided(go))
+		  
+		  boolean collided = collided(go);
+		    
+			if (go != this && go.getId() == ObjectID.Enemy && collided)
 			{
 				Enemy enemy = (Enemy) go;
 				switch (enemy.getEnemyType())
@@ -265,7 +274,7 @@ public class Player extends GameObject
 				}
 
 			}
-
+			
 			// check for ground collision
 			if (go != this && go.getClass() == Ground.class
 					&& (y + (height / 2) - 14) >= go.getY()
@@ -292,7 +301,7 @@ public class Player extends GameObject
 
 			// Check for powerup collision
 			if (go != this && go.getId() == ObjectID.Powerup
-					&& collided(go))
+					&& collided)
 			{
 				// cast go as Powerup
 				Powerup pu = (Powerup) go;
@@ -308,6 +317,7 @@ public class Player extends GameObject
 					break;
 				case HydrogenMolecule:
 					hLevel += 1;
+					moleculesPickedUp ++;
 					go.kill();
 					break;
 				}
@@ -421,7 +431,7 @@ public class Player extends GameObject
 
 	public int calculateScore()
 	{
-		return (int) (Game.playState.getPlayTime() / (balloonsUsed * heliumUsed));
+		return (int) (moleculesPickedUp*(heliumUsed/balloonsUsed));
 	}
 
 	private void initDebug()

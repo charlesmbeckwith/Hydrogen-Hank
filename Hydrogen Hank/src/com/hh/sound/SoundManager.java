@@ -4,7 +4,10 @@
 package com.hh.sound;
 
 import java.io.*;
+
 import javax.sound.sampled.*;
+
+import com.hh.framework.DebugManager;
 
 /**
  * @author blinginbeckwith
@@ -100,10 +103,10 @@ public class SoundManager
 
 		public void playClip()
 		{
-			if (!playing)
+			if (!playing && !DebugManager.muteSound)
 			{
-				Thread t = new Thread(this);
-				t.start();
+          Thread t = new Thread(this);
+          t.start();
 				playing = true;
 			}
 
@@ -116,7 +119,6 @@ public class SoundManager
 
 		}
 
-		@SuppressWarnings("unused")
 		private void playSound()
 		{
 
@@ -162,7 +164,8 @@ public class SoundManager
 					}
 					if (nBytesRead >= 0)
 					{
-						int nBytesWritten = line.write(abData, 0,
+						@SuppressWarnings("unused")
+            int nBytesWritten = line.write(abData, 0,
 								nBytesRead);
 					}
 				}
@@ -182,7 +185,8 @@ public class SoundManager
 					}
 					if (nBytesRead >= 0)
 					{
-						int nBytesWritten = line.write(abData, 0,
+						@SuppressWarnings("unused")
+            int nBytesWritten = line.write(abData, 0,
 								nBytesRead);
 					}
 				}
