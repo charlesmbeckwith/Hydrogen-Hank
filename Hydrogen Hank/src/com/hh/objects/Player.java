@@ -144,7 +144,11 @@ public class Player extends GameObject
 			if (startDeath)
 			{
 				if (deathCountdown == 80)
+				{
 					Game.soundManager.playAudioClip(SoundFile.fuse);
+					Game.soundManager.playAudioClip(SoundFile.scream);
+				}
+					
 				if (deathCountdown > 40)
 				{
 					/*

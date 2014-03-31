@@ -7,6 +7,7 @@ import java.io.*;
 
 import javax.sound.sampled.*;
 
+import com.hh.Game;
 import com.hh.framework.DebugManager;
 
 /**
@@ -15,11 +16,12 @@ import com.hh.framework.DebugManager;
  */
 public class SoundManager
 {
-	private AudioClip themesong, explosion, fuse, blow, pop, scream;
+	private AudioClip themesong, explosion, fuse, blow, pop, scream, caww,
+			caww2, helicopter;
 
 	public enum SoundFile
 	{
-		Theme, explosion, fuse, blow, pop, scream
+		Theme, explosion, fuse, blow, pop, scream, caww, helicopter;
 	}
 
 	public SoundManager()
@@ -37,6 +39,11 @@ public class SoundManager
 			blow.setLength(2);
 			pop = new AudioClip(SoundFile.pop, "/sound/fx/balloonpop.wav");
 			scream = new AudioClip(SoundFile.scream, "/sound/fx/scream.wav");
+			caww = new AudioClip(SoundFile.caww, "/sound/fx/caww.wav");
+			caww2 = new AudioClip(SoundFile.caww, "/sound/fx/caww2.wav");
+			helicopter = new AudioClip(SoundFile.helicopter,
+					"/sound/fx/helicopter.wav");
+			helicopter.setLength(1);
 
 		} catch (IOException e)
 		{
@@ -66,6 +73,22 @@ public class SoundManager
 			break;
 		case scream:
 			scream.playClip();
+			break;
+		case caww:
+			if (Game.Rand.nextBoolean())
+			{
+				if (!caww2.isPlaying())
+					caww.playClip();
+			} else
+			{
+				if (!caww.isPlaying())
+					caww2.playClip();
+			}
+			break;
+		case helicopter:
+			helicopter.playClip();
+			break;
+		default:
 			break;
 
 		}
@@ -105,11 +128,16 @@ public class SoundManager
 		{
 			if (!playing && !DebugManager.muteSound)
 			{
-          Thread t = new Thread(this);
-          t.start();
+				Thread t = new Thread(this);
+				t.start();
 				playing = true;
 			}
 
+		}
+
+		public boolean isPlaying()
+		{
+			return playing;
 		}
 
 		@Override
@@ -165,7 +193,7 @@ public class SoundManager
 					if (nBytesRead >= 0)
 					{
 						@SuppressWarnings("unused")
-            int nBytesWritten = line.write(abData, 0,
+						int nBytesWritten = line.write(abData, 0,
 								nBytesRead);
 					}
 				}
@@ -186,7 +214,7 @@ public class SoundManager
 					if (nBytesRead >= 0)
 					{
 						@SuppressWarnings("unused")
-            int nBytesWritten = line.write(abData, 0,
+						int nBytesWritten = line.write(abData, 0,
 								nBytesRead);
 					}
 				}

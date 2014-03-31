@@ -15,6 +15,7 @@ import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Enemy;
+import com.hh.sound.SoundManager.SoundFile;
 
 /**
  * COSC3550 Spring 2014
@@ -50,6 +51,10 @@ public class Bird extends Enemy
 	{
 		// this.X = -PlayState.cam.getX()+400;
 		// this.Y = -PlayState.cam.getY()+350;
+		if(Game.Rand.nextInt(500) == 112 )
+		{
+			Game.soundManager.playAudioClip(SoundFile.caww);
+		}
 		x += v.dx * GameTime.delta();
 		ANIM.runAnimation();
 	}
