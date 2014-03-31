@@ -12,11 +12,11 @@ import javax.sound.sampled.*;
  */
 public class SoundManager
 {
-	private AudioClip themesong, explosion, fuse, blow, pop;
+	private AudioClip themesong, explosion, fuse, blow, pop, scream;
 
 	public enum SoundFile
 	{
-		Theme, explosion, fuse, blow, pop
+		Theme, explosion, fuse, blow, pop, scream
 	}
 
 	public SoundManager()
@@ -33,6 +33,7 @@ public class SoundManager
 					"/sound/fx/balloonblowingup.wav");
 			blow.setLength(2);
 			pop = new AudioClip(SoundFile.pop, "/sound/fx/balloonpop.wav");
+			scream = new AudioClip(SoundFile.scream, "/sound/fx/scream.wav");
 
 		} catch (IOException e)
 		{
@@ -59,6 +60,9 @@ public class SoundManager
 			break;
 		case pop:
 			pop.playClip();
+			break;
+		case scream:
+			scream.playClip();
 			break;
 
 		}
