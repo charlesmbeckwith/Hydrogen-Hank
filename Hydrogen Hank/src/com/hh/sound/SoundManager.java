@@ -1,5 +1,8 @@
 /**
+ * COSC3550 Spring 2014 Created : March 27, 2014 Last Updated : Mar. 31, 2014
+ * Purpose: Manages Sound Files and plays sound clips
  * 
+ * @author Charlie Beckwith
  */
 package com.hh.sound;
 
@@ -10,14 +13,11 @@ import javax.sound.sampled.*;
 import com.hh.Game;
 import com.hh.framework.DebugManager;
 
-/**
- * @author blinginbeckwith
- * 
- */
+
 public class SoundManager
 {
 	private AudioClip themesong, explosion, fuse, blow, pop, scream, caww,
-			caww2, helicopter, hankstartsound, sucks;
+			caww2, helicopter, hankstartsound;
 
 	public enum SoundFile
 	{
@@ -31,19 +31,29 @@ public class SoundManager
 			themesong = new AudioClip(SoundFile.Theme,
 					"/sound/music/themesong.wav");
 			themesong.setLooping(true);
+			
 			explosion = new AudioClip(SoundFile.explosion,
 					"/sound/fx/explosion.wav");
 			fuse = new AudioClip(SoundFile.fuse, "/sound/fx/fuse.wav");
+			
+			//Create balloon blow up soundclip
 			blow = new AudioClip(SoundFile.blow,
 					"/sound/fx/balloonblowingup.wav");
 			blow.setLength(2);
+			//Create pop soundclip
 			pop = new AudioClip(SoundFile.pop, "/sound/fx/balloonpop.wav");
+			
+			//Create scream soundclip
 			scream = new AudioClip(SoundFile.scream, "/sound/fx/scream.wav");
+			
+			//Create two bird sound audio clips
 			caww = new AudioClip(SoundFile.caww, "/sound/fx/caww.wav");
 			caww2 = new AudioClip(SoundFile.caww, "/sound/fx/caww2.wav");
+			//Create helicopter sound and set length to 1
 			helicopter = new AudioClip(SoundFile.helicopter,
 					"/sound/fx/helicopter.wav");
 			helicopter.setLength(1);
+			
 			hankstartsound = new AudioClip(SoundFile.hank, "/sound/fx/bitchin.wav");
 			
 
@@ -77,6 +87,7 @@ public class SoundManager
 			scream.playClip();
 			break;
 		case caww:
+			//Randomly choose between playing the first or second bird sound
 			if (Game.Rand.nextBoolean())
 			{
 				if (!caww2.isPlaying())

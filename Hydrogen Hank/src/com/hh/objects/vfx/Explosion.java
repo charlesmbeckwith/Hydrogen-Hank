@@ -1,5 +1,8 @@
 /**
+ * COSC3550 Spring 2014 Created : March. 27, 2014 Last Updated : Mar. 31, 2014
+ * Purpose: Explosion Object Visual effect
  * 
+ * @author Charlie Beckwith
  */
 package com.hh.objects.vfx;
 
@@ -13,10 +16,7 @@ import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.VisualEffect;
 import com.hh.sound.SoundManager.SoundFile;
 
-/**
- * @author blinginbeckwith
- * 
- */
+
 public class Explosion extends VisualEffect
 {
 	private Animation animation;
@@ -26,6 +26,7 @@ public class Explosion extends VisualEffect
 	{
 		super(x, y, width, height, layer);
 		initAnimation();
+		//Play explosion sound clip
 		Game.soundManager.playAudioClip(SoundFile.explosion);
 	}
 

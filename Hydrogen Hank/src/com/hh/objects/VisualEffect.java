@@ -1,6 +1,3 @@
-/**
- * 
- */
 package com.hh.objects;
 
 import java.awt.Color;
@@ -15,8 +12,8 @@ import com.hh.framework.GameObject;
 /**
  * COSC3550 Spring 2014
  * 
- * Created : Feb. 28, 2014 Last Updated : Feb. 28, 2014 Purpose: Defines a
- * powerup
+ * Created : Mar. 27, 2014 Last Updated : Mar. 27 , 2014 
+ * Purpose: Defines a Visual Effect
  * 
  * @author Charlie Beckwith
  */

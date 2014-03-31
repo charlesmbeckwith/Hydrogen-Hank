@@ -1,5 +1,8 @@
 /**
+ * COSC3550 Spring 2014 Created : March. 27, 2014 Last Updated : Mar. 31, 2014
+ * Purpose: Smoke visual effect
  * 
+ * @author Charlie Beckwith
  */
 package com.hh.objects.vfx;
 
