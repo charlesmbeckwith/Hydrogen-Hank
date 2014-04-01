@@ -13,11 +13,10 @@ import javax.sound.sampled.*;
 import com.hh.Game;
 import com.hh.framework.DebugManager;
 
-
 public class SoundManager
 {
-	private AudioClip themesong, explosion, fuse, blow, pop, scream, caww,
-			caww2, helicopter, hankstartsound;
+	private static AudioClip themesong, explosion, fuse, blow, pop, scream,
+			caww, caww2, helicopter, hankstartsound;
 
 	public enum SoundFile
 	{
@@ -31,31 +30,31 @@ public class SoundManager
 			themesong = new AudioClip(SoundFile.Theme,
 					"/sound/music/themesong.wav");
 			themesong.setLooping(true);
-			
+
 			explosion = new AudioClip(SoundFile.explosion,
 					"/sound/fx/explosion.wav");
 			fuse = new AudioClip(SoundFile.fuse, "/sound/fx/fuse.wav");
-			
-			//Create balloon blow up soundclip
+
+			// Create balloon blow up soundclip
 			blow = new AudioClip(SoundFile.blow,
 					"/sound/fx/balloonblowingup.wav");
 			blow.setLength(2);
-			//Create pop soundclip
+			// Create pop soundclip
 			pop = new AudioClip(SoundFile.pop, "/sound/fx/balloonpop.wav");
-			
-			//Create scream soundclip
+
+			// Create scream soundclip
 			scream = new AudioClip(SoundFile.scream, "/sound/fx/scream.wav");
-			
-			//Create two bird sound audio clips
+
+			// Create two bird sound audio clips
 			caww = new AudioClip(SoundFile.caww, "/sound/fx/caww.wav");
 			caww2 = new AudioClip(SoundFile.caww, "/sound/fx/caww2.wav");
-			//Create helicopter sound and set length to 1
+			// Create helicopter sound and set length to 1
 			helicopter = new AudioClip(SoundFile.helicopter,
 					"/sound/fx/helicopter.wav");
 			helicopter.setLength(1);
-			
-			hankstartsound = new AudioClip(SoundFile.hank, "/sound/fx/bitchin.wav");
-			
+
+			hankstartsound = new AudioClip(SoundFile.hank,
+					"/sound/fx/bitchin.wav");
 
 		} catch (IOException e)
 		{
@@ -66,47 +65,67 @@ public class SoundManager
 
 	public void playAudioClip(SoundFile sound)
 	{
+		AudioClip aC = getAudioClip(sound);
+		if(aC != null)
+		{
+		aC.playClip();
+		}
+	}
+
+	public void stopAudioClip(SoundFile sound)
+	{
+		
+		AudioClip aC = getAudioClip(sound);
+		if(aC != null)
+		{
+			aC.stopClip();
+		}
+	}
+
+	private AudioClip getAudioClip(SoundFile sound)
+	{
 		switch (sound)
 		{
 		case Theme:
-			themesong.playClip();
-			break;
+			return themesong;
+
 		case explosion:
-			explosion.playClip();
-			break;
+			return explosion;
+
 		case fuse:
-			fuse.playClip();
-			break;
+			return fuse;
+
 		case blow:
-			blow.playClip();
-			break;
+			return blow;
+
 		case pop:
-			pop.playClip();
-			break;
+			return pop;
+
 		case scream:
-			scream.playClip();
-			break;
+			return scream;
+
 		case caww:
-			//Randomly choose between playing the first or second bird sound
+			// Randomly choose between playing the first or second bird sound
 			if (Game.Rand.nextBoolean())
 			{
 				if (!caww2.isPlaying())
-					caww.playClip();
+					return caww;
 			} else
 			{
 				if (!caww.isPlaying())
-					caww2.playClip();
+					return caww2;
 			}
 			break;
 		case helicopter:
-			helicopter.playClip();
-			break;
+			return helicopter;
+
 		case hank:
-			hankstartsound.playClip();
+			return hankstartsound;
 		default:
-			break;
+			return null;
 
 		}
+		return null;
 	}
 
 	public class AudioClip implements Runnable
@@ -120,6 +139,8 @@ public class SoundManager
 		private boolean lengthSet = false;
 		private int length;
 		private boolean playing = false;
+		private Thread t;
+		private boolean interrupt = false;
 
 		public AudioClip(SoundFile sound, String path) throws IOException
 		{
@@ -143,11 +164,17 @@ public class SoundManager
 		{
 			if (!playing && !DebugManager.muteSound)
 			{
-				Thread t = new Thread(this);
-				t.start();
+				t = new Thread(this);
+				t.start();				
 				playing = true;
 			}
 
+		}
+
+		public void stopClip()
+		{
+			//interrupt = true;
+			t.interrupt();
 		}
 
 		public boolean isPlaying()
@@ -195,8 +222,11 @@ public class SoundManager
 
 			if (!lengthSet)
 			{
-				while (nBytesRead != -1)
+				int counter = 0;
+				while (nBytesRead != -1 && !interrupt)
 				{
+					//System.out.println(sound + " " + counter);
+					counter++;
 					try
 					{
 						nBytesRead = audioInputStream.read(abData, 0,
@@ -215,8 +245,9 @@ public class SoundManager
 			} else if (lengthSet)
 			{
 				int counter = 0;
-				while (nBytesRead != -1 && counter < length)
+				while (nBytesRead != -1 && counter < length && !interrupt)
 				{
+					System.out.println(sound + " " + counter);
 					counter++;
 					try
 					{
@@ -236,10 +267,13 @@ public class SoundManager
 			}
 			line.drain();
 			line.close();
-			if (loop)
+			if (loop && !interrupt)
 				playSound();
 			else
+			{
 				playing = false;
+				interrupt = false;
+			}
 		}
 
 	}

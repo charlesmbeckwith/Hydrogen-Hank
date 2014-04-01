@@ -120,38 +120,51 @@ public class Player extends GameObject
 
 			if (startDeath)
 			{
-				if(balloons.size() > 0)
-				{
-					stopKill();
-				}
-				if (deathCountdown == 80)
-				{
-					// Play "explosion imminent" noise and scream sound.
-					Game.soundManager.playAudioClip(SoundFile.fuse);
-					Game.soundManager.playAudioClip(SoundFile.scream);
-				}
-
-				if (deathCountdown > 40)
-				{
-					// Add smoke effect behind player as he falls.
-					PlayState.handler.addObject(new Smoke(x, y, 64, 64,
-							ObjectLayer.middleground));
-				}
-				if (deathCountdown == 40)
-				{
-					// Add gigantic explosion indicating player death
-					PlayState.handler.addObject(new Explosion(x, y, 512,
-							512, ObjectLayer.hud));
-				}
-				if (deathCountdown == 0)
-				{
-
-					kill();
-				}
-
-				deathCountdown--;
+				deathIterator();
 			}
 		}
+	}
+	
+	/**
+	 * Processes the events leading up to player death
+	 * 
+	 */
+	public void deathIterator()
+	{
+		/* If the player is dying but blows up a balloon stop death*/
+		if(balloons.size() > 0 && hLevel > 0)
+		{
+			Game.soundManager.stopAudioClip(SoundFile.scream);
+			Game.soundManager.playAudioClip(SoundFile.hank);
+			stopKill();
+		}
+		
+		if (deathCountdown == 80)
+		{
+			// Play "explosion imminent" noise and scream sound.
+			Game.soundManager.playAudioClip(SoundFile.fuse);
+			Game.soundManager.playAudioClip(SoundFile.scream);
+		}
+
+		if (deathCountdown > 40)
+		{
+			// Add smoke effect behind player as he falls.
+			PlayState.handler.addObject(new Smoke(x, y, 64, 64,
+					ObjectLayer.middleground));
+		}
+		if (deathCountdown == 40)
+		{
+			// Add gigantic explosion indicating player death
+			PlayState.handler.addObject(new Explosion(x, y, 512,
+					512, ObjectLayer.hud));
+		}
+		if (deathCountdown == 0)
+		{
+
+			kill();
+		}
+
+		deathCountdown--;
 	}
 
 	public void tickBalloons()
