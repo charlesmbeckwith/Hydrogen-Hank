@@ -58,7 +58,6 @@ public class SoundManager
 
 		} catch (IOException e)
 		{
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
@@ -88,7 +87,7 @@ public class SoundManager
 		{
 		case Theme:
 			return themesong;
-
+			
 		case explosion:
 			return explosion;
 
@@ -130,7 +129,6 @@ public class SoundManager
 
 	public class AudioClip implements Runnable
 	{
-		@SuppressWarnings("unused")
 		private SoundFile sound;
 		private String path;
 		@SuppressWarnings("unused")
@@ -173,8 +171,8 @@ public class SoundManager
 
 		public void stopClip()
 		{
-			//interrupt = true;
-			t.interrupt();
+			interrupt = true;
+			//t.interrupt();
 		}
 
 		public boolean isPlaying()
@@ -187,6 +185,11 @@ public class SoundManager
 		{
 			playSound();
 
+		}
+		
+		public SoundFile getSoundType()
+		{
+			return sound;
 		}
 
 		private void playSound()
@@ -218,12 +221,34 @@ public class SoundManager
 			}
 			line.start();
 			int nBytesRead = 0;
-			byte[] abData = new byte[128000];
+			byte[] abData = new byte[1280];
 
 			if (!lengthSet)
 			{
+				//int counter = 0;
+				while (nBytesRead != -1 )
+				{
+					//System.out.println(sound + " " + counter);
+					//counter++;
+					try
+					{
+						nBytesRead = audioInputStream.read(abData, 0,
+								abData.length);
+					} catch (IOException e)
+					{
+						e.printStackTrace();
+					}
+					if (nBytesRead >= 0 && !interrupt)
+					{
+						@SuppressWarnings("unused")
+						int nBytesWritten = line.write(abData, 0,
+								nBytesRead);
+					}
+				}
+			} else if (lengthSet)
+			{
 				int counter = 0;
-				while (nBytesRead != -1 && !interrupt)
+				while (nBytesRead != -1 && counter < length)
 				{
 					//System.out.println(sound + " " + counter);
 					counter++;
@@ -235,29 +260,8 @@ public class SoundManager
 					{
 						e.printStackTrace();
 					}
-					if (nBytesRead >= 0)
-					{
-						@SuppressWarnings("unused")
-						int nBytesWritten = line.write(abData, 0,
-								nBytesRead);
-					}
-				}
-			} else if (lengthSet)
-			{
-				int counter = 0;
-				while (nBytesRead != -1 && counter < length && !interrupt)
-				{
-					System.out.println(sound + " " + counter);
-					counter++;
-					try
-					{
-						nBytesRead = audioInputStream.read(abData, 0,
-								abData.length);
-					} catch (IOException e)
-					{
-						e.printStackTrace();
-					}
-					if (nBytesRead >= 0)
+					
+					if (nBytesRead >= 0 && !interrupt)
 					{
 						@SuppressWarnings("unused")
 						int nBytesWritten = line.write(abData, 0,

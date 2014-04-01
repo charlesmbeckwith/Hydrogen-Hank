@@ -35,7 +35,7 @@ import com.hh.sound.SoundManager.SoundFile;
 @SuppressWarnings("unused")
 public class Player extends GameObject
 {
-	private final int DEATHCOUNTDOWN = 80;
+	private final int DEATHCOUNTDOWN = 81;
 	private final float gravity = 9f;
 	private Animation normal, death, current;
 	private ArtAssets art;
@@ -132,10 +132,10 @@ public class Player extends GameObject
 	public void deathIterator()
 	{
 		/* If the player is dying but blows up a balloon stop death*/
-		if(balloons.size() > 0 && hLevel > 0)
+		if(balloons.size() > 0 && hLevel > 0 && deathCountdown > 40)
 		{
-			Game.soundManager.stopAudioClip(SoundFile.scream);
 			Game.soundManager.playAudioClip(SoundFile.hank);
+			Game.soundManager.stopAudioClip(SoundFile.scream);
 			stopKill();
 		}
 		
@@ -193,6 +193,18 @@ public class Player extends GameObject
 			if (KeyInput.keysDown.contains(KeyBinding.POPALL.VALUE()))
 			{
 				balloons.clear();
+			}
+			if(KeyInput.keysDown.contains(KeyBinding.TestKey1.VALUE()))
+			{
+				/*
+				 * Add Values or methods to test here.
+				 */
+			}
+			if(KeyInput.keysDown.contains(KeyBinding.TestKey2.VALUE()))
+			{
+				/*
+				 * Add Values or methods to test here.
+				 */
 			}
 		}
 
