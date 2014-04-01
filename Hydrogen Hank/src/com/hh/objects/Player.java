@@ -266,7 +266,7 @@ public class Player extends GameObject
 
 			boolean collided = collided(go);
 
-			if (go != this && go.getId() == ObjectID.Enemy && collided)
+			if (go != this && go.getId() == ObjectID.Enemy && collided && go.isAlive())
 			{
 				Enemy enemy = (Enemy) go;
 				switch (enemy.getEnemyType())

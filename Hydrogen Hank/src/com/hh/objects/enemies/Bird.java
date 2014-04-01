@@ -11,10 +11,13 @@ import java.awt.geom.Area;
 import com.hh.Game;
 import com.hh.framework.GameTime;
 import com.hh.framework.Vector2D;
+import com.hh.framework.GameObject.ObjectLayer;
+import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Enemy;
+import com.hh.objects.vfx.Explosion;
 import com.hh.sound.SoundManager.SoundFile;
 
 /**
@@ -88,6 +91,15 @@ public class Bird extends Enemy
 	{
 		ANIM = new Animation(3, art.getSpriteFrame(spriteID.BIRD, 0), art.getSpriteFrame(spriteID.BIRD,
 		    1), art.getSpriteFrame(spriteID.BIRD, 2), art.getSpriteFrame(spriteID.BIRD, 3));
+	}
+	
+	@Override
+	public void kill()
+	{
+		super.kill();
+		PlayState.handler.addObject(new Explosion(x, y, (int) Math.max(width, height),
+				(int) Math.max(width, height), layer));
+		
 	}
 
 }
