@@ -30,7 +30,8 @@ public class BalloonPack extends Powerup
 	public BalloonPack(float x, float y, int width, int height)
 	{
 		super(x, y, width, height, PowerupType.BalloonPack);
-		// TODO Auto-generated constructor stub
+		
+		VALUE = 1.0;
 
 	}
 
@@ -52,5 +53,15 @@ public class BalloonPack extends Powerup
 	@Override
 	public Area boundingBox(){
 		return new Area(super.boundingBox());
+	}
+
+	/* (non-Javadoc)
+	 * @see com.hh.objects.Powerup#getValue()
+	 */
+	@Override
+	public double getValue()
+	{
+		// TODO Auto-generated method stub
+		return VALUE;
 	}
 }

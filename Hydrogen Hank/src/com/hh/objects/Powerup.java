@@ -21,7 +21,7 @@ import com.hh.framework.GameObject;
  * 
  * @author Charlie Beckwith
  */
-public class Powerup extends GameObject
+public abstract class Powerup extends GameObject
 {
 
 	public enum PowerupType
@@ -30,6 +30,7 @@ public class Powerup extends GameObject
 	}
 
 	protected PowerupType powerupType;
+	protected Double VALUE;
 
 	/**
 	 * @param x
@@ -81,5 +82,7 @@ public class Powerup extends GameObject
 	{
 		return powerupType;
 	}
+	
+	public abstract double getValue();
 
 }

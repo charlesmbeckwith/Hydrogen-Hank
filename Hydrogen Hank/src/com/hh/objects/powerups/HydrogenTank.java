@@ -40,6 +40,7 @@ public class HydrogenTank extends Powerup
 		// TODO Auto-generated constructor stub
 		art = Game.getArtAssets();
 		initAnimation();
+		VALUE = 50.0;
 	}
 
 	@Override
@@ -79,4 +80,12 @@ public class HydrogenTank extends Powerup
 	                           );
 	   
 	  }
+
+
+	@Override
+	public double getValue()
+	{
+		
+		return VALUE;
+	}
 }

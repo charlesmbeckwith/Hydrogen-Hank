@@ -29,6 +29,7 @@ public class HydrogenMolecule
   private ArtAssets art;
   private double rotationRadian;
   
+  
 
   /**
    * @param x
@@ -44,8 +45,8 @@ public class HydrogenMolecule
     Random rand = new Random();
     int frame = rand.nextInt(5);
     IMG = art.getSpriteFrame(spriteID.HYDROGEN, frame);
-
     rotationRadian = Math.toRadians((double) (Game.Rand.nextInt(360)));
+    VALUE = .1;
 
   }
 
@@ -81,6 +82,12 @@ public class HydrogenMolecule
   {
     return new Area(new Ellipse2D.Double(center.getX()+width/4, center.getY()+height/4, width/2, height/2));
 
+  }
+  
+  @Override
+  public double getValue()
+  {
+	  return VALUE;
   }
 
 }

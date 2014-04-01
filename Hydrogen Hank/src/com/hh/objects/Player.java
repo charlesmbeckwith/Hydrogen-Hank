@@ -21,6 +21,7 @@ import com.hh.input.KeyBinding;
 import com.hh.input.KeyInput;
 import com.hh.objects.Powerup.PowerupType;
 import com.hh.objects.bg.Ground;
+import com.hh.objects.powerups.HydrogenMolecule;
 import com.hh.objects.vfx.Explosion;
 import com.hh.objects.vfx.Smoke;
 import com.hh.sound.SoundManager.SoundFile;
@@ -34,12 +35,13 @@ import com.hh.sound.SoundManager.SoundFile;
 @SuppressWarnings("unused")
 public class Player extends GameObject
 {
+	private final int DEATHCOUNTDOWN = 80;
 	private final float gravity = 9f;
 	private Animation normal, death, current;
 	private ArtAssets art;
 	private LinkedList<String> debugOptions;
 	private boolean startDeath = false;
-	private int deathCountdown = 80;
+	private int deathCountdown = DEATHCOUNTDOWN;
 	private float hLevel;
 	private float maxHLevel = 200f;
 	private boolean grounded = false;
@@ -118,6 +120,10 @@ public class Player extends GameObject
 
 			if (startDeath)
 			{
+				if(balloons.size() > 0)
+				{
+					stopKill();
+				}
 				if (deathCountdown == 80)
 				{
 					// Play "explosion imminent" noise and scream sound.
@@ -284,14 +290,15 @@ public class Player extends GameObject
 				{
 				case BalloonPack:
 					// Add an extra Balloon
-					extraBalloons++;
+					extraBalloons+=pu.getValue();
 					break;
 				case HydrogenTank:
 					// Add hydrogen to tank
-					hLevel += 50;
+					hLevel += pu.getValue();
+					go.kill();
 					break;
 				case HydrogenMolecule:
-					hLevel += 1;
+					hLevel += pu.getValue();
 					moleculesPickedUp++;
 					go.kill();
 					break;
@@ -396,6 +403,14 @@ public class Player extends GameObject
 		current = death;
 		startDeath = true;
 	}
+	
+	public void stopKill()
+	{
+		current = normal;
+		startDeath = false;
+		deathCountdown = DEATHCOUNTDOWN;
+	}
+	
 
 	@Override
 	public void kill()
