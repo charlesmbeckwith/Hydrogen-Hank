@@ -453,7 +453,7 @@ public class Player extends GameObject implements Collidable
     Game.manager.push(new TitleMenuAnimState());
     Game.manager.push(new GameOverState());
     Game.playState.restart = true;
-    ScoreKeeper.newScore(calculateScore(), Game.playState.maxAltitude,
+    ScoreKeeper.newScore("Hank", calculateScore(), Game.playState.maxAltitude,
         (int) Game.playState.getPlayTime());
     super.kill();
   }

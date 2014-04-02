@@ -11,9 +11,9 @@ import com.hh.graphics.ArtAssets;
 /**
  * COSC3550 Spring 2014
  * 
- * Created : Feb. 25, 2014 
- * Last Updated : Feb. 25, 2014 
- * Purpose: Defines a menu button
+ * Created : Apr. 4, 2014 
+ * Last Updated : Apr. 4, 2014 
+ * Purpose: Defines a text box
  * 
  * @author Mark Schlottke
  */

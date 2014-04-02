@@ -26,8 +26,9 @@ public class Score implements Serializable
 	private int value;
 	private ScoreType type;
 
-	public Score(int value, ScoreType type)
+	public Score(String name, int value, ScoreType type)
 	{
+	  this.name = name;
 		this.value = value;
 		this.type = type;
 	}

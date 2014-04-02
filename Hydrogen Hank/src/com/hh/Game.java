@@ -158,7 +158,8 @@ public class Game extends Canvas implements Runnable
 		if (manager.getFirstClass() == PauseState.class
 		    || manager.getFirstClass() == TitleMenuAnimState.class
 		    || manager.getFirstClass() == IntroAnimation.class
-		    || manager.getFirstClass() == HighScoresState.class)
+		    || manager.getFirstClass() == HighScoresState.class
+		    || manager.getFirstClass() == GameOverState.class)
 		{
 			manager.pop();
 		}

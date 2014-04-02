@@ -40,32 +40,14 @@ public class HighScoresState extends GameState
 
 		if (scorekeeper.getScores().size() == 0)
 		{
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
-			ScoreKeeper.newScore(100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
+			ScoreKeeper.newScore("Hank",100,50,25);
 		}
 		
 	

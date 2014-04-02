@@ -13,11 +13,11 @@ import com.hh.objects.TextBox;
 /**
  * COSC3550 Spring 2014
  * 
- * Created : Feb. 25, 2014 
- * Last Updated : Mar. 19, 2014 
- * Purpose: Defines the Paused state for the game
+ * Created : Apr. 4, 2014 
+ * Last Updated : Apr. 4, 2014 
+ * Purpose: Defines the Game Over state for the game
  * 
- * @author Mark Schlottke & Charlie Beckwith
+ * @author Mark Schlottke
  */
 public class GameOverState extends GameState
 {
@@ -54,16 +54,14 @@ public class GameOverState extends GameState
   public void render(Graphics g)
   {
     Graphics2D g2d = (Graphics2D) g;
-    // TODO: Find a better fix for the shaky pause screen...
-    Game.playState.render(g); // Solves the shaky pause screen issue
 
     renderHelp.tintedBox(g2d, Color.black, 0.7f, (int) (Game.width / 2 - boxWidth),
         (int) (Game.height / 2 - boxHeight), (int) (boxWidth * 2), (int) (boxHeight * 2));
 
     if (boxWidth >= Game.width / 2 && boxHeight >= Game.height / 2)
     {
-      g.drawImage(art.pauseScreen, (Game.width / 2 - art.pauseScreen.getWidth() / 2),
-          (Game.height / 2 - 150), null);
+      //g.drawImage(art.pauseScreen, (Game.width / 2 - art.pauseScreen.getWidth() / 2),
+      //    (Game.height / 2 - 150), null);
     }
     
     nameEntry.render(g);

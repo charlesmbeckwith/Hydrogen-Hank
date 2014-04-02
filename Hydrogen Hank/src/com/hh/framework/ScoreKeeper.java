@@ -195,11 +195,11 @@ public class ScoreKeeper
 		}
 	}
 
-	public static void newScore(int overall, int altitude, int time)
+	public static void newScore(String name, int overall, int altitude, int time)
 	{
-		addScore(new Score(overall, ScoreType.OVERALL));
-		addScore(new Score(altitude, ScoreType.ALTITUDE));
-		addScore(new Score(time, ScoreType.TIME));
+		addScore(new Score(name, overall, ScoreType.OVERALL));
+		addScore(new Score(name, altitude, ScoreType.ALTITUDE));
+		addScore(new Score(name, time, ScoreType.TIME));
 	}
 
 	@SuppressWarnings("unchecked")
