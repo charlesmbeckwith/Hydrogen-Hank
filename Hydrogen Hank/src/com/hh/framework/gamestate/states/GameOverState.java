@@ -8,6 +8,7 @@ import com.hh.Game;
 import com.hh.framework.RenderHelper;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
+import com.hh.objects.TextBox;
 
 /**
  * COSC3550 Spring 2014
@@ -24,6 +25,12 @@ public class GameOverState extends GameState
   private RenderHelper renderHelp = new RenderHelper();
   private float boxHeight = 0;
   private float boxWidth = 0;
+  private TextBox nameEntry;
+
+  public GameOverState()
+  {
+    nameEntry = new TextBox("", Game.width/2, Game.height/2, 300, 50);
+  }
 
   public void tick()
   {
@@ -58,6 +65,8 @@ public class GameOverState extends GameState
       g.drawImage(art.pauseScreen, (Game.width / 2 - art.pauseScreen.getWidth() / 2),
           (Game.height / 2 - 150), null);
     }
+    
+    nameEntry.render(g);
   }
 
 }

@@ -3,6 +3,7 @@ package com.hh.framework;
 import java.awt.AlphaComposite;
 import java.awt.BasicStroke;
 import java.awt.Color;
+import java.awt.Composite;
 import java.awt.Font;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -34,9 +35,14 @@ public class RenderHelper
 	public void tintedBox(Graphics2D g, Color tint, float tintAmt, int posX, int posY, int width,
 	    int height)
 	{
+	  Composite origComp = g.getComposite();
+	  
 		g.setColor(tint);
 		g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, tintAmt));
 		g.fillRect(posX, posY, width, height);
+		
+		// Set the composite setting back to the original setting
+		g.setComposite(origComp);
 	}
 
 	/**
