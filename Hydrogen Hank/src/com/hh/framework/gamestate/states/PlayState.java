@@ -27,324 +27,318 @@ import com.hh.objects.powerups.HydrogenTank;
  * 
  * @author Mark Schlottke & Charlie Beckwith
  */
-@SuppressWarnings("unused") /*TODO: Remember to remove before final build*/
+@SuppressWarnings("unused")
+/*TODO: Remember to remove before final build*/
 public class PlayState extends GameState
 {
-	public static Handler handler;
+  public static Handler handler;
 
-	public static Camera cam;
+  public static Camera cam;
 
-	public Player player;
+  public Player player;
 
-	private float playTime;
+  private float playTime;
 
-	private boolean genGround = false;
+  private boolean genGround = false;
 
-	private int xStart, yStartUp, yStartDown;
+  private int xStart, yStartUp, yStartDown;
 
-	private int cloudYMin = 0;
+  private int cloudYMin = 0;
 
-	private final int meter = 30;
+  private final int meter = 30;
 
-	private ArtAssets art;
+  private ArtAssets art;
 
-	private RenderHelper renderHelp;
+  private RenderHelper renderHelp;
 
-	public boolean restart;
-	
-	private final int hydrogenCloudSize = 5;
-	
-	public int maxAltitude = 0;
+  public boolean restart;
 
-	private int[] prevHydroCloud = {0,0};
+  private final int hydrogenCloudSize = 5;
 
-	public PlayState()
-	{
-		handler = new Handler();
-		handler.setRemovalConditions(Arrays.asList(
-				RemovalConditions.OffscreenLeft,
-				RemovalConditions.OffscreenTop,
-				RemovalConditions.OffscreenBottom, RemovalConditions.Dead));
-		cam = new Camera(0, 0);
-		art = Game.getArtAssets();
-		renderHelp = new RenderHelper();
-		playTime = 0;
-		restart = true;
-	}
+  public int maxAltitude = 0;
 
-	public void tick()
-	{
-		if (restart)
-		{
-			
-			restart();
-			restart = false;
-		}
+  private int[] prevHydroCloud = { 0, 0 };
 
-		handler.tick();
-		if(player.getAltitude() > maxAltitude)
-		{
-			maxAltitude = player.getAltitude();
-		}
-		cam.tick(player);
-		generateScene();
-	}
+  public PlayState()
+  {
+    handler = new Handler();
+    handler.setRemovalConditions(Arrays.asList(RemovalConditions.OffscreenLeft,
+        RemovalConditions.OffscreenTop, RemovalConditions.OffscreenBottom, RemovalConditions.Dead));
+    cam = new Camera(0, 0);
+    art = Game.getArtAssets();
+    renderHelp = new RenderHelper();
+    playTime = 0;
+    restart = true;
+  }
 
-	public void render(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D) g;
+  public void tick()
+  {
+    if (restart)
+    {
 
-		g.setColor(new Color(109, 136, 253));
-		g.fillRect(0, 0, Game.width, Game.height);
+      restart();
+      restart = false;
+    }
 
-		g2d.translate(cam.getX(), cam.getY()); // begin cam
-		// Begin Drawing
-		handler.render(g);
-		// End Drawing
-		g2d.translate(-cam.getX(), -cam.getY()); // end cam
+    handler.tick();
+    if (player.getAltitude() > maxAltitude)
+    {
+      maxAltitude = player.getAltitude();
+    }
+    cam.tick(player);
+    generateScene();
+  }
 
-		displayHUD(g2d);
-	}
+  public void render(Graphics g)
+  {
+    Graphics2D g2d = (Graphics2D) g;
 
-	private void displayHUD(Graphics2D g)
-	{
-		int tankStart = 30;
-		int tankEnd = tankStart + 139;
-		int tankOffset = 0;
-		int timerStart = 400;
-		int altStart = 525;
-		int balloonsStart = 705;
+    g.setColor(new Color(109, 136, 253));
+    g.fillRect(0, 0, Game.width, Game.height);
 
-		if (!Game.isPaused() && player.getAltitude() >= 10)
-		{
-			playTime += GameTime.delta();
-		}
+    g2d.translate(cam.getX(), cam.getY()); // begin cam
+    // Begin Drawing
+    handler.render(g);
+    // End Drawing
+    g2d.translate(-cam.getX(), -cam.getY()); // end cam
 
-		// Draw the HUD Background
-		g.drawImage(art.hud, 0, 0, Game.width, Game.height, null);
+    displayHUD(g2d);
+  }
 
-		// Draw the Empty Hydrogen Tank
-		g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
+  private void displayHUD(Graphics2D g)
+  {
+    int tankStart = 30;
+    int tankEnd = tankStart + 139;
+    int tankOffset = 0;
+    int timerStart = 400;
+    int altStart = 525;
+    int balloonsStart = 705;
 
-		// Fill in the Hydrogen Tank with the Hydrogen Levels
-		float percent = 70 - 70 * player.getHydrogenLevelPercent();
-		for (int i = 70; i >= percent + 1; i--)
-		{
-			g.drawImage(art.fulltank_sheet.getFrame(i), tankEnd
-					- (2 * (70 - i)), 15, 2, 30, null);
-		}
+    if (!Game.isPaused() && player.getAltitude() >= 10)
+    {
+      playTime += GameTime.delta();
+    }
 
-		// Write the Percentage of Hydrogen in the Tank
-		g.setFont(new Font("Arial", Font.PLAIN, 20));
-		g.setColor(Color.black);
-		int displayedPercent = (int) (100 * player
-				.getHydrogenLevelPercent());
-		if (displayedPercent / 100 >= 1)
-			tankOffset = 45;
-		else if (displayedPercent / 10 >= 1)
-			tankOffset = 55;
-		else
-			tankOffset = 60;
+    // Draw the HUD Background
+    g.drawImage(art.hud, 0, 0, Game.width, Game.height, null);
 
-		renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 20),
-				(int) (100 * player.getHydrogenLevelPercent()) + "%", 0.6f,
-				Color.black, Color.white, tankStart + tankOffset, 36);
+    // Draw the Empty Hydrogen Tank
+    g.drawImage(art.emptytank, tankStart, 15, 140, 30, null);
 
-		// Draw the Play time
-		Date date = new Date((long) (playTime * 1000));
-		String formattedDate = new SimpleDateFormat("mm:ss").format(date);
-		renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28),
-				formattedDate, 1.25f, Color.black, Color.white, timerStart,
-				37);
+    // Fill in the Hydrogen Tank with the Hydrogen Levels
+    float percent = 70 - 70 * player.getHydrogenLevelPercent();
+    for (int i = 70; i >= percent + 1; i--)
+    {
+      g.drawImage(art.fulltank_sheet.getFrame(i), tankEnd - (2 * (70 - i)), 15, 2, 30, null);
+    }
 
-		// Draw the Altitude
-		int altitude = player.getAltitude();
-		String altitudeStr = altitude + "m";
-		renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), "ALT:"
-				+ altitudeStr, 1.25f, Color.black, Color.white, altStart,
-				37);
+    // Write the Percentage of Hydrogen in the Tank
+    g.setFont(new Font("Arial", Font.PLAIN, 20));
+    g.setColor(Color.black);
+    int displayedPercent = (int) (100 * player.getHydrogenLevelPercent());
+    if (displayedPercent / 100 >= 1)
+      tankOffset = 45;
+    else if (displayedPercent / 10 >= 1)
+      tankOffset = 55;
+    else
+      tankOffset = 60;
 
-		// Draw the Extra Balloon Count
-		g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20,
-				30, null);
-		renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), ":"
-				+ player.getExtraBalloons(), 1.25f, Color.black,
-				Color.white, balloonsStart + 23, 37);
-	}
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 20),
+        (int) (100 * player.getHydrogenLevelPercent()) + "%", 0.6f, Color.black, Color.white,
+        tankStart + tankOffset, 36);
 
-	/**
-	 * Clears the necessary objects and reinitializes them to enable a restart
-	 * of the game
-	 */
-	public void restart()
-	{
-		prevHydroCloud[0] = 0; prevHydroCloud[1] = 0;
-		handler.clearObjects();
-		player = new Player(100, 380, 55, 64, new Vector2D(0, 50));
-		handler.addObject(player);
-		cam = new Camera(0, 0);
-		cam.tick(player);
-		playTime = 0;
-		maxAltitude = 0;
-		xStart = (int) cam.getX() - Game.width;
-		yStartDown = cloudYMin;
-		generateScene();
-	}
+    // Draw Overall Score
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), "" + player.calculateScore(),
+        1.25f, Color.black, Color.white, timerStart-180, 37);
 
-	private void generateScene()
-	{
-		int offset = 75;
-		Rectangle sceneWindow = new Rectangle((int) (player.getX()
-				- Game.width - offset),
-				(int) (player.getY() - Game.height - offset),
-				(int) (offset + Game.width) * 2,
-				(int) (offset + Game.height) * 2);
-		handler.setSceneWindow(sceneWindow);
-		int preYStartUp = yStartUp;
-		int preYStartDown = yStartDown;
+    // Draw the Flight time
+    Date date = new Date((long) (playTime * 1000));
+    String formattedDate = new SimpleDateFormat("mm:ss").format(date);
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), formattedDate, 1.25f, Color.black,
+        Color.white, timerStart, 37);
 
-		for (float i = sceneWindow.x; i < sceneWindow.x + sceneWindow.width; i += 75)
-		{
-			yStartUp = preYStartUp;
-			yStartDown = preYStartDown;
+    // Draw the Altitude
+    int altitude = player.getAltitude();
+    String altitudeStr = altitude + "m";
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), "ALT:" + altitudeStr, 1.25f,
+        Color.black, Color.white, altStart, 37);
 
-			if (i > xStart)
-			{
-				generateGround((int) i);
-				for (float j = (sceneWindow.y + sceneWindow.height) < cloudYMin ? (sceneWindow.y + sceneWindow.height)
-						: cloudYMin; j > sceneWindow.y; j -= meter)
-				{
-				 
-				      generateCloud((int) i, (int) j);
-				     
-					generateEnemy((int) i, (int) j);
-					yStartUp = (int) j;
-				}
-				xStart += 70;
-			} else if (player.getVelocity().dy < 0) // Player Rising
-			{
-				if (player.getY() < 400 - Game.height)
-				{
-					genGround = true;
-				}
+    // Draw the Extra Balloon Count
+    g.drawImage(art.balloon_sheet.getFrame(0), balloonsStart, 15, 20, 30, null);
+    renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), ":" + player.getExtraBalloons(),
+        1.25f, Color.black, Color.white, balloonsStart + 23, 37);
+  }
 
-				while (yStartUp > sceneWindow.y)
-				{
-					generateCloud((int) i, (int) yStartUp);
-					generateEnemy((int) i, (int) yStartUp);
-					yStartUp -= meter;
+  /**
+   * Clears the necessary objects and reinitializes them to enable a restart
+   * of the game
+   */
+  public void restart()
+  {
+    prevHydroCloud[0] = 0;
+    prevHydroCloud[1] = 0;
+    handler.clearObjects();
+    player = new Player(100, 380, 55, 64, new Vector2D(0, 50));
+    handler.addObject(player);
+    cam = new Camera(0, 0);
+    cam.tick(player);
+    playTime = 0;
+    maxAltitude = 0;
+    xStart = (int) cam.getX() - Game.width;
+    yStartDown = cloudYMin;
+    generateScene();
+  }
 
-					if (yStartDown - yStartUp >= Game.height * 2.5)
-					{
-						yStartDown -= meter;
-					}
-				}
-			} else if (player.getVelocity().dy > 0) // Player Falling
-			{
-				if (genGround && player.getY() > 400 - Game.height)
-				{
-					if ((i + 75) >= (sceneWindow.x + sceneWindow.width))
-					{
-						genGround = false;
-					}
+  private void generateScene()
+  {
+    int offset = 75;
+    Rectangle sceneWindow = new Rectangle((int) (player.getX() - Game.width - offset),
+        (int) (player.getY() - Game.height - offset), (int) (offset + Game.width) * 2,
+        (int) (offset + Game.height) * 2);
+    handler.setSceneWindow(sceneWindow);
+    int preYStartUp = yStartUp;
+    int preYStartDown = yStartDown;
 
-					generateGround((int) i);
-				}
+    for (float i = sceneWindow.x; i < sceneWindow.x + sceneWindow.width; i += 75)
+    {
+      yStartUp = preYStartUp;
+      yStartDown = preYStartDown;
 
-				while (yStartDown < (sceneWindow.y + sceneWindow.height)
-						&& yStartDown < cloudYMin)
-				{
-					generateCloud((int) i, (int) yStartDown);
-					yStartDown += meter;
+      if (i > xStart)
+      {
+        generateGround((int) i);
+        for (float j = (sceneWindow.y + sceneWindow.height) < cloudYMin ? (sceneWindow.y + sceneWindow.height)
+            : cloudYMin; j > sceneWindow.y; j -= meter)
+        {
 
-					if (yStartDown - yStartUp >= Game.height * 2.5)
-					{
-						yStartUp += meter;
-					}
-				}
-			}
-		}
-	}
+          generateCloud((int) i, (int) j);
 
-	private void generateGround(int x)
-	{
-		handler.addObject(new Ground(x - 5, 400, 75, 300));
-	}
+          generateEnemy((int) i, (int) j);
+          yStartUp = (int) j;
+        }
+        xStart += 70;
+      } else if (player.getVelocity().dy < 0) // Player Rising
+      {
+        if (player.getY() < 400 - Game.height)
+        {
+          genGround = true;
+        }
 
-	private void generateCloud(int x, int y)
-	{
+        while (yStartUp > sceneWindow.y)
+        {
+          generateCloud((int) i, (int) yStartUp);
+          generateEnemy((int) i, (int) yStartUp);
+          yStartUp -= meter;
 
-		float xVel = -15 * (Game.Rand.nextInt(3) + 1);
-		switch (Game.Rand.nextInt(100))
-		{
-		case 0:
-		case 1:
-		case 2:
-		  if(x > prevHydroCloud[0]+300 && (y > prevHydroCloud[1]+300 || y < prevHydroCloud[1] - 300))   
-		  {
-		    generateHydrogenCloud(x, y);
-		    prevHydroCloud[0] = x; prevHydroCloud[1]=y;
-		  }
-			handler.addObject(new Cloud(x, y, 192, 96,
-					new Vector2D(xVel, 0), true, false));
-			break;
-		case 3:
-		case 4:
-		case 5:
-			handler.addObject(new Cloud(x, y, 192, 96,
-					new Vector2D(xVel, 0), true, false));
-			break;
-		case 6:
-		case 7:
-		case 8:
-			handler.addObject(new Cloud(x, y, 192, 96,
-					new Vector2D(xVel, 0), false, false));
-			break;
-		}
-	}
+          if (yStartDown - yStartUp >= Game.height * 2.5)
+          {
+            yStartDown -= meter;
+          }
+        }
+      } else if (player.getVelocity().dy > 0) // Player Falling
+      {
+        if (genGround && player.getY() > 400 - Game.height)
+        {
+          if ((i + 75) >= (sceneWindow.x + sceneWindow.width))
+          {
+            genGround = false;
+          }
 
-	private void generateHydrogenCloud(int x, int y)
-	{
+          generateGround((int) i);
+        }
 
-		//Generating a random number of clouds spaced out by a random amount. 
-		int sizeVariable = Game.Rand.nextInt(25)+25;
-		for (int t = 0; t < 720; t++){
-		  if(t % sizeVariable == 0){
-		  handler.addObject(new HydrogenMolecule(x , y
-		                                         , 25, 25));
-		  }
-		}
-		
-		if(Game.Rand.nextInt(35) == 1)
-			handler.addObject(new HydrogenTank(x,y,90,90));
-		
-	}
+        while (yStartDown < (sceneWindow.y + sceneWindow.height) && yStartDown < cloudYMin)
+        {
+          generateCloud((int) i, (int) yStartDown);
+          yStartDown += meter;
 
-	private void generateEnemy(int x, int y)
-	{
-		float xVel = -15 * (Game.Rand.nextInt(3) + 1);
+          if (yStartDown - yStartUp >= Game.height * 2.5)
+          {
+            yStartUp += meter;
+          }
+        }
+      }
+    }
+  }
 
-		switch (Game.Rand.nextInt(400))
-		{
-		case 0:
-		case 1:
-		case 2:
-			handler.addObject(new Bird(x, y, 48, 48, new Vector2D(xVel, 0)));
-			break;
-		case 3:
-			handler.addObject(new Plane(x, y, 250, 128, new Vector2D(
-					xVel * 3, 0)));
-		}
-	}
+  private void generateGround(int x)
+  {
+    handler.addObject(new Ground(x - 5, 400, 75, 300));
+  }
 
-	public Camera getCamera()
-	{
-		return cam;
-	}
-	
-	public float getPlayTime()
-	{
-		return playTime;
-	}
+  private void generateCloud(int x, int y)
+  {
+
+    float xVel = -15 * (Game.Rand.nextInt(3) + 1);
+    switch (Game.Rand.nextInt(100))
+    {
+    case 0:
+    case 1:
+    case 2:
+      if (x > prevHydroCloud[0] + 300
+          && (y > prevHydroCloud[1] + 300 || y < prevHydroCloud[1] - 300))
+      {
+        generateHydrogenCloud(x, y);
+        prevHydroCloud[0] = x;
+        prevHydroCloud[1] = y;
+      }
+      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0), true, false));
+      break;
+    case 3:
+    case 4:
+    case 5:
+      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0), true, false));
+      break;
+    case 6:
+    case 7:
+    case 8:
+      handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0), false, false));
+      break;
+    }
+  }
+
+  private void generateHydrogenCloud(int x, int y)
+  {
+
+    //Generating a random number of clouds spaced out by a random amount. 
+    int sizeVariable = Game.Rand.nextInt(25) + 25;
+    for (int t = 0; t < 720; t++)
+    {
+      if (t % sizeVariable == 0)
+      {
+        handler.addObject(new HydrogenMolecule(x, y, 25, 25));
+      }
+    }
+
+    if (Game.Rand.nextInt(35) == 1)
+      handler.addObject(new HydrogenTank(x, y, 90, 90));
+
+  }
+
+  private void generateEnemy(int x, int y)
+  {
+    float xVel = -15 * (Game.Rand.nextInt(3) + 1);
+
+    switch (Game.Rand.nextInt(400))
+    {
+    case 0:
+    case 1:
+    case 2:
+      handler.addObject(new Bird(x, y, 48, 48, new Vector2D(xVel, 0)));
+      break;
+    case 3:
+      handler.addObject(new Plane(x, y, 250, 128, new Vector2D(xVel * 3, 0)));
+    }
+  }
+
+  public Camera getCamera()
+  {
+    return cam;
+  }
+
+  public float getPlayTime()
+  {
+    return playTime;
+  }
 
 }
