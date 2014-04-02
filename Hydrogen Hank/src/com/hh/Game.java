@@ -31,7 +31,7 @@ public class Game extends Canvas implements Runnable
 {
 	private static final long serialVersionUID = 5679202415177178318L;
 	private static final int MIL = 1000000;
-	private static final int SLEEPTIME = 10;
+	public static final int SLEEPTIME = 10;
 	public static GameStateManager manager;
 	public static PlayState playState;
 	public static int width, height, heightOffset;
@@ -43,6 +43,7 @@ public class Game extends Canvas implements Runnable
 	public static Random Rand = new Random();
 	public Thread thread;
 	public static SoundManager soundManager;
+	public static FPSCounter FPSCounter;
 
 	private static BufferStrategy bs;
 	
@@ -59,6 +60,8 @@ public class Game extends Canvas implements Runnable
 		height = getHeight();
 		createBufferStrategy(3);
 		bs = getBufferStrategy();
+		FPSCounter = new FPSCounter();
+		FPSCounter.start();
 		
 		new DebugManager();
 		artassets = new ArtAssets();
@@ -106,11 +109,11 @@ public class Game extends Canvas implements Runnable
 		while (running)
 		{
 
-		    prevTime = System.nanoTime()/MIL;
+		    //prevTime = System.nanoTime()/MIL;
 			GameTime.update();
 			tick();
 			render();
-			currTime = System.nanoTime()/MIL;
+			//currTime = System.nanoTime()/MIL;
 			try
 			{
 				Thread.sleep(SLEEPTIME);
@@ -119,7 +122,13 @@ public class Game extends Canvas implements Runnable
 			{
 				e.printStackTrace();
 			}
+			FPSCounter.interrupt();
 		}
+	}
+	
+	public static int getFPS()
+	{
+		return (int) FPSCounter.getFPS();
 	}
 
 	/**

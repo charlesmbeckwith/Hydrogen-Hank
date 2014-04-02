@@ -379,6 +379,9 @@ public class Player extends GameObject implements Collidable
 			{
 				g2d.setColor(Color.black);
 				g2d.draw(this.boundingBox());
+			}
+			if(DebugManager.debugMode)
+			{
 				debugOptions(g2d);
 			}
 			for (Balloon bloons : balloons)
@@ -457,7 +460,7 @@ public class Player extends GameObject implements Collidable
 	@Override
 	public void kill()
 	{
-		// TODO: Kill Hank - Game Over
+		// TODO: Kill Hank - Game Over Screen!
 		Game.manager.push(new TitleMenuState());
 		Game.manager.push(new TitleMenuAnimState());
 		Game.playState.restart = true;
@@ -496,6 +499,7 @@ public class Player extends GameObject implements Collidable
 				+ (gravity * 2) / balloons.size());
 		String objectCount = new String().concat("Object Count = "
 				+ PlayState.handler.getObjects().size());
+		String fps = new String().concat("FPS = " + Game.getFPS());
 		debugOptions.add(BouyancyDebug);
 		debugOptions.add(HydrogenLevelDebug);
 		debugOptions.add(AltitudeDebug);
@@ -505,6 +509,7 @@ public class Player extends GameObject implements Collidable
 		debugOptions.add(BalloonValues);
 		debugOptions.add(deltaBuoyancy);
 		debugOptions.add(objectCount);
+		debugOptions.add(fps);
 	}
 
 	/**

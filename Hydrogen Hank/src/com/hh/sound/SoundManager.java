@@ -33,6 +33,8 @@ public class SoundManager
 
 			explosion = new AudioClip(SoundFile.explosion,
 					"/sound/fx/explosion.wav");
+			explosion.setOverlap(true);
+			
 			fuse = new AudioClip(SoundFile.fuse, "/sound/fx/fuse.wav");
 
 			// Create balloon blow up soundclip
