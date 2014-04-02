@@ -53,6 +53,8 @@ public class TitleMenuAnimState extends GameState
 		handler.addObject(new Cloud(600, 300, 256, 128, new Vector2D(0, 0), true, true));
 		handler.addObject(new Cloud(800, 510, 256, 128, new Vector2D(0, 0), true, true));
 		handler.addObject(new Cloud(250, 430, 256, 128, new Vector2D(0, 0), true, true));
+		
+		handler.addQueued();
 	}
 
 	public void tick()
