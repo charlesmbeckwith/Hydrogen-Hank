@@ -28,7 +28,7 @@ public class SoundManager
 		try
 		{
 			themesong = new AudioClip(SoundFile.Theme,
-					"/sound/music/theme2.wav");
+					"/sound/music/theme2convert.wav");
 			themesong.setLooping(true);
 
 			explosion = new AudioClip(SoundFile.explosion,
