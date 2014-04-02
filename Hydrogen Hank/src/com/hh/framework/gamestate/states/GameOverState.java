@@ -8,6 +8,7 @@ import com.hh.Game;
 import com.hh.framework.RenderHelper;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
+import com.hh.input.KeyInput;
 import com.hh.objects.TextBox;
 
 /**
@@ -30,6 +31,7 @@ public class GameOverState extends GameState
   public GameOverState()
   {
     nameEntry = new TextBox("", Game.width/2, Game.height/2, 300, 50);
+    KeyInput.textEntry = nameEntry;
   }
 
   public void tick()

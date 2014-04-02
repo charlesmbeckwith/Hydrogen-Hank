@@ -5,6 +5,7 @@ import java.awt.event.KeyEvent;
 import java.util.LinkedList;
 
 import com.hh.*;
+import com.hh.objects.TextBox;
 
 /**
  * COSC3550 Spring 2014
@@ -18,45 +19,60 @@ import com.hh.*;
  */
 public class KeyInput extends KeyAdapter
 {
-	public static LinkedList<Integer> keysDown;
+  public static LinkedList<Integer> keysDown;
+  public static TextBox textEntry;
 
-	/**
-	 * Initializes the list of keys held down
-	 */
-	public KeyInput()
-	{
-		keysDown = new LinkedList<Integer>();
-	}
+  /**
+   * Initializes the list of keys held down
+   */
+  public KeyInput()
+  {
+    keysDown = new LinkedList<Integer>();
+  }
 
-	/**
-	 * Determines the action to perform upon a key press
-	 */
-	public void keyPressed(KeyEvent e)
-	{
-		if (!keysDown.contains(e.getKeyCode()))
-		{
-			keysDown.add(e.getKeyCode());
-		}
+  public void keyTyped(KeyEvent e)
+  {
+    if (textEntry != null)
+    {
+      if (e.getKeyChar() != 8)
+      {
+        textEntry.addChar(e.getKeyChar());
+      } else
+      {
+        textEntry.removeLast();
+      }
+    }
+  }
 
-		if (e.getKeyCode() == KeyBinding.RESTART.VALUE())
-		{
-			Game.doRestart();
-		}
-	}
+  /**
+   * Determines the action to perform upon a key press
+   */
+  public void keyPressed(KeyEvent e)
+  {
+    if (!keysDown.contains(e.getKeyCode()))
+    {
+      keysDown.add(e.getKeyCode());
+    }
 
-	/**
-	 * Determines the action to perform upon a key release
-	 */
-	public void keyReleased(KeyEvent e)
-	{
-		if (keysDown.contains(e.getKeyCode()))
-		{
-			keysDown.remove((Integer) e.getKeyCode());
-		}
+    if (e.getKeyCode() == KeyBinding.RESTART.VALUE())
+    {
+      Game.doRestart();
+    }
+  }
 
-		if (e.getKeyCode() == KeyBinding.PAUSE.VALUE())
-		{
-			Game.togglePause();
-		}
-	}
+  /**
+   * Determines the action to perform upon a key release
+   */
+  public void keyReleased(KeyEvent e)
+  {
+    if (keysDown.contains(e.getKeyCode()))
+    {
+      keysDown.remove((Integer) e.getKeyCode());
+    }
+
+    if (e.getKeyCode() == KeyBinding.PAUSE.VALUE())
+    {
+      Game.togglePause();
+    }
+  }
 }
