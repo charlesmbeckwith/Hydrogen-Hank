@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
 
+import com.hh.framework.Collidable;
 import com.hh.framework.DebugManager;
 import com.hh.framework.GameObject;
 import com.hh.framework.Vector2D;
@@ -22,7 +23,7 @@ import com.hh.framework.Vector2D;
  * 
  * @author Charlie Beckwith
  */
-public class Enemy extends GameObject
+public class Enemy extends GameObject implements Collidable
 {
 
 	public enum EnemyType

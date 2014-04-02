@@ -11,7 +11,6 @@ import java.awt.geom.Area;
 import com.hh.Game;
 import com.hh.framework.GameTime;
 import com.hh.framework.Vector2D;
-import com.hh.framework.GameObject.ObjectLayer;
 import com.hh.framework.gamestate.states.PlayState;
 import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
@@ -57,7 +56,8 @@ public class Bird extends Enemy
 		if(Game.Rand.nextInt(50) == 1 && isVisible())
 			Game.soundManager.playAudioClip(SoundFile.caww);
 		x += 2*v.dx * GameTime.delta();
-		y+= (float) (5*Math.sin(x/10));
+		y+= (float) (3*Math.sin((x*5)/v.dx));
+		
 		ANIM.runAnimation();
 	}
 

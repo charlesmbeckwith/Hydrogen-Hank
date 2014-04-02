@@ -52,7 +52,10 @@ public class Plane extends Enemy
 	public void tick()
 	{
 		if (isVisible())
+		{
 			Game.soundManager.playAudioClip(SoundFile.helicopter);
+			System.out.println("Helicopter Sound called");
+		}
 
 		x += v.dx * GameTime.delta();
 		anim.runAnimation();

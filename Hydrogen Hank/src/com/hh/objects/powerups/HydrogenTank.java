@@ -11,6 +11,7 @@ import com.hh.graphics.Animation;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Powerup;
+import com.hh.sound.SoundManager.SoundFile;
 
 /**
  * COSC3550 Spring 2014
@@ -87,5 +88,12 @@ public class HydrogenTank extends Powerup
 	{
 		
 		return VALUE;
+	}
+	
+	@Override
+	public void kill()
+	{
+		super.kill();
+		Game.soundManager.playAudioClip(SoundFile.tank);
 	}
 }

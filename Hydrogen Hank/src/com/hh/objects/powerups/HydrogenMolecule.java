@@ -14,6 +14,7 @@ import com.hh.Game;
 import com.hh.graphics.ArtAssets;
 import com.hh.graphics.SpriteSheet.spriteID;
 import com.hh.objects.Powerup;
+import com.hh.sound.SoundManager.SoundFile;
 
 /**
  * COSC3550 Spring 2014 Created : Feb. 28, 2014 Last Updated : Feb. 28, 2014
@@ -46,7 +47,7 @@ public class HydrogenMolecule
     int frame = rand.nextInt(5);
     IMG = art.getSpriteFrame(spriteID.HYDROGEN, frame);
     rotationRadian = Math.toRadians((double) (Game.Rand.nextInt(360)));
-    VALUE = .1;
+    VALUE = .5;
 
   }
 
@@ -88,6 +89,13 @@ public class HydrogenMolecule
   public double getValue()
   {
 	  return VALUE;
+  }
+  
+  @Override
+  public void kill()
+  {
+	  super.kill();
+	  Game.soundManager.playAudioClip(SoundFile.hydrogen);
   }
 
 }

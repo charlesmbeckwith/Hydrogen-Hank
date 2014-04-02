@@ -5,6 +5,7 @@ import java.awt.geom.Area;
 import java.awt.image.BufferedImage;
 
 import com.hh.Game;
+import com.hh.framework.Collidable;
 import com.hh.graphics.ArtAssets;
 import com.hh.objects.BackgroundElement;
 
@@ -17,7 +18,7 @@ import com.hh.objects.BackgroundElement;
  * 
  * @author Mark Schlottke & Charlie Beckwith
  */
-public class Ground extends BackgroundElement
+public class Ground extends BackgroundElement implements Collidable
 {
 	private BufferedImage img;
 	private ArtAssets art = Game.getArtAssets();

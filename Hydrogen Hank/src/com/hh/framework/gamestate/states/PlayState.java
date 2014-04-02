@@ -27,6 +27,7 @@ import com.hh.objects.powerups.HydrogenTank;
  * 
  * @author Mark Schlottke & Charlie Beckwith
  */
+@SuppressWarnings("unused") /*TODO: Remember to remove before final build*/
 public class PlayState extends GameState
 {
 	public static Handler handler;
@@ -50,7 +51,7 @@ public class PlayState extends GameState
 	private RenderHelper renderHelp;
 
 	public boolean restart;
-
+	
 	private final int hydrogenCloudSize = 5;
 	
 	public int maxAltitude = 0;
@@ -314,7 +315,7 @@ public class PlayState extends GameState
 		  }
 		}
 		
-		if(Game.Rand.nextInt(100) == 50)
+		if(Game.Rand.nextInt(35) == 1)
 			handler.addObject(new HydrogenTank(x,y,90,90));
 		
 	}

@@ -9,6 +9,7 @@ import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.geom.Area;
 
+import com.hh.framework.Collidable;
 import com.hh.framework.DebugManager;
 import com.hh.framework.GameObject;
 
@@ -21,7 +22,7 @@ import com.hh.framework.GameObject;
  * 
  * @author Charlie Beckwith
  */
-public abstract class Powerup extends GameObject
+public abstract class Powerup extends GameObject implements Collidable
 {
 
 	public enum PowerupType

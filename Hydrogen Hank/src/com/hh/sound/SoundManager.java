@@ -16,11 +16,11 @@ import com.hh.framework.DebugManager;
 public class SoundManager
 {
 	private static AudioClip themesong, explosion, fuse, blow, pop, scream,
-			caww, caww2, helicopter, hankstartsound;
+			caww, caww2, helicopter, hankstartsound, hydrogen, hydrogentank;
 
 	public enum SoundFile
 	{
-		Theme, explosion, fuse, blow, pop, scream, caww, helicopter, hank;
+		Theme, explosion, fuse, blow, pop, scream, caww, helicopter, hank, hydrogen, tank;
 	}
 
 	public SoundManager()
@@ -28,7 +28,7 @@ public class SoundManager
 		try
 		{
 			themesong = new AudioClip(SoundFile.Theme,
-					"/sound/music/themesong.wav");
+					"/sound/music/theme2.wav");
 			themesong.setLooping(true);
 
 			explosion = new AudioClip(SoundFile.explosion,
@@ -55,6 +55,12 @@ public class SoundManager
 
 			hankstartsound = new AudioClip(SoundFile.hank,
 					"/sound/fx/bitchin.wav");
+			
+			hydrogentank = new AudioClip(SoundFile.tank, "/sound/fx/hydrogentank.wav");
+
+			hydrogen = new AudioClip(SoundFile.hydrogen,
+					"/sound/fx/collecthydrogen2.wav");
+			hydrogen.setOverlap(true);
 
 		} catch (IOException e)
 		{
@@ -65,17 +71,21 @@ public class SoundManager
 	public void playAudioClip(SoundFile sound)
 	{
 		AudioClip aC = getAudioClip(sound);
-		if(aC != null)
+		if (aC != null)
 		{
-		aC.playClip();
+			aC.playClip();
+		} else
+		{
+			if (DebugManager.debugMode)
+				System.out.println("AudioClip " + sound + " returned null");
 		}
 	}
 
 	public void stopAudioClip(SoundFile sound)
 	{
-		
+
 		AudioClip aC = getAudioClip(sound);
-		if(aC != null)
+		if (aC != null)
 		{
 			aC.stopClip();
 		}
@@ -87,7 +97,7 @@ public class SoundManager
 		{
 		case Theme:
 			return themesong;
-			
+
 		case explosion:
 			return explosion;
 
@@ -120,6 +130,10 @@ public class SoundManager
 
 		case hank:
 			return hankstartsound;
+		case hydrogen:
+			return hydrogen;
+		case tank:
+			return hydrogentank;
 		default:
 			return null;
 
@@ -139,6 +153,7 @@ public class SoundManager
 		private boolean playing = false;
 		private Thread t;
 		private boolean interrupt = false;
+		private boolean overlap = false;
 
 		public AudioClip(SoundFile sound, String path) throws IOException
 		{
@@ -163,16 +178,22 @@ public class SoundManager
 			if (!playing && !DebugManager.muteSound)
 			{
 				t = new Thread(this);
-				t.start();				
-				playing = true;
+				t.start();
+				if (!overlap)
+					playing = true;
 			}
 
+		}
+
+		public void setOverlap(boolean bool)
+		{
+			overlap = bool;
 		}
 
 		public void stopClip()
 		{
 			interrupt = true;
-			//t.interrupt();
+			// t.interrupt();
 		}
 
 		public boolean isPlaying()
@@ -186,7 +207,7 @@ public class SoundManager
 			playSound();
 
 		}
-		
+
 		public SoundFile getSoundType()
 		{
 			return sound;
@@ -221,15 +242,15 @@ public class SoundManager
 			}
 			line.start();
 			int nBytesRead = 0;
-			byte[] abData = new byte[1280];
+			byte[] abData = new byte[128000];
 
 			if (!lengthSet)
 			{
-				//int counter = 0;
-				while (nBytesRead != -1 )
+				// int counter = 0;
+				while (nBytesRead != -1)
 				{
-					//System.out.println(sound + " " + counter);
-					//counter++;
+					// System.out.println(sound + " " + counter);
+					// counter++;
 					try
 					{
 						nBytesRead = audioInputStream.read(abData, 0,
@@ -250,17 +271,19 @@ public class SoundManager
 				int counter = 0;
 				while (nBytesRead != -1 && counter < length)
 				{
-					//System.out.println(sound + " " + counter);
+					// System.out.println(sound + " " + counter);
 					counter++;
 					try
 					{
+
 						nBytesRead = audioInputStream.read(abData, 0,
 								abData.length);
+
 					} catch (IOException e)
 					{
 						e.printStackTrace();
 					}
-					
+
 					if (nBytesRead >= 0 && !interrupt)
 					{
 						@SuppressWarnings("unused")

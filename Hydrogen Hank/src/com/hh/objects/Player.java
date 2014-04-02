@@ -33,7 +33,7 @@ import com.hh.sound.SoundManager.SoundFile;
  * @author Mark Schlottke & Charlie Beckwith
  */
 @SuppressWarnings("unused")
-public class Player extends GameObject
+public class Player extends GameObject implements Collidable
 {
 	private final int DEATHCOUNTDOWN = 81;
 	private final float gravity = 9f;
@@ -124,21 +124,21 @@ public class Player extends GameObject
 			}
 		}
 	}
-	
+
 	/**
 	 * Processes the events leading up to player death
 	 * 
 	 */
 	public void deathIterator()
 	{
-		/* If the player is dying but blows up a balloon stop death*/
-		if(balloons.size() > 0 && hLevel > 0 && deathCountdown > 40)
+		/* If the player is dying but blows up a balloon stop death */
+		if (balloons.size() > 0 && hLevel > 0 && deathCountdown > 40)
 		{
 			Game.soundManager.playAudioClip(SoundFile.hank);
 			Game.soundManager.stopAudioClip(SoundFile.scream);
 			stopKill();
 		}
-		
+
 		if (deathCountdown == 80)
 		{
 			// Play "explosion imminent" noise and scream sound.
@@ -155,8 +155,8 @@ public class Player extends GameObject
 		if (deathCountdown == 40)
 		{
 			// Add gigantic explosion indicating player death
-			PlayState.handler.addObject(new Explosion(x, y, 512,
-					512, ObjectLayer.hud));
+			PlayState.handler.addObject(new Explosion(x, y, 512, 512,
+					ObjectLayer.hud));
 		}
 		if (deathCountdown == 0)
 		{
@@ -194,13 +194,13 @@ public class Player extends GameObject
 			{
 				balloons.clear();
 			}
-			if(KeyInput.keysDown.contains(KeyBinding.TestKey1.VALUE()))
+			if (KeyInput.keysDown.contains(KeyBinding.TestKey1.VALUE()))
 			{
 				/*
 				 * Add Values or methods to test here.
 				 */
 			}
-			if(KeyInput.keysDown.contains(KeyBinding.TestKey2.VALUE()))
+			if (KeyInput.keysDown.contains(KeyBinding.TestKey2.VALUE()))
 			{
 				/*
 				 * Add Values or methods to test here.
@@ -256,6 +256,11 @@ public class Player extends GameObject
 		deflate = false;
 	}
 
+	/**
+	 * Method that detects a collision between player and
+	 * 
+	 * @return
+	 */
 	public boolean collision()
 	{
 		boolean col = false;
@@ -264,75 +269,85 @@ public class Player extends GameObject
 		for (final GameObject go : PlayState.handler.getObjects())
 		{
 
-			boolean collided = collided(go);
-
-			if (go != this && go.getId() == ObjectID.Enemy && collided && go.isAlive())
+			//if (go instanceof Collidable)
+			if(true)
 			{
-				Enemy enemy = (Enemy) go;
-				switch (enemy.getEnemyType())
+				boolean collided = collided(go);
+
+				if (go != this && go.getId() == ObjectID.Enemy && collided
+						&& go.isAlive())
 				{
-				case Bird:
-					go.kill();
-					destroyBalloon();
-					break;
-				case Plane:
-					destroyBalloon();
-					break;
+					Enemy enemy = (Enemy) go;
+					switch (enemy.getEnemyType())
+					{
+					case Bird:
+						go.kill();
+						destroyBalloon();
+						break;
+					case Plane:
+						destroyBalloon();
+						break;
+					}
+
 				}
 
-			}
+				// check for ground collision
+				if (go != this && go.getClass() == Ground.class
+						&& (y + (height / 2) - 14) >= go.getY()
+						&& x > go.getX() && x < go.getX() + go.getWidth())
+				{
+					col = true;
+					grounded = true;
 
-			// check for ground collision
-			if (go != this && go.getClass() == Ground.class
-					&& (y + (height / 2) - 14) >= go.getY()
-					&& x > go.getX() && x < go.getX() + go.getWidth())
+					if (v.dy > weight * 3
+							|| (balloons.isEmpty() && hLevel < balloonCost)
+							|| hLevel == 0
+							|| (extraBalloons == 0 && balloons.isEmpty()))
+					{
+						deathCountdown = 40;
+						startKill();
+					}
+
+					y = (go.getY() - (height / 2) + 14);
+					v.dy = 0;
+
+					if (v.dx > 0)
+						v.dx -= (v.dx * 0.01);
+				}
+
+				// Check for powerup collision
+				if (go != this && go.getId() == ObjectID.Powerup
+						&& collided)
+				{
+					// cast go as Powerup
+					Powerup pu = (Powerup) go;
+
+					switch (pu.getPowerupType())
+					{
+					case BalloonPack:
+						// Add an extra Balloon
+						extraBalloons += pu.getValue();
+						break;
+					case HydrogenTank:
+						// Add hydrogen to tank
+						hLevel += pu.getValue();
+						go.kill();
+						break;
+					case HydrogenMolecule:
+						hLevel += pu.getValue();
+						moleculesPickedUp++;
+						go.kill();
+						break;
+					}
+
+					if (hLevel > maxHLevel)
+					{
+						hLevel = maxHLevel;
+					}
+				}
+			} else
 			{
-				col = true;
-				grounded = true;
-
-				if (v.dy > weight * 3
-						|| (balloons.isEmpty() && hLevel < balloonCost)
-						|| hLevel == 0
-						|| (extraBalloons == 0 && balloons.isEmpty()))
-				{
-					deathCountdown = 40;
-					startKill();
-				}
-
-				y = (go.getY() - (height / 2) + 14);
-				v.dy = 0;
-
-				if (v.dx > 0)
-					v.dx -= (v.dx * 0.01);
-			}
-
-			// Check for powerup collision
-			if (go != this && go.getId() == ObjectID.Powerup && collided)
-			{
-				// cast go as Powerup
-				Powerup pu = (Powerup) go;
-				switch (pu.getPowerupType())
-				{
-				case BalloonPack:
-					// Add an extra Balloon
-					extraBalloons+=pu.getValue();
-					break;
-				case HydrogenTank:
-					// Add hydrogen to tank
-					hLevel += pu.getValue();
-					go.kill();
-					break;
-				case HydrogenMolecule:
-					hLevel += pu.getValue();
-					moleculesPickedUp++;
-					go.kill();
-					break;
-				}
-
-				if (hLevel > maxHLevel)
-				{
-					hLevel = maxHLevel;
-				}
+				//System.out.println("Collision Detection averted");
 			}
 		}
 
@@ -409,7 +424,7 @@ public class Player extends GameObject
 	{
 		if (!balloons.isEmpty())
 		{
-			//Play popping sound
+			// Play popping sound
 			Game.soundManager.playAudioClip(SoundFile.pop);
 			balloons.pop();
 			if (balloons.isEmpty())
@@ -428,14 +443,13 @@ public class Player extends GameObject
 		current = death;
 		startDeath = true;
 	}
-	
+
 	public void stopKill()
 	{
 		current = normal;
 		startDeath = false;
 		deathCountdown = DEATHCOUNTDOWN;
 	}
-	
 
 	@Override
 	public void kill()
@@ -505,6 +519,7 @@ public class Player extends GameObject
 
 	/**
 	 * return the hydrogen level percentage
+	 * 
 	 * @return float
 	 */
 	public float getHydrogenLevelPercent()
@@ -514,6 +529,7 @@ public class Player extends GameObject
 
 	/**
 	 * return how many extra balloons are left
+	 * 
 	 * @return int
 	 */
 	public int getExtraBalloons()
@@ -523,6 +539,7 @@ public class Player extends GameObject
 
 	/**
 	 * get current "altitude" of player
+	 * 
 	 * @return int
 	 */
 	public int getAltitude()
