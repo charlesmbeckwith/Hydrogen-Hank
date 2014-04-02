@@ -54,7 +54,6 @@ public class Plane extends Enemy
 		if (isVisible())
 		{
 			Game.soundManager.playAudioClip(SoundFile.helicopter);
-			System.out.println("Helicopter Sound called");
 		}
 
 		x += v.dx * GameTime.delta();

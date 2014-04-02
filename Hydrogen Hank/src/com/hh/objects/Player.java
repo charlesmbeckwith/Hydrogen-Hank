@@ -157,10 +157,10 @@ public class Player extends GameObject implements Collidable
 			// Add gigantic explosion indicating player death
 			PlayState.handler.addObject(new Explosion(x, y, 512, 512,
 					ObjectLayer.hud));
+			deathCountdown--;
 		}
 		if (deathCountdown == 0)
 		{
-
 			kill();
 		}
 
@@ -215,7 +215,6 @@ public class Player extends GameObject implements Collidable
 
 		if (KeyInput.keysDown.contains(KeyBinding.BLOWUP_BALLOON.VALUE()))
 		{
-			// TODO: FIX BUG WHERE BALLOONS ARE ADDED TOO FAST...
 			if (extraBalloons > 0 && !balloonAlreadyBlownUp
 					&& hLevel > balloonCost
 					&& balloons.size() < maxBalloons)
@@ -269,8 +268,8 @@ public class Player extends GameObject implements Collidable
 		for (final GameObject go : PlayState.handler.getObjects())
 		{
 
-			//if (go instanceof Collidable)
-			if(true)
+			// if (go instanceof Collidable)
+			if (true)
 			{
 				boolean collided = collided(go);
 
@@ -304,8 +303,12 @@ public class Player extends GameObject implements Collidable
 							|| hLevel == 0
 							|| (extraBalloons == 0 && balloons.isEmpty()))
 					{
-						deathCountdown = 40;
-						startKill();
+						if (!startDeath)
+						{
+							deathCountdown = 40;
+							startKill();
+						}
+
 					}
 
 					y = (go.getY() - (height / 2) + 14);
@@ -347,7 +350,7 @@ public class Player extends GameObject implements Collidable
 				}
 			} else
 			{
-				//System.out.println("Collision Detection averted");
+				// System.out.println("Collision Detection averted");
 			}
 		}
 
