@@ -83,7 +83,7 @@ public class TitleMenuState extends GameState
     }
 
     // Draw Hank animation
-    g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 3), hankFlyingPosition - 12,
+    /*g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 3), hankFlyingPosition - 12,
         (int) (Game.height - hankFlyingPosition) - 79, 73, 100, null);
     g.drawImage(art.getSpriteFrame(spriteID.BALLOON, 2), hankFlyingPosition + 9,
         (int) (Game.height - hankFlyingPosition) - 83, 73, 100, null);
@@ -96,6 +96,6 @@ public class TitleMenuState extends GameState
     if (hankFlyingPosition > Game.width)
     {
       hankFlyingPosition = 0;
-    }
+    }*/
   }
 }

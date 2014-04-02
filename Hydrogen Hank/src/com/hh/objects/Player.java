@@ -10,6 +10,7 @@ import java.util.Random;
 import com.hh.Game;
 import com.hh.framework.*;
 import com.hh.framework.GameObject.ObjectLayer;
+import com.hh.framework.gamestate.states.GameOverState;
 import com.hh.framework.gamestate.states.HighScoresState;
 import com.hh.framework.gamestate.states.PlayState;
 import com.hh.framework.gamestate.states.TitleMenuAnimState;
@@ -450,6 +451,7 @@ public class Player extends GameObject implements Collidable
     // TODO: Kill Hank - Game Over Screen!
     Game.manager.push(new TitleMenuState());
     Game.manager.push(new TitleMenuAnimState());
+    //Game.manager.push(new GameOverState());
     Game.playState.restart = true;
     ScoreKeeper.newScore(calculateScore(), Game.playState.maxAltitude,
         (int) Game.playState.getPlayTime());
