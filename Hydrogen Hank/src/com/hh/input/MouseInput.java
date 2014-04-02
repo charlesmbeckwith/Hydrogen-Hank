@@ -21,84 +21,94 @@ import com.hh.objects.ScoreTab;
  */
 public class MouseInput extends MouseAdapter
 {
-	public void mousePressed(MouseEvent e)
-	{
+  public void mousePressed(MouseEvent e)
+  {
 
-	}
+  }
 
-	public void mouseReleased(MouseEvent e)
-	{
-		if (Game.manager.getFirstClass() == TitleMenuAnimState.class
-		    || Game.manager.getFirstClass() == IntroAnimation.class)
-		{
-			Game.manager.pop();
-		}
-		else if (Game.manager.getFirstClass() == TitleMenuState.class)
-		{
-			for (GameObject go : TitleMenuState.handler.getObjects())
-			{
-				if (go.getClass() == MenuButton.class)
-				{
-					MenuButton button = (MenuButton) go;
-					if (button.isSelected())
-					{
-						switchMenuButton(button);
-					}
-				}
-			}
-		}
-		else if (Game.manager.getFirstClass() == HighScoresState.class)
-		{
-			for (GameObject go : HighScoresState.handler.getObjects())
-			{
-				if (go.getClass() == ScoreTab.class)
-				{
-					ScoreTab tab = (ScoreTab) go;
-					if (tab.isHoveringOver())
-					{
-						tab.setSelected(true);
-					}
-					else{
-						tab.setSelected(false);
-					}
-				}
-				if(go.getClass() == MenuButton.class)
-				{
-					MenuButton button = (MenuButton) go;
-					if(button.isSelected())
-					{
-						switchMenuButton(button);
-					}
-				}
-			}
-		}
-	}
+  public void mouseReleased(MouseEvent e)
+  {
+    if (Game.manager.getFirstClass() == TitleMenuAnimState.class
+        || Game.manager.getFirstClass() == IntroAnimation.class)
+    {
+      Game.manager.pop();
+    } else if (Game.manager.getFirstClass() == TitleMenuState.class)
+    {
+      for (GameObject go : TitleMenuState.handler.getObjects())
+      {
+        if (go.getClass() == MenuButton.class)
+        {
+          MenuButton button = (MenuButton) go;
+          if (button.isSelected())
+          {
+            switchMenuButton(button);
+          }
+        }
+      }
+    } else if (Game.manager.getFirstClass() == HighScoresState.class)
+    {
+      ScoreTab lastSelect = null;
+      ScoreTab newSelect = null;
+      
+      for (GameObject go : HighScoresState.handler.getObjects())
+      {        
+        if (go.getClass() == ScoreTab.class)
+        {
+          ScoreTab tab = (ScoreTab) go;
+          if (tab.isSelected())
+          {
+            lastSelect = tab;
+          }
 
-	/**
-	 * Switches game state depending on which button was pushed
-	 * 
-	 * @param button
-	 */
-	public void switchMenuButton(MenuButton button)
-	{
-		switch (button.getButtonID())
-		{
-		case NEWGAME:
-			Game.manager.pop();
-			break;
-		case HIGHSCORE:
-			Game.manager.push(new HighScoresState());
-			break;
-		case CREDITS:
-			System.out.println("Credits");
-			// Game.manager.STATES.push(new CreditsState());
-			break;
-		case RESETSCORES:
-			System.out.println("Reset Scores");
-			ScoreKeeper.resetScores();
-			break;
+          if (tab.isHoveringOver())
+          {
+            newSelect = tab;
+          }
+        }
 
-		}
-	}
+        if (go.getClass() == MenuButton.class)
+        {
+          MenuButton button = (MenuButton) go;
+          if (button.isSelected())
+          {
+            switchMenuButton(button);
+          }
+        }
+      }
+      
+      if (lastSelect != null && newSelect != null && lastSelect != newSelect)
+      {
+        lastSelect.setSelected(false);
+        newSelect.setSelected(true);
+      }
+    }
+  }
+
+  /**
+   * Switches game state depending on which button was pushed
+   * 
+   * @param button
+   */
+  public void switchMenuButton(MenuButton button)
+  {
+    switch (button.getButtonID())
+    {
+    case NEWGAME:
+      Game.manager.pop();
+      break;
+    case HIGHSCORE:
+      Game.manager.push(new HighScoresState());
+      break;
+    case CREDITS:
+      System.out.println("Credits");
+      // Game.manager.STATES.push(new CreditsState());
+      break;
+    case RESETSCORES:
+      System.out.println("Reset Scores");
+      ScoreKeeper.resetScores();
+      break;
+
+    }
+  }
 
 }

@@ -27,86 +27,91 @@ import com.hh.graphics.ArtAssets;
  */
 public class ScoreTab extends GameObject
 {
-	private BufferedImage IMG, IMGSelected;
-	private boolean selected;
-	private ArtAssets art;
-	private RenderHelper renderHelp = new RenderHelper();
-	private Font font;
-	String text = "";
-	Score.ScoreType ScoreType;
-	
-	
+  private BufferedImage IMG, IMGSelected;
+  private boolean selected;
+  private ArtAssets art;
+  private RenderHelper renderHelp = new RenderHelper();
+  private Font font;
+  String text = "";
+  Score.ScoreType ScoreType;
 
-	public ScoreTab(String text, Score.ScoreType ScoreType, float x, float y, int width, int height,
-	    boolean selected)
-	{
-		super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
-		alive = true;
-		art = Game.getArtAssets();
-		IMG = art.tab_sheet.getFrame(1);
-		IMGSelected = art.tab_sheet.getFrame(0);
-		font = new Font("Arial", Font.BOLD, 20);
-		this.selected = selected;
-		this.text = text;
-		this.ScoreType = ScoreType;
-	}
+  public ScoreTab(String text, Score.ScoreType ScoreType, float x, float y, int width, int height,
+      boolean selected)
+  {
+    super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
+    alive = true;
+    art = Game.getArtAssets();
+    IMG = art.tab_sheet.getFrame(1);
+    IMGSelected = art.tab_sheet.getFrame(0);
+    font = new Font("Arial", Font.BOLD, 20);
+    this.selected = selected;
+    this.text = text;
+    this.ScoreType = ScoreType;
+  }
 
-	@Override
-	public void tick()
-	{
-	}
+  @Override
+  public void tick()
+  {
+  }
 
-	@Override
-	public void render(Graphics g)
-	{
-		if (alive)
-		{
-			List<Score> scores = Game.getScoreKeeper().getScores(ScoreType);
-			Graphics2D g2d = (Graphics2D) g;
-			FontMetrics metrics = g.getFontMetrics(font);
-			int textX = (int) (x - (metrics.stringWidth(text) / 2));
-			int textY = (int) y - (metrics.getHeight() / 4);
-			int position = 150;
+  @Override
+  public void render(Graphics g)
+  {
+    if (alive)
+    {
+      List<Score> scores = Game.getScoreKeeper().getScores(ScoreType);
+      Graphics2D g2d = (Graphics2D) g;
+      FontMetrics metrics = g.getFontMetrics(font);
+      int textX = (int) (x - (metrics.stringWidth(text) / 2));
+      int textY = (int) y - (metrics.getHeight() / 4);
+      int position = 150;
 
-			if (!selected)
-			{
-				g2d.drawImage(IMG, (int) (x - width / 2), (int) (y - height / 2), (int) width,
-				    (int) height, null);
-				renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.white, textX, textY);
-			}
-			else
-			{
-				g2d.drawImage(IMGSelected, (int) (x - width / 2), (int) (y - height / 2), (int) width,
-				    (int) height, null);
-				renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.red, textX, textY);
-				for (Score score : scores)
-				{
-					
-					renderHelp.outlinedText((Graphics2D) g, font, score.getName() + " : " + String.valueOf(score.getValue()), 0.9f,
-					    Color.black, Color.DARK_GRAY, Game.width/2, position);
-					position += 50;
-				}
-			}
-		}
-	}
+      if (!selected)
+      {
+        g2d.drawImage(IMG, (int) (x - width / 2), (int) (y - height / 2), (int) width,
+            (int) height, null);
+        renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.white, textX, textY);
+      } else
+      {
+        g2d.drawImage(IMGSelected, (int) (x - width / 2), (int) (y - height / 2), (int) width,
+            (int) height, null);
+        renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.red, textX, textY);
+        for (Score score : scores)
+        {
 
-	@Override
-	public Area boundingBox()
-	{
-		return new Area (new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width, (int) height));
-	}
-	
-	public boolean isHoveringOver(){
-		Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
-		mouseLoc.x -= Game.getPosition().x;
-		mouseLoc.y -= Game.getPosition().y + 25; // 25 pixels is roughly the size of the top of the
-		                                         // window
-		
-		return this.boundingBox().contains(mouseLoc);
-	}
+          renderHelp.outlinedText((Graphics2D) g, font,
+              score.getName() + " : " + String.valueOf(score.getValue()), 0.9f, Color.black,
+              Color.DARK_GRAY, Game.width / 2, position);
+          position += 50;
+        }
+      }
+    }
+  }
 
-	public void setSelected(boolean selected)
-	{
-		this.selected = selected;
-	}
+  @Override
+  public Area boundingBox()
+  {
+    return new Area(new Rectangle((int) (x - width / 2), (int) (y - height / 2), (int) width,
+        (int) height));
+  }
+
+  public boolean isHoveringOver()
+  {
+    Point mouseLoc = MouseInfo.getPointerInfo().getLocation();
+    mouseLoc.x -= Game.getPosition().x;
+    mouseLoc.y -= Game.getPosition().y + 25; // 25 pixels is roughly the size of the top of the
+                                             // window
+
+    return this.boundingBox().contains(mouseLoc);
+  }
+
+  public boolean isSelected()
+  {
+    return this.selected;
+  }
+
+  public void setSelected(boolean selected)
+  {
+    this.selected = selected;
+  }
 }
