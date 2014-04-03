@@ -79,9 +79,10 @@ public class ScoreTab extends GameObject
         for (int i = 0; i < scores.size() && i < 8; i++)
         {
           Score score = scores.get(i);
-          renderHelp.outlinedText((Graphics2D) g, font,
-              score.getName() + " : " + String.valueOf(score.getValue()), 0.9f, Color.black,
-              Color.DARK_GRAY, Game.width / 2, position);
+          String entry = score.getName() + " : " + String.valueOf(score.getValue());
+          int entryX = ((Game.width / 2) - (metrics.stringWidth(entry) / 2));
+          renderHelp.outlinedText((Graphics2D) g, font, entry, 0.9f, Color.black, Color.DARK_GRAY,
+              entryX, position);
           position += 50;
         }
       }
