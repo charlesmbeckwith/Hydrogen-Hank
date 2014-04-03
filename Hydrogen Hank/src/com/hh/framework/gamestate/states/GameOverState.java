@@ -1,6 +1,7 @@
 package com.hh.framework.gamestate.states;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 
@@ -29,6 +30,8 @@ public class GameOverState extends GameState
   private float boxWidth = 0;
   private TextBox nameEntry;
   private int[] scores = new int[3];
+  private Font font = new Font("Arial", Font.BOLD, 100);
+  private Font font2 = new Font("Arial", Font.BOLD, 34);
 
   public GameOverState(int overall, int altitude, int time)
   {
@@ -71,9 +74,12 @@ public class GameOverState extends GameState
     {
       //g.drawImage(art.pauseScreen, (Game.width / 2 - art.pauseScreen.getWidth() / 2),
       //    (Game.height / 2 - 150), null);
+      renderHelp.outlinedText((Graphics2D) g, font, "Game Over", 0.9f, Color.black, Color.red,
+          (Game.width / 2)-260, (Game.height / 2)-120);
+      renderHelp.outlinedText((Graphics2D) g, font2, "Enter Your Name", 0.9f, Color.black, Color.red,
+          (Game.width / 2)-140, (Game.height / 2)-50);
+      nameEntry.render(g);
     }
-
-    nameEntry.render(g);
   }
 
   public void onDelete()
