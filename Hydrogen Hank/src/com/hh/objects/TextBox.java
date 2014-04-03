@@ -67,15 +67,15 @@ public class TextBox extends GameObject
       g2d.fillRect((int) (x - width / 2), (int) (y - height / 2), (int) (width), (int) (height));
 
       FontMetrics metrics = g.getFontMetrics(font);
-      int textX = (int) (x - (metrics.stringWidth(text) / 2) + (width * 0.04));
+      int textX = (int)(x - (width/2) + (width * 0.04));
       int textY = (int) y + (metrics.getHeight() / 4);
       renderHelp.outlinedText(g2d, font, text, 1.25f, Color.black, Color.red, textX, textY);
 
-      System.out.println(lastBlink);
       if (lastBlink > 1)
       {
         g2d.setColor(Color.black);
-        g2d.drawLine((int) (textX+metrics.stringWidth(text)), (int) (y-height/2+8), (int) (textX+metrics.stringWidth(text)), (int) (y-height/2+metrics.getHeight()));
+        g2d.drawLine((int) (textX + metrics.stringWidth(text)), (int) (y - height / 2 + 8),
+            (int) (textX + metrics.stringWidth(text)), (int) (y - height / 2 + metrics.getHeight()));
 
         if (lastBlink > 1.3)
         {
