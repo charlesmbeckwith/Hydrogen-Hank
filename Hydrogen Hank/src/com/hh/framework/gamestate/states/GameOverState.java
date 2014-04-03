@@ -6,6 +6,7 @@ import java.awt.Graphics2D;
 
 import com.hh.Game;
 import com.hh.framework.RenderHelper;
+import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
 import com.hh.input.KeyInput;
@@ -27,11 +28,15 @@ public class GameOverState extends GameState
   private float boxHeight = 0;
   private float boxWidth = 0;
   private TextBox nameEntry;
+  private int[] scores = new int[3]; 
 
-  public GameOverState()
+  public GameOverState(int overall, int altitude, int time)
   {
-    nameEntry = new TextBox("", 10, Game.width/2, Game.height/2, 300, 50);
+    nameEntry = new TextBox("", 10, Game.width / 2, Game.height / 2, 300, 50);
     KeyInput.textEntry = nameEntry;
+    scores[0] = overall;
+    scores[1] = altitude;
+    scores[2] = time;
   }
 
   public void tick()
@@ -51,7 +56,7 @@ public class GameOverState extends GameState
     {
       boxWidth = Game.width;
     }
-    
+
     nameEntry.tick();
   }
 
@@ -67,8 +72,12 @@ public class GameOverState extends GameState
       //g.drawImage(art.pauseScreen, (Game.width / 2 - art.pauseScreen.getWidth() / 2),
       //    (Game.height / 2 - 150), null);
     }
-    
+
     nameEntry.render(g);
   }
 
+  public void onDelete()
+  {
+    ScoreKeeper.newScore(nameEntry.getText(), scores[0], scores[1],scores[2]);
+  }
 }

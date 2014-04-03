@@ -65,6 +65,12 @@ public class GameStateManager
 
 		while (removeCount > 0)
 		{
+		  iter = states.listIterator();
+	    if (iter.hasNext())
+	    {
+	      iter.next().onDelete();
+	    }
+		  
 			states.pop();
 			removeCount--;
 		}

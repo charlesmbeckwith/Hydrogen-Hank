@@ -25,11 +25,6 @@ public class TextBox extends GameObject
   int maxChars = 32;
   float lastBlink = 0;
 
-  public enum ButtonID
-  {
-    NEWGAME, HIGHSCORE, CREDITS, RESETSCORES
-  };
-
   public TextBox(String text, int maxChars, float x, float y, int width, int height)
   {
     super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
@@ -67,10 +62,10 @@ public class TextBox extends GameObject
       g2d.fillRect((int) (x - width / 2), (int) (y - height / 2), (int) (width), (int) (height));
 
       FontMetrics metrics = g.getFontMetrics(font);
-      int textX = (int)(x - (width/2) + (width * 0.04));
+      int textX = (int) (x - (width / 2) + (width * 0.04));
       int textY = (int) y + (metrics.getHeight() / 4);
-      renderHelp.outlinedText(g2d, font, text, 1.25f, Color.black, Color.red, textX, textY);
-
+      renderHelp.outlinedText(g2d, font, text, 1.25f, Color.black, Color.black, textX, textY);
+      
       if (lastBlink > 1)
       {
         g2d.setColor(Color.black);
@@ -83,6 +78,11 @@ public class TextBox extends GameObject
         }
       }
     }
+  }
+
+  public String getText()
+  {
+    return this.text;
   }
 
   public void addChar(char c)

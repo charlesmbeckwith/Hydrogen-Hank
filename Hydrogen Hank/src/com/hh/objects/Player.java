@@ -449,12 +449,12 @@ public class Player extends GameObject implements Collidable
   public void kill()
   {
     // TODO: Kill Hank - Game Over Screen!
+    GameOverState gameOver = new GameOverState(calculateScore(),Game.playState.maxAltitude, (int) Game.playState.getPlayTime());
+    
     Game.manager.push(new TitleMenuState());
     Game.manager.push(new TitleMenuAnimState());
-    Game.manager.push(new GameOverState());
+    Game.manager.push(gameOver);
     Game.playState.restart = true;
-    ScoreKeeper.newScore("Hank", calculateScore(), Game.playState.maxAltitude,
-        (int) Game.playState.getPlayTime());
     super.kill();
   }
 
