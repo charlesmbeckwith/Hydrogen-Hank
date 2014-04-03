@@ -30,7 +30,7 @@ public class GameOverState extends GameState
 
   public GameOverState()
   {
-    nameEntry = new TextBox("", Game.width/2, Game.height/2, 300, 50);
+    nameEntry = new TextBox("", 10, Game.width/2, Game.height/2, 300, 50);
     KeyInput.textEntry = nameEntry;
   }
 
@@ -51,6 +51,8 @@ public class GameOverState extends GameState
     {
       boxWidth = Game.width;
     }
+    
+    nameEntry.tick();
   }
 
   public void render(Graphics g)

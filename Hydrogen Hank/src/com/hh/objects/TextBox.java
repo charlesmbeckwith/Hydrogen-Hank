@@ -20,25 +20,37 @@ import com.hh.graphics.ArtAssets;
 public class TextBox extends GameObject
 {
   private RenderHelper renderHelp = new RenderHelper();
-  private Font font;
+  private Font font = new Font("Arial", Font.BOLD, 32);
   String text = "";
+  int maxChars = 32;
+  float lastBlink = 0;
 
   public enum ButtonID
   {
     NEWGAME, HIGHSCORE, CREDITS, RESETSCORES
   };
 
-  public TextBox(String text, float x, float y, int width, int height)
+  public TextBox(String text, int maxChars, float x, float y, int width, int height)
   {
     super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
     alive = true;
-    font = new Font("Arial", Font.BOLD, 32);
     this.text = text;
+    this.maxChars = maxChars;
+  }
+
+  public TextBox(String text, int maxChars, Font font, float x, float y, int width, int height)
+  {
+    super(x, y, width, height, ObjectID.Tile, ObjectLayer.background);
+    alive = true;
+    this.font = font;
+    this.text = text;
+    this.maxChars = maxChars;
   }
 
   @Override
   public void tick()
   {
+    lastBlink += GameTime.delta();
   }
 
   @Override
@@ -59,12 +71,26 @@ public class TextBox extends GameObject
       int textY = (int) y + (metrics.getHeight() / 4);
       renderHelp.outlinedText(g2d, font, text, 1.25f, Color.black, Color.red, textX, textY);
 
+      System.out.println(lastBlink);
+      if (lastBlink > 1)
+      {
+        g2d.setColor(Color.black);
+        g2d.drawLine((int) (textX+metrics.stringWidth(text)), (int) (y-height/2+8), (int) (textX+metrics.stringWidth(text)), (int) (y-height/2+metrics.getHeight()));
+
+        if (lastBlink > 1.3)
+        {
+          lastBlink = 0;
+        }
+      }
     }
   }
 
   public void addChar(char c)
   {
-    this.text += c;
+    if (this.text.length() < maxChars)
+    {
+      this.text += c;
+    }
   }
 
   public void removeLast()
