@@ -49,15 +49,16 @@ public class MouseInput extends MouseAdapter
     {
       ScoreTab lastSelect = null;
       ScoreTab newSelect = null;
-      
+
       for (GameObject go : HighScoresState.handler.getObjects())
-      {        
+      {
         if (go.getClass() == ScoreTab.class)
         {
           ScoreTab tab = (ScoreTab) go;
           if (tab.isSelected())
           {
             lastSelect = tab;
+            tab.setSelected(false);
           }
 
           if (tab.isHoveringOver())
@@ -75,11 +76,17 @@ public class MouseInput extends MouseAdapter
           }
         }
       }
-      
-      if (lastSelect != null && newSelect != null && lastSelect != newSelect)
+
+      if (lastSelect != null)
       {
-        lastSelect.setSelected(false);
-        newSelect.setSelected(true);
+        if (newSelect != null && lastSelect != newSelect)
+        {
+          newSelect.setSelected(true);
+        } else
+        {
+          lastSelect.setSelected(true);
+
+        }
       }
     }
   }

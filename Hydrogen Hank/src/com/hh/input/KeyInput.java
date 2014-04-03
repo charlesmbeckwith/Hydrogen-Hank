@@ -38,7 +38,9 @@ public class KeyInput extends KeyAdapter
       if (e.getKeyChar() != 8 && e.getKeyChar() != 10)
       {
         textEntry.addChar(e.getKeyChar());
-      } else
+      } 
+      // remove the last character since we pressed backspace
+      else if(e.getKeyChar() == 8)
       {
         textEntry.removeLast();
       }
