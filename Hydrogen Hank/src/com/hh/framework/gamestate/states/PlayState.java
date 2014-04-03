@@ -58,6 +58,8 @@ public class PlayState extends GameState
   public int maxAltitude = 0;
 
   private int[] prevHydroCloud = { 0, 0 };
+  
+  private int hydroCloudCounter = 0;
 
   public PlayState()
   {
@@ -275,14 +277,15 @@ public class PlayState extends GameState
     case 0:
     case 1:
     case 2:
-      if (x > prevHydroCloud[0] + 300
-          && (y > prevHydroCloud[1] + 300 || y < prevHydroCloud[1] - 300))
+      if(hydroCloudCounter > 5)
       {
         generateHydrogenCloud(x, y);
         prevHydroCloud[0] = x;
         prevHydroCloud[1] = y;
+        hydroCloudCounter = 0;
       }
       handler.addObject(new Cloud(x, y, 192, 96, new Vector2D(xVel, 0), true, false));
+      hydroCloudCounter++;
       break;
     case 3:
     case 4:
