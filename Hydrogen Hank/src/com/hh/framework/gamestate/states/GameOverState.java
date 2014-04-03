@@ -82,7 +82,7 @@ public class GameOverState extends GameState
 
     if (name.length() > 0)
     {
-      ScoreKeeper.newScore(nameEntry.getText(), scores[0], scores[1], scores[2]);
+      ScoreKeeper.newScore(name, scores[0], scores[1], scores[2]);
     } else
     {
       ScoreKeeper.newScore("Player", scores[0], scores[1], scores[2]);

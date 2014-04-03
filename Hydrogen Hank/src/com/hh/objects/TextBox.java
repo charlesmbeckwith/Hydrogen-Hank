@@ -87,7 +87,7 @@ public class TextBox extends GameObject
 
   public void addChar(char c)
   {
-    if (this.text.length() < maxChars)
+    if (this.text.length() <= maxChars)
     {
       this.text += c;
     }
