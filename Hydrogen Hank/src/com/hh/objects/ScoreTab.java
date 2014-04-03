@@ -76,9 +76,9 @@ public class ScoreTab extends GameObject
         g2d.drawImage(IMGSelected, (int) (x - width / 2), (int) (y - height / 2), (int) width,
             (int) height, null);
         renderHelp.outlinedText(g2d, font, text, 1f, Color.black, Color.red, textX, textY);
-        for (Score score : scores)
+        for (int i = 0; i < scores.size() && i < 8; i++)
         {
-
+          Score score = scores.get(i);
           renderHelp.outlinedText((Graphics2D) g, font,
               score.getName() + " : " + String.valueOf(score.getValue()), 0.9f, Color.black,
               Color.DARK_GRAY, Game.width / 2, position);
