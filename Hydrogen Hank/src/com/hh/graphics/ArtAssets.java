@@ -22,7 +22,7 @@ public class ArtAssets
 	public SpriteSheet hydrogenhank_sheet, hydrogenhank_sheet2,
 			balloon_sheet, balloon_sheet2, bird_sheet, hydrogen_sheet,
 			fulltank_sheet, planes_sheet, tab_sheet, hydrogen_tank,
-			explosion, smoke;
+			explosion, smoke, balloonpack;
 
 	public BufferedImage dirt, cloud, pauseScreen;
 	public BufferedImage mainTitle, button, hud, emptytank, highScoreBG;
@@ -58,6 +58,8 @@ public class ArtAssets
 				"/graphics/bgelements/explosion.png");
 		smoke = new SpriteSheet(spriteID.EXPLOSION,
 				"/graphics/bgelements/smoke.png");
+		balloonpack = new SpriteSheet(spriteID.BALLOONPACK,
+        "/graphics/powerups/balloonpack/balloonpack.png");
 
 		mainTitle = loadImage("/graphics/mainmenu/Logo3.png");
 		button = loadImage("/graphics/mainmenu/button.png");
@@ -156,7 +158,8 @@ public class ArtAssets
 			return explosion.getFrame(frame);
 		case SMOKE:
 			return smoke.getFrame(frame);
-
+		case BALLOONPACK:
+		  return balloonpack.getFrame(frame);
 		default:
 			return null;
 
@@ -185,6 +188,8 @@ public class ArtAssets
 			return explosion.getSheet();
 		case SMOKE:
 			return smoke.getSheet();
+		case BALLOONPACK:
+		  return balloonpack.getSheet();
 		default:
 			return null;
 

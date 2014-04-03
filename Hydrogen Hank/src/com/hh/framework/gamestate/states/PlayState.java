@@ -17,6 +17,7 @@ import com.hh.graphics.ArtAssets;
 import com.hh.objects.*;
 import com.hh.objects.bg.*;
 import com.hh.objects.enemies.*;
+import com.hh.objects.powerups.BalloonPack;
 // import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
 import com.hh.objects.powerups.HydrogenTank;
@@ -58,7 +59,7 @@ public class PlayState extends GameState
   public int maxAltitude = 0;
 
   private int[] prevHydroCloud = { 0, 0 };
-  
+
   private int hydroCloudCounter = 0;
 
   public PlayState()
@@ -151,7 +152,7 @@ public class PlayState extends GameState
 
     // Draw Overall Score
     renderHelp.outlinedText(g, new Font("Arial", Font.BOLD, 28), "" + player.calculateScore(),
-        1.25f, Color.black, Color.white, timerStart-180, 37);
+        1.25f, Color.black, Color.white, timerStart - 180, 37);
 
     // Draw the Flight time
     Date date = new Date((long) (playTime * 1000));
@@ -277,7 +278,7 @@ public class PlayState extends GameState
     case 0:
     case 1:
     case 2:
-      if(hydroCloudCounter > 5)
+      if (hydroCloudCounter > 5)
       {
         generateHydrogenCloud(x, y);
         prevHydroCloud[0] = x;
@@ -314,7 +315,12 @@ public class PlayState extends GameState
     }
 
     if (Game.Rand.nextInt(35) == 1)
+    {
       handler.addObject(new HydrogenTank(x, y, 90, 90));
+    } else if (Game.Rand.nextInt(20) == 1)
+    {
+      handler.addObject(new BalloonPack(x, y, 90, 90));
+    }
 
   }
 
