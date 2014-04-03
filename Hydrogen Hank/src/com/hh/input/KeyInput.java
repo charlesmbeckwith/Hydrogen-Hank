@@ -34,7 +34,8 @@ public class KeyInput extends KeyAdapter
   {
     if (textEntry != null)
     {
-      if (e.getKeyChar() != 8)
+      // Ensure the character isn't backspace or enter
+      if (e.getKeyChar() != 8 && e.getKeyChar() != 10)
       {
         textEntry.addChar(e.getKeyChar());
       } else

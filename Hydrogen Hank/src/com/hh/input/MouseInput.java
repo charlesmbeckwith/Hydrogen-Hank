@@ -101,7 +101,6 @@ public class MouseInput extends MouseAdapter
       break;
     case CREDITS:
       System.out.println("Credits");
-      //Game.manager.push(new GameOverState());
       break;
     case RESETSCORES:
       System.out.println("Reset Scores");

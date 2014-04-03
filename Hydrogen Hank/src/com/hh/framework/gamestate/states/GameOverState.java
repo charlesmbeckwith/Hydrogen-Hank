@@ -28,7 +28,7 @@ public class GameOverState extends GameState
   private float boxHeight = 0;
   private float boxWidth = 0;
   private TextBox nameEntry;
-  private int[] scores = new int[3]; 
+  private int[] scores = new int[3];
 
   public GameOverState(int overall, int altitude, int time)
   {
@@ -78,6 +78,14 @@ public class GameOverState extends GameState
 
   public void onDelete()
   {
-    ScoreKeeper.newScore(nameEntry.getText(), scores[0], scores[1],scores[2]);
+    String name = nameEntry.getText();
+
+    if (name.length() > 0)
+    {
+      ScoreKeeper.newScore(nameEntry.getText(), scores[0], scores[1], scores[2]);
+    } else
+    {
+      ScoreKeeper.newScore("Player", scores[0], scores[1], scores[2]);
+    }
   }
 }
