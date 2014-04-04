@@ -11,6 +11,7 @@ import java.util.Date;
 
 import com.hh.Game;
 import com.hh.framework.*;
+import com.hh.framework.GameObject.ObjectLayer;
 import com.hh.framework.Handler.RemovalConditions;
 import com.hh.framework.gamestate.GameState;
 import com.hh.graphics.ArtAssets;
@@ -21,6 +22,7 @@ import com.hh.objects.powerups.BalloonPack;
 // import com.hh.objects.enemies.*;
 import com.hh.objects.powerups.HydrogenMolecule;
 import com.hh.objects.powerups.HydrogenTank;
+import com.hh.objects.vfx.ControlsGraphic;
 
 /**
  * COSC3550 Spring 2014 Created : Feb. 25, 2014 Last Updated : Mar. 19, 2014
@@ -190,6 +192,7 @@ public class PlayState extends GameState
     xStart = (int) cam.getX() - Game.width;
     yStartDown = cloudYMin;
     generateScene();
+    handler.addObject(new ControlsGraphic(0,0,ObjectLayer.middleground));
   }
 
   private void generateScene()

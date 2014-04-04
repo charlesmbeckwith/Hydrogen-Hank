@@ -24,7 +24,7 @@ public class ArtAssets
 			fulltank_sheet, planes_sheet, tab_sheet, hydrogen_tank,
 			explosion, smoke, balloonpack;
 
-	public BufferedImage dirt, cloud, pauseScreen;
+	public BufferedImage dirt, cloud, pauseScreen, controls;
 	public BufferedImage mainTitle, button, hud, emptytank, highScoreBG;
 
 	/**
@@ -66,6 +66,8 @@ public class ArtAssets
 
 		hud = loadImage("/graphics/hud/hud.png");
 		emptytank = loadImage("/graphics/hud/emptytank.png");
+		controls = loadImage("/graphics/bgelements/startingnote.png");
+		
 		fulltank_sheet = new SpriteSheet(spriteID.TANK,
 				"/graphics/hud/fulltank.png");
 
