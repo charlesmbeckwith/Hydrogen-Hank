@@ -591,9 +591,9 @@ public class Player extends GameObject implements Collidable
         adjHeight = (int) ((getFillLevel() / 100) * height);
       }
 
-      if (dirCounter == 10)
+      if (dirCounter == 40)
       {
-        toRight = Game.Rand.nextBoolean();
+        toRight = !toRight;//Game.Rand.nextBoolean();
         dirCounter = 0;
       }
 
