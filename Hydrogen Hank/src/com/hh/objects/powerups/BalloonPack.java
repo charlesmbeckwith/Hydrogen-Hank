@@ -3,7 +3,6 @@
  */
 package com.hh.objects.powerups;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.geom.Area;
@@ -41,7 +40,7 @@ public class BalloonPack extends Powerup
     super(x, y, width, height, PowerupType.BalloonPack);
     art = Game.getArtAssets();
     initAnimation();
-    VALUE = 20.0;
+    VALUE = 5.0;
   }
 
   @Override

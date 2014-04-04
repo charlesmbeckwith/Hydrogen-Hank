@@ -50,12 +50,12 @@ public class Player extends GameObject implements Collidable
 	private float buoyancy;
 	private LinkedList<Balloon> balloons = new LinkedList<Balloon>();
 	private boolean balloonAlreadyBlownUp = false;
-	private int extraBalloons = 50; // How many balloons you start with
+	private int extraBalloons = 15; // How many balloons you start with
 	private final int balloonCost = 10; // How much hydrogen blowing up a
 	// balloon
 	// costs.
 
-	private final int maxBalloons = 100;
+	private final int maxBalloons = 10;
 	private boolean inflate = false;
 	private boolean deflate = false;
 	private float gInc = 0f;

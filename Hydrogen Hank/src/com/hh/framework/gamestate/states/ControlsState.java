@@ -7,9 +7,7 @@ import java.awt.Graphics2D;
 
 import com.hh.Game;
 import com.hh.framework.RenderHelper;
-import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.GameState;
-import com.hh.graphics.ArtAssets;
 import com.hh.input.KeyInput;
 import com.hh.objects.TextBox;
 
@@ -18,19 +16,17 @@ import com.hh.objects.TextBox;
  * 
  * Created : Apr. 4, 2014 
  * Last Updated : Apr. 4, 2014 
- * Purpose: Defines the Game Over state for the game
+ * Purpose: An unused state for modifying controls
  * 
  * @author Mark Schlottke
  */
 public class ControlsState extends GameState
 {
-  private ArtAssets art = Game.getArtAssets();
   private RenderHelper renderHelp = new RenderHelper();
   private float boxHeight = 0;
   private float boxWidth = 0;
   private TextBox nameEntry;
   private Font font = new Font("Arial", Font.BOLD, 100);
-  private Font font2 = new Font("Arial", Font.BOLD, 34);
 
   public ControlsState()
   {

@@ -30,7 +30,6 @@ import com.hh.sound.SoundManager.SoundFile;
 public class Game extends Canvas implements Runnable
 {
 	private static final long serialVersionUID = 5679202415177178318L;
-	private static final int MIL = 1000000;
 	public static final int SLEEPTIME = 20;
 	public static GameStateManager manager;
 	public static PlayState playState;

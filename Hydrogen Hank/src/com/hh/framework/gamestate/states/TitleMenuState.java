@@ -27,8 +27,9 @@ public class TitleMenuState extends GameState
 {
   public static Handler handler;
   private ArtAssets art = Game.getArtAssets();
-  private int hankFlyingPosition = 0;
-  private BufferedImage hank;
+ // private int hankFlyingPosition = 0;
+  @SuppressWarnings("unused")
+private BufferedImage hank;
   private int flip;
 
   public TitleMenuState()

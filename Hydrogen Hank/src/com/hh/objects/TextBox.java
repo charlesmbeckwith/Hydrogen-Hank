@@ -2,11 +2,8 @@ package com.hh.objects;
 
 import java.awt.*;
 import java.awt.geom.Area;
-import java.awt.image.BufferedImage;
 
-import com.hh.Game;
 import com.hh.framework.*;
-import com.hh.graphics.ArtAssets;
 
 /**
  * COSC3550 Spring 2014

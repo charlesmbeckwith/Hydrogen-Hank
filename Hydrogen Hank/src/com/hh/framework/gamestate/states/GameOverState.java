@@ -9,7 +9,6 @@ import com.hh.Game;
 import com.hh.framework.RenderHelper;
 import com.hh.framework.ScoreKeeper;
 import com.hh.framework.gamestate.GameState;
-import com.hh.graphics.ArtAssets;
 import com.hh.input.KeyInput;
 import com.hh.objects.TextBox;
 
@@ -24,7 +23,6 @@ import com.hh.objects.TextBox;
  */
 public class GameOverState extends GameState
 {
-  private ArtAssets art = Game.getArtAssets();
   private RenderHelper renderHelp = new RenderHelper();
   private float boxHeight = 0;
   private float boxWidth = 0;
