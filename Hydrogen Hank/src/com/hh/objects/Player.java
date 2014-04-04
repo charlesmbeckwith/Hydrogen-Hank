@@ -322,6 +322,7 @@ public class Player extends GameObject implements Collidable
           case BalloonPack:
             // Add an extra Balloon
             extraBalloons += pu.getValue();
+            go.kill();
             break;
           case HydrogenTank:
             // Add hydrogen to tank

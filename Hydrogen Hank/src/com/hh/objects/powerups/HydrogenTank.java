@@ -24,76 +24,71 @@ import com.hh.sound.SoundManager.SoundFile;
 public class HydrogenTank extends Powerup
 {
 
-	private Animation animation;
+  private Animation animation;
 
-	private ArtAssets art;
+  private ArtAssets art;
 
-	/**
-	 * @param x
-	 * @param y
-	 * @param width
-	 * @param height
-	 * @param powerupType
-	 */
-	public HydrogenTank(float x, float y, int width, int height)
-	{
-		super(x, y, width, height, PowerupType.HydrogenTank);
-		// TODO Auto-generated constructor stub
-		art = Game.getArtAssets();
-		initAnimation();
-		VALUE = 50.0;
-	}
+  /**
+   * @param x
+   * @param y
+   * @param width
+   * @param height
+   * @param powerupType
+   */
+  public HydrogenTank(float x, float y, int width, int height)
+  {
+    super(x, y, width, height, PowerupType.HydrogenTank);
+    // TODO Auto-generated constructor stub
+    art = Game.getArtAssets();
+    initAnimation();
+    VALUE = 50.0;
+  }
 
-	@Override
-	public void tick()
-	{
+  @Override
+  public void tick()
+  {
 
-		animation.runAnimation();
+    animation.runAnimation();
 
-	}
+  }
 
-	@Override
-	public void render(Graphics g)
-	{
-		Graphics2D g2d = (Graphics2D) g.create();
-		g2d.drawImage(animation.getAnimationFrame(), (int) center.getX(),
-				(int) center.getY(), (int) width, (int) height, null);
-		g2d.dispose();
-		super.render(g);
-	}
+  @Override
+  public void render(Graphics g)
+  {
+    Graphics2D g2d = (Graphics2D) g.create();
+    g2d.drawImage(animation.getAnimationFrame(), (int) center.getX(), (int) center.getY(),
+        (int) width, (int) height, null);
+    g2d.dispose();
+    super.render(g);
+  }
 
-	@Override
-	public Area boundingBox()
-	{
-		return new Area(super.boundingBox());
-	}
+  @Override
+  public Area boundingBox()
+  {
+    return new Area(super.boundingBox());
+  }
 
-	private void initAnimation()
-	  {
-	    animation = new Animation(3, art.getSpriteFrame(spriteID.TANKPOWERUP, 0),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 1),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 2),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 3),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 4),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 5),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 6),
-	                           art.getSpriteFrame(spriteID.TANKPOWERUP, 7)
-	                           );
-	   
-	  }
+  private void initAnimation()
+  {
+    animation = new Animation(3, art.getSpriteFrame(spriteID.TANKPOWERUP, 0), art.getSpriteFrame(
+        spriteID.TANKPOWERUP, 1), art.getSpriteFrame(spriteID.TANKPOWERUP, 2), art.getSpriteFrame(
+        spriteID.TANKPOWERUP, 3), art.getSpriteFrame(spriteID.TANKPOWERUP, 4), art.getSpriteFrame(
+        spriteID.TANKPOWERUP, 5), art.getSpriteFrame(spriteID.TANKPOWERUP, 6), art.getSpriteFrame(
+        spriteID.TANKPOWERUP, 7));
 
+  }
 
-	@Override
-	public double getValue()
-	{
-		
-		return VALUE;
-	}
-	
-	@Override
-	public void kill()
-	{
-		super.kill();
-		Game.soundManager.playAudioClip(SoundFile.tank);
-	}
+  @Override
+  public double getValue()
+  {
+
+    return VALUE;
+  }
+
+  @Override
+  public void kill()
+  {
+    super.kill();
+    Game.soundManager.playAudioClip(SoundFile.tank);
+  }
 }
