@@ -61,7 +61,7 @@ public class SoundManager
 			hydrogentank = new AudioClip(SoundFile.tank, "/sound/fx/hydrogentank.wav");
 
 			hydrogen = new AudioClip(SoundFile.hydrogen,
-					"/sound/fx/collecthydrogen2.wav");
+					"/sound/fx/moleculepickup.wav");
 			hydrogen.setOverlap(true);
 
 		} catch (IOException e)
