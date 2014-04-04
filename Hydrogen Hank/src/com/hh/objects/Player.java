@@ -138,8 +138,6 @@ public class Player extends GameObject implements Collidable
 		/* If the player is dying but blows up a balloon stop death */
 		if (balloons.size() > 0 && hLevel > 0 && deathCountdown > 40)
 		{
-			Game.soundManager.playAudioClip(SoundFile.hank);
-			Game.soundManager.stopAudioClip(SoundFile.scream);
 			stopKill();
 			closeCalls++;
 		}
@@ -461,6 +459,8 @@ public class Player extends GameObject implements Collidable
 
 	public void stopKill()
 	{
+		Game.soundManager.playAudioClip(SoundFile.hankbetter);
+		Game.soundManager.stopAudioClip(SoundFile.scream);
 		current = normal;
 		startDeath = false;
 		deathCountdown = DEATHCOUNTDOWN;

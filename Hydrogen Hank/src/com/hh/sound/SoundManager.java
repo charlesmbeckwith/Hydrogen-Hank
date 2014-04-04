@@ -16,11 +16,11 @@ import com.hh.framework.DebugManager;
 public class SoundManager
 {
 	private static AudioClip themesong, explosion, fuse, blow, pop, scream,
-			caww, caww2, helicopter, hankstartsound, hydrogen, hydrogentank;
+			caww, caww2, helicopter, hankstartsound, hydrogen, hydrogentank, hankbetter;
 
 	public enum SoundFile
 	{
-		Theme, explosion, fuse, blow, pop, scream, caww, helicopter, hank, hydrogen, tank;
+		Theme, explosion, fuse, blow, pop, scream, caww, helicopter, hank, hydrogen, tank, hankbetter;
 	}
 
 	public SoundManager()
@@ -56,13 +56,15 @@ public class SoundManager
 			helicopter.setLength(1);
 
 			hankstartsound = new AudioClip(SoundFile.hank,
-					"/sound/fx/bitchin.wav");
+					"/sound/fx/readyforaction.wav");
 			
 			hydrogentank = new AudioClip(SoundFile.tank, "/sound/fx/hydrogentank.wav");
 
 			hydrogen = new AudioClip(SoundFile.hydrogen,
 					"/sound/fx/moleculepickup.wav");
 			hydrogen.setOverlap(true);
+			
+			hankbetter = new AudioClip(SoundFile.hankbetter, "/sound/fx/muchbetter.wav");
 
 		} catch (IOException e)
 		{
@@ -136,6 +138,8 @@ public class SoundManager
 			return hydrogen;
 		case tank:
 			return hydrogentank;
+		case hankbetter:
+			return hankbetter;
 		default:
 			return null;
 
@@ -195,7 +199,8 @@ public class SoundManager
 		public void stopClip()
 		{
 			interrupt = true;
-			// t.interrupt();
+			t.interrupt();
+			
 		}
 
 		public boolean isPlaying()
@@ -206,7 +211,9 @@ public class SoundManager
 		@Override
 		public void run()
 		{
+
 			playSound();
+
 
 		}
 
@@ -217,7 +224,7 @@ public class SoundManager
 
 		private void playSound()
 		{
-
+			
 			AudioInputStream audioInputStream = null;
 			try
 			{
@@ -235,6 +242,7 @@ public class SoundManager
 			{
 				line = (SourceDataLine) AudioSystem.getLine(info);
 				line.open(audioFormat);
+				
 			} catch (LineUnavailableException e)
 			{
 				e.printStackTrace();
@@ -263,9 +271,11 @@ public class SoundManager
 					}
 					if (nBytesRead >= 0 && !interrupt)
 					{
+						
 						@SuppressWarnings("unused")
 						int nBytesWritten = line.write(abData, 0,
 								nBytesRead);
+					
 					}
 				}
 			} else if (lengthSet)
