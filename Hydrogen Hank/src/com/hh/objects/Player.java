@@ -473,7 +473,8 @@ public class Player extends GameObject implements Collidable
 		GameOverState gameOver = new GameOverState(calculateScore(),
 				Game.playState.maxAltitude,
 				(int) Game.playState.getPlayTime(), balloonsUsed,
-				moleculesPickedUp, closeCalls, birdsObliterated, powerUps, heliumUsed);
+				moleculesPickedUp, closeCalls, birdsObliterated, powerUps,
+				heliumUsed);
 
 		Game.manager.push(new TitleMenuState());
 		Game.manager.push(new TitleMenuAnimState());
@@ -576,13 +577,19 @@ public class Player extends GameObject implements Collidable
 
 	private class Balloon
 	{
-		private float x, y, rX, rY, xOffset, yOffset;
+		private float x, y, rX, rY,
+				xOffset = Game.Rand.nextBoolean() ? -Game.Rand.nextFloat()
+						: Game.Rand.nextFloat()
+						, yOffset;
 		private int balloonColor;
 		private boolean alive = true;
 		private int width, height, adjWidth, adjHeight;
 		private float fillLevel;
 		private BufferedImage img;
 		private int moveCounter;
+		private final int RIGHT = 0;
+		private final int LEFT = 1;
+		private int STATE = 0;
 
 		public Balloon(float x, float y, int width, int height)
 		{
@@ -601,6 +608,11 @@ public class Player extends GameObject implements Collidable
 
 			// Play sound of balloon blowing up
 			Game.soundManager.playAudioClip(SoundFile.blow);
+			
+			if(xOffset > 0 ){
+				STATE = RIGHT;
+			}else
+				STATE = LEFT;
 		}
 
 		public void tick(float x, float y)
@@ -614,22 +626,21 @@ public class Player extends GameObject implements Collidable
 				adjHeight = (int) ((getFillLevel() / 100) * height);
 			}
 
-			if (moveCounter == 10)
-			{
-				xOffset += Game.Rand.nextBoolean() ? -Game.Rand.nextFloat()
-						: Game.Rand.nextFloat();
-				moveCounter = 0;
-			} else
-			{
-				moveCounter++;
-			}
 
-			if (xOffset > 10)
+			if (xOffset > 20 && STATE == RIGHT)
 			{
-				xOffset = 10;
-			} else if (xOffset < -10)
+				STATE = LEFT;
+				xOffset = 20;
+			} else if (xOffset < 20 && STATE == LEFT)
 			{
-				xOffset = -10;
+				xOffset -= xOffset;
+			} else if (xOffset < 20 && STATE == RIGHT)
+			{
+				xOffset += xOffset;
+			} else if (xOffset < -20 && STATE == LEFT)
+			{
+				STATE = RIGHT;
+				xOffset = -20;
 			}
 
 			rX = (int) x - adjWidth / 2 + xOffset;
