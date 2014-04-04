@@ -91,8 +91,8 @@ public class GameOverState extends GameState
       renderHelp.outlinedText((Graphics2D) g, font2, "Enter Your Name", 0.9f, Color.black, Color.red,
           (Game.width / 2)-140, (Game.height / 2)-50);
       renderHelp.outlinedText((Graphics2D) g, font2, "Game Stats", .8f, Color.black, Color.white, (Game.width/2) -70, (Game.height/2) +80);
-      renderHelp.outlinedText((Graphics2D) g, font3, "Max Altitude = " + scores[2], .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +120);
-      renderHelp.outlinedText((Graphics2D) g, font3, "Time = " + scores[1] + " seconds", .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +140);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Max Altitude = " + scores[1], .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +120);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Time = " + (int) scores[2] + " seconds", .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +140);
       renderHelp.outlinedText((Graphics2D) g, font3, "Overall Score = " + scores[0], .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +160);
       renderHelp.outlinedText((Graphics2D) g, font3, "Balloons Used = " + balloonsUsed, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +180);
       renderHelp.outlinedText((Graphics2D) g, font3, "Atoms Picked Up = " + numAtoms, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +200);
