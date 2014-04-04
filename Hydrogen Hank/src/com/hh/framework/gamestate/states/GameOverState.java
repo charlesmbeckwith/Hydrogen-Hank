@@ -32,14 +32,28 @@ public class GameOverState extends GameState
   private int[] scores = new int[3];
   private Font font = new Font("Arial", Font.BOLD, 100);
   private Font font2 = new Font("Arial", Font.BOLD, 34);
+  private Font font3 = new Font("Arial", Font.BOLD, 20);
+  
+  private int balloonsUsed = 0;
+  private int numAtoms = 0;
+  private int closeCalls = 0;
+  private int birdsObliterated =0;
+  private int powerUps = 0;
+  private int heliumUsed = 0;
 
-  public GameOverState(int overall, int altitude, int time)
+  public GameOverState(int overall, int altitude, int time, int balloonsUsed, int numAtoms, int closeCalls, int birdsObliterated, int powerUps, int heliumUsed)
   {
     nameEntry = new TextBox("", 10, Game.width / 2, Game.height / 2, 300, 50);
     KeyInput.textEntry = nameEntry;
     scores[0] = overall;
     scores[1] = altitude;
     scores[2] = time;
+    this.balloonsUsed = balloonsUsed;
+    this. numAtoms = numAtoms;
+    this.closeCalls = closeCalls;
+    this.birdsObliterated = birdsObliterated;
+    this.powerUps = powerUps;
+    this.heliumUsed = heliumUsed;
   }
 
   public void tick()
@@ -78,6 +92,16 @@ public class GameOverState extends GameState
           (Game.width / 2)-260, (Game.height / 2)-120);
       renderHelp.outlinedText((Graphics2D) g, font2, "Enter Your Name", 0.9f, Color.black, Color.red,
           (Game.width / 2)-140, (Game.height / 2)-50);
+      renderHelp.outlinedText((Graphics2D) g, font2, "Game Stats", .8f, Color.black, Color.white, (Game.width/2) -70, (Game.height/2) +80);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Max Altitude = " + scores[2], .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +120);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Time = " + scores[1] + " seconds", .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +140);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Overall Score = " + scores[0], .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +160);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Balloons Used = " + balloonsUsed, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +180);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Atoms Picked Up = " + numAtoms, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +200);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Close Calls = " + closeCalls, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +220);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Birds Obliterated = " + birdsObliterated, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +240);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Helium Used = " + heliumUsed, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +260);
+      renderHelp.outlinedText((Graphics2D) g, font3, "Power Ups Picked Up = " + powerUps, .4f, Color.black, Color.white, (Game.width/2) -100, (Game.height/2) +280);
       nameEntry.render(g);
     }
   }
