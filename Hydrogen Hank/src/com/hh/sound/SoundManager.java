@@ -58,7 +58,7 @@ public class SoundManager
 			hankstartsound = new AudioClip(SoundFile.hank,
 					"/sound/fx/readyforaction.wav");
 			
-			hydrogentank = new AudioClip(SoundFile.tank, "/sound/fx/hydrogentank.wav");
+			hydrogentank = new AudioClip(SoundFile.tank, "/sound/fx/collecthydrogentank.wav");
 
 			hydrogen = new AudioClip(SoundFile.hydrogen,
 					"/sound/fx/moleculepickup.wav");
