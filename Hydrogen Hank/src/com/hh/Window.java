@@ -1,14 +1,15 @@
 package com.hh;
 
+import javax.swing.JFrame;
 import javax.swing.*;
-
 import java.awt.*;
 import java.util.ArrayList;
-
+import javax.swing.JFrame;
+import java.awt.Dimension;
 /**
  * COSC3550 Spring 2014 Created : Feb. 7, 2014 Last Updated : Mar. 19, 2014
  * Purpose: Create the game window for the 'Hydrogen Hank' game
- * 
+ *
  * @author Mark Schlottke & Charlie Beckwith
  */
 public class Window
@@ -18,7 +19,7 @@ public class Window
 
 	/**
 	 * Set up the display of the game and start it
-	 * 
+	 *
 	 * @param w
 	 *          - width of the game window
 	 * @param h
@@ -58,7 +59,7 @@ public class Window
 
 	/**
 	 * Main entry point for the program
-	 * 
+	 *
 	 * @param args
 	 */
 	public static void main(String args[])

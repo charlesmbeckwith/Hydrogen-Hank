@@ -1,0 +1,27 @@
+plugins {
+    id 'java'
+    id 'application'
+}
+jar {
+    manifest {
+        attributes(
+            'Main-Class': 'src/com/hh/Window'
+        )
+    }
+}
+sourceSets {
+    main {
+        java.srcDirs=['src']
+        resources.srcDirs=['res']
+    }
+}
+// Define the main class for the application
+mainClassName = 'com.hh.Window'
+
+dependencies {
+    compile 'com.google.guava:guava:23.0'
+    testCompile 'junit:junit:4.12'
+}
+repositories {
+    jcenter()
+}

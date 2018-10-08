@@ -1,2 +1,10 @@
 /bin
 /highscores.sav
+build/*
+*.jar
+!gradle-wrapper.jar
+*.class
+.gradle
+.gradle/*
+/build/
+.DS_Store
