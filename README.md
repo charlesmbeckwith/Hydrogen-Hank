@@ -1,6 +1,6 @@
 # Hydrogen Hank
-![gameplay](/images/game.png)
-![explosion](/images/explosion.png)
+![gameplay](/Images/game.png)
+![explosion](/Images/explosion.png)
 ## Build
 
 ### Requirements
